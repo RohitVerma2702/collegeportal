@@ -2,6 +2,9 @@
 <!--Admin-->
 <div ng-app="grievances" ng-controller="GRV_TYPE" >
     <h1>Grievance Type List</h1>
+    <div>
+        <button class="btn" id="createnew">Create New Grievance Type</button>
+    </div>
     <div id="grv_type" class="contenttable hide">
         <table class="table table-hover table-striped">
             <thead class="table-success">
@@ -23,6 +26,41 @@
             </tr>   
         </table>
     </div>
+
+    <div class="detailbackground hide">
+        <div class="detailpopup">
+
+            <h1>Add New Member</h1>
+
+            <div class="detail-data">
+                <form class="form-group">
+                    <div class="row">
+                        <div class="col-sm-4 offset-sm-1">
+                            <label class="label-control">Grievance Name:</label>
+                            <input type="text" name="grvname" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-7 offset-sm-1">
+                            <label class="label-control">Description:</label>
+                            <textarea name="description" rows="4" class="form-control" placeholder="(max. 200 characters)" maxlength="200" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 offset-sm-1">
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="closebutton">
+                <button id="closebutton" class="btn btn-default">Close</button>
+            </div>
+
+        </div>
+    </div>
+
     <div id="loading">
         <div class="loader">
         </div>
@@ -32,3 +70,12 @@
 
 </div>
 
+<script type="text/javascript">
+    $('#closebutton').click(function(){
+        $('.detailbackground').fadeOut(500);
+    });
+
+    $('#createnew').click(function(){
+        $('.detailbackground').fadeIn(500);
+    });
+</script>

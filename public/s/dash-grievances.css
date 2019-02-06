@@ -440,3 +440,11 @@ h1{
 	}
 
 }
+
+.detailbackground input[type=text],
+.detailbackground input[type=number],
+.detailbackground textarea,
+.detailbackground select{
+	border: .1rem solid #000;
+	margin-bottom: 1rem;
+}
