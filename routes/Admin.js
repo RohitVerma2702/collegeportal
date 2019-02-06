@@ -845,7 +845,7 @@ else{
 });
 
   router.post('/create',function(req,res,next){
-
+    console.log(req.body.mngmnt);
     var name=req.body.name;
    var Des=req.body.Des;
    console.log(req.body.gtype);
@@ -857,7 +857,7 @@ else{
     numbers: true
 });
 
-if((req.body.mngmnt)=='on')
+if((req.body.mngmnt)==1)
 {
    var newuser=new mngmnt({
     name:name,
