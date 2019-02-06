@@ -899,16 +899,22 @@ app.controller("Admin", function ($http,$scope,$window,$mdDialog) {
 
 app.controller("Admin_GCM", function ($http,$scope,$window,$mdDialog) {
 
+
     $http.get("/Admin/GCM_List").then(function(response){
      $scope.members=response.data.info;
      $('#loading').hide();
      $('#grievances').fadeIn(500);
     });
 
+    $http.get('/Admin/grievance_type').then(function(response){
+        $scope.result=response.data.info;
+    });    
+
     $scope.Deactivate=function(user,ev){
    $scope.form={email:user};
    $http.post("/Admin/GCM_Deactivate",$scope.form).then(function(response){
-   });
+   
+});
    var confirmpass = $mdDialog.confirm()
    .title('GCM Deactivated!')
    .targetEvent(ev)
@@ -919,6 +925,28 @@ $window.location.reload();
 })
 }
    
+$scope.create=function(ev){
+    $scope.form={
+        name:$scope.name,
+        email:$scope.email,
+        mobile:$scope.mobile,
+        Des:$scope.desig,
+        gtype:$scope.Gtype,
+        mngmnt:$scope.mngmnt
+    };
+    $http.post('/Admin/create',$scope.form).then(function(response){    
+       
+  });
+  var update = $mdDialog.confirm()
+  .title('Created!')
+  .targetEvent(ev)
+  .ok('Thank You!');
+
+$mdDialog.show(update).then(function() {
+$window.location.reload();
+
+    });
+}
    });
    app.controller('Admin_Rejected_user',function($http,$scope,$window){
     $scope.init=function(user,ev){
@@ -1189,6 +1217,27 @@ $window.location.reload();
     
 })
 }
-     
+$scope.Create=function(ev){
+    $scope.form ={
+        grvtype:$scope.grvname,
+        description:$scope.description
+    };
+
+    $http.post('/Admin/grvtype_add',$scope.form).then(function(success){
+
+    });
+
+    var Created = $mdDialog.confirm()
+    .title('Successfully Created!')
+    .targetEvent(ev)
+    .ok('Thank You!');
+
+$mdDialog.show(Created).then(function() {
+$window.location.reload();
+
+});    
+}
+
+
 });
 

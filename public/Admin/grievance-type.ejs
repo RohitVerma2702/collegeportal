@@ -30,25 +30,25 @@
     <div class="detailbackground hide">
         <div class="detailpopup">
 
-            <h1>Add New Member</h1>
+            <h1>Add New Grievance-Type</h1>
 
             <div class="detail-data">
                 <form class="form-group">
                     <div class="row">
                         <div class="col-sm-4 offset-sm-1">
                             <label class="label-control">Grievance Name:</label>
-                            <input type="text" name="grvname" class="form-control" required>
+                            <input type="text" ng-model="grvname" class="form-control" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-7 offset-sm-1">
                             <label class="label-control">Description:</label>
-                            <textarea name="description" rows="4" class="form-control" placeholder="(max. 200 characters)" maxlength="200" required></textarea>
+                            <textarea ng-model="description" rows="4" class="form-control" placeholder="(max. 200 characters)" maxlength="200" required></textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4 offset-sm-1">
-                            <button type="submit" class="btn btn-primary">Create</button>
+                            <button type="submit" class="btn btn-primary" ng-click="Create()">Create</button>
                         </div>
                     </div>
                 </form>
