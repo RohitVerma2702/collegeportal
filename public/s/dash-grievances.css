@@ -312,6 +312,8 @@ h1{
 .tablebuttons{
 	font-size: .7rem !important;
 	padding: 0.2rem 0.5rem;
+	display: block;
+	margin-bottom: .1rem;
 }
 
 .detailbackground, .detailbackground-reply{
