@@ -22,13 +22,16 @@
                 <td>{{result.Gtype}} </td>
                 <td></td>
                 <td>{{result.subject}}</td>
-                <td>
+                <td ng-switch on="result.status">
                     <button ng-click="popup(result.grv_id)" class="btn btn-primary tablebuttons">
                         <span class="fas fa-eye"></span>View</button>
                     <button class="btn btn-success tablebuttons">
                         Meeting Details
                     </button>
-                    <button ng-click="delete(result.grv_id)" class="btn btn-danger">
+                    <button ng-switch-when="disposed" ng-click="reopen(result.grv_id)" class="btn btn-primary tablebuttons">
+                        Reopen
+                    </button>
+                    <button ng-switch-default ng-click="delete(result.grv_id)" class="btn btn-danger tablebuttons">
                         Delete
                     </button>
                 </td>
