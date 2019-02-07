@@ -246,8 +246,8 @@ function requireLogin(req, res, next) {
           html : "Hello,<br> your new password for EduGrievance Portal is: <br>"+password+"<br> Thanks and Regards <br> <b>Anand International College Of Engineering</b>" 
       }
       console.log(mailOptions);
-      smtpTransport.sendMail(mailOptions, function(error, response){
-       if(error) throw err;
+      smtpTransport.sendMail(mailOptions, function(err, response){
+       if(err) throw err;
        else{
            console.log("Message sent: " + response.message);
            res.send('success');       
