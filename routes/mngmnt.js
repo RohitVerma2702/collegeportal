@@ -6,6 +6,7 @@ var Grv=require('../models/grievancedb');
 var Student=require('../models/Studentdb');
 var Parent=require('../models/Parentdb');
 var faculty=require('../models/facultydb');
+var Mail_log=require=('../models/Maildb');
 var Staff=require('../models/staffdb');
 var session=require('express-session');
 
@@ -176,7 +177,7 @@ function requireLogin(req, res, next) {
   })
   });
 
-  router.get('/approve_user',requireLogin,function(req,res,next){//to Display all th Grievance Cell Member 
+  router.get('/approve_user',requireLogin,function(req,res,next){//to Display all the approved Student
    console.log(req.query.user);
     if(req.query.user=='student')
 {
@@ -427,8 +428,16 @@ var id=req.body.id;
         console.log(mailOptions);
         smtpTransport.sendMail(mailOptions, function(error, response){
          if(error) throw err;
-         else{
-             console.log("Message sent: " + response.message);
+         else{ var mail_doc=new Mail_log({//Entry into Mail Log
+          emailid:id,
+          subject:"Password Update",
+          status:'Sent'
+        });
+  
+        Mail_log.mail_log(mail_doc,function(err){
+          if(err) throw err;
+        });
+             console.log("Message sent");
              res.send('success');       
                }
     });

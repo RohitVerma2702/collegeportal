@@ -847,6 +847,7 @@ $scope.Grv_type_deactivate=function(id)
 
 
 app.controller("Admin", function ($http,$scope,$window,$mdDialog) {
+
     $http.get("/Admin/my-account").then(function (response) {
          $scope.name = response.data.name;
          $scope.mobile = response.data.mobile;
@@ -1240,4 +1241,11 @@ $window.location.reload();
 
 
 });
+
+app.controller('Termination',function($http,$window,$mdDialog,$scope){
+$scope.Termination=function(Type,ev){
+        $http.get('/Admin/termination?type='+Type).then(function(response){
+        });
+}
+})
 

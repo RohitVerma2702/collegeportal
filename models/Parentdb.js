@@ -23,8 +23,15 @@ var ParentSchema = mongoose.Schema({
     access:{
       type:String
     },
+    Termination:{
+        type:Boolean,
+        default:0  
+    },
     Cdate:{
-   type:String
+   type:Number
+    },
+    Last_year:{
+     type:Number
     },
     password: {
         type: String
@@ -47,23 +54,21 @@ var Parent = module.exports = mongoose.model('Parent',ParentSchema,'Parent');
     Faculty.findById(id, callback);
 }*/
 
-module.exports.getUserByID = function(id, callback){
+Parent.getUserByID = function(id, callback){
     var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
-    Parent.findOne(query, callback);
+    Parent.findOne(query,callback);
 }
-module.exports.getinfobyID = function(id, callback){
+Parent.getinfobyID = function(id,callback){
     //var query = (id.indexOf('@') === -1) ? {mobileno: id} : {emailid: id};
   var query={_id:id};
     Parent.findOne(query, callback);
 }
-module.exports.updateuser = function(id,newvalues, callback){
-   // var query = (id.indexOf('@') === -1) ? {mobileno: id} : {emailid: id};
-  // var query={_id:id}
+Parent.updateuser = function(id,newvalues, callback){
+   var query = (id.indexOf('@') === -1) ? {mobileno: id} : {emailid: id};
    Parent.updateOne(id, newvalues,callback);
 }
-module.exports.update_password = function(id,password, callback){
+Parent.update_password = function(id,password, callback){
     var id = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
-   //var query={_id:id};
     bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(password, salt, function(err, hash) {
                var query={password:hash};
@@ -72,14 +77,19 @@ module.exports.update_password = function(id,password, callback){
     });
    
 }
-module.exports.comparePassword = function(candidatePassword, hash, callback){
+Parent.comparePassword = function(candidatePassword, hash, callback){
     bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
         callback(null, isMatch);
     });
 }
+
+Parent.Terminate=function(year,newvalues,callback){
+    Parent.updateMany({Last_year:year},newvalues,callback);
+}
+
 Parent.apprv_find=function(query,callback)
 {
-   Parent.find({$and:[{status:'verified'},{access:query}]},callback);
+   Parent.find({$and:[{Termination:0},{status:'verified'},{access:query}]},callback);
 }
 module.exports.createUser = function(newUser, callback){
     bcrypt.genSalt(10, function(err, salt) {

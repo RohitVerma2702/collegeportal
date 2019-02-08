@@ -25,6 +25,10 @@ var StudentSchema = mongoose.Schema({
     access:{
         type:String
     },
+    Termination:{
+     type:Boolean,
+     default:0,
+    },
     Batch:{
         type:String
     },
@@ -32,7 +36,10 @@ var StudentSchema = mongoose.Schema({
         type:String
     },
     Cdate:{
-   type:String
+   type:Number
+    },
+    Last_year:{
+       type:Number
     },
     password: {
         type: String
@@ -85,13 +92,18 @@ module.exports.updateuser = function(id,newvalues, callback){
     });
    
 }
+
+Student.Terminate=function(year,newvalues,callback){
+
+    Student.updateMany({Last_year:year},newvalues,callback);
+
+}
+
+
  Student.apprv_find=function(query,callback)
 {
-   //var query1={approval:query12};
-  // var query2={status:'verified'};    
-   //Student.find({$and:[{status:'verified'},{approval:query}]},callback);
-    //Student.find({status:{$ne:'pending'}},callback);
-    Student.find({$and:[{status:'verified'},{access:query}]},callback);
+ 
+    Student.find({$and:[{Termination:0},{status:'verified'},{access:query}]},callback);
 }
 
 module.exports.createUser = function(newUser, callback){
