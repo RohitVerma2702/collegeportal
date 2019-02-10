@@ -6,7 +6,7 @@ var Grv=require('../models/grievancedb');
 var Student=require('../models/Studentdb');
 var Parent=require('../models/Parentdb');
 var faculty=require('../models/facultydb');
-var Mail_log=require=('../models/Maildb');
+var Mail_log=require('../models/Maildb');
 var Staff=require('../models/staffdb');
 var session=require('express-session');
 

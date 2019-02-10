@@ -5,7 +5,7 @@ var Member=require('../models/Membersdb');
 var Grv=require('../models/grievancedb');
 const flash = require('express-flash-notification');
 var session=require('express-session');
-var Mail_log=require=('../models/Maildb');
+var Mail_log=require('../models/Maildb');
 console.log('successful');
 var app = express();
 var nodemailer = require("nodemailer");

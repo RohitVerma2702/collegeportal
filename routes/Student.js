@@ -7,7 +7,7 @@ var Grv=require('../models/grievancedb');
 var session = require('express-session'); 
 var sess;
 var bcrypt = require('bcryptjs');
-var Mail_log=require=('../models/Maildb');
+var Mail_log=require('../models/Maildb');
 var generator = require('generate-password');
 var nodemailer = require("nodemailer");
 var smtpTransport = nodemailer.createTransport({

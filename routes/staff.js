@@ -7,7 +7,7 @@ var Grvtype=require('../models/grvtypedb');
 console.log('successful');
 var session = require('express-session'); 
 var app = express();
-var Mail_log=require=('../models/Maildb');
+var Mail_log=require('../models/Maildb');
 var sess;
 var nodemailer = require("nodemailer");
 
@@ -16,7 +16,7 @@ var smtpTransport = nodemailer.createTransport({
   //secure: false,
   auth: {
       user: "gportal33@gmail.com",
-      pass: "grievance001"
+      pass: "grieva nce001"
   }
 });
 var rand,mailOptions,host,link;

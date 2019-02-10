@@ -12,8 +12,7 @@ var mngmnt =require('../models/mngmntdb');
 var Member=require('../models/Membersdb');
 var Grv=require('../models/grievancedb');
 var Grvtype=require('../models/grvtypedb');
-var Mail_log=require=('../models/Maildb');
-var session = require('express-session');
+var Mail_log=require('../models/Maildb');
 var async=require('async')
 
 var nodemailer = require("nodemailer");

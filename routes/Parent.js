@@ -5,7 +5,7 @@ var Parent=require('../models/Parentdb')
 var Grv=require('../models/grievancedb');
 var Grvtype=require('../models/grvtypedb');
 var nodemailer = require("nodemailer");
-var Mail_log=require=('../models/Maildb');
+var Mail_log=require('../models/Maildb');
 console.log('successful');
 var app = express();
 

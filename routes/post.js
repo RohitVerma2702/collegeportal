@@ -8,7 +8,7 @@ var datetime = require('node-datetime');
 var Admin=require('../models/Admindb');
 var Member=require('../models/Membersdb');
 var Grvtype=require('../models/grvtypedb');
-var Mail_log=require=('../models/Maildb');
+var Mail_log=require('../models/Maildb');
 var dt = datetime.create();
 var formatted = dt.format('d/m/Y H:M:S');
 var session=require('express-session');
