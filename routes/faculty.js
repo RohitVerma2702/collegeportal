@@ -7,7 +7,7 @@ var session=require('express-session');
 var Grvtype=require('../models/grvtypedb');
 var nodemailer = require("nodemailer");
 console.log('successful');
-var Mail_log=require=('../models/Maildb');
+var Mail_log=require('../models/Maildb');
 var app = express();
 var sess;
 var smtpTransport = nodemailer.createTransport({
