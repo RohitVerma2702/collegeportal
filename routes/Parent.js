@@ -5,6 +5,7 @@ var Parent=require('../models/Parentdb')
 var Grv=require('../models/grievancedb');
 var Grvtype=require('../models/grvtypedb');
 var nodemailer = require("nodemailer");
+var Mail_log=require=('../models/Maildb');
 console.log('successful');
 var app = express();
 
@@ -124,13 +125,7 @@ router.get('/My_Grievances',requireLogin,function(req,res,next){
 router.get('/Home',requireLogin, function(req, res, next) {
   res.render('Pdash',{title:'Parent'});
 });
-router.get('/complaint',requireLogin ,function(req, res, next) {
-  res.render('post',{title:'Parent'});
-});
 
-  router.get('/err_valid', requireLogin,function(req, res, next) {
-    res.render('err_valid',{title:'Faculty_Login'});
-  });
   router.post('/login',function(req,res,next){
     sess=req.session;
     if(!sess.user)
@@ -181,7 +176,6 @@ router.get('/complaint',requireLogin ,function(req, res, next) {
   
   router.post('/update',function(req,res,next){
     
-   var id={ _id:sess.user};
     var newvalues = {$set: 
       {
         emailid:req.body.email,
@@ -190,7 +184,7 @@ router.get('/complaint',requireLogin ,function(req, res, next) {
   
   };
 
-  Parent.updateuser(id,newvalues,function(err,isUpdate){
+  Parent.updateuser(sess.user,newvalues,function(err,isUpdate){
      if(err) throw err;
    else
    {
@@ -241,6 +235,7 @@ router.get('/complaint',requireLogin ,function(req, res, next) {
       var newUser=new Parent({
         name: name,
         Cdate:cdate,
+        Last_year:(cdate+4),
         relation:relation,
         emailid: email,
         mobileno: Mobile,
@@ -265,7 +260,16 @@ router.get('/complaint',requireLogin ,function(req, res, next) {
               console.log(error);
           res.end("error");
        }else{
-              console.log("Message sent: " + response.message);
+        var mail_doc=new Mail_log({//Entry into Mail Log
+          emailid:user.emailid,
+          subject:"Please confirm your Email account",
+          status:'Sent'
+        });
+  
+        Mail_log.mail_log(mail_doc,function(err){
+          if(err) throw err;
+        });
+              console.log("Message sent");
           res.end("sent");
            }
   });
@@ -390,8 +394,20 @@ console.log('id is '+req.query.id);
       console.log(mailOptions);
       smtpTransport.sendMail(mailOptions, function(error, response){
        if(error) throw err;
-       else{
-           console.log("Message sent: " + response.message);
+       
+       else
+       {
+
+        var mail_doc=new Mail_log({//Entry into Mail Log
+          emailid:id,
+          subject:"Password Update",
+          status:'Sent'
+        });
+  
+        Mail_log.mail_log(mail_doc,function(err){
+          if(err) throw err;
+        });
+           console.log("Message sent");
            res.send('success');       
              }
   });

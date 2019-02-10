@@ -5,6 +5,7 @@ var Member=require('../models/Membersdb');
 var Grv=require('../models/grievancedb');
 const flash = require('express-flash-notification');
 var session=require('express-session');
+var Mail_log=require=('../models/Maildb');
 console.log('successful');
 var app = express();
 var nodemailer = require("nodemailer");
@@ -52,8 +53,7 @@ function requireLogin(req, res, next) {
     });
 
     router.get('/GRV',requireLogin,function(req,res,next){//For finding a particular Grievance information
-      //console.log('hii'); 
-      //console.log(req.query.grv_id);
+  
          Grv.grv_findbyid(req.query.grv_id,function(err,result)
       {
           if(err) throw err;
@@ -72,23 +72,7 @@ function requireLogin(req, res, next) {
   router.get('/Home',requireLogin, function(req, res, next) {
     res.render('gcm_dash',{title:'Members',Gtype:sess.grv_type});
   });
-  router.get('/err_valid', function(req, res, next) {
-    res.render('err_valid',{title:'Faculty_Login'});
-  });
-  router.get('/logged', function(req, res, next) {
-    res.render('logged',{title:'Faculty_Login'});
-  });
-  router.get('/unknw', function(req, res, next) {
-    res.render('unknw',{title:'Faculty_Login'});
-  });
-  router.get('/password_reset',requireLogin, function(req, res, next) {
-    res.render('password_reset',{title:'Members'});
-  });
-  
-  router.get('/pass', function(req, res, next) {
-    res.render('pass',{title:'Faculty_Login'});
-  });
-
+ 
   router.get('/my-account', requireLogin,function(req, res, next) {
     sess=req.session;
     id=sess.user;
@@ -249,7 +233,16 @@ function requireLogin(req, res, next) {
       smtpTransport.sendMail(mailOptions, function(err, response){
        if(err) throw err;
        else{
-           console.log("Message sent: " + response.message);
+        var mail_doc=new Mail_log({//Entry into Mail Log
+          emailid:id,
+          subject:"Password Update",
+          status:'Sent'
+        });
+  
+        Mail_log.mail_log(mail_doc,function(err){
+          if(err) throw err;
+        });
+           console.log("Message sent");
            res.send('success');       
              }
   });

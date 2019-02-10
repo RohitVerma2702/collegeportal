@@ -8,6 +8,7 @@ var datetime = require('node-datetime');
 var Admin=require('../models/Admindb');
 var Member=require('../models/Membersdb');
 var Grvtype=require('../models/grvtypedb');
+var Mail_log=require=('../models/Maildb');
 var dt = datetime.create();
 var formatted = dt.format('d/m/Y H:M:S');
 var session=require('express-session');
@@ -43,6 +44,15 @@ console.log(result.length);
             console.log(error);
         //res.status(500).send('error');
      }else{
+        var mail_doc=new Mail_log({//Entry into Mail Log
+            emailid:result[i].emailid,
+            subject:"Grievance Portal Reminder",
+            status:'Sent'
+          });
+    
+          Mail_log.mail_log(mail_doc,function(err){
+            if(err) throw err;
+          });
             console.log("Message sent: " + response.message);
         //res.end("sent");
          }
@@ -68,7 +78,16 @@ else
                 console.log(error);
             //res.status(500).send('error');
          }else{
-                console.log("Message sent: " + response.message);
+            var mail_doc=new Mail_log({//Entry into Mail Log
+                emailid:result[i].emailid,
+                subject:"Grievance Portal Reminder",
+                status:'Sent'
+              });
+        
+              Mail_log.mail_log(mail_doc,function(err){
+                if(err) throw err;
+              });
+                console.log("Message sent");
             //res.end("sent");
              }
     });        

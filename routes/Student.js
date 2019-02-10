@@ -7,6 +7,7 @@ var Grv=require('../models/grievancedb');
 var session = require('express-session'); 
 var sess;
 var bcrypt = require('bcryptjs');
+var Mail_log=require=('../models/Maildb');
 var generator = require('generate-password');
 var nodemailer = require("nodemailer");
 var smtpTransport = nodemailer.createTransport({
@@ -88,40 +89,10 @@ function requireLogin(req, res, next) {
     );
       });
     
-  
-    router.get('/post',requireLogin, function(req, res, next) {
-    res.render('post',{title:'Student'});
-  });
-  router.get('/reports',requireLogin, function(req, res, next) {
-    res.render('reports',{title:'Student'});
-  });
    router.get('/Home',requireLogin, function(req, res, next) {
     res.render('Student_dash',{title:'Student',verify:sess.ver});
   });
-   router.get('/logged', function(req, res, next) {
-    res.render('logged',{title:'Faculty_Login'});
-  });
-  router.get('/err_valid', function(req, res, next) {
-    res.render('err_valid',{title:'Faculty_Login'});
-  });
-  router.get('/logged', function(req, res, next) {
-    res.render('logged',{title:'Faculty_Login'});
-  });
-  router.get('/unknw', function(req, res, next) {
-    res.render('unknw',{title:'Faculty_Login'});
-  });
-  router.get('/pass', function(req, res, next) {
-    res.render('pass',{title:'Faculty_Login'});
-  });
-  router.get('/al', function(req, res, next) {
-    res.render('al',{title:'Faculty_Login'});
-  });
-  /*router.get('/update', function(req, res, next) {
-    res.render('Supdt',{title:'Student'});
-  });*/
-  router.get('/password_reset',requireLogin, function(req, res, next) {
-    res.render('password_reset',{title:'Student'});
-  });
+ 
 
   router.post('/password_reset',function(req,res,next){
   var cpass=req.body.current_password;
@@ -213,14 +184,13 @@ Student.getinfobyID(req.session.user,function(err, user){
     });
     router.post('/update',function(req,res,next){
     
-      var id={ _id:sess.user};
        var newvalues = {$set: 
          {
            //gender:req.body.gender,
           emailid:req.body.emailid,
           mobileno:req.body.mobileno
        }};
-     Student.updateuser(id,newvalues,function(err,isUpdate){
+     Student.updateuser(sess.user,newvalues,function(err,isUpdate){
         if(err) throw err;
       else
       {
@@ -294,6 +264,7 @@ Student.getinfobyID(req.session.user,function(err, user){
         dep: dep,
         gender: gender,
         Cdate:cdate,
+        Last_year:cdate+4,
         Batch:batch,
         emailid: email,
         mobileno: Mobile,
@@ -316,8 +287,17 @@ Student.getinfobyID(req.session.user,function(err, user){
         smtpTransport.sendMail(mailOptions, function(error, response){
          if(error){
                 console.log(error);
-            //res.status(500).send('error');
-         }else{
+         }
+         else
+         { var mail_doc=new Mail_log({//Entry into Mail Log
+          emailid:user.emailid,
+          subject:"PLease Confirm your Email account",
+          status:'Sent'
+        });
+  
+        Mail_log.mail_log(mail_doc,function(err){
+          if(err) throw err;
+        });
                 console.log("Message sent: " + response.message);
             //res.end("sent");
              }
@@ -337,42 +317,6 @@ Student.getinfobyID(req.session.user,function(err, user){
     res.end('someone already logged in');
   }
 });
-/*router.get('/send', function(req, res, next) {
-  rand=Math.floor((Math.random() * 100) + 54);
-  var id={ _id:sess.user };
-  //console.log('id is '+sess.user.id);
-  var newvalues = {$set: 
-    { rand:rand
-    }};
-  
-Student.updateuser(id,newvalues,function(err){
-   if(err) throw err;
- else
- {
-   console.log(' random variable added');
-   //res.redirect('/updated')
- }
-});
-
-    host=req.get('host');
-    link="http://"+req.get('host')+"/Student/verify?rand="+rand+"&id="+sess.user;
-    //link="https://www.google.com/"
-    mailOptions={
-        to : req.session.email,
-        subject : "Please confirm your Email account",
-        html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
-    }
-    console.log(mailOptions);
-    smtpTransport.sendMail(mailOptions, function(error, response){
-     if(error){
-            console.log(error);
-        res.end("error");
-     }else{
-            console.log("Message sent: " + response.message);
-        res.end("sent");
-         }
-});
-});*/
 router.get('/verify',function(req,res){
   console.log(req.protocol+"://"+req.get('host'));
 console.log('id is '+req.query.id);
@@ -394,7 +338,6 @@ console.log('id is '+req.query.id);
       {
           console.log("email is verified");
           res.end("<h1>Email "+user.emailid+" is been Successfully verified");
-        var id={_id:user._id}
           var newvalues={$set:
         {
            status:"verified"
@@ -446,7 +389,16 @@ console.log('id is '+req.query.id);
      smtpTransport.sendMail(mailOptions, function(error, response){
       if(error) throw err;
       else{
-          console.log("Message sent: " + response.message);
+        var mail_doc=new Mail_log({//Entry into Mail Log
+          emailid:id,
+          subject:"Password Update",
+          status:'Sent'
+        });
+  
+        Mail_log.mail_log(mail_doc,function(err){
+          if(err) throw err;
+        });
+          console.log("Message sent");
           res.send('success');       
             }
  });

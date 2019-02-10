@@ -12,6 +12,7 @@ var mngmnt =require('../models/mngmntdb');
 var Member=require('../models/Membersdb');
 var Grv=require('../models/grievancedb');
 var Grvtype=require('../models/grvtypedb');
+var Mail_log=require=('../models/Maildb');
 var session = require('express-session');
 var async=require('async')
 
@@ -42,19 +43,8 @@ var sess;
   router.get('/Home',requireLogin, function(req, res, next) {
     res.render('Home2',{title:'Admin_Login'});
   });
-  router.get('/unknw', function(req, res, next) {
-    res.render('unknw');
-  });
-  router.get('/pass', function(req, res, next) {
-    res.render('pass');
-  });
-  router.get('/create',requireLogin ,function(req, res, next) {
-    var sess=req.session;
-    if(sess.user)
-    res.render('create_cell');
-    else
-    res.render('view');
-  });
+
+  
 
 router.get('/my-account',function(req,res,next){
 
@@ -469,57 +459,6 @@ data={
       res.redirect('/');
     });
   })
-router.get('/approve',requireLogin,function(req,res,next){
-  //var x=req.query.status;
-  if(req.query.type=='Student')
-{
-  Student.apprv_find(req.query.status,function(err,users){
-  if(err) throw err;
-res.render('post1',{
-  result:users,
-  type:req.query.status,
-  user:req.query.type
-});
-  //res.end('fetched complete');
-})
-}
-else if(req.query.type=='Parent')
-{
-  Parent.apprv_find(req.query.status,function(err,users){
-  if(err) throw err;
-res.render('post1',{
-  result:users,
-  type:req.query.status,
-  user:req.query.type
-});
-  //res.end('fetched complete');
-})
-}
-else if(req.query.type=='staff')
-{
-  Staff.apprv_find(req.query.status,function(err,users){
-  if(err) throw err;
-   res.render('post1',{
-    result:users,
-    type:req.query.status,
-    user:req.query.type
-   }); 
-  })
-}
-else if(req.query.type=='faculty')
-{
-  faculty.apprv_find(req.query.status,function(err,users){
-  if(err) throw err;
-res.render('post1',{
-  result:users,
-  type:req.query.status,
-  user:req.query.type
-});
-  //res.end('fetched complete');
-})
-}
-
-});
 router.get('/Grievances',function(req,res,next){// for all pending grievances 
   console.log('hii'); 
   active=req.query.param;
@@ -872,7 +811,7 @@ if((req.body.mngmnt)==1)
     mngmnt.createUser(newuser,function(err,user){
       if(err) throw err;
       console.log(user);
-      res.end('Managment Member Created');
+     // res.end('Managment Member Created');
     });
   }
   else{
@@ -889,26 +828,35 @@ if((req.body.mngmnt)==1)
   cell.createUser(newuser,function(err,user){
     if(err) throw err;
     console.log(user);
-    res.end('Cell Member Created');
+   // res.end('Cell Member Created');
   });
   }
 
 
   host=req.get('host');
-   // link="http://"+req.get('host')+"/Student/verify?rand="+rand+"&id="+sess.user;
-    //link="https://www.google.com/"
-    mailOptions={
+   mailOptions={
         to :email,
         subject : "Added to Anand Cell ",
         html : "Hello "+name+", <br><br>Greetings from Anand International College of Engineering Online Grievance Redressal Portal!<br><br>You have been added as Cell Member to the Grievance Redressal Portal of Anand International College of Engineering<br><br>You can login with your email Id or mobile number as username and "+password+ " as password to access the posts and updates.<br><br>Thanks and Regards<br><br>Admin-Grievance Redressal Portal<br><br><h1>Anand International College of Engineering</h1><br>" 
     }
-    //console.log(mailOptions);
+    
+    console.log(mailOptions);
     smtpTransport.sendMail(mailOptions, function(error, response){
      if(error){
             console.log(error);
         res.end("error");
-     }else{
-            console.log("Message sent: " + response.message);
+     }
+     else{
+      var mail_doc=new Mail_log({
+        emailid:email,
+        subject:"Added to Anand Cell ",
+        status:'Sent'
+      });
+
+      Mail_log.mail_log(mail_doc,function(err){
+        if(err) throw err;
+      });
+        console.log("Message sent: " + response.message);
         res.end("sent");
          }
 });
@@ -1030,7 +978,16 @@ if(!sess.user){
         smtpTransport.sendMail(mailOptions, function(error, response){
          if(error) throw err;
          else{
-             console.log("Message sent: " + response.message);
+          var mail_doc=new Mail_log({
+            emailid:id,
+            subject:"Password Updated ",
+            status:'Sent'
+          });
+    
+          Mail_log.mail_log(mail_doc,function(err){
+            if(err) throw err;
+          });
+             console.log("Message sent");
              res.send('success');       
                }
     });
@@ -1039,6 +996,35 @@ if(!sess.user){
      });
   
 
+     router.get('/termination',requireLogin,function(req,res,next){
+      var newvalues={$set:{
+        access:'rejected',
+        Termination:1
+      }};
+      if(req.body.type=='Student')
+      {
+      Student.Terminate(req.body.year,newvalues,function(err){
+        if(err) throw err;
+        console.log('Student Terminated');
+      });
+     
+    }
+    else if(req.body.type=='Parent'){
+      Parent.Terminate(req.body.year,newvalues,function(err){
+        if(err) throw err
+        console.log('Parent Terminated');
+      })
+    }
+    res.end();
+     });
+
+     router.get('/Mail_Log',requireLogin,function(response){
+      Mail_log.find_mail(function(err,Result){
+      if(err) throw err;
+      console.log('Mail Log fetched');
+      res.end(result);
+      })
+     });
 
 // author: Ankit Sharma
 //function to add new grievance type
@@ -1094,7 +1080,6 @@ router.post('/grvtype_add',requireLogin,function(req,res,next){
   });
 
 });
-
 
 /* author : Ankit Sharma
 date: 31/10/2018 */

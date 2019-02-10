@@ -7,6 +7,7 @@ var session=require('express-session');
 var Grvtype=require('../models/grvtypedb');
 var nodemailer = require("nodemailer");
 console.log('successful');
+var Mail_log=require=('../models/Maildb');
 var app = express();
 var sess;
 var smtpTransport = nodemailer.createTransport({
@@ -104,31 +105,6 @@ res.send(data);
   );
     });
 
-
- router.get('/Home',requireLogin, function(req, res, next) {
-  res.render('Faculty_dash',{title:'faculty',verify:sess.ver});
-});
-router.get('/complaint',requireLogin, function(req, res, next) {
-  res.render('post',{title:'faculty'});
-});
-  router.get('/err_valid',requireLogin, function(req, res, next) {
-    res.render('err_valid',{title:'Faculty_Login'});
-  });
-  router.get('/logged', function(req, res, next) {
-    res.render('logged',{title:'Faculty_Login'});
-  });
-  router.get('/unknw', function(req, res, next) {
-    res.render('unknw',{title:'Faculty_Login'});
-  });
-  router.get('/pass', function(req, res, next) {
-    res.render('pass',{title:'Faculty_Login'});
-  });
-  router.get('/update',requireLogin, function(req, res, next) {
-    res.render('fupdt',{title:'Faculty'});
-  });
-  router.get('/al', function(req, res, next) {
-    res.render('al',{title:'Faculty_Login'});
-  });
 
   router.post('/password_reset',function(req,res,next){
     var cpass=req.body.current_password;
@@ -315,6 +291,15 @@ router.get('/complaint',requireLogin, function(req, res, next) {
               console.log(error);
           res.end("error");
        }else{
+        var mail_doc=new Mail_log({//Entry into Mail Log
+          emailid:user.emailid,
+          subject:"Please confirm your Email account",
+          status:'Sent'
+        });
+  
+        Mail_log.mail_log(mail_doc,function(err){
+          if(err) throw err;
+        });
               console.log("Message sent: " + response.message);
           res.end("sent");
            }
@@ -404,6 +389,15 @@ console.log('id is '+req.query.id);
       smtpTransport.sendMail(mailOptions, function(error, response){
        if(error) throw err;
        else{
+        var mail_doc=new Mail_log({//Entry into Mail Log
+          emailid:id,
+          subject:"Password Update",
+          status:'Sent'
+        });
+  
+        Mail_log.mail_log(mail_doc,function(err){
+          if(err) throw err;
+        });
            console.log("Message sent: " + response.message);
            res.send('success');       
              }
