@@ -209,56 +209,57 @@ Student.getinfobyID(req.session.user,function(err, user){
       sess=req.session; 
       if(!sess.user)
       {
-      var name=req.body.name;
-    var email=req.body.email;
-    var gender=req.body.gender;
-    var dep=req.body.dep;
-    var batch=req.body.batch;
-    var id=req.body.id;
-    var cdate=req.body.cdate;
-    var Mobile=req.body.Mobile;
-    var password=req.body.password;
-    var password2=req.body.password2;
-    console.log(req.body.name);
-    console.log(req.body.email);
-    req.checkBody('name','Name field is required').notEmpty();
-    req.checkBody('gender','Email field is required').notEmpty();
-    req.checkBody('email','Email is not valid').isEmail();
-    req.checkBody('dep','department field is required').notEmpty();
-    req.checkBody('batch','batch/class field is required').notEmpty();
-    req.checkBody('cdate','course completion date field is required').notEmpty();
-    req.checkBody('id','id field is required').notEmpty();
-    req.checkBody('Mobile','username field is required').notEmpty();
-    req.checkBody('password','password field is required').notEmpty();
-    req.checkBody('password2','password do not match').equals(password);
-  
-    var errors=req.validationErrors();
-    if(errors)
-    { console.log(errors);
-        res.render('err_valid',{
-      errors: errors
-    });
-      console.log('errors in validation');
-      
-    }
-    else{
-      Student.getUserByID(email,function(err, user){
-        if(err) throw err;
-        if(user){
-            console.log("Already Registered");
-            if(user.status=="pending"){
-              res.end('<h1>Already Registered but email is not verified</h1>');
-              //res.status(500).send('already reg not verified');
+        var name=req.body.name;
+        var email=req.body.email;
+        var gender=req.body.gender;
+        var dep=req.body.dep;
+        var batch=req.body.batch;
+        var id=req.body.id;
+        var cdate=req.body.cdate;
+        var mobile=req.body.mobile;
+        var password=req.body.password;
+        var password2=req.body.password2;
+        console.log(req.body.name);
+        console.log(req.body.email);
+        req.checkBody('name','Name field is required').notEmpty();
+        req.checkBody('gender','Email field is required').notEmpty();
+        req.checkBody('email','Email is not valid').isEmail();
+        req.checkBody('dep','department field is required').notEmpty();
+        req.checkBody('batch','batch/class field is required').notEmpty();
+        req.checkBody('cdate','course completion date field is required').notEmpty();
+        req.checkBody('id','id field is required').notEmpty();
+        req.checkBody('mobile','username field is required').notEmpty();
+        req.checkBody('password','password field is required').notEmpty();
+        req.checkBody('password2','password do not match').equals(password);
+        
+        var errors=req.validationErrors();
+        if(errors)
+          { console.log(errors);
+        //res.render('err_valid',{
+      //errors: errors
+    //});
+    res.status(500).send('errors in validation');
+    console.log('errors in validation');
+    
+  }
+  else{
+    Student.getUserByID(email,function(err, user){
+      if(err) throw err;
+      if(user){
+        console.log("Already Registered");
+        if(user.status=="pending"){
+              //res.end('<h1>Already Registered but email is not verified</h1>');
+              res.status(500).send('already reg not verified');
             }
             else{
-              res.end('<h1>Already Registered and email is verified</h1>');
-              //res.status(500).send('already reg verified');
+              //res.end('<h1>Already Registered and email is verified</h1>');
+              res.status(500).send('already reg verified');
             }
             return;
-        }
-        else{
-          var random=Math.floor((Math.random() * 100) + 54);
-      var newUser=new Student({
+          }
+          else{
+            var random=Math.floor((Math.random() * 100) + 54);
+            var newUser=new Student({
         name: name,//LHS should be same as that of attribute name in DB file and DB
         id: id,
         dep: dep,
@@ -267,56 +268,55 @@ Student.getinfobyID(req.session.user,function(err, user){
         Last_year:cdate+4,
         Batch:batch,
         emailid: email,
-        mobileno: Mobile,
+        mobileno: mobile,
         password: password,
         rand:random,
         status:"pending"
       }); 
-    Student.createUser(newUser,function(err,user){
-      if(err) throw err;
-      console.log(user);
-     
-        host=req.get('host');
-        link="http://"+req.get('host')+"/Student/verify?rand="+random+"&id="+newUser._id;
-        mailOptions={
-            to : user.emailid,
-            subject : "Please confirm your Email account",
-            html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
-        }
-        console.log(mailOptions);
-        smtpTransport.sendMail(mailOptions, function(error, response){
-         if(error){
+            Student.createUser(newUser,function(err,user){
+              if(err) throw err;
+              console.log(user);
+              
+              host=req.get('host');
+              link="http://"+req.get('host')+"/Student/verify?rand="+random+"&id="+newUser._id;
+              mailOptions={
+                to : user.emailid,
+                subject : "Please confirm your Email account",
+                html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
+              }
+              console.log(mailOptions);
+              smtpTransport.sendMail(mailOptions, function(error, response){
+               if(error){
                 console.log(error);
-         }
-         else
+                res.status(500).send('mail error');
+              }
+              else
          { var mail_doc=new Mail_log({//Entry into Mail Log
           emailid:user.emailid,
           subject:"PLease Confirm your Email account",
           status:'Sent'
         });
-  
-        Mail_log.mail_log(mail_doc,function(err){
-          if(err) throw err;
-        });
-                console.log("Message sent: " + response.message);
+       
+       Mail_log.mail_log(mail_doc,function(err){
+        if(err) throw err;
+      });
+       console.log("Message sent: " + response.message);
             //res.end("sent");
-             }
-    });
-
-
-
-    });
-    console.log('success','you are now registered and can login');
-    req.flash('success','you are now registered and can login');
-    res.redirect('/');
+          }
+        });
+            });
+            console.log('success','you are now registered and can login');
+            req.flash('success','you are now registered and can login');
+            res.redirect('/');
+          }
+        });
+  }
+}
+else{
+  res.status(500).send('someone already logged in');
 }
 });
-    }
-  }
-  else{
-    res.end('someone already logged in');
-  }
-});
+    
 router.get('/verify',function(req,res){
   console.log(req.protocol+"://"+req.get('host'));
 console.log('id is '+req.query.id);
