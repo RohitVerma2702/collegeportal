@@ -202,10 +202,7 @@ Student.getinfobyID(req.session.user,function(err, user){
      });
 
    
-
-   
-
-    router.post('/register', function(req, res, next) {
+     router.post('/register', function(req, res, next) {
       sess=req.session; 
       if(!sess.user)
       {
@@ -216,7 +213,6 @@ Student.getinfobyID(req.session.user,function(err, user){
     var batch=req.body.batch;
     var id=req.body.id;
     var cdate=req.body.cdate;
-    var Last_year=(req.body.cdate)+4;
     var Mobile=req.body.Mobile;
     var password=req.body.password;
     var password2=req.body.password2;
@@ -265,7 +261,7 @@ Student.getinfobyID(req.session.user,function(err, user){
         dep: dep,
         gender: gender,
         Cdate:cdate,
-        Last_year:Last_year,
+        Last_year:cdate+4,
         Batch:batch,
         emailid: email,
         mobileno: Mobile,
@@ -318,6 +314,10 @@ Student.getinfobyID(req.session.user,function(err, user){
     res.end('someone already logged in');
   }
 });
+   
+
+
+    
 router.get('/verify',function(req,res){
   console.log(req.protocol+"://"+req.get('host'));
 console.log('id is '+req.query.id);

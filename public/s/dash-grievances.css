@@ -14,7 +14,7 @@ body {
 
 /*.header{
 	min-width: 100%;
-	background-color: green;
+	background-color: #5c3f5a;
 }
 
 .heading{
@@ -93,7 +93,7 @@ i:hover{
 	padding-bottom: 5rem;
 	width: 5rem;
 	height: 100vh;
-	background-color: #022051;
+	background-color: #222222;
 	transition: all .5s ease-in-out;
 }
 
@@ -247,7 +247,7 @@ nav{
 }
 
 .navbar-dark{
-	background-color: green !important;
+	background-color: #5c3f5a !important;
 }
 
 .navbar-brand{
@@ -273,7 +273,7 @@ h1{
 .realsidemenu{
 	min-height: 100vh;
 	height: auto;
-	background-color: #022051;
+	background-color: #222222;
 	padding-top: 2rem;
 	padding-bottom: 2rem;
 }

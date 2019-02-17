@@ -202,23 +202,24 @@ router.get('/Home',requireLogin, function(req, res, next) {
     var email=req.body.email;
     var relation=req.body.relation;
     var cdate=req.body.cdate;
-    var Mobile=req.body.Mobile;
+    var mobile=req.body.mobile;
     var password=req.body.password;
     var password2=req.body.password2;
     req.checkBody('name','Name field is required').notEmpty();
     req.checkBody('email','Email is not valid').isEmail();
     req.checkBody('relation','relation field is required').notEmpty();
     req.checkBody('cdate','course completion date field is required').notEmpty();
-    req.checkBody('Mobile','mobile no. field is required').notEmpty();
+    req.checkBody('mobile','mobile no. field is required').notEmpty();
     req.checkBody('password','password field is required').notEmpty();
     req.checkBody('password2','password do not match').equals(password);
   
     var errors=req.validationErrors();
     if(errors)
     { console.log(errors);
-        res.render('err_valid',{
-      errors: errors
-    });
+        //res.render('err_valid',{
+      //errors: errors
+    //});
+    res.status(500).send('errors in validation');
       console.log('errors in validation');
       
     }
@@ -227,7 +228,8 @@ router.get('/Home',requireLogin, function(req, res, next) {
         if(err) throw err;
         if(user){
             console.log("Already Registered");
-            res.redirect('/al');
+            //res.redirect('/al');
+            res.status(500).send('already reg verified');
             return;
         }
         else{
@@ -238,7 +240,7 @@ router.get('/Home',requireLogin, function(req, res, next) {
         Last_year:(cdate+4),
         relation:relation,
         emailid: email,
-        mobileno: Mobile,
+        mobileno: mobile,
         password: password,
         rand:random,
         status:"pending"
@@ -258,7 +260,7 @@ router.get('/Home',requireLogin, function(req, res, next) {
       smtpTransport.sendMail(mailOptions, function(error, response){
        if(error){
               console.log(error);
-          res.end("error");
+          res.status(500).send('mail error');
        }else{
         var mail_doc=new Mail_log({//Entry into Mail Log
           emailid:user.emailid,
@@ -282,7 +284,7 @@ router.get('/Home',requireLogin, function(req, res, next) {
   }
 });
 }} else{
-  res.end('someone already logged in');
+  res.status(500).send('someone already logged in');
 }
 });
 
