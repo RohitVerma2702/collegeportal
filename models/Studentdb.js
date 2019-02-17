@@ -100,7 +100,7 @@ Student.Terminate=function(year,newvalues,callback){
  Student.apprv_find=function(query,callback)
 {
                                                                 
-    Student.find({$and:[{Termination:0},{status:'verified'},{access:query}]},callback);
+    Student.find({$and:[{status:'verified'},{access:query}]},callback);
 }
 
 module.exports.createUser = function(newUser, callback){

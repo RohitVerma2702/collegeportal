@@ -216,6 +216,7 @@ Student.getinfobyID(req.session.user,function(err, user){
     var batch=req.body.batch;
     var id=req.body.id;
     var cdate=req.body.cdate;
+    var Last_year=(req.body.cdate)+4;
     var Mobile=req.body.Mobile;
     var password=req.body.password;
     var password2=req.body.password2;
@@ -264,7 +265,7 @@ Student.getinfobyID(req.session.user,function(err, user){
         dep: dep,
         gender: gender,
         Cdate:cdate,
-        Last_year:cdate+4,
+        Last_year:Last_year,
         Batch:batch,
         emailid: email,
         mobileno: Mobile,

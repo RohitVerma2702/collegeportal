@@ -1,12 +1,12 @@
 <!--Student Termination-->
 <!--Admin-->
-<div ng-app="grievances" ng-controller="" ng-init="">
+<div ng-app="grievances" ng-controller="Termination" >
     <h1>Student Termination</h1>
-    <div id="" class="contenttable">
+    <div id="terminate" class="contenttable">
         <form class="form-group">
             <label>Enter Year</label>
-            <input type="number" class="form-control w-50" name="" placeholder="(ex. 2016)" maxlength="4" minlength="4" required>
-            <button type="submit" class="btn btn-danger my-3">Terminate</button>
+            <input type="number" class="form-control w-50" ng-model="year" placeholder="(ex. 2016)" maxlength="4" minlength="4" required>
+            <button type="submit" ng-click="Termination('Student')" class="btn btn-danger my-3">Terminate</button>
         </form>
     </div>
 

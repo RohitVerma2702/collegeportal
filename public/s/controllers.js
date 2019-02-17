@@ -1244,8 +1244,28 @@ $window.location.reload();
 
 app.controller('Termination',function($http,$window,$mdDialog,$scope){
 $scope.Termination=function(Type,ev){
-        $http.get('/Admin/termination?type='+Type).then(function(response){
+    $scope.form={
+        year:$scope.year
+    }  
+    $http.post('/Admin/termination?type='+Type,$scope.form).then(function(response){
         });
+        
+        var Created = $mdDialog.confirm()
+        .title('Successfully Terminated!')
+        .targetEvent(ev)
+        .ok('Thank You!');
+    
+    $mdDialog.show(Created).then(function() {
+    $window.location.reload();
+    
+    });      
 }
 })
+
+app.controller('Mail_Log',function($http,$window,$mdDialog,$scope){
+    $http.get('/Admin/Mail_Log').then(function(response){
+     $scope.maillog=response.data.info;
+    });
+})
+
 

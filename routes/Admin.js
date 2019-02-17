@@ -1000,11 +1000,11 @@ if(!sess.user){
      });
   
 
-     router.get('/termination',requireLogin,function(req,res,next){
+     router.post('/termination',requireLogin,function(req,res,next){
       var newvalues={$set:{
-        access:'terminated',
+        access:'terminated'
       }};
-      if(req.body.type=='Student')
+      if(req.query.type=='Student')
       {
       Student.Terminate(req.body.year,newvalues,function(err){
         if(err) throw err;
@@ -1012,7 +1012,7 @@ if(!sess.user){
       });
      
     }
-    else if(req.body.type=='Parent'){
+    else if(req.query.type=='Parent'){
       Parent.Terminate(req.body.year,newvalues,function(err){
         if(err) throw err
         console.log('Parent Terminated');
@@ -1021,11 +1021,13 @@ if(!sess.user){
     res.end();
      });
 
-     router.get('/Mail_Log',requireLogin,function(response){
+     router.get('/Mail_Log',requireLogin,function(req,res,next){
       Mail_log.find_mail(function(err,Result){
       if(err) throw err;
       console.log('Mail Log fetched');
-      res.end(result);
+      console.log(Result);
+      data={info:Result}
+      res.send(data);
       })
      });
 
