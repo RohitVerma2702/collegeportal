@@ -246,7 +246,7 @@ Student.getinfobyID(req.session.user,function(err, user){
     Student.getUserByID(email,function(err, user){
       if(err) throw err;
       if(user){
-        console.log("Already Registered");
+        console.log("Already Registered user");
         if(user.status=="pending"){
               //res.end('<h1>Already Registered but email is not verified</h1>');
               res.status(500).send('already reg not verified');
