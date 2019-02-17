@@ -170,46 +170,14 @@ $('#lgnbtn, .options li').click(function(){
           duration: 1000,
           origin:'top'
         });
-        sr.reveal('#logo', {
-          duration: 1000,
-          origin:'left',
-          distance:'300px'
-        });
+        
         sr.reveal('#sitetitle', {
           duration: 1000,
           origin:'bottom',
           delay: '500',
           distance:'300px'
         });
-        sr.reveal('#aboutheading', {
-          duration: 2000,
-          origin:'right',
-          distance: '300px',
-          viewFactor: 0.5
-        });
-        sr.reveal('#aboutinfo', {
-          duration: 1000,
-          origin:'bottom',
-          viewFactor: 0.5
-        });
-        sr.reveal('#contactheading', {
-          duration: 2000,
-          origin:'top',
-          distance:'300px',
-          viewFactor: 0.5
-        });
-        sr.reveal('#contactinfo', {
-          duration: 1000,
-          origin:'left',
-          distance:'300px',
-          viewFactor: 0.5
-        });
-        sr.reveal('#map', {
-          duration: 1000,
-          origin:'right',
-          distance:'300px',
-          viewFactor: 0.5
-        });
+        
 
     $(window).scroll(function(){ 
         if ($(this).scrollTop() > 200) { 
@@ -350,19 +318,65 @@ $('.mngmnt_forgotpassword').click(function(){
 
 
 //scroll reveal for the heading grievance portal....
+
+        $('.heading').removeClass('hide');
+
         window.sr = ScrollReveal();
+
+        sr.reveal('#logo', {
+          duration: 1000,
+          origin:'left',
+          distance:'300px',
+          delay: '300'
+        });
+
         sr.reveal('#heading1', {
           duration: 1000,
           origin:'bottom',
           distance: '300px',
           easing: 'cubic-bezier(0.5, 0, 0, 1.3)'
         });
-        window.sr = ScrollReveal();
+
         sr.reveal('#heading2', {
           duration: 1100,
           origin:'bottom',
           distance: '350px',
           easing: 'cubic-bezier(.5, 0, .2, 1.2)'
+        });
+
+        sr.reveal('#aboutheading', {
+          duration: 2000,
+          origin:'left',
+          distance: '300px',
+          viewFactor: 0.5
+        });
+
+        sr.reveal('#aboutinfo', {
+          duration: 1000,
+          origin:'right',
+          distance: '300px',
+          viewFactor: 0.5
+        });
+
+        sr.reveal('#contactheading', {
+          duration: 2000,
+          origin:'top',
+          distance:'300px',
+          viewFactor: 0.5
+        });
+
+        sr.reveal('#contactinfo', {
+          duration: 1000,
+          origin:'left',
+          distance:'300px',
+          viewFactor: 0.5
+        });
+
+        sr.reveal('#map', {
+          duration: 1000,
+          origin:'right',
+          distance:'300px',
+          viewFactor: 0.5
         });
 
 });
