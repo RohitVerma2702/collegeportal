@@ -571,25 +571,7 @@ $('#nonteachinglogin').click(function(e) {
 
 //student registration validation...
 
-$('#studentsignup').click(function(e){
-			e.preventDefault();
-			console.log('hello');
-			alert("hellofjsdfhaklsjdhf");
 
-			/*var name = document.studentsignup.name.value;
-			var email = document.studentsignup.email.value;
-			var cdate = document.studentsignup.cdate.value;
-			var id = document.studentsignup.id.value;
-			var mobile = document.studentsignup.Mobile.value;
-			var pwd = document.studentsignup.password.value;
-			var pwd2 = document.studentsignup.password2.value;
-			var dep = document.studentsignup.dep.value;
-			var batch = document.studentsignup.batch.value;
-			var gender = document.studentsignup.gender.value;
-*/
-
-			return false;
-		});
 
 //Forgot Password Validation
 		$('#Student_forgotpass').click(function(e) {
