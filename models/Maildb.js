@@ -6,7 +6,7 @@ var MailSchema=mongoose.Schema({
     emailid:{
         type:String
     },
-    Subject:{
+    subject:{
         type:String
     },
     status:{

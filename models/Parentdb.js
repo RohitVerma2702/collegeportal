@@ -21,11 +21,8 @@ var ParentSchema = mongoose.Schema({
      type:String
     },
     access:{
-      type:String
-    },
-    Termination:{
-        type:Boolean,
-        default:0  
+      type:String,
+      default:'pending'
     },
     Cdate:{
    type:Number
