@@ -104,7 +104,7 @@ router.post('/register',uploads.single('profileimage'), function(req, res, next)
     res.render('register',{ 
     errors: errors
   });
-    console.log('errors in validation');
+    
     
   }
   else{
