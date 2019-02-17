@@ -569,6 +569,68 @@ $('#nonteachinglogin').click(function(e) {
 	}
 });
 
+//password strength checker for signup
+
+//student password
+$('#student-progress').strengthMeter('progressBar', {
+	container: $('#student-progress-container'),
+	base: 80,
+	hierarchy: {
+		'0': 'progress-bar bg-danger',
+		'25': 'progress-bar bg-warning',
+		'50': 'progress-bar bg-success'
+	},
+	passwordScore: {
+		options: [],
+		append: true
+	}
+});
+
+//faculty password
+$('#faculty-progress').strengthMeter('progressBar', {
+	container: $('#faculty-progress-container'),
+	base: 80,
+	hierarchy: {
+		'0': 'progress-bar bg-danger',
+		'25': 'progress-bar bg-warning',
+		'50': 'progress-bar bg-success'
+	},
+	passwordScore: {
+		options: [],
+		append: true
+	}
+});
+
+//nonteaching password
+$('#nonteaching-progress').strengthMeter('progressBar', {
+	container: $('#nonteaching-progress-container'),
+	base: 80,
+	hierarchy: {
+		'0': 'progress-bar bg-danger',
+		'25': 'progress-bar bg-warning',
+		'50': 'progress-bar bg-success'
+	},
+	passwordScore: {
+		options: [],
+		append: true
+	}
+});
+
+//parent password
+$('#parent-progress').strengthMeter('progressBar', {
+	container: $('#parent-progress-container'),
+	base: 80,
+	hierarchy: {
+		'0': 'progress-bar bg-danger',
+		'25': 'progress-bar bg-warning',
+		'50': 'progress-bar bg-success'
+	},
+	passwordScore: {
+		options: [],
+		append: true
+	}
+});
+
 //student registration validation...
 $('#studentsignupbutton').click(function(e) {
 	e.preventDefault();
@@ -666,6 +728,278 @@ $('#studentsignupbutton').click(function(e) {
 	}
 });
 
+//faculty registration validation...
+$('#facultysignupbutton').click(function(e) {
+	e.preventDefault();
+
+	var name = document.facultysignup.name.value;
+	var gender = document.facultysignup.gender.value;
+	var dep = document.facultysignup.dep.value;
+	var id = document.facultysignup.id.value;
+	var desig = document.facultysignup.desig.value;
+	var email = document.facultysignup.email.value;
+	var mobile = document.facultysignup.mobile.value;
+	var pass1 = document.facultysignup.password.value;
+	var pass2 = document.facultysignup.password2.value;
+	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+	if (name && gender && dep && id && desig && email && mobile && pass1 && pass2 ) {
+
+		if (re.test(email) == false) {
+			$('.faculty-reg-form small').text('Please enter a valid Email Address!');
+			return false;
+		}
+
+		else if (pass1 != pass2) {
+			$('.faculty-reg-form small').text('Passwords don\'t match!');
+			return false;
+		}
+
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				name: name,
+				gender: gender,
+				dep: dep,
+				id: id,
+				desig: desig,
+				email: email,
+				mobile: mobile,
+				password: pass1,
+				password2: pass2
+			},
+		    url: 'http://localhost:3000/faculty/register', //node.js server is running
+		    error: function(error){
+		    	if (error.responseText == 'already reg not verified') {
+		    		console.log(error.responseText);
+		    		$('.faculty-reg-form small').text('User already registered but Email not verified.');
+		    		return false;
+		    	}
+		    	else if (error.responseText == 'already reg verified') {
+		    		console.log(error.responseText);
+		    		$('.faculty-reg-form small').text('User already registered and waiting for approval.');
+		    		return false;
+		    	}
+		    	else if (error.responseText == 'mail error') {
+		    		console.log(error.responseText);
+		    		$('.faculty-reg-form small').text('Not able to send verification mail. Please check Email Address.');
+		    		return false;
+		    	}
+		    	else if (error.responseText == 'someone already logged in') {
+		    		console.log(error.responseText);
+		    		$('.faculty-reg-form small').text('Someone already logged in!');
+		    		return false;
+		    	}
+		    	else{
+		    		console.log(error.responseText);
+		    		$('.faculty-reg-form small').text('Unknown Error! Try again.');
+		    		return false;
+		    	}
+		    },
+		    success: function(data) { 
+		    	console.log('success');
+				Swal.fire({
+				  position: 'center',
+				  type: 'success',
+				  title: 'Successfully Registered!',
+				  text: 'Please verify your Email Address.',
+				  showConfirmButton: true,
+				  timer: 5000
+				}).then(function(){
+					location.reload();
+				});
+		    	return false;
+		    }
+		});
+	}else{
+		$('.faculty-reg-form small').text('Please fill all the fields!');
+		return false;
+	}
+});
+
+//parent registration validation...
+$('#parentsignupbutton').click(function(e) {
+	e.preventDefault();
+
+	var name = document.parentsignup.name.value;
+	var id = document.parentsignup.id.value;
+	var cdate = document.parentsignup.cdate.value;
+	var relation = document.parentsignup.relation.value;
+	var email = document.parentsignup.email.value;
+	var mobile = document.parentsignup.mobile.value;
+	var pass1 = document.parentsignup.password.value;
+	var pass2 = document.parentsignup.password2.value;
+	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+	if (name && id && cdate && relation && email && mobile && pass1 && pass2 ) {
+
+		if (re.test(email) == false) {
+			$('.parent-reg-form small').text('Please enter a valid Email Address!');
+			return false;
+		}
+
+		else if (pass1 != pass2) {
+			$('.parent-reg-form small').text('Passwords don\'t match!');
+			return false;
+		}
+
+		else if (cdate >= 9999 || cdate <= 2000) {
+			$('.parent-reg-form small').text('Please enter a valid Course Completion Date!');
+			return false;
+		}
+
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				name: name,
+				relation: relation,
+				id: id,
+				cdate: cdate,
+				email: email,
+				mobile: mobile,
+				password: pass1,
+				password2: pass2
+			},
+		    url: 'http://localhost:3000/Parent/register', //node.js server is running
+		    error: function(error){
+		    	if (error.responseText == 'already reg not verified') {
+		    		console.log(error.responseText);
+		    		$('.parent-reg-form small').text('User already registered but Email not verified.');
+		    		return false;
+		    	}
+		    	else if (error.responseText == 'already reg verified') {
+		    		console.log(error.responseText);
+		    		$('.parent-reg-form small').text('User already registered and waiting for approval.');
+		    		return false;
+		    	}
+		    	else if (error.responseText == 'mail error') {
+		    		console.log(error.responseText);
+		    		$('.parent-reg-form small').text('Not able to send verification mail. Please check Email Address.');
+		    		return false;
+		    	}
+		    	else if (error.responseText == 'someone already logged in') {
+		    		console.log(error.responseText);
+		    		$('.parent-reg-form small').text('Someone already logged in!');
+		    		return false;
+		    	}
+		    	else{
+		    		console.log(error.responseText);
+		    		$('.parent-reg-form small').text('Unknown Error! Try again.');
+		    		return false;
+		    	}
+		    },
+		    success: function(data) { 
+		    	console.log('success');
+				Swal.fire({
+				  position: 'center',
+				  type: 'success',
+				  title: 'Successfully Registered!',
+				  text: 'Please verify your Email Address.',
+				  showConfirmButton: true,
+				  timer: 5000
+				}).then(function(){
+					location.reload();
+				});
+		    	return false;
+		    }
+		});
+	}else{
+		$('.parent-reg-form small').text('Please fill all the fields!');
+		return false;
+	}
+});
+
+//nonteaching registration validation...
+$('#nonteachingsignupbutton').click(function(e) {
+	e.preventDefault();
+
+	var name = document.nonteachingsignup.name.value;
+	var gender = document.nonteachingsignup.gender.value;
+	var dep = document.nonteachingsignup.dep.value;
+	var id = document.nonteachingsignup.id.value;
+	var desig = document.nonteachingsignup.desig.value;
+	var email = document.nonteachingsignup.email.value;
+	var mobile = document.nonteachingsignup.mobile.value;
+	var pass1 = document.nonteachingsignup.password.value;
+	var pass2 = document.nonteachingsignup.password2.value;
+	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+	if (name && gender && dep && id && desig && email && mobile && pass1 && pass2 ) {
+
+		if (re.test(email) == false) {
+			$('.nonteaching-reg-form small').text('Please enter a valid Email Address!');
+			return false;
+		}
+
+		else if (pass1 != pass2) {
+			$('.nonteaching-reg-form small').text('Passwords don\'t match!');
+			return false;
+		}
+
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				name: name,
+				gender: gender,
+				dep: dep,
+				id: id,
+				desig: desig,
+				email: email,
+				mobile: mobile,
+				password: pass1,
+				password2: pass2
+			},
+		    url: 'http://localhost:3000/staff/register', //node.js server is running
+		    error: function(error){
+		    	if (error.responseText == 'already reg not verified') {
+		    		console.log(error.responseText);
+		    		$('.nonteaching-reg-form small').text('User already registered but Email not verified.');
+		    		return false;
+		    	}
+		    	else if (error.responseText == 'already reg verified') {
+		    		console.log(error.responseText);
+		    		$('.nonteaching-reg-form small').text('User already registered and waiting for approval.');
+		    		return false;
+		    	}
+		    	else if (error.responseText == 'mail error') {
+		    		console.log(error.responseText);
+		    		$('.nonteaching-reg-form small').text('Not able to send verification mail. Please check Email Address.');
+		    		return false;
+		    	}
+		    	else if (error.responseText == 'someone already logged in') {
+		    		console.log(error.responseText);
+		    		$('.nonteaching-reg-form small').text('Someone already logged in!');
+		    		return false;
+		    	}
+		    	else{
+		    		console.log(error.responseText);
+		    		$('.nonteaching-reg-form small').text('Unknown Error! Try again.');
+		    		return false;
+		    	}
+		    },
+		    success: function(data) { 
+		    	console.log('success');
+				Swal.fire({
+				  position: 'center',
+				  type: 'success',
+				  title: 'Successfully Registered!',
+				  text: 'Please verify your Email Address.',
+				  showConfirmButton: true,
+				  timer: 5000
+				}).then(function(){
+					location.reload();
+				});
+		    	return false;
+		    }
+		});
+	}else{
+		$('.nonteaching-reg-form small').text('Please fill all the fields!');
+		return false;
+	}
+});
 
 //Forgot Password Validation
 $('#Student_forgotpass').click(function(e) {

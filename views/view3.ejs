@@ -434,66 +434,73 @@
 									<i class="fas fa-times"></i>
 								</div>
 								<div class="form-content signup">
-									<form class="form-group">
+									<form class="form-group" name="facultysignup">
 										<h3>Faculty Sign Up</h3>
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 												<label>FULL NAME</label>
-												<input type="text" class="form-control" name="" placeholder="Name">
+												<input type="text" class="form-control" name="name" placeholder="Name">
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 												<label>gender</label><br>
-												<label class="radio-inline">male<input type="radio" name="optradio"><span class="checkmark"></span></label>
-												<label class="radio-inline">female<input type="radio" name="optradio"><span class="checkmark"></span></label>
-												<label class="radio-inline">other<input type="radio" name="optradio"><span class="checkmark"></span></label>
+												<label class="radio-inline">male<input type="radio" name="gender" value="M"><span class="checkmark"></span></label>
+												<label class="radio-inline">female<input type="radio" name="gender" value="F"><span class="checkmark"></span></label>
+												<label class="radio-inline">other<input type="radio" name="gender" value="O"><span class="checkmark"></span></label>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 												<label for="dep">department</label>
-												<select class="form-control" id="dep">
-													<option>CS</option>
-													<option>EE</option>
-													<option>ME</option>
-													<option>EC</option>
-													<option>CE</option>
+												<select class="form-control" name="dep">
+													<option value="CS">CS</option>
+													<option value="EE">EE</option>
+													<option value="ME">ME</option>
+													<option value="EC">EC</option>
+													<option value="CE">CE</option>
+													<option value="SLLL">SLLL</option>
 												</select>
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 												<label>designation</label>
-												<input type="text" class="form-control" name="" placeholder="Designation">
+												<input type="text" class="form-control" name="desig" placeholder="Designation">
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 												<label>employee id</label>
-												<input type="text" class="form-control" name="" placeholder="Employee ID">
+												<input type="text" class="form-control" name="id" placeholder="Employee ID">
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 												<label>email id</label>
-												<input type="email" class="form-control" name="" placeholder="Email ID">
+												<input type="email" class="form-control" name="email" placeholder="Email ID">
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 												<label>mobile no.</label>
-												<input type="number" class="form-control" name="" placeholder="Mobile No.">
+												<input type="number" class="form-control" name="mobile" placeholder="Mobile No.">
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 												<label>password</label>
-												<input type="password" class="form-control" name="" placeholder="Password">
+												<input type="password" class="form-control" name="password" id="faculty-progress" placeholder="Password">
+												<div id="faculty-progress-container"></div>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 												<label>confirm PASSWORD</label>
-												<input type="password" class="form-control" name="" placeholder="Confirm Password">
+												<input type="password" class="form-control" name="password2" placeholder="Confirm Password">
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 												
 											</div>
 										</div>
-										<input type="submit" class="btn btn-primary" name="" value="Sign Up">
+										<div class="row">
+											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+												<small></small>
+											</div>
+										</div>
+										<input type="submit" class="btn btn-primary" id="facultysignupbutton" name="" value="Sign Up">
 										<br>
 										<label>ALREADY HAVE AN ACCOUNT? <a href="#" class="faculty-login">SIGN IN</a></label>
 									</form>
@@ -569,7 +576,8 @@
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 												<label>password</label>
-												<input type="password" class="form-control" name="password" placeholder="Password">
+												<input type="password" class="form-control" name="password" id="student-progress" placeholder="Password">
+												<div id="student-progress-container"></div>
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 												<label>confirm PASSWORD</label>
@@ -598,26 +606,26 @@
 									<i class="fas fa-times"></i>
 								</div>
 								<div class="form-content signup">
-									<form class="form-group">
+									<form class="form-group" name="parentsignup">
 										<h3>Parent Sign Up</h3>
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 												<label>FULL NAME</label>
-												<input type="text" class="form-control" name="" placeholder="Name">
+												<input type="text" class="form-control" name="name" placeholder="Name">
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 												<label>email id</label>
-												<input type="email" class="form-control" name="" placeholder="Email ID">
+												<input type="email" class="form-control" name="email" placeholder="Email ID">
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>college id</label>
-												<input type="text" class="form-control" name="" placeholder="College ID Of Student">
+												<label>student's college id</label>
+												<input type="text" class="form-control" name="id" placeholder="College ID Of Student">
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 												<label>Course completion date</label>
-												<input type="date" class="form-control" name="">
+												<input type="number" class="form-control" name="cdate">
 											</div>
 										</div>
 										<div class="row">
@@ -627,20 +635,26 @@
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 												<label>mobile no.</label>
-												<input type="number" class="form-control" name="" placeholder="Mobile No.">
+												<input type="number" class="form-control" name="mobile" placeholder="Mobile No.">
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 												<label>password</label>
-												<input type="password" class="form-control" name="" placeholder="Password">
+												<input type="password" class="form-control" name="password" id="parent-progress" placeholder="Password">
+												<div id="parent-progress-container"></div>
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 												<label>confirm PASSWORD</label>
-												<input type="password" class="form-control" name="" placeholder="Confirm Password">
+												<input type="password" class="form-control" name="password2" placeholder="Confirm Password">
 											</div>
 										</div>
-										<input type="submit" class="btn btn-primary" name="" value="Sign Up">
+										<div class="row">
+											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+												<small></small>
+											</div>
+										</div>
+										<input type="submit" class="btn btn-primary" id="parentsignupbutton" value="Sign Up">
 										<br>
 										<label>ALREADY HAVE AN ACCOUNT? <a href="#" class="parent-login">SIGN IN</a></label>
 									</form>
@@ -657,66 +671,73 @@
 									<i class="fas fa-times"></i>
 								</div>
 								<div class="form-content signup">
-									<form class="form-group">
+									<form class="form-group" name="nonteachingsignup">
 										<h3>NonTeaching Sign Up</h3>
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 												<label>FULL NAME</label>
-												<input type="text" class="form-control" name="" placeholder="Name">
+												<input type="text" class="form-control" name="name" placeholder="Name">
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 												<label>gender</label><br>
-												<label class="radio-inline">male<input type="radio" name="optradio"><span class="checkmark"></span></label>
-												<label class="radio-inline">female<input type="radio" name="optradio"><span class="checkmark"></span></label>
-												<label class="radio-inline">other<input type="radio" name="optradio"><span class="checkmark"></span></label>
+												<label class="radio-inline">male<input type="radio" name="gender" value="M"><span class="checkmark"></span></label>
+												<label class="radio-inline">female<input type="radio" name="gender" value="F"><span class="checkmark"></span></label>
+												<label class="radio-inline">other<input type="radio" name="gender" value="O"><span class="checkmark"></span></label>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 												<label for="dep">department</label>
-												<select class="form-control" id="depart">
-													<option>CS</option>
-													<option>EE</option>
-													<option>ME</option>
-													<option>EC</option>
-													<option>CE</option>
+												<select class="form-control" name="dep">
+													<option value="CS">CS</option>
+													<option value="EE">EE</option>
+													<option value="ME">ME</option>
+													<option value="EC">EC</option>
+													<option value="CE">CE</option>
+													<option value="SLLL">SLLL</option>
 												</select>
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 												<label>designation</label>
-												<input type="text" class="form-control" name="" placeholder="Designation">
+												<input type="text" class="form-control" name="desig" placeholder="Designation">
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 												<label>employee id</label>
-												<input type="text" class="form-control" name="" placeholder="Employee ID">
+												<input type="text" class="form-control" name="id" placeholder="Employee ID">
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 												<label>email id</label>
-												<input type="email" class="form-control" name="" placeholder="Email ID">
+												<input type="email" class="form-control" name="email" placeholder="Email ID">
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 												<label>mobile no.</label>
-												<input type="number" class="form-control" name="" placeholder="Mobile No.">
+												<input type="number" class="form-control" name="mobile" placeholder="Mobile No.">
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 												<label>password</label>
-												<input type="password" class="form-control" name="" placeholder="Password">
+												<input type="password" class="form-control" name="password" id="nonteaching-progress" placeholder="Password">
+												<div id="nonteaching-progress-container"></div>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 												<label>confirm PASSWORD</label>
-												<input type="password" class="form-control" name="" placeholder="Confirm Password">
+												<input type="password" class="form-control" name="password2" placeholder="Confirm Password">
 											</div>
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 												
 											</div>
 										</div>
-										<input type="submit" class="btn btn-primary" name="" value="Sign Up">
+										<div class="row">
+											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+												<small></small>
+											</div>
+										</div>
+										<input type="submit" class="btn btn-primary" id="nonteachingsignupbutton" value="Sign Up">
 										<br>
 										<label>ALREADY HAVE AN ACCOUNT? <a href="#" class="nonteaching-login">SIGN IN</a></label>
 									</form>
@@ -1087,6 +1108,9 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 		<script src="https://unpkg.com/scrollreveal"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+		<script type="text/javascript" src="javascripts/password-score.js"></script>
+		<script type="text/javascript" src="javascripts/password-score-options.js"></script>
+		<script type="text/javascript" src="javascripts/bootstrap-strength-meter.js"></script>
 		<script src="/javascripts/home.js"></script>
 		<script type="text/javascript" src="javascripts/validate.js"></script>
 

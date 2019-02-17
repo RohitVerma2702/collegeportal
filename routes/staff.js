@@ -217,9 +217,9 @@ var data={
     var email=req.body.email;
     var gender=req.body.gender;
     var dep=req.body.dep;
-    var Desig=req.body.Desig;
+    var desig=req.body.desig;
     var id=req.body.id;
-    var Mobile=req.body.Mobile;
+    var mobile=req.body.mobile;
     var password=req.body.password;
     var password2=req.body.password2;
     console.log(req.body.name);
@@ -228,18 +228,19 @@ var data={
     req.checkBody('gender','Email field is required').notEmpty();
     req.checkBody('email','Email is not valid').isEmail();
     req.checkBody('dep','username field is required').notEmpty();
-    req.checkBody('Desig','username field is required').notEmpty();
+    req.checkBody('desig','username field is required').notEmpty();
     req.checkBody('id','username field is required').notEmpty();
-    req.checkBody('Mobile','username field is required').notEmpty();
+    req.checkBody('mobile','username field is required').notEmpty();
     req.checkBody('password','password field is required').notEmpty();
     req.checkBody('password2','password do not match').equals(password);
   
     var errors=req.validationErrors();
     if(errors)
     { console.log(errors);
-        res.render('err_valid',{
-      errors: errors
-    });
+        //res.render('err_valid',{
+      //errors: errors
+    //});
+      res.staff(500).send('errors in validation');
       console.log('errors in validation');
       
     }
@@ -248,7 +249,8 @@ var data={
         if(err) throw err;
         if(user){
             console.log("Already Registered");
-            res.redirect('/al');
+            //res.redirect('/al');
+            res.status(500).send('already reg verifies');
             return;
         }
         else{
@@ -258,9 +260,9 @@ var data={
         id: id,
         dep: dep,
         gender: gender,
-        Desig: Desig,
+        Desig: desig,
         emailid: email,
-        mobileno: Mobile,
+        mobileno: mobile,
         password: password,
         rand:random,
         status:"pending",
@@ -280,7 +282,7 @@ var data={
       smtpTransport.sendMail(mailOptions, function(error, response){
        if(error){
               console.log(error);
-          res.end("error");
+          res.status(500).send('mail error');
        }else{
         var mail_doc=new Mail_log({//Entry into Mail Log
           emailid:user.emailid,
@@ -305,7 +307,7 @@ var data={
     }
   }
   else{
-    res.end('someone already logged in');
+    res.status(500).send('someone already logged in');
   }
 });
 

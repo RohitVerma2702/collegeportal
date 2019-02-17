@@ -224,9 +224,9 @@ res.send(data);
     var email=req.body.email;
     var gender=req.body.gender;
     var dep=req.body.dep;
-    var Desig=req.body.Desig;
+    var desig=req.body.desig;
     var id=req.body.id;
-    var Mobile=req.body.Mobile;
+    var mobile=req.body.mobile;
     var password=req.body.password;
     var password2=req.body.password2;
     console.log(req.body.name);
@@ -235,18 +235,19 @@ res.send(data);
     req.checkBody('gender','Email field is required').notEmpty();
     req.checkBody('email','Email is not valid').isEmail();
     req.checkBody('dep','username field is required').notEmpty();
-    req.checkBody('Desig','username field is required').notEmpty();
+    req.checkBody('desig','username field is required').notEmpty();
     req.checkBody('id','username field is required').notEmpty();
-    req.checkBody('Mobile','username field is required').notEmpty();
+    req.checkBody('mobile','username field is required').notEmpty();
     req.checkBody('password','password field is required').notEmpty();
     req.checkBody('password2','password do not match').equals(password);
   
     var errors=req.validationErrors();
     if(errors)
     { console.log(errors);
-        res.render('err_valid',{
-      errors: errors
-    });
+        //res.render('err_valid',{
+      //errors: errors
+    //});
+    res.status(500).send('error in validation');
       console.log('errors in validation');
       
     }
@@ -256,7 +257,7 @@ res.send(data);
         if(user){
             console.log("Already Registered");
             //res.redirect('/al');
-            res.end('already registered');
+            res.status(500).send('already reg verified');
             return;
         }
         else{
@@ -266,9 +267,9 @@ res.send(data);
         id: id,
         dep: dep,
         gender: gender,
-        Desig: Desig,
+        desig: desig,
         emailid: email,
-        mobileno: Mobile,
+        mobileno: mobile,
         password: password,
         rand:random,
         status:"pending"
@@ -289,7 +290,7 @@ res.send(data);
       smtpTransport.sendMail(mailOptions, function(error, response){
        if(error){
               console.log(error);
-          res.end("error");
+          res.status(500).send('mail error');
        }else{
         var mail_doc=new Mail_log({//Entry into Mail Log
           emailid:user.emailid,
@@ -313,7 +314,7 @@ res.send(data);
       });
     }}
     else{
-      res.end('someone already logged in');
+      res.status(500).send('someone already logged in');
     }
 });
 
