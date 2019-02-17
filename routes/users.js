@@ -97,13 +97,7 @@ router.post('/register',uploads.single('profileimage'), function(req, res, next)
     console.log('no file uploaded');
     var profileimage='noimage.jpg'; 
   }
-  req.checkBody('name','Name field is required').notEmpty();
-  req.checkBody('email','Email field is required').notEmpty();
-  req.checkBody('email','Email is not valid').isEmail();
-  req.checkBody('username','username field is required').notEmpty();
-  req.checkBody('password','password field is required').notEmpty();
-  req.checkBody('password2','password do not match').equals(password);
-
+ 
   var errors=req.validationErrors();
   if(errors)
   {
