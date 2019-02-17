@@ -20,7 +20,7 @@ var smtpTransport = nodemailer.createTransport({
       pass: "grievance001"
   }
 });
-//var pdfMake=require('pdfmake');
+var pdfMake=require('pdfmake');
 
 /*var fonts = {
   Roboto: {
@@ -614,7 +614,7 @@ var id=req.body.id;
         //const pdfDoc = pdfMake.createPdf(docDefinition);
        docDefinition.dom=JSON.stringify(docDefinition);
        docDefinition.dom=JSON.parse(docDefinition.dom);
-       const pdfDoc= pdfMake.createPdfKitDocument( docDefinition.dom);
+       const pdfDoc= pdfMake.createPdf( docDefinition.dom);
         pdfDoc.getBase64((data)=>{
             res.writeHead(200, 
             {

@@ -23,11 +23,8 @@ var StudentSchema = mongoose.Schema({
      type:String
     },
     access:{
-        type:String
-    },
-    Termination:{
-     type:Boolean,
-     default:0,
+        type:String,
+        default:'pending'
     },
     Batch:{
         type:String
@@ -102,7 +99,7 @@ Student.Terminate=function(year,newvalues,callback){
 
  Student.apprv_find=function(query,callback)
 {
- 
+                                                                
     Student.find({$and:[{Termination:0},{status:'verified'},{access:query}]},callback);
 }
 

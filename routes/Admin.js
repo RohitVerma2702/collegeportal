@@ -452,7 +452,10 @@ data={
   router.post('/GCM_Deactivate',requireLogin,function(req,res,next){
     console.log(req.body.email);
     console.log('hii');
-    Member.Delete_Gcm(req.body.email,function(err){
+    var newvalue={$set:{
+      access:'terminated'
+    }}
+    Member.updateuser(req.body.email,newvalue,function(err){
       if(err) throw err;
       console.log('GCM  Deactivated');
       res.redirect('/');
@@ -494,7 +497,7 @@ var newvalues={
       });
 
 
-router.get('/existing_request',requireLogin,function(req,res,next){
+/*router.get('/existing_request',requireLogin,function(req,res,next){
   console.log(req.query.email);
   console.log(req.query.status);
   console.log(req.query.user);
@@ -780,7 +783,7 @@ else{
  });
   }
 }
-});
+});*/
 
   router.post('/create',function(req,res,next){
     console.log(req.body.mngmnt);
@@ -803,7 +806,8 @@ if((req.body.mngmnt)==1)
     Gtype:gtype,
     emailid:email,
     mobileno:mobile,
-    password:password
+    password:password,
+    access:'approved'
   });
 
     console.log("create management");
@@ -820,7 +824,8 @@ if((req.body.mngmnt)==1)
       Gtype:gtype,
       emailid:email,
       mobileno:mobile,
-      password:password
+      password:password,
+      access:'approved'
     });
   
     console.log('cell created');
@@ -997,8 +1002,7 @@ if(!sess.user){
 
      router.get('/termination',requireLogin,function(req,res,next){
       var newvalues={$set:{
-        access:'rejected',
-        Termination:1
+        access:'terminated',
       }};
       if(req.body.type=='Student')
       {

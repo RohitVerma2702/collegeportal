@@ -23,6 +23,9 @@ type:String
         type: String,
         index: true
     },
+    access:{
+     type:String
+    },
     password: {
         type: String
     }
@@ -33,7 +36,7 @@ var Member = module.exports = mongoose.model('Members',MemberSchema,'Members');
 
 
 module.exports.updateuser = function(id,newvalues, callback){
-   
+    var id = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
    Member.updateOne(id, newvalues,callback);
 }
 
