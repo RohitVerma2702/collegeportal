@@ -159,6 +159,14 @@ app.config(function($routeProvider){
 		templateUrl: '/Admin/report42.ejs'
 	})
 
+	.when('/mail-log', {
+		templateUrl: '/Admin/maillog.ejs'
+	})
+
+	.when('/label-editor', {
+		templateUrl: '/Admin/labeleditor.ejs'
+	})
+
 	.otherwise({
 		template: 'Not found'
 	});

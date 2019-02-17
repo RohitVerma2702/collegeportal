@@ -1,0 +1,40 @@
+<!--Mail Log-->
+<!--Admin-->
+<div ng-app="grievances" ng-controller="" ng-init="">
+    <h1>Mail Log</h1>
+    <div id="" class="contenttable hide">
+        <table class="table table-hover table-striped">
+            <thead class="table-success">
+                <tr>
+                    <th>S.No.</th>
+                    <th>Email ID</th>
+                    <th>Thing 3</th>
+                    <th>Thing 4</th>
+                    <th>Thing 5</th>
+                    <th>Date</th>
+                    <th>Send</th>
+                </tr> 
+            </thead>
+            <tr ng-repeat="">
+                    <td>{{$index+1}}</td>
+                    <td>{{user.emailid}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                    <button ng-click="" class="btn btn-success">
+                    Send</button>
+                    </td>
+                </tr>
+        </table>
+    </div>
+    <div id="loading">
+        <div class="loader">
+        </div>
+        
+        <h1>Loading...</h1>
+    </div>
+
+</div>
+
