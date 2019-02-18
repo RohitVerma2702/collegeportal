@@ -319,7 +319,7 @@ $('.mngmnt_forgotpassword').click(function(){
 
 //scroll reveal for the heading grievance portal....
 
-        $('.heading').removeClass('hide');
+        $('.heading, #logo').removeClass('hide');
 
         window.sr = ScrollReveal();
 
