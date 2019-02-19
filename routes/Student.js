@@ -71,11 +71,6 @@ function requireLogin(req, res, next) {
          Grv.grv_findbyid(req.query.grv_id,function(err,result)
       {
           if(err) throw err;
-          console.log(result);
-          console.log(result.Gtype);
-          var wqe={
-          info:result
-      }
       var data=result
       res.send(data);
           }

@@ -79,8 +79,7 @@ Staff.apprv_find=function(query,callback)
     Staff.find({$and:[{status:'verified'},{access:query}]},callback);
 }
 module.exports.getinfobyID = function(id, callback){
-   // var query = (id.indexOf('@') === -1) ? {mobileno: id} : {emailid: id};
-   var query={_id:id}; 
+   var query = (id.indexOf('@') === -1) ? {mobileno: id} : {emailid: id}; 
    Staff.findOne(query, callback);
 }
 module.exports.createUser = function(newUser, callback){

@@ -62,8 +62,7 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
 }
 Member.grv_find=function(query,callback)
 {
-console.log(query);
-    Member.find({$and:[{gseq: { $in: query} },{status:{$in:['pending','viewed']}}]},callback);
+    Member.find({$and:[{active:1},{gseq: { $in: query} },{status:{$in:['pending','viewed']}}]},callback);
 }
 Member.Delete_Gcm=function(query,callback){
     var set={emailid: query}

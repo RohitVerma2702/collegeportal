@@ -50,37 +50,27 @@ type:String
 
 });
 var Grv = module.exports = mongoose.model('Grievance',GrievanceSchema,'Grievance');
-Grv.grv_post=function(grv_docs,callback)
+Grv.grv_post=function(grv_docs,callback)//Creating new Grievances
 {
-   // Grv.create(grv_docs,callback);
  grv_docs.save(callback);
-
 }
 Grv.update_grv=function(id,newvalues,callback)
-{
-    Grv.updateOne(id, newvalues,callback);
+{  Grv.updateOne(id, newvalues,callback);
 }
 Grv.grv_find=function(query,callback)
 {
- 
-    /*Grv.find({$and:[{Gtype:query},{status:{$in:['pending','viewed']}}]},callback);
-*/
-Grv.find({Gtype:query},null,{sort:{time:-1}},callback);
+Grv.find({$and:[{active:1},{Gtype:query}]},null,{sort:{time:-1}},callback);
 }
 Grv.grv_findbyuser=function(query,callback)
 {
-console.log(query);
-    Grv.find({$and:[{active:1},{Grievant:query}]},null,{sort:{time:-1}},callback);
+   Grv.find({$and:[{active:1},{Grievant:query}]},null,{sort:{time:-1}},callback);
 }
 Grv.grv_findbyid=function(query,callback)
 {
-//console.log(query);
-    Grv.findOne({grv_id:query},null,callback);
-}
+    Grv.findOne({grv_id:query},null,callback);}
 
 Grv.grv_all=function(query,callback)//all grievances either either active or not 
 {
-console.log(query);
     Grv.find({active:query},null,{sort:{time:-1}},callback);
 }
 

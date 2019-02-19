@@ -41,18 +41,14 @@ module.exports.getUserByID = function(id, callback){
     mngmnt.findOne(query, callback);
 }
 module.exports.getinfobyID = function(id, callback){
-    //var query = (id.indexOf('@') === -1) ? {mobileno: id} : {emailid: id};
-  var query={_id:id};
+    var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
   mngmnt.findOne(query, callback);
 }
 module.exports.updateuser = function(id,newvalues, callback){
+  var id=(id.indexOf('@')===-1)?{_id:id}:{emailid:id};
     mngmnt.updateOne(id, newvalues,callback);
  }
-/*module.exports.comparePassword = function(candidatePassword, hash, callback){
-    bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
-        callback(null, isMatch);
-    });
-}*/
+
 module.exports.comparePassword = function(candidatePassword, hash, callback){
     bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
         callback(null, isMatch);

@@ -46,17 +46,9 @@ var FacultySchema = mongoose.Schema({
 
 var Faculty = module.exports = mongoose.model('Faculty',FacultySchema,'Faculty');
 
-
-
-
-/*module.exports.getUserById = function(id, callback){
-    Faculty.findById(id, callback);
-}*/
 Faculty.apprv_find=function(query,callback)
 {
-   //var query1={approval:query12};
-  // var query2={status:'verified'};    
-   // Faculty.find({$and:[{status:'verified'},{approval:query}]},callback);
+
    Faculty.find({$and:[{status:'verified'},{access:query}]},callback);
 }
 
@@ -71,13 +63,11 @@ module.exports.update_password = function(id,password, callback){
    
 }
 module.exports.getUserByID = function(id, callback){
-    //var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
-   var query= {emailid: id};
+    var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
     Faculty.findOne(query, callback);
 }
 module.exports.updateuser = function(id,newvalues, callback){
-    // var query = (id.indexOf('@') === -1) ? {mobileno: id} : {emailid: id};
-    //var query={_id:id};
+    var id = (id.indexOf('@') === -1) ? {mobileno: id} : {emailid: id};
     Faculty.updateOne(id, newvalues,callback);
  }
 
@@ -89,8 +79,7 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
 }
 
 module.exports.getinfobyID = function(id, callback){ //will return  user using "oid"
-    //var query = (id.indexOf('@') === -1) ? {mobileno: id} : {emailid: id};
-    var query={_id:id};
+    var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
     Faculty.findOne(query, callback);
 }
 module.exports.createUser = function(newUser, callback){

@@ -29,7 +29,7 @@ var Admin = module.exports = mongoose.model('Admin',AdminSchema,'Admin');
 
 
 module.exports.getinfobyID = function(id, callback){
-  var query={_id:id};
+    var query=(id.indexOf('@')===-1)?{_id:id}:{emailid:id};
     Admin.findOne(query, callback);
 }
 module.exports.update_password = function(id,password, callback){
@@ -52,10 +52,10 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
     var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
      Admin.findOne(query, callback);
      }
-     Admin.updateuser=function(id,callback)
+     Admin.updateuser=function(id,newvalues,callback)
      {
-         var query=id;
-         Admin.updateOne(query,callback);
+        var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
+         Admin.updateOne(query,newvalues,callback);
      }
 
   Admin.admin_find=function(callback){
@@ -68,12 +68,3 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
     });
 }
 
-/*module.exports.createUser = function(newUser, callback){
-    bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(newUser.password, salt, function(err, hash) {
-            newUser.password = hash;
-            newUser.save(callback);
-        });
-    });
-    
-}*/

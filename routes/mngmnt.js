@@ -8,6 +8,7 @@ var Parent=require('../models/Parentdb');
 var faculty=require('../models/facultydb');
 var Mail_log=require('../models/Maildb');
 var Staff=require('../models/staffdb');
+var dt = datetime.create();
 var session=require('express-session');
 
 var nodemailer = require("nodemailer");
@@ -41,7 +42,6 @@ var fs = require('fs');
 console.log('successful');
 var sess;
 function requireLogin(req, res, next) {
-  console.log(req.session.active)
     if (req.session.active==1&&req.session.type=='mngmnt') { /*if someone is logged in as Parent*/ 
       next(); // allow the next route to run                   
     } else {
@@ -52,23 +52,11 @@ function requireLogin(req, res, next) {
   router.get('/Home', requireLogin,function(req, res, next) {
     res.render('mngmnt_dash',{title:'Management'});
   });
-  router.get('/err_valid', function(req, res, next) {
-    res.render('err_valid');
-  });
-  router.get('/logged', function(req, res, next) {
-    res.render('logged');
-  });
-  router.get('/unknw', function(req, res, next) {
-    res.render('unknw');
-  });
-  router.get('/pass', function(req, res, next) {
-    res.render('pass');
-  });
+ 
 
   router.get('/my-account', requireLogin,function(req, res, next) {
     sess=req.session;
     id=sess.user;
-    console.log('id is '+sess.user);
     mngmnt.getinfobyID(id,function(err, user){
      if(err) throw err;
      if(!user){
@@ -96,7 +84,6 @@ function requireLogin(req, res, next) {
     Grv.grv_findformembers_and_mngmnt(req.session.grv_type,function(err,result)
     {
         if(err) throw err;
-        console.log(result);
         var data={
           info:result
         }
@@ -115,7 +102,6 @@ function requireLogin(req, res, next) {
       Grv.grv_all(query,function(err,result)
       {
           if(err) throw err;
-          console.log(result);
           var data={
             info:result
           }
@@ -127,16 +113,10 @@ function requireLogin(req, res, next) {
       );
       });
 
-    router.get('/GRV',requireLogin,function(req,res,next){//For finding a particular Grievance information
-      //console.log('hii'); 
-      console.log(req.query.grv_id);
+    router.get('/GRV',requireLogin,function(req,res,next){//For finding a particular Grievance 
          Grv.grv_findbyid(req.query.grv_id,function(err,result)
       {
           if(err) throw err;
-          console.log(result);
-          var wqe={
-          info:result
-      }
       var data=result
       res.send(data);
           }
@@ -164,11 +144,10 @@ function requireLogin(req, res, next) {
          
       })
 
-  router.get('/GCM_List',requireLogin,function(req,res,next){//to Display all th Grievance Cell Member 
+  router.get('/GCM_List',requireLogin,function(req,res,next){//to Display all th Grievance Cell  
   Member.find_all(function(err,result){
     if(err) throw err;
     else{
-      console.log(result);
       var data={
         info:result
       }
@@ -178,13 +157,11 @@ function requireLogin(req, res, next) {
   });
 
   router.get('/approve_user',requireLogin,function(req,res,next){//to Display all the approved Student
-   console.log(req.query.user);
-    if(req.query.user=='student')
+  if(req.query.user=='student')
 {
   Student.apprv_find('approved',function(err,users){
   if(err) throw err;
   else{
-    console.log(users);
    data={
      info:users
    }
@@ -197,20 +174,18 @@ else if(req.query.user=='parent')
   Parent.apprv_find('approved',function(err,users){
   if(err) throw err;
   else{
-    console.log(users);
    data={
      info:users
    }
   res.send(data)
-  }//res.end('fetched complete');
-})
+  }})
 }
 else if(req.query.user=='staff')
 {
   Staff.apprv_find('approved',function(err,users){
   if(err) throw err;
   else
-  {console.log(users);
+  { 
     data={
     info:users
   }
@@ -243,8 +218,7 @@ data={
      Student.apprv_find('pending',function(err,users){
      if(err) throw err;
      else{
-       console.log(users);
-      data={
+     data={
         info:users
       }
      res.send(data);
@@ -256,12 +230,11 @@ data={
      Parent.apprv_find('pending',function(err,users){
      if(err) throw err;
      else{
-       console.log(users);
       data={
         info:users
       }
      res.send(data)
-     }//res.end('fetched complete');
+     }
    })
    }
    else if(req.query.user=='staff')
@@ -269,8 +242,7 @@ data={
      Staff.apprv_find('pending',function(err,users){
      if(err) throw err;
      else
-     {console.log(users);
-       data={
+     { data={
        info:users
      }
     res.send(data)
@@ -283,7 +255,6 @@ data={
      if(err) throw err;
      else
      {
-       console.log(users);
    data={
         info:users
       };
@@ -341,13 +312,12 @@ data={
     });
     router.post('/update',function(req,res,next){
     
-      var id={ _id:sess.user};
        var newvalues = {$set: 
          {
           //emailid:req.body.emailid,
           mobileno:req.body.mobileno
        }};
-     mngmnt.updateuser(id,newvalues,function(err,isUpdate){
+     mngmnt.updateuser(sess.user,newvalues,function(err,isUpdate){
         if(err) throw err;
       else
       {
@@ -431,7 +401,8 @@ var id=req.body.id;
          else{ var mail_doc=new Mail_log({//Entry into Mail Log
           emailid:id,
           subject:"Password Update",
-          status:'Sent'
+          status:'Sent',
+          date:new Date(dt.now())
         });
   
         Mail_log.mail_log(mail_doc,function(err){

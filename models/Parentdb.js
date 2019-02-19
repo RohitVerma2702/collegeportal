@@ -44,24 +44,17 @@ var ParentSchema = mongoose.Schema({
 
 var Parent = module.exports = mongoose.model('Parent',ParentSchema,'Parent');
 
-
-
-
-/*module.exports.getUserById = function(id, callback){
-    Faculty.findById(id, callback);
-}*/
-
 Parent.getUserByID = function(id, callback){
     var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
     Parent.findOne(query,callback);
 }
 Parent.getinfobyID = function(id,callback){
-    //var query = (id.indexOf('@') === -1) ? {mobileno: id} : {emailid: id};
+    var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
   var query={_id:id};
     Parent.findOne(query, callback);
 }
 Parent.updateuser = function(id,newvalues, callback){
-   var query = (id.indexOf('@') === -1) ? {mobileno: id} : {emailid: id};
+   var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
    Parent.updateOne(id, newvalues,callback);
 }
 Parent.update_password = function(id,password, callback){
@@ -86,7 +79,7 @@ Parent.Terminate=function(year,newvalues,callback){
 
 Parent.apprv_find=function(query,callback)
 {
-   Parent.find({$and:[{Termination:0},{status:'verified'},{access:query}]},callback);
+   Parent.find({$and:[{status:'verified'},{access:query}]},callback);
 }
 module.exports.createUser = function(newUser, callback){
     bcrypt.genSalt(10, function(err, salt) {

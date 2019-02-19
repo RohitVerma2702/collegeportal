@@ -9,6 +9,7 @@ var nodemailer = require("nodemailer");
 console.log('successful');
 var Mail_log=require('../models/Maildb');
 var app = express();
+var dt = datetime.create();
 var sess;
 var smtpTransport = nodemailer.createTransport({
   service: "Gmail",
@@ -54,16 +55,9 @@ router.get('/my-account',requireLogin, function(req, res, next) {
   });  
  });
  router.get('/GRV',requireLogin,function(req,res,next){//For finding a particular Grievance information
-  console.log('hii'); 
-  console.log(req.query.grv_id);
      Grv.grv_findbyid(req.query.grv_id,function(err,result)
   {
       if(err) throw err;
-      console.log(result);
-      console.log(result.Gtype);
-      var wqe={
-      info:result
-  }
   var data=result
   res.send(data);
       }
@@ -72,13 +66,9 @@ router.get('/my-account',requireLogin, function(req, res, next) {
   });
 
  router.get('/My_Grievances',requireLogin,function(req,res,next){//project all the grievances 
-  console.log('hii'); 
-  console.log(req.session.email)
-    //console.log(req.query.id)
       Grv.grv_findbyuser(req.session.email,function(err,result)
   {
       if(err) throw err;
-      console.log(result);
      var data={
       info:result
   }
@@ -88,16 +78,9 @@ res.send(data);
   );
   });
   router.get('/GRV',requireLogin,function(req,res,next){//detail of indiviual grievance
-    console.log('hii'); 
-    console.log(req.query.grv_id);
        Grv.grv_findbyid(req.query.grv_id,function(err,result)
     {
-        if(err) throw err;
-        console.log(result);
-        console.log(result.Gtype);
-        var wqe={
-        info:result
-    }
+    if(err) throw err;
     var data=result
     res.send(data);
         }
@@ -134,7 +117,6 @@ res.send(data);
                    }
                   }); 
                   }
-  
                   else{
                     console.log('password doesnt match');
                     res.redirect('/failed');
@@ -177,14 +159,12 @@ res.send(data);
         }
         else{
           console.log('invalid password');
-          //res.redirect('/faculty/pass');
           res.status(500).send('pass');
           return;
         }
       })}
       else{
         console.log("user no approved by admin");
-        //res.redirect('/');
         res.status(500).send('not apprv');
       }
      });
@@ -194,16 +174,12 @@ res.send(data);
     }
     });
     router.post('/update',function(req,res,next){
-      var id={ _id:sess.user };
       var newvalues = {$set: 
-        {
-          
+        {  
           mobileno:req.body.mobileno
       } 
-    
     };
-  
-    faculty.updateuser(id,newvalues,function(err,isUpdate){
+    faculty.updateuser(sess.user,newvalues,function(err,isUpdate){
        if(err) throw err;
      else
      {
@@ -244,10 +220,7 @@ res.send(data);
     var errors=req.validationErrors();
     if(errors)
     { console.log(errors);
-        //res.render('err_valid',{
-      //errors: errors
-    //});
-    res.status(500).send('error in validation');
+      res.status(500).send('error in validation');
       console.log('errors in validation');
       
     }
@@ -256,7 +229,6 @@ res.send(data);
         if(err) throw err;
         if(user){
             console.log("Already Registered");
-            //res.redirect('/al');
             res.status(500).send('already reg verified');
             return;
         }
@@ -277,8 +249,6 @@ res.send(data);
       //console.log('no errors');
     faculty.createUser(newUser,function(err,user){
       if(err) throw err;
-      console.log(user);
-      
       host=req.get('host');
       link="http://"+req.get('host')+"/faculty/verify?rand="+random+"&id="+newUser._id;
       mailOptions={
@@ -286,7 +256,6 @@ res.send(data);
           subject : "Please confirm your Email account",
           html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
       }
-      console.log(mailOptions);
       smtpTransport.sendMail(mailOptions, function(error, response){
        if(error){
               console.log(error);
@@ -295,7 +264,8 @@ res.send(data);
         var mail_doc=new Mail_log({//Entry into Mail Log
           emailid:user.emailid,
           subject:"Please confirm your Email account",
-          status:'Sent'
+          status:'Sent',
+          date:new Date(dt.now())
         });
   
         Mail_log.mail_log(mail_doc,function(err){
@@ -339,12 +309,11 @@ console.log('id is '+req.query.id);
       {
           console.log("email is verified");
           res.end("<h1>Email "+user.emailid+" is been Successfully verified");
-        var id={_id:user._id}
           var newvalues={$set:
         {
            status:"verified"
         }};
-        faculty.updateuser(id,newvalues,function(err){
+        faculty.updateuser(user._id,newvalues,function(err){
            if(err) throw err;
         });
         }
@@ -368,7 +337,6 @@ console.log('id is '+req.query.id);
        if(err) throw err;
        if(!user){
            console.log("unknown user");
-           //res.redirect('/Student/unknw');
            res.status(500).send('Unauthorized User');
            return;
        }
@@ -386,14 +354,14 @@ console.log('id is '+req.query.id);
           subject : "Password Updated",
           html : "Hello,<br> your new password for EduGrievance Portal is: <br>"+password+"<br> Thanks and Regards <br> <b>Anand International College Of Engineering</b>" 
       }
-      console.log(mailOptions);
       smtpTransport.sendMail(mailOptions, function(error, response){
        if(error) throw err;
        else{
         var mail_doc=new Mail_log({//Entry into Mail Log
           emailid:id,
           subject:"Password Update",
-          status:'Sent'
+          status:'Sent',
+          date:new Date(dt.now())
         });
   
         Mail_log.mail_log(mail_doc,function(err){
@@ -408,16 +376,12 @@ console.log('id is '+req.query.id);
    });
 
   router.get('/grievance_type',requireLogin,function(req,res,next){
-    console.log('hiitype'); 
-    console.log(req.session.email)
-      //console.log(req.query.id)
         Grvtype.grvtype_find(function(err,result)
     {
         if(err) throw err;
         console.log(result);
       
     res.send(result);
-    //)
         }
     
     );

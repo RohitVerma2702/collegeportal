@@ -8,6 +8,7 @@ var session=require('express-session');
 var Mail_log=require('../models/Maildb');
 console.log('successful');
 var app = express();
+var dt = datetime.create();
 var nodemailer = require("nodemailer");
 var sess;
 var bcrypt = require('bcryptjs');
@@ -33,20 +34,13 @@ function requireLogin(req, res, next) {
   }
 
     router.get('/Grievances',requireLogin,function(req,res,next){
-    console.log('hiii');
-    console.log(req.session.grv_type)
-
     Grv.grv_findformembers_and_mngmnt(req.session.grv_type,function(err,result)
     {
         if(err) throw err;
-        console.log(result);
-        //res.render('gcm_dash',{
         var data={
           info:result
         }
-    //})
     res.send(data);
-  //)
         }
 
     );
@@ -57,11 +51,6 @@ function requireLogin(req, res, next) {
          Grv.grv_findbyid(req.query.grv_id,function(err,result)
       {
           if(err) throw err;
-          console.log(result);
-          console.log(result.Gtype);
-          var wqe={
-          info:result
-      }
       var data=result
       res.send(data);
           }
@@ -76,7 +65,6 @@ function requireLogin(req, res, next) {
   router.get('/my-account', requireLogin,function(req, res, next) {
     sess=req.session;
     id=sess.user;
-    console.log('id is '+sess.user);
     Member.getUserByID(id,function(err, user){
      if(err) throw err;
      if(!user){
@@ -84,9 +72,7 @@ function requireLogin(req, res, next) {
          res.redirect('/unknw');
          return;
      }  
-  
-   //res.render('gcm-myaccount',{
-   var data ={
+  var data ={
       title:"Member",
       designation:user.designation,
       name:user.name,
@@ -94,7 +80,7 @@ function requireLogin(req, res, next) {
       email:user.emailid,
       mobile:user.mobileno
     }
-    //})
+
    res.send(data);
     });
   });
@@ -110,7 +96,6 @@ function requireLogin(req, res, next) {
   Member.getUserByID(req.session.user,function(err, user){
     if(err) throw err;
     if(!user){
-        console.log("unknown user");
         res.redirect('/faculty/unknw');
         return;
     }
@@ -211,7 +196,6 @@ function requireLogin(req, res, next) {
        if(err) throw err;
        if(!user){
            console.log("unknown user");
-           //res.redirect('/Student/unknw');
            res.status(500).send('Unauthorized User');
            return;
        }
@@ -236,7 +220,8 @@ function requireLogin(req, res, next) {
         var mail_doc=new Mail_log({//Entry into Mail Log
           emailid:id,
           subject:"Password Update",
-          status:'Sent'
+          status:'Sent',
+          date:new Date(dt.now())
         });
   
         Mail_log.mail_log(mail_doc,function(err){
@@ -252,9 +237,6 @@ function requireLogin(req, res, next) {
 
 
      router.get('/grievance_type',requireLogin,function(req,res,next){
-    console.log('hiitype'); 
-    console.log(req.session.email)
-      //console.log(req.query.id)
         Grvtype.grvtype_find(function(err,result)
     {
         if(err) throw err;

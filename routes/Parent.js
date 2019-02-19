@@ -6,6 +6,7 @@ var Grv=require('../models/grievancedb');
 var Grvtype=require('../models/grvtypedb');
 var nodemailer = require("nodemailer");
 var Mail_log=require('../models/Maildb');
+var dt = datetime.create();
 console.log('successful');
 var app = express();
 
@@ -89,17 +90,10 @@ Parent.getinfobyID(req.session.user,function(err, user){
   })
 
   router.get('/GRV',requireLogin,function(req,res,next){//For finding a particular Grievance information
-    console.log('hii'); 
-    console.log(req.query.grv_id);
        Grv.grv_findbyid(req.query.grv_id,function(err,result)
     {
     
         if(err) throw err;
-        console.log(result);
-        console.log(result.Gtype);
-        var wqe={
-        info:result
-    }
     var data=result
     res.send(data);
         }
@@ -112,8 +106,6 @@ router.get('/My_Grievances',requireLogin,function(req,res,next){
     Grv.grv_findbyuser(req.session.email,function(err,result)
   {
       if(err) throw err;
-      console.log(result);
-
        data={
         info:result
       }
@@ -131,14 +123,12 @@ router.get('/Home',requireLogin, function(req, res, next) {
     if(!sess.user)
     {
     var id=req.body.id;
-    console.log(id);
     var password=req.body.password;
   
     Parent.getUserByID(id,function(err, user){
       if(err) throw err;
       if(!user){
           console.log("unknown user");
-          //res.redirect('/unknw');
           res.status(500).send('Unauthorized User');
           return;
       }
@@ -175,13 +165,11 @@ router.get('/Home',requireLogin, function(req, res, next) {
     });
   
   router.post('/update',function(req,res,next){
-    
     var newvalues = {$set: 
       {
         emailid:req.body.email,
         mobileno:req.body.mobile,   
        } 
-  
   };
 
   Parent.updateuser(sess.user,newvalues,function(err,isUpdate){
@@ -216,9 +204,6 @@ router.get('/Home',requireLogin, function(req, res, next) {
     var errors=req.validationErrors();
     if(errors)
     { console.log(errors);
-        //res.render('err_valid',{
-      //errors: errors
-    //});
     res.status(500).send('errors in validation');
       console.log('errors in validation');
       
@@ -265,7 +250,8 @@ router.get('/Home',requireLogin, function(req, res, next) {
         var mail_doc=new Mail_log({//Entry into Mail Log
           emailid:user.emailid,
           subject:"Please confirm your Email account",
-          status:'Sent'
+          status:'Sent',
+          date:new Date(dt.now())
         });
   
         Mail_log.mail_log(mail_doc,function(err){
@@ -289,42 +275,6 @@ router.get('/Home',requireLogin, function(req, res, next) {
 });
 
 
-
-/*router.get('/send', function(req, res, next) {
-  rand=Math.floor((Math.random() * 100) + 54);
-  var id={ _id:sess.user };
-  var newvalues = {$set: 
-    { rand:rand  //adding random variable in user DB
-    }};
-  
-Parent.updateuser(id,newvalues,function(err){
-   if(err) throw err;
- else
- {
-   console.log(' random variable added');
-   //res.redirect('/updated')
- }
-});
-
-    host=req.get('host');
-    link="http://"+req.get('host')+"/Parent/verify?rand="+rand+"&id="+sess.user;
-    //link="https://www.google.com/"
-    mailOptions={
-        to : req.session.email,
-        subject : "Please confirm your Email account",
-        html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
-    }
-    console.log(mailOptions);
-    smtpTransport.sendMail(mailOptions, function(error, response){
-     if(error){
-            console.log(error);
-        res.end("error");
-     }else{
-            console.log("Message sent: " + response.message);
-        res.end("sent");
-         }
-});
-});*/
 router.get('/verify',function(req,res){
   console.log(req.protocol+"://"+req.get('host'));
 console.log('id is '+req.query.id);
@@ -345,12 +295,11 @@ console.log('id is '+req.query.id);
       {
           console.log("email is verified");
           res.end("<h1>Email "+user.emailid+" is been Successfully verified");
-        var id={_id:user._id}
           var newvalues={$set:
         {
            status:"verified"  //updating status of user
         }};
-        Parent.updateuser(id,newvalues,function(err){
+        Parent.updateuser(user._id,newvalues,function(err){
            if(err) throw err;
         });
         }
@@ -403,7 +352,8 @@ console.log('id is '+req.query.id);
         var mail_doc=new Mail_log({//Entry into Mail Log
           emailid:id,
           subject:"Password Update",
-          status:'Sent'
+          status:'Sent',
+          date:new Date(dt.now())
         });
   
         Mail_log.mail_log(mail_doc,function(err){
@@ -423,11 +373,8 @@ console.log('id is '+req.query.id);
       //console.log(req.query.id)
         Grvtype.grvtype_find(function(err,result)
     {
-        if(err) throw err;
-        console.log(result);
-      
-    res.send(result);
-    //)
+        if(err) throw err;   
+       res.send(result);
         }
     
     );

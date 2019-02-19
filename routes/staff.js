@@ -5,6 +5,7 @@ var staff=require('../models/staffdb')
 var Grv=require('../models/grievancedb');
 var Grvtype=require('../models/grvtypedb');
 console.log('successful');
+var dt = datetime.create();
 var session = require('express-session'); 
 var app = express();
 var Mail_log=require('../models/Maildb');
@@ -95,16 +96,9 @@ staff.getinfobyID(req.session.user,function(err, user){
     
   })
   router.get('/GRV',requireLogin,function(req,res,next){//For finding a particular Grievance information
-    console.log('hii'); 
-    console.log(req.query.grv_id);
        Grv.grv_findbyid(req.query.grv_id,function(err,result)
     {
         if(err) throw err;
-        console.log(result);
-        console.log(result.Gtype);
-        var wqe={
-        info:result
-    }
     var data=result
     res.send(data);
         }
@@ -113,14 +107,9 @@ staff.getinfobyID(req.session.user,function(err, user){
     });
   
  router.get('/My_Grievances',requireLogin,function(req,res,next){
-  console.log('hii'); 
-  console.log(req.session.email)
-    //console.log(req.query.id)
       Grv.grv_findbyuser(req.session.email,function(err,result)
   {
       if(err) throw err;
-      console.log(result);
-//      res.render('grievances',
 var data={
       info:result
   }
@@ -183,21 +172,14 @@ var data={
     });
 
     router.post('/update',function(req,res,next){
-      var email={ _id: sess.user };
       var newvalues = {$set: 
         {
-          
-          //name:req.body.name,
-          //dep:req.body.dep,
-          //Desig:req.body.Desig,
-          //gender:req.body.gender,
-          //emailid:req.body.email,
           mobileno:req.body.mobile
       } 
     
     };
   
-    staff.updateuser(email,newvalues,function(err,isUpdate){
+    staff.updateuser(sess.user,newvalues,function(err,isUpdate){
        if(err) throw err;
      else
      {
@@ -237,9 +219,6 @@ var data={
     var errors=req.validationErrors();
     if(errors)
     { console.log(errors);
-        //res.render('err_valid',{
-      //errors: errors
-    //});
       res.staff(500).send('errors in validation');
       console.log('errors in validation');
       
@@ -278,7 +257,6 @@ var data={
           subject : "Please confirm your Email account",
           html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
       }
-      console.log(mailOptions);
       smtpTransport.sendMail(mailOptions, function(error, response){
        if(error){
               console.log(error);
@@ -287,7 +265,8 @@ var data={
         var mail_doc=new Mail_log({//Entry into Mail Log
           emailid:user.emailid,
           subject:"Password Update",
-          status:'Sent'
+          status:'Sent',
+          date:new Date(dt.now())
         });
   
         Mail_log.mail_log(mail_doc,function(err){
@@ -382,14 +361,14 @@ console.log('id is '+req.query.id);
           subject : "Password Updated",
           html : "Hello,<br> your new password for EduGrievance Portal is: <br>"+password+"<br> Thanks and Regards <br> <b>Anand International College Of Engineering</b>" 
       }
-      console.log(mailOptions);
       smtpTransport.sendMail(mailOptions, function(error, response){
        if(error) throw err;
        else{
         var mail_doc=new Mail_log({//Entry into Mail Log
           emailid:id,
           subject:"Password Update",
-          status:'Sent'
+          status:'Sent',
+          date:new Date(dt.now())
         });
   
         Mail_log.mail_log(mail_doc,function(err){
@@ -403,32 +382,12 @@ console.log('id is '+req.query.id);
      }); 
    });
 
-  /*router.get('/grievance_type',requireLogin,function(req,res,next){
-    console.log('hiitype'); 
-    console.log(req.session.email)
-      //console.log(req.query.id)
-        Grvtype.grvtype_find(function(err,result)
-    {
-        if(err) throw err;
-        console.log(result);
-      
-    res.send(result);
-    //)
-        }
-    
-    );
-    });*/
     router.get('/grievance_type',requireLogin,function(req,res,next){
-      console.log('hiitype'); 
-      console.log(req.session.email)
-        //console.log(req.query.id)
           Grvtype.grvtype_find(function(err,result)
       {
           if(err) throw err;
-          console.log(result);
-        
+          console.log(result);       
       res.send(result);
-      //)
           }
       
       );

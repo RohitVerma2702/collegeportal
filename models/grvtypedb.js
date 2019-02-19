@@ -22,16 +22,12 @@ description:{
 });
 var grvtype = module.exports = mongoose.model('Grvtype',GrievanceSchema,'Grvtype');
 grvtype.grvtype_post=function(grvtype_docs,callback)
-{
-   // grvtype.create(grvtype_docs,callback);
-   grvtype.count({},function(err,c)
+{ grvtype.count({},function(err,c)
     {
         grvtype_docs.seq=c+1;
         console.log(grvtype_docs.seq);
        grvtype_docs.save(callback); 
     });
- 
-
 }
 
 /* author : Ankit Sharma*/
@@ -45,13 +41,10 @@ grvtype.grvtype_seq_find=function(grv,callback)
 {
 query={grvtype:grv}
 
-grvtype.findOne(query,callback);
+grvtype.findOne({$and:[{active:1},{grvtype:grv}]},callback);
 }
 
 grvtype.grvtype_find=function(callback)
 {
- 
-    /*grvtype.find({$and:[{Gtype:query},{status:{$in:['pending','viewed']}}]},callback);
-*/
 grvtype.find({active:true},null,{sort:{seq:1}},callback);
 }
