@@ -52,11 +52,11 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
     var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
      Admin.findOne(query, callback);
      }
-     Admin.updateuser=function(id,newvalues,callback)
-     {
-        var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
-         Admin.updateOne(query,newvalues,callback);
-     }
+ Admin.updateuser=function(id,newvalues,callback)
+ {
+     var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
+  Admin.updateOne(query,newvalues,callback);
+ }
 
   Admin.admin_find=function(callback){
 

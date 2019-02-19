@@ -162,6 +162,8 @@ function requireLogin(req, res, next) {
           res.status(500).send('Unauthorized User');
           return;
               }
+         if(user.access=='approved')
+         {     
       Member.comparePassword(password, user.password, function(err, isMatch){
         if(err) throw err;
         if(isMatch){
@@ -182,6 +184,11 @@ function requireLogin(req, res, next) {
           res.status(500).send('pass');
         }
       })
+    }
+    else{
+      console.log('Access Denied');
+      res.status(500).send('apprv');
+    }
         });
     }
     else{

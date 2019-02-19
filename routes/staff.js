@@ -62,11 +62,10 @@ res.send(data);
   var  npass=req.body.new_password;
   var npass2=req.body.new_password1;
 
-staff.getinfobyID(req.session.user,function(err, user){
+staff.getinfobyID(req.session.email,function(err, user){
   if(err) throw err;
   if(!user){
       console.log("unknown user");
-      res.redirect('/faculty/unknw');
       return;
   }
 

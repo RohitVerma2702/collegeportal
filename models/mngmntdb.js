@@ -19,6 +19,9 @@ var mngmntSchema = mongoose.Schema({
    Gtype:{
       type:[Number]
        },
+       access:{
+       type:String
+       },
     mobileno:{
         type: String,
         index: true

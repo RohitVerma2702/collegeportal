@@ -346,8 +346,11 @@ var id=req.body.id;
           res.status(500).send('Unauthorized User');
           return;
       }
+      if ((user.access=='approved'))
+      {
       mngmnt.comparePassword(password, user.password, function(err, isMatch){
         if(err) throw err;
+        
         if(isMatch){
            console.log('login successful');      
            sess.user=user._id;
@@ -364,6 +367,12 @@ var id=req.body.id;
          res.status(500).send('pass');
         }
       })
+    }
+    else
+    {
+      console.log('Access Denied');
+      res.status(500).send('apprv');
+    }
       });
     }
     else{
