@@ -180,7 +180,7 @@ res.send(data);
           mobileno:req.body.mobileno
       } 
     };
-    faculty.updateuser(sess.user,newvalues,function(err,isUpdate){
+    faculty.updateuser(sess.email,newvalues,function(err,isUpdate){
        if(err) throw err;
      else
      {

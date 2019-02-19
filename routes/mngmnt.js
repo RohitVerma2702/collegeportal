@@ -318,7 +318,7 @@ data={
           //emailid:req.body.emailid,
           mobileno:req.body.mobileno
        }};
-     mngmnt.updateuser(sess.user,newvalues,function(err,isUpdate){
+     mngmnt.updateuser(sess.email,newvalues,function(err,isUpdate){
         if(err) throw err;
       else
       {

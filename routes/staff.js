@@ -180,7 +180,7 @@ var data={
     
     };
   
-    staff.updateuser(sess.user,newvalues,function(err,isUpdate){
+    staff.updateuser(sess.email,newvalues,function(err,isUpdate){
        if(err) throw err;
      else
      {

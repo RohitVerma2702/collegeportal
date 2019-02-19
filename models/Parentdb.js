@@ -54,7 +54,7 @@ Parent.getinfobyID = function(id,callback){
     Parent.findOne(query, callback);
 }
 Parent.updateuser = function(id,newvalues, callback){
-   var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
+   var id = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
    Parent.updateOne(id, newvalues,callback);
 }
 Parent.update_password = function(id,password, callback){

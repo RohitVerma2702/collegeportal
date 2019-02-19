@@ -173,7 +173,7 @@ router.get('/Home',requireLogin, function(req, res, next) {
        } 
   };
 
-  Parent.updateuser(sess.user,newvalues,function(err,isUpdate){
+  Parent.updateuser(sess.email,newvalues,function(err,isUpdate){
      if(err) throw err;
    else
    {

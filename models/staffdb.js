@@ -54,7 +54,7 @@ module.exports.getUserByID = function(id, callback){
     Staff.findOne(query, callback);
 }
 module.exports.updateuser = function(id,newvalues, callback){
-    // var query = (id.indexOf('@') === -1) ? {mobileno: id} : {emailid: id};
+    var id = (id.indexOf('@') === -1) ? {mobileno: id} : {emailid: id};
     //var query={_id:id}; 
     Staff.updateOne(id, newvalues,callback);
  }

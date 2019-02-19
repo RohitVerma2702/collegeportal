@@ -131,13 +131,12 @@ function requireLogin(req, res, next) {
     })
   router.post('/update',function(req,res,next){
     
-    var id={ _id:sess.user};
      var newvalues = {$set: 
        {
         emailid:req.body.emailid,
         mobileno:req.body.mobileno
      }};
-   Member.updateuser(id,newvalues,function(err,isUpdate){
+   Member.updateuser(sess.email,newvalues,function(err,isUpdate){
       if(err) throw err;
     else
     {
