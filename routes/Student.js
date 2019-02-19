@@ -4,6 +4,7 @@ var Student=require('../models/Studentdb');
 var Grvtype=require('../models/grvtypedb');
 var Grv=require('../models/grievancedb'); 
 var sess;
+var datetime = require('node-datetime');
 var dt = datetime.create();
 var Mail_log=require('../models/Maildb');
 var generator = require('generate-password');
@@ -173,7 +174,7 @@ Student.getinfobyID(req.session.user,function(err, user){
           emailid:req.body.emailid,
           mobileno:req.body.mobileno
        }};
-     Student.updateuser(sess.user,newvalues,function(err,isUpdate){
+     Student.updateuser(sess.email,newvalues,function(err,isUpdate){
         if(err) throw err;
       else
       {
@@ -320,7 +321,7 @@ console.log('id is '+req.query.id);
         {
            status:"verified"
         }};
-        Student.updateuser(id,newvalues,function(err){
+        Student.updateuser(user.emailid,newvalues,function(err){
            if(err) throw err;
         });
         }

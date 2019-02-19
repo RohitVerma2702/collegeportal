@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var datetime = require('node-datetime');
 var dt = datetime.create();
 var expressValidator=require('express-validator');
 var admin=require('../models/Admindb')
@@ -28,8 +29,6 @@ var smtpTransport = nodemailer.createTransport({
 });
 var mailOptions;
 function requireLogin(req, res, next) {
-  console.log(req.session.active);
-  console.log('1');
     if (req.session.active==1&&req.session.type=='Admin') { /*if someone is logged in as cell member*/ 
       next(); // allow the next route to run                   
     } else {
@@ -67,7 +66,7 @@ router.post('/update',function(req,res,next){
      {
       mobileno:req.body.mobileno
    }};
- admin.updateuser(sess.user,newvalues,function(err,isUpdate){
+ admin.updateuser(sess.email,newvalues,function(err,isUpdate){
     if(err) throw err;
   else
   {
@@ -199,7 +198,7 @@ data={
     console.log(user)  
     if(user=='Faculty')
     {
-      faculty.updateuser(id,newvalue,function(err){
+      faculty.updateuser(req.body.email,newvalue,function(err){
         if(err) throw err;
         console.log("Successfuly Rejected Faculty");
         res.redirect('/');
@@ -208,7 +207,7 @@ data={
     else if(user=='Student')
     {
 
-      Student.updateuser(id,newvalue,function(err){
+      Student.updateuser(req.body.email,newvalue,function(err){
         if(err) throw err;
         console.log("Successfuly Rejected Student")
         res.redirect('/');
@@ -216,7 +215,7 @@ data={
     }
     else if(user=='Staff')
     {
-      Staff.updateuser(id,newvalue,function(err){
+      Staff.updateuser(req.body.email,newvalue,function(err){
         if(err) throw err;
         console.log("Successfuly Rejected Staff");
         res.redirect('/');
@@ -224,7 +223,7 @@ data={
     }
     else if(user=='Parent')
     {
-      Parent.updateuser(id,newvalue,function(err){
+      Parent.updateuser(req.body.email,newvalue,function(err){
         if(err) throw err;
         console.log("Successfuly Rejected Parent");
         res.redirect('/');
@@ -300,7 +299,7 @@ data={
     }   
     if(user=='Faculty')
     {
-      faculty.updateuser(id,newvalue,function(err){
+      faculty.updateuser(req.body.email,newvalue,function(err){
         if(err) throw err;
         console.log("Successfuly approved ");
         res.redirect('/');
@@ -308,7 +307,7 @@ data={
     }
     else if(user=='Student')
     {
-      Student.updateuser(id,newvalue,function(err){
+      Student.updateuser(req.body.email,newvalue,function(err){
         if(err) throw err;
         console.log("Successfuly approved ");
         res.redirect('/');
@@ -316,7 +315,7 @@ data={
     }
     else if(user=='Staff')
     {
-      Staff.updateuser(id,newvalue,function(err){
+      Staff.updateuser(req.body.email,newvalue,function(err){
         if(err) throw err;
         console.log("Successfuly approved ");
         res.redirect('/');
@@ -324,7 +323,7 @@ data={
     }
     else if(user=='Parent')
     {
-      Parent.updateuser(id,newvalue,function(err){
+      Parent.updateuser(req.body.email,newvalue,function(err){
         if(err) throw err;
         console.log("Successfuly approved ");
         res.redirect('/');
@@ -340,7 +339,7 @@ data={
   }   
   if(user=='Faculty')
   {
-    faculty.updateuser(id,newvalue,function(err){
+    faculty.updateuser(req.body.email,newvalue,function(err){
       if(err) throw err;
       console.log("Successfuly approved ");
       res.redirect('/');
@@ -348,7 +347,7 @@ data={
   }
   else if(user=='Student')
   {
-    Student.updateuser(id,newvalue,function(err){
+    Student.updateuser(req.body.email,newvalue,function(err){
       if(err) throw err;
       console.log("Successfuly approved ");
       res.redirect('/');
@@ -356,7 +355,7 @@ data={
   }
   else if(user=='Staff')
   {
-    Staff.updateuser(id,newvalue,function(err){
+    Staff.updateuser(req.body.email,newvalue,function(err){
       if(err) throw err;
       console.log("Successfuly approved ");
       res.redirect('/');
@@ -364,7 +363,7 @@ data={
   }
   else if(user=='Parent')
   {
-    Parent.updateuser(id,newvalue,function(err){
+    Parent.updateuser(req.body.email,newvalue,function(err){
       if(err) throw err;
       console.log("Successfuly approved");
       res.redirect('/');
@@ -563,7 +562,7 @@ admin.getinfobyID(req.session.user,function(err, user){
         admin.comparePassword(cpass, user.password, function(err, isMatch){
             if(err) throw err;
               if(isMatch){
-                admin.update_password(sess.user,npass,function(err){
+                admin.update_password(sess.email,npass,function(err){
                    if(err) throw err;
                  else
                  {

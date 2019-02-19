@@ -75,8 +75,7 @@ module.exports.getinfobyID = function(id, callback){
     Student.findOne(query, callback);
 }
 module.exports.updateuser = function(id,newvalues, callback){
-     //var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
-    var query=id;
+     var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};  
     Student.updateOne(query,newvalues,callback);
  }
  module.exports.update_password = function(id,password, callback){

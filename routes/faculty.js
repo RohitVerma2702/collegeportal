@@ -9,6 +9,7 @@ var nodemailer = require("nodemailer");
 console.log('successful');
 var Mail_log=require('../models/Maildb');
 var app = express();
+var datetime = require('node-datetime');
 var dt = datetime.create();
 var sess;
 var smtpTransport = nodemailer.createTransport({
