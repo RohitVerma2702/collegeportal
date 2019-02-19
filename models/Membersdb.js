@@ -71,10 +71,10 @@ Member.Delete_Gcm=function(query,callback){
 }
 Member.find_member=function(seq,callback){
 query={Gtype:seq}
-    Member.find(query,callback);
+    Member.find({$and:[{Gtype:seq},{access:'approved'}]},callback);
 }
 Member.find_all=function(callback){
-        Member.find(callback);
+        Member.find({access:'approved'},callback);
     }
 Member.createUser = function(newUser, callback){
     bcrypt.genSalt(10, function(err, salt) {

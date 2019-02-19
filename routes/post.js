@@ -11,8 +11,6 @@ var Grvtype=require('../models/grvtypedb');
 var Mail_log=require('../models/Maildb');
 var dt = datetime.create();
 var formatted = dt.format('d/m/Y H:M:S');
-var session=require('express-session');
-
 var app = express();
 var nodemailer = require("nodemailer");
 var smtpTransport = nodemailer.createTransport({
@@ -38,7 +36,6 @@ console.log(result.length);
         subject : "Grievance Portal Reminder",
         html : "Dear Grievance Cell Member,<br>A user has reminded you of a grievance you left unattended.Kindly login using your username and password to check grievance and give reply.<br>Thanks and Regard.<br>ANAND INTERNATIONAL COLLEGE OF ENGINEERING" 
     }
-    console.log(mailOptions);
     smtpTransport.sendMail(mailOptions, function(error, response){
      if(error){
             console.log(error);
@@ -47,7 +44,8 @@ console.log(result.length);
         var mail_doc=new Mail_log({//Entry into Mail Log
             emailid:result[i].emailid,
             subject:"Grievance Portal Reminder",
-            status:'Sent'
+            status:'Sent',
+            date:new Date(dt.now()) 
           });
     
           Mail_log.mail_log(mail_doc,function(err){
@@ -81,7 +79,8 @@ else
             var mail_doc=new Mail_log({//Entry into Mail Log
                 emailid:result[i].emailid,
                 subject:"Grievance Portal Reminder",
-                status:'Sent'
+                status:'Sent',
+                date:new Date(dt.now()), 
               });
         
               Mail_log.mail_log(mail_doc,function(err){
@@ -107,9 +106,7 @@ router.get('/grv_action',function(req,res,next){
     var id={grv_id:req.body.id}
     var newvalues = {$set: 
         {
-          //reply:req.body.reply,
           status:'viewed',
-          //action:'replied'
         }};
 
     Grv.update_grv(id,newvalues,function(err,isUpdate){
@@ -121,41 +118,9 @@ router.get('/grv_action',function(req,res,next){
       }
      });
 
-})
+});
 
-
-/*router.get('/Grievances',function(req,res,next){
-console.log('hii'); 
-  //console.log(req.query.id)
-    Grv.grv_find(function(err,result)
-{
-    if(err) throw err;
-   // console.log(result);
-    res.render('post2',{
-    result:result
-})
-    }
-
-);
-});*/
-/*
-router.get('/Grievances_user',function(req,res,next){
-    console.log('hii'); 
-    console.log(req.session.email)
-      //console.log(req.query.id)
-        Grv.grv_findbyuser(req.session.email,function(err,result)
-    {
-        if(err) throw err;
-        console.log(result);
-        res.render('grievances',{
-        result:result
-    })
-        }
-    
-    );
-    });*/
-
-    router.post('/reply',uploads.single('file'), function(req, res, next) {
+    router.post('/reply',uploads.single('file'), function(req, res, next) {//For Replying to particular Grievance
 
         var id={grv_id:req.body.id}
        var newvalues = {$set: 
@@ -176,7 +141,7 @@ router.get('/Grievances_user',function(req,res,next){
          });
 
     })
-router.post('/complaint',uploads.single('file'), function(req, res, next) {
+router.post('/complaint',uploads.single('file'), function(req, res, next) {//To raise a Grievance
     sess=req.session;
 var comp=req.body.grv;
 var type=req.body.type;
@@ -221,10 +186,83 @@ var doc=new Grv({
 Grv.grv_post(doc,function(err,doc){
     if(err) throw err;
     console.log(doc);
-    //res.end('complaint posted');
     console.log('Grievance Posted');
       res.redirect('/'+utype+'/Home');
 });
+Member.find_member(gseq,function(err,result){
+    if (err)
+    throw error;
+    else
+    {
+    console.log(result.length);
+        for(i=0;i<result.length;i++)
+    {
+        mailOptions={
+            to : result[i].emailid,
+            subject : "Grievance Portal Reminder",
+            html : "Dear Grievance Cell Member,<br>A user has posted a grievance .Kindly login using your username and password to check grievance and give reply.<br>Thanks and Regard.<br>ANAND INTERNATIONAL COLLEGE OF ENGINEERING" 
+        }
+        smtpTransport.sendMail(mailOptions, function(error, response){
+         if(error){
+                console.log(error);
+            //res.status(500).send('error');
+         }else{
+            var mail_doc=new Mail_log({//Entry into Mail Log
+                emailid:result[i].emailid,
+                subject:"New Grievance",
+                status:'Sent',
+                date:new Date(dt.now()) 
+              });
+        
+              Mail_log.mail_log(mail_doc,function(err){
+                if(err) throw err;
+              });
+                console.log("Message sent: " + response.message);
+            //res.end("sent");
+             }
+    });
+    } 
+    }
+    Admin.admin_find(function(err,result){
+    if(err)
+    throw error;
+    else
+    {
+        console.log(result.length);
+        for(i=0;i<result.length;i++){
+    
+            mailOptions={
+                to : result[i].emailid,
+                subject : "Grievance Portal Reminder",
+                html : "Dear Admin,<br>A user has raised a grievance .Kindly login using your username and password to check grievance.<br>Thanks and Regard.<br>ANAND INTERNATIONAL COLLEGE OF ENGINEERING" 
+            }
+            console.log(mailOptions);
+            smtpTransport.sendMail(mailOptions, function(error, response){
+             if(error){
+                    console.log(error);
+                //res.status(500).send('error');
+             }else{
+                var mail_doc=new Mail_log({//Entry into Mail Log
+                    emailid:result[i].emailid,
+                    subject:"New Grievance",
+                    status:'Sent',
+                    date:new Date(dt.now()), 
+                  });
+            
+                  Mail_log.mail_log(mail_doc,function(err){
+                    if(err) throw err;
+                  });
+                    console.log("Message sent");
+                //res.end("sent");
+                 }
+        });        
+        }
+    }
+    })
+    
+    })
+    
+    
 }
 
 });

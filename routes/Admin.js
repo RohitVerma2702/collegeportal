@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var dt = datetime.create();
 var expressValidator=require('express-validator');
 var admin=require('../models/Admindb')
 var cell=require('../models/Membersdb');
@@ -36,7 +37,6 @@ function requireLogin(req, res, next) {
       res.redirect('/'); // or render a form, etc.
     }
   }
-console.log('successful');
 var app = express();
 var sess;
   router.get('/Home',requireLogin, function(req, res, next) {
@@ -51,7 +51,6 @@ router.get('/my-account',function(req,res,next){
 if(err) throw err;
 else
 {
-
   data={
     email:user.emailid,
     mobile:user.mobileno,
@@ -64,15 +63,11 @@ else
 });
 
 router.post('/update',function(req,res,next){
-    
-  var id={ _id:sess.user};
    var newvalues = {$set: 
      {
-       //gender:req.body.gender,
-      //emailid:req.body.emailid,
       mobileno:req.body.mobileno
    }};
- admin.updateuser(id,newvalues,function(err,isUpdate){
+ admin.updateuser(sess.user,newvalues,function(err,isUpdate){
     if(err) throw err;
   else
   {
@@ -82,60 +77,55 @@ router.post('/update',function(req,res,next){
  });
 
  });
- router.get('/rejected_user',requireLogin,function(req,res,next){
-  console.log(req.query.user);
+ router.get('/rejected_user',requireLogin,function(req,res,next){//For Showing Rejected User(By Admin) list
   if(req.query.user=='student')
 {
-Student.apprv_find('rejected',function(err,users){
-if(err) throw err;
-else{
-  console.log(users);
- data={
-   info:users
- }
-res.send(data);
-}
-})
+  Student.apprv_find('rejected',function(err,users){
+  if(err) throw err;
+  else{
+    console.log(users);
+  data={info:users}
+  res.send(data);
+  }
+  })
 }
 else if(req.query.user=='parent')
 {
-Parent.apprv_find('rejected',function(err,users){
-if(err) throw err;
-else{
-  console.log(users);
- data={
-   info:users
- }
-res.send(data)
-}//res.end('fetched complete');
-})
+  Parent.apprv_find('rejected',function(err,users){
+  if(err) throw err;
+  else{
+   console.log(users);
+  data={
+    info:users
+  }
+  res.send(data)
+  }
+  })
 }
 else if(req.query.user=='staff')
 {
-Staff.apprv_find('rejected',function(err,users){
-if(err) throw err;
-else
-{console.log(users);
-  data={
-  info:users
-}
-res.send(data)
-}
-})
+ Staff.apprv_find('rejected',function(err,users){
+ if(err) throw err;
+ else
+ {console.log(users);
+   data={info:users}
+ res.send(data)
+ }
+ })
 }
 else if(req.query.user=='faculty')
 {
-faculty.apprv_find('rejected',function(err,users){
-if(err) throw err;
-else
-{
-  console.log(users);
-data={
-   info:users
- };
-res.send(data);
-}
-})
+  faculty.apprv_find('rejected',function(err,users){
+  if(err) throw err;
+  else
+  {
+   console.log(users);
+  data={
+     info:users
+   };
+  res.send(data);
+  }
+  })
 }
 
 });
@@ -199,7 +189,7 @@ data={
 
    
    });
-   router.post('/Deactivate_user',requireLogin,function(req,res,next){
+   router.post('/Deactivate_user',requireLogin,function(req,res,next){//To reject a particular user
     var user=req.body.type;
     var id={emailid:req.body.email};
     var newvalue={$set:{
@@ -242,7 +232,7 @@ data={
     }
    });
 
-   router.get('/pending_user',requireLogin,function(req,res,next){//to Display all th Grievance Cell Member 
+   router.get('/pending_user',requireLogin,function(req,res,next){//To show the list of  user whose access is Pending (Not Approved By user) 
      console.log(req.query.user);
       if(req.query.user=='student')
   {
@@ -301,7 +291,7 @@ data={
       
       });
 
-      router.post('/Approve_User',requireLogin,function(req,res,next){
+      router.post('/Approve_User',requireLogin,function(req,res,next){// To give access to a user(by Admin)
         var user=req.body.type;
     var id={emailid:req.body.email};
     var newvalue={$set:{
@@ -341,7 +331,7 @@ data={
       })
     }
       });
- router.post('/undo_rejected',requireLogin,function(req,res,next){
+ router.post('/undo_rejected',requireLogin,function(req,res,next){//To Undo rejection of a user
   var user=req.body.type;
   var id={emailid:req.body.email};
   var newvalue={$set:{
@@ -416,14 +406,10 @@ data={
         
       );
         });
-        router.post('/GRV_delete',requireLogin,function(req,res,next){
-          console.log(req.query.grv_id);
+        router.post('/GRV_delete',requireLogin,function(req,res,next){//To deactivate a posted grievance 
           var id={grv_id:req.query.grv_id}
           var newvalues = {$set: 
-               {
-                 active:0 
-                     
-                }
+               { active:0 }
               };
    
            Grv.update_grv(id,newvalues,function(err,isUpdate){
@@ -449,7 +435,7 @@ data={
   }
   })
   });
-  router.post('/GCM_Deactivate',requireLogin,function(req,res,next){
+  router.post('/GCM_Deactivate',requireLogin,function(req,res,next){//To remove access permission from a GCM
     console.log(req.body.email);
     console.log('hii');
     var newvalue={$set:{
@@ -463,12 +449,10 @@ data={
   })
 router.get('/Grievances',function(req,res,next){// for all pending grievances 
   console.log('hii'); 
-  active=req.query.param;
-    //console.log(req.query.id)body
-      Grv.grv_findforAdmin(function(active,err,result)
+  active=req.query.param;     
+   Grv.grv_findforAdmin(function(active,err,result)
   {
       if(err) throw err;
-     // console.log(result);
       var data={
       info:result
   }
@@ -476,315 +460,6 @@ router.get('/Grievances',function(req,res,next){// for all pending grievances
       });
   });
   
-  router.post('delete_grv',function(req,res,next){//for deleting any grievances
-var newvalues={
-  active:0
-};
-    Grv.update_grv(req.body.id,newvalues,function(err){
-      if(err)
-      throw errror;
-    })
-  });
-
-  router.post('deactivate_grvtype',function(req,res,next){//for deleting any grievances
-    var newvalues={
-      active:false
-    };
-    Grvtype.update_grvtype(req.body.id,newvalues,function(err){
-          if(err)
-          throw errror;
-        })
-      });
-
-
-/*router.get('/existing_request',requireLogin,function(req,res,next){
-  console.log(req.query.email);
-  console.log(req.query.status);
-  console.log(req.query.user);
-  if(req.query.status==1)//all those who are rejected
-  { console.log('in approved');
-   if(req.query.user=='Student')
-   {
-    var id={emailid:req.query.email};
-    var newvalues = {$set: 
-      { status:'approved' }};
-      
-  Student.updateuser(id,newvalues,function(err,isUpdate){
-     if(err) throw err;
-   else
-   {
-     console.log(' successfuly update ');
-     res.redirect('/Admin/Home');
-     //res.redirect('/Parent/dashboard')
-   }
-  
-  }); 
-   }
-   else if(req.query.user=='Parent')
-   {
-    var id={ emailid:req.query.email};
-    var newvalues = {$set: 
-      { status:'approved' }};
-  
-  Parent.updateuser(id,newvalues,function(err,isUpdate){
-     if(err) throw err;
-   else
-   {
-     console.log(' successfuly update ');
-     res.redirect('/Admin/Home')
-   }
-  });
-  
-   }
-   else if(req.query.user=='staff')
-   {
-    var id={ emailid:req.query.email};
-    var newvalues = {$set: 
-      { status:'approved' }};
-      
-  Staff.updateuser(id,newvalues,function(err,isUpdate){
-     if(err) throw err;
-   else
-   {
-     console.log(' successfuly update ');
-     res.redirect('/Admin/Home');
-     //res.redirect('/Parent/dashboard')
-   }
-  });
-   }
-   else if(req.query.user=='faculty')
-   {
-    var id={ emailid:req.query.email};
-    var newvalues = {$set: 
-      { status:'approved' }};
-      
-  faculty.updateuser(id,newvalues,function(err,isUpdate){
-     if(err) throw err;
-   else
-   {
-     console.log(' successfuly update ');
-     res.redirect('/Admin/Home');
-     //res.redirect('/Parent/dashboard')
-   }
-  });
-   }
-  }
-  else{   //all those who are approved
-    console.log('in rejected');
-    if(req.query.user=='Student')
-    {
-     var id={ emailid:req.query.email};
-     var newvalues = {$set: 
-       { status:'rejected' }};
-       
-   Student.updateuser(id,newvalues,function(err,isUpdate){
-      if(err) throw err;
-    else
-    {
-      console.log(' successfuly update ');
-      res.redirect('/Admin/Home');
-      //res.redirect('/Parent/dashboard')
-    }
-   
-   }); 
-    }
-    else if(req.query.user=='Parent')
-    {
-     var id={ emailid:req.query.email};
-     var newvalues = {$set: 
-       { status:'rejected' }};
-   
-   Parent.updateuser(id,newvalues,function(err,isUpdate){
-      if(err) throw err;
-    else
-    {
-      console.log(' successfuly update ');
-      res.redirect('/Admin/Home');
-      //res.redirect('/Parent/dashboard')
-    }
-   });
-   
-    }
-    else if(req.query.user=='staff')
-    {
-     var id={ emailid:req.query.email};
-     var newvalues = {$set: 
-       { status:'rejected' }};
-       
-   Staff.updateuser(id,newvalues,function(err,isUpdate){
-      if(err) throw err;
-    else
-    {
-      console.log(' successfuly update ');
-      res.redirect('/Admin/Home');
-      //res.redirect('/Parent/dashboard')
-    }
-   });
-    }
-    else if(req.query.user=='faculty')
-    {
-     var id={ emailid:req.query.email};
-     var newvalues = {$set: 
-       { status:'rejected' }};
-       
-   faculty.updateuser(id,newvalues,function(err,isUpdate){
-      if(err) throw err;
-    else
-    {
-      console.log(' successfuly update ');
-      res.redirect('/Admin/Home');
-      //res.redirect('/Parent/dashboard')
-    }
-   });
-    }
-  }
-  
-
-});
-router.get('/Pending_user',requireLogin,function(req,res,next){   //Pending approval 
-var email=req.query.email;
-console.log(req.query.email);
-console.log(req.query.status);
-console.log(req.query.user);
-if(req.query.status==1)
-{ console.log('in approved');
- if(req.query.user=='Student')
- {
-  var id={emailid:req.query.email};
-  var newvalues = {$set: 
-    { status:'approved' }};
-    
-Student.updateuser(id,newvalues,function(err,isUpdate){
-   if(err) throw err;
- else
- {
-   console.log(' successfuly update ');
-   res.redirect('/Admin/Home');
-   //res.redirect('/Parent/dashboard')
- }
-
-}); 
- }
- else if(req.query.user=='Parent')
- {
-  var id={ emailid:req.query.email};
-  var newvalues = {$set: 
-    { status:'approved' }};
-
-Parent.updateuser(id,newvalues,function(err,isUpdate){
-   if(err) throw err;
- else
- {
-   console.log(' successfuly update ');
-   res.redirect('/Admin/Home');
- }
-});
-
- }
- else if(req.query.user=='staff')
- {
-  var id={ emailid:req.query.email};
-  var newvalues = {$set: 
-    { status:'approved' }};
-    
-Staff.updateuser(id,newvalues,function(err,isUpdate){
-   if(err) throw err;
- else
- {
-   console.log(' successfuly update ');
-   res.redirect('/Admin/Home');
-   //res.redirect('/Parent/dashboard')
- }
-});
- }
- else if(req.query.user=='faculty')
- {
-  var id={ emailid:req.query.email};
-  var newvalues = {$set: 
-    { status:'approved' }};
-    
-faculty.updateuser(id,newvalues,function(err,isUpdate){
-   if(err) throw err;
- else
- {
-   console.log(' successfuly update ');
-   res.redirect('/Admin/Home');
-   //res.redirect('/Parent/dashboard')
- }
-});
- }
-}
-else{
-  console.log('in rejected');
-  if(req.query.user=='Student')
-  {
-   var id={ emailid:req.query.email};
-   var newvalues = {$set: 
-     { status:'rejected' }};
-     
- Student.updateuser(id,newvalues,function(err,isUpdate){
-    if(err) throw err;
-  else
-  {
-    console.log(' successfuly update ');
-    res.redirect('/Admin/Home')
-    //res.redirect('/Parent/dashboard')
-  }
- 
- }); 
-  }
-  else if(req.query.user=='Parent')
-  {
-   var id={ emailid:req.query.email};
-   var newvalues = {$set: 
-     { status:'rejected' }};
- 
- Parent.updateuser(id,newvalues,function(err,isUpdate){
-    if(err) throw err;
-  else
-  {
-    console.log(' successfuly update ');
-    res.redirect('/Admin/Home');
-    //res.redirect('/Parent/dashboard')
-  }
- });
- 
-  }
-  else if(req.query.user=='staff')
-  {
-   var id={ emailid:req.query.email};
-   var newvalues = {$set: 
-     { status:'rejected' }};
-     
- Staff.updateuser(id,newvalues,function(err,isUpdate){
-    if(err) throw err;
-  else
-  {
-    console.log(' successfuly update ');
-    res.redirect('/Admin/Home');
-    //res.redirect('/Parent/dashboard')
-  }
- });
-  }
-  else if(req.query.user=='faculty')
-  {
-   var id={ emailid:req.query.email};
-   var newvalues = {$set: 
-     { status:'rejected' }};
-     
- faculty.updateuser(id,newvalues,function(err,isUpdate){
-    if(err) throw err;
-  else
-  {
-    console.log(' successfuly update ');
-    res.redirect('/Admin/Home');
-    //res.redirect('/Parent/dashboard')
-  }
- });
-  }
-}
-});*/
-
   router.post('/create',function(req,res,next){
     console.log(req.body.mngmnt);
     var name=req.body.name;
@@ -854,7 +529,8 @@ if((req.body.mngmnt)==1)
       var mail_doc=new Mail_log({
         emailid:email,
         subject:"Added to Anand Cell ",
-        status:'Sent'
+        status:'Sent',
+        date:new Date(dt.now()) 
       });
 
       Mail_log.mail_log(mail_doc,function(err){
@@ -919,7 +595,6 @@ if(!sess.user){
       if(err) throw err;
       if(!user){
           console.log("unknown user");
-          //res.redirect('/Admin/unknw');
           res.status(500).send('Unauthorized User');
           return false;
       }
@@ -942,9 +617,6 @@ if(!sess.user){
           return false;
         }
       })
-     // sess.user=user._id;
-      //sess.type='Admin';
-      //sess.active=1;
      });
     }
     else{
@@ -985,7 +657,8 @@ if(!sess.user){
           var mail_doc=new Mail_log({
             emailid:id,
             subject:"Password Updated ",
-            status:'Sent'
+            status:'Sent',
+            date:new Date(dt.now()) 
           });
     
           Mail_log.mail_log(mail_doc,function(err){
@@ -1000,8 +673,8 @@ if(!sess.user){
      });
   
 
-     router.post('/termination',requireLogin,function(req,res,next){
-      var newvalues={$set:{
+     router.post('/termination',requireLogin,function(req,res,next){//For Permanent Termination of either 
+      var newvalues={$set:{                                         //Student or Parent at end of Course Completion
         access:'terminated'
       }};
       if(req.query.type=='Student')
@@ -1050,7 +723,7 @@ router.get('/grievance_type',requireLogin,function(req,res,next){
   
   );
   });
-router.post('/grvtype_deactivate',function(req,res,next){
+router.post('/grvtype_deactivate',function(req,res,next){// For deactivating a Grievance type
 grvtype={grvtype:req.body.grvtype};
 console.log(req.body.grvtype)
 var newvalue={$set:{active:false}};
@@ -1060,14 +733,7 @@ console.log('grvtype deleted');
 res.redirect('/');
 })
 });
-  router.get('/grvtype_add',requireLogin ,function(req, res, next) {
-    var sess=req.session;
-    if(sess.user)
-    res.render('add_grvtype');
-    else
-    res.render('view');
-  });
-router.post('/grvtype_add',requireLogin,function(req,res,next){   
+router.post('/grvtype_add',requireLogin,function(req,res,next){ //For adding a grievance type
   var grvtype=req.body.grvtype;
   var description=req.body.description;
   var newGrv=new Grvtype({
@@ -1086,24 +752,5 @@ router.post('/grvtype_add',requireLogin,function(req,res,next){
 
 });
 
-/* author : Ankit Sharma
-date: 31/10/2018 */
 
-   /*router.get('/grievance_type',requireLogin,function(req,res,next){
-    console.log('hiitype'); 
- 
-      //console.log(req.query.id)
-        Grvtype.grvtype_find(function(err,result)
-    {
-        if(err) throw err;
-        console.log(result);
-      
-    res.send(result);
-    //)
-        }
-    
-    );
-    });
-
-*/
 module.exports = router;
