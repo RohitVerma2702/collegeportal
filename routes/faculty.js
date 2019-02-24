@@ -31,7 +31,9 @@ function requireLogin(req, res, next) {
       res.redirect('/'); // or render a form, etc.
     }
   }
-
+  router.get('/Home',requireLogin, function(req, res, next) {
+    res.render('Faculty_dash',{title:'Student',verify:sess.ver});
+  });
 router.get('/my-account',requireLogin, function(req, res, next) {
   sess=req.session;
   faculty.getinfobyID(sess.user,function(err, user){

@@ -11,6 +11,9 @@ var MailSchema=mongoose.Schema({
     },
     status:{
         type:String
+    },
+    date:{
+        type:Date
     }
 });
 

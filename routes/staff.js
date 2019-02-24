@@ -35,7 +35,7 @@ function requireLogin(req, res, next) {
   
 router.get('/my-account',requireLogin, function(req, res, next) {
   sess=req.session;
-  staff.getinfobyID(sess.user,function(err, user){
+  staff.getinfobyID(sess.email,function(err, user){
    if(err) throw err;
    if(!user){
        console.log("unknown user");

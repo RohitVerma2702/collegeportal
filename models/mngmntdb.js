@@ -47,11 +47,14 @@ module.exports.getinfobyID = function(id, callback){
     var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
   mngmnt.findOne(query, callback);
 }
-module.exports.updateuser = function(id,newvalues, callback){
+mngmnt.updateuser = function(id,newvalues, callback){
   var id=(id.indexOf('@')===-1)?{_id:id}:{emailid:id};
     mngmnt.updateOne(id, newvalues,callback);
  }
-
+ mngmnt.find_member=function(seq,callback){
+    query={Gtype:seq}
+        mngmnt.find({$and:[{Gtype:seq},{access:'approved'}]},callback);
+    }
 module.exports.comparePassword = function(candidatePassword, hash, callback){
     bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
         callback(null, isMatch);

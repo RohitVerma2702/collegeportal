@@ -7,6 +7,7 @@ var Grv=require('../models/grievancedb');
 var datetime = require('node-datetime');
 var Admin=require('../models/Admindb');
 var Member=require('../models/Membersdb');
+var mngmnt=require('../models/mngmntdb');
 var Grvtype=require('../models/grvtypedb');
 var Mail_log=require('../models/Maildb');
 var dt = datetime.create();
@@ -36,6 +37,7 @@ console.log(result.length);
         subject : "Grievance Portal Reminder",
         html : "Dear Grievance Cell Member,<br>A user has reminded you of a grievance you left unattended.Kindly login using your username and password to check grievance and give reply.<br>Thanks and Regard.<br>ANAND INTERNATIONAL COLLEGE OF ENGINEERING" 
     }
+    console.log(mailOptions);
     smtpTransport.sendMail(mailOptions, function(error, response){
      if(error){
             console.log(error);
@@ -57,6 +59,41 @@ console.log(result.length);
 });
 } 
 }
+mngmnt.find_member(seq,function(err,result){
+    if (err)
+    throw error;
+    else
+    {
+    console.log(result.length);
+        for(i=0;i<result.length;i++)
+    {
+        mailOptions={
+            to : result[i].emailid,
+            subject : "Grievance Portal Reminder",
+            html : "Dear Grievance Cell Member,<br>A user has reminded you of a grievance you left unattended.Kindly login using your username and password to check grievance and give reply.<br>Thanks and Regard.<br>ANAND INTERNATIONAL COLLEGE OF ENGINEERING" 
+        }
+        console.log(mailOptions)
+        smtpTransport.sendMail(mailOptions, function(error, response){
+         if(error){
+                console.log(error);
+            //res.status(500).send('error');
+         }else{
+            var mail_doc=new Mail_log({//Entry into Mail Log
+                emailid:result[i].emailid,
+                subject:"Grievance Portal Reminder",
+                status:'Sent',
+                date:new Date(dt.now()) 
+              });
+        
+              Mail_log.mail_log(mail_doc,function(err){
+                if(err) throw err;
+              });
+                console.log("Message sent: " + response.message);
+            //res.end("sent");
+             }
+    });
+    } 
+    }
 Admin.admin_find(function(err,result){
 if(err)
 throw error;
@@ -94,6 +131,8 @@ else
 }
 })
 
+})
+res.end();
 })
 
 
