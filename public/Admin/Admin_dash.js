@@ -1,7 +1,6 @@
 var app = angular.module('grievances', ['ngRoute', 'ngMaterial']);
 
 app.config(function($routeProvider){
-
 	$routeProvider
 	.when('/', {
 		templateUrl: '/Admin/myaccount.ejs'
@@ -173,5 +172,5 @@ app.config(function($routeProvider){
 	.otherwise({
 		template: 'Not found'
 	});
-	$locationProvider.html5Mode(true);
+
 });

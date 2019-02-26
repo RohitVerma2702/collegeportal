@@ -31,5 +31,4 @@ $(document).ready(function(){
 	$('.setting-toggle').click(function(){
 		$('.settings').slideToggle(500);
 	});
-	$locationProvider.html5Mode(true);
 });
