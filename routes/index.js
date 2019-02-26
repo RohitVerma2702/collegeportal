@@ -31,10 +31,6 @@ res.redirect('/'+sess.type+'/Home#!/');
   {
     res.render('view3');
   } 
-  
- 
- // res.render('view', { title: 'Members' });
-  
 });
 
 router.get('/logout', function(req, res, next) {
@@ -42,45 +38,9 @@ router.get('/logout', function(req, res, next) {
   console.log(sess.user+' is logged out');
   req.session.destroy(function(err)
 {
-
   if(err) throw err;
 });
-console.log(sess.user+' is logged out');
-  res.render('view3', { title: 'Members' });
+res.render('view3', { title: 'Members' });
 })
-/*router.get('/logout', function(req, res) {
-  req.session.reset();
-  res.redirect('/');
-});*/
-router.get('/al', function(req, res, next) {
-  res.render('al',{title:'Faculty_Login'});
-});
-router.get('/success', function(req, res, next) {
-  res.render('success',{title:'Faculty_Login'});
-});
-router.get('/failed', function(req, res, next) {
-  res.render('failed',{title:'Faculty_Login'});
-});
-router.get('/pass', function(req, res, next) {
-  res.render('pass',{title:'Faculty_Login'});
-});
-router.get('/unknw', function(req, res, next) {
-  res.render('unknw',{title:'Faculty_Login'});
-});
-
-  
-router.get('/logged', function(req, res, next) {
-  res.render('logged',{title:'Faculty_Login'});
-});
-router.get('/updated', function(req, res, next) {
-  res.render('udone',{title:'Faculty_Login'});
-});
-
-function ensureAuthenticated(req,res,next){
-  if(req.isAuthenticated()){
-    return next();
-  }
-  res.redirect('/Admin/Welcome');
-}
 
 module.exports = router;

@@ -310,9 +310,6 @@ console.log('id is '+req.query.id);
             res.redirect('/faculty/unknw');
             return;
         }
-  
-      
-        console.log('value of random is '+user.rand);
       if(req.query.rand== user.rand)
       {
           console.log("email is verified");

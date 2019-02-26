@@ -91,6 +91,11 @@ app.use(expressValidator({
     }
   
 }));
+app.use(function(req, res, next) {
+  if (!req.active)
+      res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  next();
+});
 
 app.use(require('connect-flash')());
 app.use(function (req,res,next)
@@ -124,9 +129,10 @@ app.use(bodyParser.json());
 app.use(function(req, res, next) {
   next(createError(404));
 });
-
 // error handler
 app.use(function(err, req, res, next) {
+ 
+  
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
