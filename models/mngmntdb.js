@@ -55,6 +55,9 @@ mngmnt.updateuser = function(id,newvalues, callback){
     query={Gtype:seq}
         mngmnt.find({$and:[{Gtype:seq},{access:'approved'}]},callback);
     }
+    mngmnt.find_all=function(callback){
+        mngmnt.find({access:'approved'},callback);
+    }
 module.exports.comparePassword = function(candidatePassword, hash, callback){
     bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
         callback(null, isMatch);

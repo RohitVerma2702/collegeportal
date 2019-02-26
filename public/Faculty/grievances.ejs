@@ -26,8 +26,8 @@
                     <button id="viewbtn{{index+1}}" ng-click="popup(result.grv_id)" class="btn btn-primary tablebuttons"><span class="fas fa-eye"></span>View</button>
                 </td>
                 <td>{{result.status}}</td>
-                <td>
-                    <button id="remind{{index+1}}" ng-click="remind(result.gseq)"  class="btn btn-success tablebuttons"><span class="fa fa-clock-o"></span> Reminder</button>
+                <td ng-switch on="result.status">
+                    <button ng-switch-when="pending|viewed" ng-switch-when-separator="|" id="remind{{index+1}}" ng-click="remind(result.gseq)" class="btn btn-success tablebuttons"><span class="fa fa-clock-o"></span> Reminder</button>
                 </td>
             </tr>
         </table>

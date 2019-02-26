@@ -433,14 +433,42 @@ data={
     res.send(data);
   }
   })
+  
   });
+
+  router.get('/Mngmnt_List',requireLogin,function(req,res,next){//to Display all th Grievance Cell Member 
+    mngmnt.find_all(function(err,result){
+      if(err) throw err;
+      else{
+        console.log(result);
+        var data={
+          info:result
+        }
+      res.send(data);
+    }
+    })
+    
+    });
   router.post('/GCM_Deactivate',requireLogin,function(req,res,next){//To remove access permission from a GCM
+
     console.log(req.body.email);
     console.log('hii');
     var newvalue={$set:{
       access:'terminated'
     }}
     Member.updateuser(req.body.email,newvalue,function(err){
+      if(err) throw err;
+      console.log('GCM  Deactivated');
+      res.redirect('/');
+    });
+  })
+  router.post('/Mngmnt_Deactivate',requireLogin,function(req,res,next){//To remove access permission from a GCM
+    console.log(req.body.email);
+    console.log('hii');
+    var newvalue={$set:{
+      access:'terminated'
+    }}
+    mngmnt.updateuser(req.body.email,newvalue,function(err){
       if(err) throw err;
       console.log('GCM  Deactivated');
       res.redirect('/');

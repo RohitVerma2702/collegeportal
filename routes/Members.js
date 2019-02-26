@@ -133,7 +133,6 @@ function requireLogin(req, res, next) {
     
      var newvalues = {$set: 
        {
-        emailid:req.body.emailid,
         mobileno:req.body.mobileno
      }};
    Member.updateuser(sess.email,newvalues,function(err,isUpdate){

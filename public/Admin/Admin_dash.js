@@ -42,6 +42,9 @@ app.config(function($routeProvider){
 	.when('/gcm', {
 		templateUrl: '/Admin/gcm.ejs'
 	})
+	.when('/mngmnt',{
+		templateUrl:'/Admin/mngmnt.ejs'
+	})
 
 	.when('/pending-students', {
 		templateUrl: '/Admin/pending-students.ejs'

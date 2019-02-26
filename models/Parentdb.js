@@ -20,6 +20,9 @@ var ParentSchema = mongoose.Schema({
     status:{
      type:String
     },
+    ward_id:{
+    type:String
+    },
     access:{
       type:String,
       default:'pending'

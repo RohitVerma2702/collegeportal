@@ -190,8 +190,10 @@ router.get('/Home',requireLogin, function(req, res, next) {
     var name=req.body.name;//LHS should be same as that of attribute name in DB file and DB
     var email=req.body.email;
     var relation=req.body.relation;
+    var ward_id=req.body.id;
     var cdate=req.body.cdate;
     var mobile=req.body.mobile;
+    var Last_year=req.body.Last_year;
     var password=req.body.password;
     var password2=req.body.password2;
     req.checkBody('name','Name field is required').notEmpty();
@@ -223,7 +225,8 @@ router.get('/Home',requireLogin, function(req, res, next) {
       var newUser=new Parent({
         name: name,
         Cdate:cdate,
-        Last_year:(cdate+4),
+        ward_id:ward_id,
+        Last_year:Last_year,
         relation:relation,
         emailid: email,
         mobileno: mobile,

@@ -60,13 +60,21 @@ app.controller("Gcm", function ($http,$scope,$mdDialog,$window) {
             $scope.grievance_type=response.data;
         });
  
-     $scope.submit=function(){
+     $scope.submit=function(ev){
          $scope.form={
-             emailid:$scope.email,
              mobileno:$scope.mobile,
          }
          $http.post("/Members/update",$scope.form).then(function(response){   
-     })
+     });
+
+     var update = $mdDialog.confirm()
+     .title('Successfully Updated!')
+      .targetEvent(ev)
+      .ok('Thank You!');
+
+$mdDialog.show(update).then(function() {
+$window.location.reload();
+})
      
      }
  
@@ -114,10 +122,19 @@ $scope.id=id;
         }); 
     }
 
-    $scope.remind=function(sequence){
+    $scope.remind=function(sequence,ev){
         $scope.seq=sequence;
     $http.get("/post/reminder?seq="+$scope.seq).then(function(response){
-    });    
+    });
+    
+    var update = $mdDialog.confirm()
+    .title('Reminder Sent!')
+     .targetEvent(ev)
+     .ok('Thank You!');
+
+$mdDialog.show(update).then(function() {
+$window.location.reload();
+})    
     }
 });
 app.controller("Student", function ($http,$scope,$window,$mdDialog) {
@@ -143,22 +160,23 @@ app.controller("Student", function ($http,$scope,$window,$mdDialog) {
 
 
 
-     $scope.submit=function(){
+     $scope.submit=function(ev){
          $scope.form={
              emailid:$scope.email,
              mobileno:$scope.mobile,
          }
          $http.post("/Student/update",$scope.form).then(function(response){   
-            location.reload();
-            var update = $mdDialog.confirm()
-            .title('Successfully Updated!')
-            .targetEvent(ev)
-            .ok('Thank You!');
-  
-      $mdDialog.show(update).then(function() {
-        $window.location.reload();
-      })
-        })
+            
+        });
+
+        var update = $mdDialog.confirm()
+        .title('Successfully Updated!')
+         .targetEvent(ev)
+         .ok('Thank You!');
+
+$mdDialog.show(update).then(function() {
+$window.location.reload();
+})
      
      }
  
@@ -207,7 +225,6 @@ app.controller("Student", function ($http,$scope,$window,$mdDialog) {
 app.controller("Parent_grievances", function ($http,$scope) {
     $scope.msg = "I love London";
     $http.get("/Parent/My_Grievances").then(function (response) {
-        //$scope.result = response.result1;
         $scope.result=response.data.info;
         $('#loading').hide();
         $('#grievances').fadeIn(500);
@@ -225,10 +242,19 @@ app.controller("Parent_grievances", function ($http,$scope) {
              //   $('.detailbackground').fadeIn(500);
             }
         
-            $scope.remind=function(sequence){
+            $scope.remind=function(sequence,ev){
                 $scope.seq=sequence;
             $http.get("/post/reminder?seq="+$scope.seq).then(function(response){
             });    
+
+         var update = $mdDialog.confirm()
+         .title('Reminder Sent!')
+          .targetEvent(ev)
+          .ok('Thank You!');
+ 
+ $mdDialog.show(update).then(function() {
+ $window.location.reload();
+ })
             }
 });
 
@@ -247,21 +273,22 @@ app.controller("Parent", function ($http,$scope,$window,$mdDialog) {
         $scope.grievance_type=response.data;
     });
 
-    $scope.submit=function(){
+    $scope.submit=function(ev){
         $scope.form={
             email:$scope.email,
             mobile:$scope.mobile
         }
         $http.post("/Parent/update",$scope.form).then(function(response){
-         var update = $mdDialog.confirm()
-         .title('Successfully Updated!')
+        })
+
+        var update = $mdDialog.confirm()
+        .title('Successfully Updated!')
          .targetEvent(ev)
          .ok('Thank You!');
 
-   $mdDialog.show(update).then(function() {
-     $window.location.reload();
-   })
-        })
+$mdDialog.show(update).then(function() {
+$window.location.reload();
+})
     
     }
 
@@ -327,10 +354,19 @@ app.controller("NonTeaching_grievances", function ($http,$scope,$window) {
              //   $('.detailbackground').fadeIn(500);
             }
         
-            $scope.remind=function(sequence){
+            $scope.remind=function(sequence,ev){
                 $scope.seq=sequence;
             $http.get("/post/reminder?seq="+$scope.seq).then(function(response){
-            });    
+            });
+            
+         var update = $mdDialog.confirm()
+         .title('Reminder Sent!')
+          .targetEvent(ev)
+          .ok('Thank You!');
+ 
+ $mdDialog.show(update).then(function() {
+ $window.location.reload();
+ })    
             }
 
 });
@@ -359,21 +395,23 @@ app.controller("NonTeaching", function ($http,$scope,$window,$mdDialog) {
 
 
 
-     $scope.submit=function(){
+     $scope.submit=function(ev){
          $scope.form={
             // emailid:$scope.email,
              mobile:$scope.mobile,
          }
          $http.post("/staff/update",$scope.form).then(function(response){   
-            var update = $mdDialog.confirm()
-            .title('Successfully Updated!')
-            .targetEvent(ev)
-            .ok('Thank You!');
-  
-      $mdDialog.show(update).then(function() {
-        $window.location.reload();
-      })
+            
         })
+
+        var update = $mdDialog.confirm()
+        .title('Successfully Updated!')
+         .targetEvent(ev)
+         .ok('Thank You!');
+
+$mdDialog.show(update).then(function() {
+$window.location.reload();
+})
      
      }
  
@@ -444,7 +482,16 @@ app.controller("Faculty_grievances", function ($http,$scope,$window) {
     $scope.remind=function(sequence){
         $scope.seq=sequence;
               $http.get("/post/reminder?seq="+$scope.seq).then(function(response){
-              });    
+              }); 
+              
+         var update = $mdDialog.confirm()
+         .title('Reminder Sent!')
+          .targetEvent(ev)
+          .ok('Thank You!');
+ 
+ $mdDialog.show(update).then(function() {
+ $window.location.reload();
+ })   
             }
 
 });
@@ -473,22 +520,23 @@ app.controller("Faculty", function ($http,$scope,$window,$mdDialog) {
 
 
 
-     $scope.submit=function(){
+     $scope.submit=function(ev){
          $scope.form={
              //emailid:$scope.email,
              mobileno:$scope.mobile,
          }
          $http.post("/faculty/update",$scope.form).then(function(response){   
-            //location.reload();
-            var update = $mdDialog.confirm()
-            .title('Successfully Updated!')
-            .targetEvent(ev)
-            .ok('Thank You!');
-  
-      $mdDialog.show(update).then(function() {
-        $window.location.reload();
-      })
+          
         })
+
+        var update = $mdDialog.confirm()
+        .title('Successfully Updated!')
+         .targetEvent(ev)
+         .ok('Thank You!');
+
+$mdDialog.show(update).then(function() {
+$window.location.reload();
+})
      
      }
  
@@ -649,16 +697,17 @@ app.controller("Management", function ($http,$scope,$window,$mdDialog) {
         }
         $http.post("/mngmnt/update",$scope.form).then(function(response){   
        
-         var update = $mdDialog.confirm()
-        .title('Successfully Updated!')
-         .targetEvent(ev)
-         .ok('Thank You!');
+
+       })
+
+       var update = $mdDialog.confirm()
+       .title('Successfully Updated!')
+        .targetEvent(ev)
+        .ok('Thank You!');
 
 $mdDialog.show(update).then(function() {
 $window.location.reload();
 })
-
-       })
     
        
     }
@@ -808,41 +857,7 @@ $scope.consolidate=function(){
 
 });
    
-/*app.controller("Admin_grievances_active", function ($http,$scope,$window) {
-      $http.get("/Admin/Grievances?active="+1).then(function (response) {
-        $scope.result=response.data.info;
-    });
-});
-app.controller("Admin_grievances_deleted", function ($http,$scope,$window) {
-  
-    $http.get("/Admin/Grievances?active="+0).then(function (response) {
-        $scope.result=response.data.info;
-    });
-$scope.Grv_delete=function(id)
-{
-    $scope.id=id
-    $http.post('delete_grv',$scope.id).then(function(response){
 
-    });
-}
-
-});
-app.controller("Admin_grievance_type", function ($http,$scope,$window) {
-  
-    $http.get("/Admin/grievance_type").then(function(response)
-    {
-        $scope.grievance_type=response.data;
-    });
-$scope.Grv_type_deactivate=function(id)
-{
-    $scope.id=id;
-    $http.post('delete_grv',$scope.id).then(function(response){
-
-    });
-}
-
-});
-*/
 //------------------------------------ADMIN-------------------------------------------------------//
 
 
@@ -856,21 +871,22 @@ app.controller("Admin", function ($http,$scope,$window,$mdDialog) {
          $('#account-details').fadeIn(500);
      });
 
-     $scope.submit=function(){
+     $scope.submit=function(ev){
          $scope.form={
              //emailid:$scope.email,
              mobileno:$scope.mobile,
          }
          $http.post("/Admin/update",$scope.form).then(function(response){   
-            var update = $mdDialog.confirm()
-            .title('Successfully Updated!')
-             .targetEvent(ev)
-             .ok('Thank You!');
-    
-    $mdDialog.show(update).then(function() {
-    $window.location.reload();
-    }); 
+           
         });
+        var update = $mdDialog.confirm()
+        .title('Successfully Updated!')
+         .targetEvent(ev)
+         .ok('Thank You!');
+
+$mdDialog.show(update).then(function() {
+$window.location.reload();
+}); 
      
      }
  
@@ -949,6 +965,29 @@ $window.location.reload();
     });
 }
    });
+   app.controller("Admin_mngmnt", function ($http,$scope,$window,$mdDialog) {
+
+
+    $http.get("/Admin/Mngmnt_List").then(function(response){
+     $scope.members=response.data.info;
+     $('#loading').hide();
+     $('#grievances').fadeIn(500);
+    });
+    $scope.Deactivate=function(user,ev){
+        $scope.form={email:user};
+        $http.post("/Admin/Mngmnt_Deactivate",$scope.form).then(function(response){
+        
+     });
+        var confirmpass = $mdDialog.confirm()
+        .title('Management member Deactivated!')
+        .targetEvent(ev)
+        .ok('Thank You!');
+     
+     $mdDialog.show(confirmpass).then(function() {
+     $window.location.reload();
+     })
+     }
+})
    app.controller('Admin_Rejected_user',function($http,$scope,$window){
     $scope.init=function(user,ev){
         if(user=='faculty')
