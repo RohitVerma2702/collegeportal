@@ -231,10 +231,21 @@ res.send(data);
       faculty.getUserByID(email,function(err, user){ //for checking if user is already registered
         if(err) throw err;
         if(user){
-            console.log("Already Registered");
-            res.status(500).send('already reg verified');
-            return;
-        }
+          console.log("Already Registered user");
+          if(user.status=="pending"){
+                res.status(500).send('already reg not verified');
+              }
+              else{
+                if(status.access=='pending')
+                  res.status(500).send('Already Registered and verified Waiting for admin approval');
+                else if(status.access=='approved')
+                res.status(500).send('Already Registered,verified and admin approved. Now you can Login');
+                else if(status.access=='rejected')
+                res.status(500).send('Already Registered,verified but admin rejected');
+             
+              }
+              return;
+          }
         else{
           var random=Math.floor((Math.random() * 100) + 54);
       var newUser=new faculty({

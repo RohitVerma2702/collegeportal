@@ -230,8 +230,14 @@ Student.getinfobyID(req.session.user,function(err, user){
               res.status(500).send('already reg not verified');
             }
             else{
-              res.end('<h1>Already Registered and email is verified</h1>');
-              //res.status(500).send('already reg verified');
+              if(status.access=='pending')
+                res.status(500).send('Already Registered and verified Waiting for admin approval');
+              else if(status.access=='approved')
+              res.status(500).send('Already Registered,verified and admin approved. Now you can Login');
+              else if(status.access=='rejected')
+              res.status(500).send('Already Registered,verified but admin rejected');
+              else if(status.access='terminated')
+              res.status(500).send('Already Registered but access terminated');
             }
             return;
         }
