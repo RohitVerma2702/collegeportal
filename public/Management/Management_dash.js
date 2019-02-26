@@ -122,5 +122,5 @@ app.config(function($routeProvider){
 	.otherwise({
 		template: 'Not found'
 	});
-
+	$locationProvider.html5Mode(true);
 });

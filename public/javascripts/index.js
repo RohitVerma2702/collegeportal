@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
 // Add smooth scrolling to link
  		$("#help1").on('click', function() {
