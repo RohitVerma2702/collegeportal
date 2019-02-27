@@ -26,5 +26,5 @@ app.config(function($routeProvider){
 	.otherwise({
 		template: 'Not found'
 	});
-
+	
 });

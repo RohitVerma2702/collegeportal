@@ -15,14 +15,7 @@ var flash=require('connect-flash');
 var mongo=require('mongodb');
 var mongoose=require('mongoose');
 var db=mongoose.connection;
-/*
-var app1= angular.module('grievances', ['ngRoute']);
 
-app1.controller("grievnaces", function ($scope) {
-  console.log('in controller')
-  $scope.msg = "I love London";
-});
-*/
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -35,9 +28,6 @@ var Student_route=require('./routes/Student');
 var Parent_route=require('./routes/Parent');
 var Grv_route=require('./routes/post');
 var app = express();
-
-
-
 
 
 // view engine setup
@@ -91,7 +81,7 @@ app.use(expressValidator({
     }
   
 }));
-app.use(function(req, res, next) {
+app.use(function(req, res, next) {//clearing cache for back button problem
   if (!req.active)
       res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
   next();

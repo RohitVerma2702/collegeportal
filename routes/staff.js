@@ -227,12 +227,20 @@ var data={
       staff.getUserByID(email,function(err, user){
         if(err) throw err;
         if(user){
-            console.log("Already Registered");
-            //res.redirect('/al');
-            res.status(500).send('already reg verifies');
-            return;
-        }
-        else{
+          console.log("Already Registered user");
+          if(user.status=="pending"){
+                res.status(500).send('already reg not verified');
+              }
+              else{
+                if(status.access=='pending')
+                  res.status(500).send('Already Registered and verified Waiting for admin approval');
+                else if(status.access=='approved')
+                res.status(500).send('Already Registered,verified and admin approved. Now you can Login');
+                else if(status.access=='rejected')
+                res.status(500).send('Already Registered,verified but admin rejected');
+                }
+              return;
+          }        else{
           var random=Math.floor((Math.random() * 100) + 54);
       var newUser=new staff({
         name: name,//LHS should be same as that of attribute name in DB file and DB

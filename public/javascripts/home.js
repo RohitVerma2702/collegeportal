@@ -283,6 +283,7 @@ $('#nonteachingsignup').click(function(){
 $('.closebtn').click(function(){
   $('.forms').fadeOut(500);
   $('.heading').delay(500).fadeIn(1000);
+
 });
 
 
