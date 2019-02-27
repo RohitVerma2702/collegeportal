@@ -2,7 +2,7 @@
 <!--Admin-->
 <div ng-app="grievances" ng-controller="Admin_pending_user" ng-init="init('staff')">
     <h1>Pending Non Teaching Staff List</h1>
-    <div id="pending_list" class="contenttable">
+    <div id="pending_list" class="contenttable hide">
         <table class="table table-hover table-striped">
             <thead class="table-success">
                 <tr>
@@ -15,7 +15,7 @@
                     <th>Email ID</th>
                     <th>Mobile No.</th>
                     <th>Action</th>
-                </tr> 
+                </tr>
             </thead>
             <tr ng-repeat="user in users">
                     <td>{{$index+1}}</td>
@@ -30,16 +30,15 @@
                     <button ng-click="Approve('Staff',user.emailid)" class="btn btn-success">
                     Approve</button>
                     </td>
-                    
+
                 </tr>
         </table>
     </div>
     <div id="loading">
         <div class="loader">
         </div>
-        
+
         <h1>Loading...</h1>
     </div>
 
 </div>
-
