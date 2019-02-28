@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Student=require('../models/Studentdb');
 var Grvtype=require('../models/grvtypedb');
-var Grv=require('../models/grievancedb'); 
+var Grv=require('../models/grievancedb');
 var sess;
 var datetime = require('node-datetime');
 var dt = datetime.create();
@@ -21,14 +21,14 @@ var rand,mailOptions,host,link;
 host='localhost:3000'
 function requireLogin(req, res, next) {
   console.log(req.session.active)
-    if (req.session.active==1&&req.session.type=='Student') { /*if someone is logged in as Student*/ 
-      next(); // allow the next route to run                   
+    if (req.session.active==1&&req.session.type=='Student') { /*if someone is logged in as Student*/
+      next(); // allow the next route to run
     } else {
       // require the user to log in
       res.redirect('/'); // or render a form, etc.
     }
   }
-  
+
   router.get('/my-account',requireLogin, function(req, res, next) {
     sess=req.session;
     id=sess.user;
@@ -52,7 +52,7 @@ function requireLogin(req, res, next) {
       mobile:user.mobileno
        }
        res.send(data);
-    });  
+    });
    });
    router.get('/My_Grievances',requireLogin,function(req,res,next){
 
@@ -65,7 +65,7 @@ function requireLogin(req, res, next) {
     }
     res.send(data);
         }
-    
+
     );
     });
     router.get('/GRV',requireLogin,function(req,res,next){//For finding a particular Grievance information
@@ -75,14 +75,14 @@ function requireLogin(req, res, next) {
       var data=result
       res.send(data);
           }
-      
+
     );
       });
-    
+
    router.get('/Home',requireLogin, function(req, res, next) {
     res.render('Student_dash',{title:'Student',verify:sess.ver});
   });
- 
+
 
   router.post('/password_reset',function(req,res,next){
   var cpass=req.body.current_password;
@@ -100,7 +100,7 @@ Student.getinfobyID(req.session.user,function(err, user){
         Student.comparePassword(cpass, user.password, function(err, isMatch){
             if(err) throw err;
               if(isMatch){
-                  
+
                 Student.update_password(sess.user,npass,function(err){
                    if(err) throw err;
                  else
@@ -108,7 +108,7 @@ Student.getinfobyID(req.session.user,function(err, user){
                    console.log(' password updated');
                    res.send('Password Updated');
                  }
-                }); 
+                });
                 }
 
                 else{
@@ -119,18 +119,18 @@ Student.getinfobyID(req.session.user,function(err, user){
     });
 
     })
-    
+
   });
   var sess;
-  
+
   router.post('/login',function(req,res,next){
  sess=req.session;
  if(!sess.user)
  {
     var id=req.body.id;
     var password=req.body.password;
-  
-  
+
+
     Student.getUserByID(id,function(err, user){
       if(err) throw err;
       if(!user){
@@ -144,11 +144,11 @@ Student.getinfobyID(req.session.user,function(err, user){
         if(err) throw err;
         if(isMatch){
            console.log('login sucsseful');
-           
+
          sess.user=user._id;
           sess.type="Student";
           sess.email=user.emailid;
-          sess.active=1;  
+          sess.active=1;
           res.send('success');
         }
         else{
@@ -163,13 +163,13 @@ Student.getinfobyID(req.session.user,function(err, user){
       }
      });
     }
-    else   
+    else
     res.status(500).send('some');
 
     });
     router.post('/update',function(req,res,next){
-    
-       var newvalues = {$set: 
+
+       var newvalues = {$set:
          {
           emailid:req.body.emailid,
           mobileno:req.body.mobileno
@@ -182,12 +182,12 @@ Student.getinfobyID(req.session.user,function(err, user){
         res.redirect('/Student/Home#!/')
       }
      });
-    
+
      });
 
-   
+
      router.post('/register', function(req, res, next) {
-      sess=req.session; 
+      sess=req.session;
       if(!sess.user)
       {
         var name=req.body.name;
@@ -197,7 +197,7 @@ Student.getinfobyID(req.session.user,function(err, user){
         var batch=req.body.batch;
         var id=req.body.id;
         var cdate=req.body.cdate;
-        var Last_year=req.body.Last_year;; 
+        var Last_year=req.body.Last_year;;
         var mobile=req.body.mobile;
         var password=req.body.password;
         var password2=req.body.password2;
@@ -213,19 +213,19 @@ Student.getinfobyID(req.session.user,function(err, user){
         req.checkBody('mobile','username field is required').notEmpty();
         req.checkBody('password','password field is required').notEmpty();
         req.checkBody('password2','password do not match').equals(password);
-        
+
         var errors=req.validationErrors();
         if(errors)
           { console.log(errors);
     res.status(500).send('errors in validation');
     console.log('errors in validation');
-    
+
   }
   else{
     Student.getUserByID(email,function(err, user){
       if(err) throw err;
       if(user){
-        console.log("Already Registered user");
+        console.log("already reg verified");
         if(user.status=="pending"){
               res.status(500).send('already reg not verified');
             }
@@ -256,15 +256,15 @@ Student.getinfobyID(req.session.user,function(err, user){
         password: password,
         rand:random,
         status:"pending"
-      }); 
+      });
     Student.createUser(newUser,function(err,user){
-      if(err) throw err;     
+      if(err) throw err;
         host=req.get('host');
         link="http://"+req.get('host')+"/Student/verify?rand="+random+"&id="+newUser._id;
         mailOptions={
             to : user.emailid,
             subject : "Please confirm your Email account",
-            html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
+            html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
         }
         smtpTransport.sendMail(mailOptions, function(error, response){
          if(error){
@@ -277,11 +277,11 @@ Student.getinfobyID(req.session.user,function(err, user){
           status:'Sent',
           date:new Date(dt.now())
         });
-  
+
         Mail_log.mail_log(mail_doc,function(err){
           if(err) throw err;
         });
-            
+
              }
     });
 
@@ -299,16 +299,16 @@ Student.getinfobyID(req.session.user,function(err, user){
     res.end('someone already logged in');
   }
 });
-   
 
 
-    
+
+
 router.get('/verify',function(req,res){
   console.log(req.protocol+"://"+req.get('host'));
 console.log('id is '+req.query.id);
   if((req.protocol+"://"+req.get('host'))==("http://"+host))
   {
-      console.log("Domain is matched. Information is from Authentic email"); 
+      console.log("Domain is matched. Information is from Authentic email");
       Student.getinfobyID(req.query.id,function(err, user){
         if(err) throw err;
         if(!user){
@@ -339,7 +339,7 @@ console.log('id is '+req.query.id);
       res.end("<h1>Request is from unknown source");
   }
   });
-  
+
 
 
   router.post('/forgot_pass',function(req,res,next){
@@ -360,12 +360,12 @@ console.log('id is '+req.query.id);
     var password='sahil';
     Student.update_password(id,password,function(err){
      if(err) throw err;
-      
+
      host=req.get('host');
      mailOptions={
          to : id,
          subject : "Password Updated",
-         html : "Hello,<br> your new password for EduGrievance Portal is: <br>"+password+"<br> Thanks and Regards <br> <b>Anand International College Of Engineering</b>" 
+         html : "Hello,<br> your new password for EduGrievance Portal is: <br>"+password+"<br> Thanks and Regards <br> <b>Anand International College Of Engineering</b>"
      }
      smtpTransport.sendMail(mailOptions, function(error, response){
       if(error) throw err;
@@ -375,16 +375,16 @@ console.log('id is '+req.query.id);
           subject:"Password Update",
           status:'Sent'
         });
-  
+
         Mail_log.mail_log(mail_doc,function(err){
           if(err) throw err;
         });
           console.log("Message sent");
-          res.send('success');       
+          res.send('success');
             }
  });
     });
-    }); 
+    });
   });
 
 
@@ -397,11 +397,11 @@ date: 31/10/2018 */
     {
         if(err) throw err;
         console.log(result);
-      
+
     res.send(result);
     //)
         }
-    
+
     );
     });
 
