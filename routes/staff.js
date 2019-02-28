@@ -18,7 +18,7 @@ var smtpTransport = nodemailer.createTransport({
   //secure: false,
   auth: {
       user: "gportal33@gmail.com",
-      pass: "grieva nce001"
+      pass: "grievance001"
   }
 });
 var rand,mailOptions,host,link;
@@ -270,7 +270,7 @@ var data={
               console.log(error);
           res.status(500).send('mail error');
        }else{
-        var mail_doc=new Mail_log({//Entry into Mail Log
+        var mail_doc  =new Mail_log({//Entry into Mail Log
           emailid:user.emailid,
           subject:"Password Update",
           status:'Sent',
