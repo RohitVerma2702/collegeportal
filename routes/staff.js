@@ -7,7 +7,7 @@ var Grvtype=require('../models/grvtypedb');
 var datetime = require('node-datetime');
 console.log('successful');
 var dt = datetime.create();
-var session = require('express-session'); 
+var session = require('express-session');
 var app = express();
 var Mail_log=require('../models/Maildb');
 var sess;
@@ -18,21 +18,21 @@ var smtpTransport = nodemailer.createTransport({
   //secure: false,
   auth: {
       user: "gportal33@gmail.com",
-      pass: "grieva nce001"
+      pass: "grievance001"
   }
 });
 var rand,mailOptions,host,link;
 host='localhost:3000';
 function requireLogin(req, res, next) {
   console.log(req.session.active)
-    if (req.session.active==1&&req.session.type=='staff') { /*if someone is logged in as Student*/ 
-      next(); // allow the next route to run                   
+    if (req.session.active==1&&req.session.type=='staff') { /*if someone is logged in as Student*/
+      next(); // allow the next route to run
     } else {
       // require the user to log in
       res.redirect('/'); // or render a form, etc.
     }
   }
-  
+
 router.get('/my-account',requireLogin, function(req, res, next) {
   sess=req.session;
   staff.getinfobyID(sess.email,function(err, user){
@@ -53,7 +53,7 @@ router.get('/my-account',requireLogin, function(req, res, next) {
     mobile:user.mobileno,
      }
 res.send(data);
-  });  
+  });
  });
 
 
@@ -73,8 +73,8 @@ staff.getinfobyID(req.session.email,function(err, user){
             if(err) throw err;
               if(isMatch){
 
-                  
-                  
+
+
                 staff.update_password(sess.user,npass,function(err){
                    if(err) throw err;
                  else
@@ -82,7 +82,7 @@ staff.getinfobyID(req.session.email,function(err, user){
                    console.log(' password updated');
                    //res.redirect('/Student/Home')
                  }
-                }); 
+                });
                 }
 
                 else{
@@ -93,7 +93,7 @@ staff.getinfobyID(req.session.email,function(err, user){
     });
 
     })
-    
+
   })
   router.get('/GRV',requireLogin,function(req,res,next){//For finding a particular Grievance information
        Grv.grv_findbyid(req.query.grv_id,function(err,result)
@@ -102,10 +102,10 @@ staff.getinfobyID(req.session.email,function(err, user){
     var data=result
     res.send(data);
         }
-    
+
   );
     });
-  
+
  router.get('/My_Grievances',requireLogin,function(req,res,next){
       Grv.grv_findbyuser(req.session.email,function(err,result)
   {
@@ -115,10 +115,10 @@ var data={
   }
   res.send(data);
       }
-  
+
   );
   });
- 
+
  router.get('/Home',requireLogin, function(req, res, next) {
   res.render('Staff_dash',{title:'staff',verify:sess.ver});
 });
@@ -128,8 +128,8 @@ var data={
     if(!sess.user){
     var id=req.body.id;
     var password=req.body.password;
-  
-  
+
+
     staff.getUserByID(id,function(err, user){
       if(err) throw err;
       if(!user){
@@ -143,14 +143,14 @@ var data={
       staff.comparePassword(password, user.password, function(err, isMatch){
         if(err) throw err;
         if(isMatch){
-           console.log('login sucsseful');      
-          
+           console.log('login sucsseful');
+
           sess.email=user.emailid;
           sess.user=user._id;
           sess.type="staff";
           sess.active=1;
           res.send('success');
-         
+
         }
         else{
           console.log('invalid password');
@@ -172,13 +172,13 @@ var data={
     });
 
     router.post('/update',function(req,res,next){
-      var newvalues = {$set: 
+      var newvalues = {$set:
         {
           mobileno:req.body.mobile
-      } 
-    
+      }
+
     };
-  
+
     staff.updateuser(sess.email,newvalues,function(err,isUpdate){
        if(err) throw err;
      else
@@ -187,9 +187,9 @@ var data={
        res.redirect('/staff/Home#!/')
      }
     });
-  
+
     });
-  
+
 
 
     router.post('/register', function(req, res, next) {
@@ -205,7 +205,7 @@ var data={
     var password=req.body.password;
     var password2=req.body.password2;
     console.log(req.body.name);
-    
+
     req.checkBody('name','Name field is required').notEmpty();
     req.checkBody('gender','Email field is required').notEmpty();
     req.checkBody('email','Email is not valid').isEmail();
@@ -215,13 +215,13 @@ var data={
     req.checkBody('mobile','username field is required').notEmpty();
     req.checkBody('password','password field is required').notEmpty();
     req.checkBody('password2','password do not match').equals(password);
-  
+
     var errors=req.validationErrors();
     if(errors)
     { console.log(errors);
       res.staff(500).send('errors in validation');
       console.log('errors in validation');
-      
+
     }
     else{
       staff.getUserByID(email,function(err, user){
@@ -253,7 +253,7 @@ var data={
         password: password,
         rand:random,
         status:"pending",
-      }); 
+      });
       //console.log('no errors');
     staff.createUser(newUser,function(err,user){
       if(err) throw err;
@@ -263,7 +263,7 @@ var data={
       mailOptions={
           to : user.emailid,
           subject : "Please confirm your Email account",
-          html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
+          html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
       }
       smtpTransport.sendMail(mailOptions, function(error, response){
        if(error){
@@ -276,7 +276,7 @@ var data={
           status:'Sent',
           date:new Date(dt.now())
         });
-  
+
         Mail_log.mail_log(mail_doc,function(err){
           if(err) throw err;
         });
@@ -307,7 +307,7 @@ console.log('id is '+req.query.id);
   if((req.protocol+"://"+req.get('host'))==("http://"+host))
   {
       console.log("Domain is matched. Information is from Authentic email");
-      //console.log("random no is " +sess.user.rand);  
+      //console.log("random no is " +sess.user.rand);
       staff.getinfobyID(req.query.id,function(err, user){
         if(err) throw err;
         if(!user){
@@ -315,8 +315,8 @@ console.log('id is '+req.query.id);
             res.redirect('/faculty/unknw');
             return;
         }
-  
-      
+
+
         console.log('value of random is '+user.rand);
       if(req.query.rand== user.rand)
       {
@@ -362,12 +362,12 @@ console.log('id is '+req.query.id);
      var password='sahil';
      staff.update_password(id,password,function(err){
       if(err) throw err;
-       
+
       host=req.get('host');
       mailOptions={
           to : id,
           subject : "Password Updated",
-          html : "Hello,<br> your new password for EduGrievance Portal is: <br>"+password+"<br> Thanks and Regards <br> <b>Anand International College Of Engineering</b>" 
+          html : "Hello,<br> your new password for EduGrievance Portal is: <br>"+password+"<br> Thanks and Regards <br> <b>Anand International College Of Engineering</b>"
       }
       smtpTransport.sendMail(mailOptions, function(error, response){
        if(error) throw err;
@@ -378,26 +378,26 @@ console.log('id is '+req.query.id);
           status:'Sent',
           date:new Date(dt.now())
         });
-  
+
         Mail_log.mail_log(mail_doc,function(err){
           if(err) throw err;
         });
            console.log("Message sent");
-           res.send('success');       
+           res.send('success');
              }
   });
      });
-     }); 
+     });
    });
 
     router.get('/grievance_type',requireLogin,function(req,res,next){
           Grvtype.grvtype_find(function(err,result)
       {
           if(err) throw err;
-          console.log(result);       
+          console.log(result);
       res.send(result);
           }
-      
+
       );
       });
 

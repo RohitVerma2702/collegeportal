@@ -67,7 +67,7 @@ $('#adminlogin').click(function(e) {
 				     	}
 				     },
 				     success: function(data) {
-				     	if (data === 'success') { 
+				     	if (data === 'success') {
 				     		console.log(data);
 				     		$('#adminid, #adminpass').removeClass('wrong').addClass('correct');
 				     		$('#adminid .fa-times, #adminpass .fa-times').addClass('hide');
@@ -147,7 +147,7 @@ $('#mngmntlogin').click(function(e) {
 				     	}
 				     },
 				     success: function(data) {
-				     	if (data === 'success') { 
+				     	if (data === 'success') {
 				     		console.log(data);
 				     		$('#mngmntid, #mngmntpass').removeClass('wrong').addClass('correct');
 				     		$('#mngmntid .fa-times, #mngmntpass .fa-times').addClass('hide');
@@ -232,7 +232,7 @@ $('#facultylogin').click(function(e) {
 				     	}
 				     },
 				     success: function(data) {
-				     	if (data === 'success') { 
+				     	if (data === 'success') {
 				     		console.log(data);
 				     		$('#facultyid, #facultypass').removeClass('wrong').addClass('correct');
 				     		$('#facultyid .fa-times, #facultypass .fa-times').addClass('hide');
@@ -313,7 +313,7 @@ $('#gcmlogin').click(function(e) {
 				     	}
 				     },
 				     success: function(data) {
-				     	if (data === 'success') { 
+				     	if (data === 'success') {
 				     		console.log(data);
 				     		$('#gcmid, #gcmpass').removeClass('wrong').addClass('correct');
 				     		$('#gcmid .fa-times, #gcmpass .fa-times').addClass('hide');
@@ -393,7 +393,7 @@ $('#studentlogin').click(function(e) {
 				     	}
 				     },
 				     success: function(data) {
-				     	if (data === 'success') { 
+				     	if (data === 'success') {
 				     		console.log(data);
 				     		$('#studentid, #studentpass').removeClass('wrong').addClass('correct');
 				     		$('#studentid .fa-times, #studentpass .fa-times').addClass('hide');
@@ -474,7 +474,7 @@ $('#parentlogin').click(function(e) {
 				     	}
 				     },
 				     success: function(data) {
-				     	if (data === 'success') { 
+				     	if (data === 'success') {
 				     		console.log(data);
 				     		$('#parentid, #parentpass').removeClass('wrong').addClass('correct');
 				     		$('#parentid .fa-times, #parentpass .fa-times').addClass('hide');
@@ -555,7 +555,7 @@ $('#nonteachinglogin').click(function(e) {
 				     	}
 				     },
 				     success: function(data) {
-				     	if (data === 'success') { 
+				     	if (data === 'success') {
 				     		console.log(data);
 				     		$('#nonteachingid, #nonteachingpass').removeClass('wrong').addClass('correct');
 				     		$('#nonteachingid .fa-times, #nonteachingpass .fa-times').addClass('hide');
@@ -659,7 +659,7 @@ $('#studentsignupbutton').click(function(e) {
 			return false;
 		}
 
-		else if (cdate >= 9999 || cdate <= 2000) {
+		else if (cdate <= 2000 || cdate >=9999) {
 			$('.student-reg-form small').text('Please enter a valid Course Completion Date!');
 			return false;
 		}
@@ -686,14 +686,29 @@ $('#studentsignupbutton').click(function(e) {
 		    		$('.student-reg-form small').text('User already registered but Email not verified.');
 		    		return false;
 		    	}
-		    	else if (error.responseText == 'already reg verified') {
+		    	else if (error.responseText == 'Already Registered and verified Waiting for admin approval') {
 		    		console.log(error.responseText);
-		    		$('.student-reg-form small').text('User already registered and waiting for approval.');
+		    		$('.student-reg-form small').text('User already registered and waiting for Admin approval.');
+		    		return false;
+		    	}
+					else if (error.responseText == 'Already Registered,verified and admin approved. Now you can Login') {
+		    		console.log(error.responseText);
+		    		$('.student-reg-form small').text('User already registered. Please Login.');
+		    		return false;
+		    	}
+					else if (error.responseText == 'Already Registered,verified but admin rejected') {
+		    		console.log(error.responseText);
+		    		$('.student-reg-form small').text('User already registered but Rejected by Admin.');
+		    		return false;
+		    	}
+					else if (error.responseText == 'Already Registered but access terminated') {
+		    		console.log(error.responseText);
+		    		$('.student-reg-form small').text('User already registered but access Terminated.');
 		    		return false;
 		    	}
 		    	else if (error.responseText == 'mail error') {
 		    		console.log(error.responseText);
-		    		$('.student-reg-form small').text('Not able to send verification mail. Please check Email Address.');
+		    		$('.student-reg-form small').text('Not able to send verification mail. Please check Email Address and Try Again..');
 		    		return false;
 		    	}
 		    	else if (error.responseText == 'someone already logged in') {
@@ -707,19 +722,19 @@ $('#studentsignupbutton').click(function(e) {
 		    		return false;
 		    	}
 		    },
-		    success: function(data) { 
+		    success: function(data) {
 		    	console.log('success');
-				Swal.fire({
-				  position: 'center',
-				  type: 'success',
-				  title: 'Successfully Registered!',
-				  text: 'Please verify your Email Address.',
-				  showConfirmButton: true,
-				  timer: 5000
-				}).then(function(){
-					location.reload();
-				});
-		    	return false;
+					$('.student-reg-form small').text('Loading...');
+					Swal.fire({
+					  position: 'center',
+					  type: 'success',
+					  title: 'Successfully Registered!',
+					  text: 'Please verify your Email Address.',
+					  showConfirmButton: true
+					}).then(function(){
+						location.reload();
+					});
+			    	return false;
 		    }
 		});
 	}else{
@@ -770,20 +785,35 @@ $('#facultysignupbutton').click(function(e) {
 				password2: pass2
 			},
 		    url: 'http://localhost:3000/faculty/register', //node.js server is running
-		    error: function(error){
+				error: function(error){
 		    	if (error.responseText == 'already reg not verified') {
 		    		console.log(error.responseText);
 		    		$('.faculty-reg-form small').text('User already registered but Email not verified.');
 		    		return false;
 		    	}
-		    	else if (error.responseText == 'already reg verified') {
+		    	else if (error.responseText == 'Already Registered and verified Waiting for admin approval') {
 		    		console.log(error.responseText);
-		    		$('.faculty-reg-form small').text('User already registered and waiting for approval.');
+		    		$('.faculty-reg-form small').text('User already registered and waiting for Admin approval.');
+		    		return false;
+		    	}
+					else if (error.responseText == 'Already Registered,verified and admin approved. Now you can Login') {
+		    		console.log(error.responseText);
+		    		$('.faculty-reg-form small').text('User already registered. Please Login.');
+		    		return false;
+		    	}
+					else if (error.responseText == 'Already Registered,verified but admin rejected') {
+		    		console.log(error.responseText);
+		    		$('.faculty-reg-form small').text('User already registered but Rejected by Admin.');
+		    		return false;
+		    	}
+					else if (error.responseText == 'Already Registered but access terminated') {
+		    		console.log(error.responseText);
+		    		$('.faculty-reg-form small').text('User already registered but access Terminated.');
 		    		return false;
 		    	}
 		    	else if (error.responseText == 'mail error') {
 		    		console.log(error.responseText);
-		    		$('.faculty-reg-form small').text('Not able to send verification mail. Please check Email Address.');
+		    		$('.faculty-reg-form small').text('Not able to send verification mail. Please check Email Address and Try Again..');
 		    		return false;
 		    	}
 		    	else if (error.responseText == 'someone already logged in') {
@@ -797,18 +827,18 @@ $('#facultysignupbutton').click(function(e) {
 		    		return false;
 		    	}
 		    },
-		    success: function(data) { 
+		    success: function(data) {
 		    	console.log('success');
-				Swal.fire({
-				  position: 'center',
-				  type: 'success',
-				  title: 'Successfully Registered!',
-				  text: 'Please verify your Email Address.',
-				  showConfirmButton: true,
-				  timer: 5000
-				}).then(function(){
-					location.reload();
-				});
+					$('.faculty-reg-form small').text('Loading...');
+					Swal.fire({
+					  position: 'center',
+					  type: 'success',
+					  title: 'Successfully Registered!',
+					  text: 'Please verify your Email Address.',
+					  showConfirmButton: true
+					}).then(function(){
+						location.reload();
+					});
 		    	return false;
 		    }
 		});
@@ -863,20 +893,35 @@ $('#parentsignupbutton').click(function(e) {
 				password2: pass2
 			},
 		    url: 'http://localhost:3000/Parent/register', //node.js server is running
-		    error: function(error){
+				error: function(error){
 		    	if (error.responseText == 'already reg not verified') {
 		    		console.log(error.responseText);
 		    		$('.parent-reg-form small').text('User already registered but Email not verified.');
 		    		return false;
 		    	}
-		    	else if (error.responseText == 'already reg verified') {
+		    	else if (error.responseText == 'Already Registered and verified Waiting for admin approval') {
 		    		console.log(error.responseText);
-		    		$('.parent-reg-form small').text('User already registered and waiting for approval.');
+		    		$('.parent-reg-form small').text('User already registered and waiting for Admin approval.');
+		    		return false;
+		    	}
+					else if (error.responseText == 'Already Registered,verified and admin approved. Now you can Login') {
+		    		console.log(error.responseText);
+		    		$('.parent-reg-form small').text('User already registered. Please Login.');
+		    		return false;
+		    	}
+					else if (error.responseText == 'Already Registered,verified but admin rejected') {
+		    		console.log(error.responseText);
+		    		$('.parent-reg-form small').text('User already registered but Rejected by Admin.');
+		    		return false;
+		    	}
+					else if (error.responseText == 'Already Registered but access terminated') {
+		    		console.log(error.responseText);
+		    		$('.parent-reg-form small').text('User already registered but access Terminated.');
 		    		return false;
 		    	}
 		    	else if (error.responseText == 'mail error') {
 		    		console.log(error.responseText);
-		    		$('.parent-reg-form small').text('Not able to send verification mail. Please check Email Address.');
+		    		$('.parent-reg-form small').text('Not able to send verification mail. Please check Email Address and Try Again..');
 		    		return false;
 		    	}
 		    	else if (error.responseText == 'someone already logged in') {
@@ -890,18 +935,18 @@ $('#parentsignupbutton').click(function(e) {
 		    		return false;
 		    	}
 		    },
-		    success: function(data) { 
+		    success: function(data) {
 		    	console.log('success');
-				Swal.fire({
-				  position: 'center',
-				  type: 'success',
-				  title: 'Successfully Registered!',
-				  text: 'Please verify your Email Address.',
-				  showConfirmButton: true,
-				  timer: 5000
-				}).then(function(){
-					location.reload();
-				});
+					$('.parent-reg-form small').text('Loading...');
+					Swal.fire({
+					  position: 'center',
+					  type: 'success',
+					  title: 'Successfully Registered!',
+					  text: 'Please verify your Email Address.',
+					  showConfirmButton: true
+					}).then(function(){
+						location.reload();
+					});
 		    	return false;
 		    }
 		});
@@ -953,20 +998,35 @@ $('#nonteachingsignupbutton').click(function(e) {
 				password2: pass2
 			},
 		    url: 'http://localhost:3000/staff/register', //node.js server is running
-		    error: function(error){
+				error: function(error){
 		    	if (error.responseText == 'already reg not verified') {
 		    		console.log(error.responseText);
 		    		$('.nonteaching-reg-form small').text('User already registered but Email not verified.');
 		    		return false;
 		    	}
-		    	else if (error.responseText == 'already reg verified') {
+		    	else if (error.responseText == 'Already Registered and verified Waiting for admin approval') {
 		    		console.log(error.responseText);
-		    		$('.nonteaching-reg-form small').text('User already registered and waiting for approval.');
+		    		$('.nonteaching-reg-form small').text('User already registered and waiting for Admin approval.');
+		    		return false;
+		    	}
+					else if (error.responseText == 'Already Registered,verified and admin approved. Now you can Login') {
+		    		console.log(error.responseText);
+		    		$('.nonteaching-reg-form small').text('User already registered. Please Login.');
+		    		return false;
+		    	}
+					else if (error.responseText == 'Already Registered,verified but admin rejected') {
+		    		console.log(error.responseText);
+		    		$('.nonteaching-reg-form small').text('User already registered but Rejected by Admin.');
+		    		return false;
+		    	}
+					else if (error.responseText == 'Already Registered but access terminated') {
+		    		console.log(error.responseText);
+		    		$('.nonteaching-reg-form small').text('User already registered but access Terminated.');
 		    		return false;
 		    	}
 		    	else if (error.responseText == 'mail error') {
 		    		console.log(error.responseText);
-		    		$('.nonteaching-reg-form small').text('Not able to send verification mail. Please check Email Address.');
+		    		$('.nonteaching-reg-form small').text('Not able to send verification mail. Please check Email Address and Try Again..');
 		    		return false;
 		    	}
 		    	else if (error.responseText == 'someone already logged in') {
@@ -980,18 +1040,18 @@ $('#nonteachingsignupbutton').click(function(e) {
 		    		return false;
 		    	}
 		    },
-		    success: function(data) { 
+		    success: function(data) {
 		    	console.log('success');
-				Swal.fire({
-				  position: 'center',
-				  type: 'success',
-				  title: 'Successfully Registered!',
-				  text: 'Please verify your Email Address.',
-				  showConfirmButton: true,
-				  timer: 5000
-				}).then(function(){
-					location.reload();
-				});
+					$('.nonteaching-reg-form small').text('Loading...');
+					Swal.fire({
+					  position: 'center',
+					  type: 'success',
+					  title: 'Successfully Registered!',
+					  text: 'Please verify your Email Address.',
+					  showConfirmButton: true
+					}).then(function(){
+						location.reload();
+					});
 		    	return false;
 		    }
 		});
@@ -1013,11 +1073,11 @@ $('#Student_forgotpass').click(function(e) {
 
 			}
 
-			if(a!=""){ 
+			if(a!=""){
 
 				$('#forgotemail .fa-times').addClass('hide');
 
-				
+
 				$.ajax({
 					type: 'post',
 					datatype: "json",
@@ -1045,7 +1105,7 @@ $('#Student_forgotpass').click(function(e) {
 											}
 										},
 										success: function(data) {
-											if (data === 'success') { 
+											if (data === 'success') {
 												console.log(data);
 												$('#forgotemail, #nonteachingpass').removeClass('wrong').addClass('correct');
 												$('#forgotemail .fa-times, #nonteachingpass .fa-times').addClass('hide');
@@ -1071,11 +1131,11 @@ $('#Staff_forgotpass').click(function(e) {
 
 			}
 
-			if(a!=""){ 
+			if(a!=""){
 
 				$('#forgotemail .fa-times').addClass('hide');
 
-				
+
 				$.ajax({
 					type: 'post',
 					datatype: "json",
@@ -1103,7 +1163,7 @@ $('#Staff_forgotpass').click(function(e) {
 											}
 										},
 										success: function(data) {
-											if (data === 'success') { 
+											if (data === 'success') {
 												console.log(data);
 												$('#forgotemail, #nonteachingpass').removeClass('wrong').addClass('correct');
 												$('#forgotemail .fa-times, #nonteachingpass .fa-times').addClass('hide');
@@ -1130,11 +1190,11 @@ $('#Parent_forgotpass').click(function(e) {
 
 			}
 
-			if(a!=""){ 
+			if(a!=""){
 
 				$('#forgotemail .fa-times').addClass('hide');
 
-				
+
 				$.ajax({
 					type: 'post',
 					datatype: "json",
@@ -1162,7 +1222,7 @@ $('#Parent_forgotpass').click(function(e) {
 											}
 										},
 										success: function(data) {
-											if (data === 'success') { 
+											if (data === 'success') {
 												console.log(data);
 												$('#forgotemail, #nonteachingpass').removeClass('wrong').addClass('correct');
 												$('#forgotemail .fa-times, #nonteachingpass .fa-times').addClass('hide');
@@ -1189,11 +1249,11 @@ $('#Faculty_forgotpass').click(function(e) {
 
 			}
 
-			if(a!=""){ 
+			if(a!=""){
 
 				$('#forgotemail .fa-times').addClass('hide');
 
-				
+
 				$.ajax({
 					type: 'post',
 					datatype: "json",
@@ -1221,7 +1281,7 @@ $('#Faculty_forgotpass').click(function(e) {
 											}
 										},
 										success: function(data) {
-											if (data === 'success') { 
+											if (data === 'success') {
 												console.log(data);
 												$('#forgotemail, #nonteachingpass').removeClass('wrong').addClass('correct');
 												$('#forgotemail .fa-times, #nonteachingpass .fa-times').addClass('hide');
@@ -1243,8 +1303,8 @@ $('#Admin_forgotpass').click(function(e) {
 		$('#forgotemail').addClass('wrong').removeClass('correct');
 
 	}
-	
-	if(a!=""){ 
+
+	if(a!=""){
 
 		$('#forgotemail .fa-times').addClass('hide');
 
@@ -1271,7 +1331,7 @@ $('#Admin_forgotpass').click(function(e) {
 							 	}
 							 },
 							 success: function(data) {
-							 	if (data === 'success') { 
+							 	if (data === 'success') {
 							 		console.log(data);
 							 		$('#forgotemail, #nonteachingpass').removeClass('wrong').addClass('correct');
 							 		$('#forgotemail .fa-times, #nonteachingpass .fa-times').addClass('hide');
@@ -1297,11 +1357,11 @@ $('#Gcm_forgotpass').click(function(e) {
 
 			}
 
-			if(a!=""){ 
+			if(a!=""){
 
 				$('#forgotemail .fa-times').addClass('hide');
 
-				
+
 				$.ajax({
 					type: 'post',
 					datatype: "json",
@@ -1329,7 +1389,7 @@ $('#Gcm_forgotpass').click(function(e) {
 											}
 										},
 										success: function(data) {
-											if (data === 'success') { 
+											if (data === 'success') {
 												console.log(data);
 												$('#forgotemail, #nonteachingpass').removeClass('wrong').addClass('correct');
 												$('#forgotemail .fa-times, #nonteachingpass .fa-times').addClass('hide');
@@ -1355,11 +1415,11 @@ $('#mngmnt_forgotpass').click(function(e) {
 
 			}
 
-			if(a!=""){ 
+			if(a!=""){
 
 				$('#forgotemail .fa-times').addClass('hide');
 
-				
+
 				$.ajax({
 					type: 'post',
 					datatype: "json",
@@ -1387,7 +1447,7 @@ $('#mngmnt_forgotpass').click(function(e) {
 											}
 										},
 										success: function(data) {
-											if (data === 'success') { 
+											if (data === 'success') {
 												console.log(data);
 												$('#forgotemail, #nonteachingpass').removeClass('wrong').addClass('correct');
 												$('#forgotemail .fa-times, #nonteachingpass .fa-times').addClass('hide');
@@ -1401,5 +1461,3 @@ $('#mngmnt_forgotpass').click(function(e) {
 
 			}
 		});
-
-
