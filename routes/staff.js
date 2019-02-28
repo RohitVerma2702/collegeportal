@@ -232,11 +232,11 @@ var data={
                 res.status(500).send('already reg not verified');
               }
               else{
-                if(status.access=='pending')
+                if(user.access=='pending')
                   res.status(500).send('Already Registered and verified Waiting for admin approval');
-                else if(status.access=='approved')
+                else if(user.access=='approved')
                 res.status(500).send('Already Registered,verified and admin approved. Now you can Login');
-                else if(status.access=='rejected')
+                else if(user.access=='rejected')
                 res.status(500).send('Already Registered,verified but admin rejected');
                 }
               return;
