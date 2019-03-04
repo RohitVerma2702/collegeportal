@@ -66,12 +66,12 @@ $('#grievance_cell_staff').click(function(){
 $('#student').click(function(){
  $('#5l').fadeIn(1000);
  $('#2l, #3l, #4l, #1l, #6l, #7l, #3r, #5r, #6r, #7r').hide();
-}); 
+});
 
 $('#parent').click(function(){
  $('#6l').fadeIn(1000);
  $('#2l, #3l, #4l, #5l, #1l, #7l, #3r, #5r, #6r, #7r').hide();
-});	
+});
 
 $('#nonteaching').click(function(){
  $('#7l').fadeIn(1000);
@@ -170,25 +170,25 @@ $('#lgnbtn, .options li').click(function(){
           duration: 1000,
           origin:'top'
         });
-        
+
         sr.reveal('#sitetitle', {
           duration: 1000,
           origin:'bottom',
           delay: '500',
           distance:'300px'
         });
-        
 
-    $(window).scroll(function(){ 
-        if ($(this).scrollTop() > 200) { 
-            $('#totop').fadeIn(); 
-        } else { 
-            $('#totop').fadeOut(); 
-        } 
-    }); 
-    $('#totop').click(function(){ 
-        $("html, body").animate({ scrollTop: 0 }, 600); 
-        return false; 
+
+    $(window).scroll(function(){
+        if ($(this).scrollTop() > 200) {
+            $('#totop').fadeIn();
+        } else {
+            $('#totop').fadeOut();
+        }
+    });
+    $('#totop').click(function(){
+        $("html, body").animate({ scrollTop: 0 }, 600);
+        return false;
     });*/
 
   $(function() {
@@ -315,6 +315,38 @@ $('.Gcm_forgotpassword').click(function(){
 $('.mngmnt_forgotpassword').click(function(){
   $('.forms').fadeOut(500);
   $('.mngmnt_forgotpass').delay(500).fadeIn(1000);
+});
+
+//yearpicker for course year...
+$(function() {
+    $('#datepicker-student').datepicker({
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'yy',
+        onClose: function(dateText, inst) {
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).datepicker('setDate', new Date(year, 1));
+        }
+    });
+ $(".date-picker-year").focus(function () {
+        $(".ui-datepicker-month").hide();
+    });
+});
+
+//yearpicker for course year...
+$(function() {
+    $('#datepicker-parent').datepicker({
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'yy',
+        onClose: function(dateText, inst) {
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).datepicker('setDate', new Date(year, 1));
+        }
+    });
+ $(".date-picker-year").focus(function () {
+        $(".ui-datepicker-month").hide();
+    });
 });
 
 

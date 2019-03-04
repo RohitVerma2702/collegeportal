@@ -724,7 +724,8 @@ $('#studentsignupbutton').click(function(e) {
 		    },
 		    success: function(data) {
 		    	console.log('success');
-					$('.student-reg-form small').text('Loading...');
+					$('.student-reg-form small').text('');
+					$('.student-reg-form .fa-spinner').fadeIn(100);
 					Swal.fire({
 					  position: 'center',
 					  type: 'success',
@@ -829,7 +830,8 @@ $('#facultysignupbutton').click(function(e) {
 		    },
 		    success: function(data) {
 		    	console.log('success');
-					$('.faculty-reg-form small').text('Loading...');
+					$('.faculty-reg-form small').text('');
+					$('.faculty-reg-form .fa-spinner').fadeIn(100);
 					Swal.fire({
 					  position: 'center',
 					  type: 'success',
@@ -937,7 +939,8 @@ $('#parentsignupbutton').click(function(e) {
 		    },
 		    success: function(data) {
 		    	console.log('success');
-					$('.parent-reg-form small').text('Loading...');
+					$('.parent-reg-form small').text('');
+					$('.parent-reg-form .fa-spinner').fadeIn(100);
 					Swal.fire({
 					  position: 'center',
 					  type: 'success',
@@ -1042,7 +1045,8 @@ $('#nonteachingsignupbutton').click(function(e) {
 		    },
 		    success: function(data) {
 		    	console.log('success');
-					$('.nonteaching-reg-form small').text('Loading...');
+					$('.nonteaching-reg-form small').text('');
+					$('.nonteaching-reg-form .fa-spinner').fadeIn(100);
 					Swal.fire({
 					  position: 'center',
 					  type: 'success',
