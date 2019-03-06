@@ -191,7 +191,7 @@ router.get('/Home',requireLogin, function(req, res, next) {
     var email=req.body.email;
     var relation=req.body.relation;
     var ward_id=req.body.id;
-    var cdate=req.body.cdate;
+    //var cdate=req.body.cdate;
     var mobile=req.body.mobile;
     var Last_year=req.body.Last_year;
     var password=req.body.password;

@@ -196,7 +196,7 @@ Student.getinfobyID(req.session.user,function(err, user){
         var dep=req.body.dep;
         var batch=req.body.batch;
         var id=req.body.id;
-        var cdate=req.body.cdate;
+        //var cdate=req.body.cdate;
         var Last_year=req.body.Last_year;;
         var mobile=req.body.mobile;
         var password=req.body.password;

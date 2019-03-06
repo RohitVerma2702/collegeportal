@@ -640,7 +640,7 @@ $('#studentsignupbutton').click(function(e) {
 	var dep = document.studentsignup.dep.value;
 	var batch = document.studentsignup.batch.value;
 	var id = document.studentsignup.id.value;
-	var cdate = document.studentsignup.cdate.value;
+	var Last_year = document.studentsignup.Lyear.value;
 	var email = document.studentsignup.email.value;
 	var mobile = document.studentsignup.mobile.value;
 	var pass1 = document.studentsignup.password.value;
@@ -673,7 +673,7 @@ $('#studentsignupbutton').click(function(e) {
 				dep: dep,
 				batch: batch,
 				id: id,
-				cdate: cdate,
+				Last_year: Last_year,
 				email: email,
 				mobile: mobile,
 				password: pass1,
@@ -856,7 +856,7 @@ $('#parentsignupbutton').click(function(e) {
 
 	var name = document.parentsignup.name.value;
 	var id = document.parentsignup.id.value;
-	var cdate = document.parentsignup.cdate.value;
+	var Last_year = document.parentsignup.Lyear.value;
 	var relation = document.parentsignup.relation.value;
 	var email = document.parentsignup.email.value;
 	var mobile = document.parentsignup.mobile.value;
@@ -888,7 +888,7 @@ $('#parentsignupbutton').click(function(e) {
 				name: name,
 				relation: relation,
 				id: id,
-				cdate: cdate,
+				Last_year: Last_year,
 				email: email,
 				mobile: mobile,
 				password: pass1,
