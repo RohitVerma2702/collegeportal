@@ -3,6 +3,7 @@ var router = express.Router();
 var expressValidator=require('express-validator');
 var Member=require('../models/Membersdb');
 var Grv=require('../models/grievancedb');
+var grvtype=require('../models/grvtypedb');
 const flash = require('express-flash-notification');
 var session=require('express-session');
 var Mail_log=require('../models/Maildb');
@@ -73,16 +74,19 @@ function requireLogin(req, res, next) {
          res.redirect('/unknw');
          return;
      }  
+     grvtype.grvtype_find_seq(user.Gtype,function(err,result){//for finding grvtype using there seq
+      if(err) throw err;
   var data ={
       title:"Member",
       designation:user.designation,
       name:user.name,
-      gtype:user.Gtype,
+      gtype:result.map(i=>[i.grvtype]),
       email:user.emailid,
       mobile:user.mobileno
     }
 
    res.send(data);
+  })
     });
   });
 

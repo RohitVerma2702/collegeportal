@@ -43,6 +43,9 @@ query={grvtype:grv}
 
 grvtype.findOne({$and:[{active:1},{grvtype:grv}]},callback);
 }
+grvtype.grvtype_find_seq=function(seq,callback){//for finding grvtype using there seq
+    grvtype.find({$and:[{active:true},{seq:{$in:seq}}]},{"grvtype":1,"_id":0},callback);
+}
 
 grvtype.grvtype_find=function(callback)
 {

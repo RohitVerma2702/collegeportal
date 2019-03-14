@@ -3,6 +3,7 @@ var router = express.Router();
 var mngmnt=require('../models/mngmntdb');
 var Member=require('../models/Membersdb');
 var Grv=require('../models/grievancedb');
+var grvtype=require('../models/grvtypedb');
 var Student=require('../models/Studentdb');
 var Parent=require('../models/Parentdb');
 var faculty=require('../models/facultydb');
@@ -64,18 +65,23 @@ function requireLogin(req, res, next) {
          console.log("unknown user");
          res.redirect('/unknw');
          return;
-     }  
+     }
+     grvtype.grvtype_find_seq(user.Gtype,function(err,result){//for finding grvtype using there seq
+       if(err) throw err;
+       
+var data ={
+  title:"Management",
+  designation:user.designation,
+  name:user.name,
+  gtype:result.map(i=>[i.grvtype]),
+  email:user.emailid,
+  mobile:user.mobileno
+}
+ res.send(data);
+   
+})  
   
-   var data ={
-      title:"Management",
-      designation:user.designation,
-      name:user.name,
-      gtype:user.Gtype,
-      email:user.emailid,
-      mobile:user.mobileno
-    }
-     res.send(data);
-    });
+   });
   });
 
   router.get('/Grievances',requireLogin,function(req,res,next){
