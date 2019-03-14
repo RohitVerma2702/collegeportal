@@ -162,7 +162,6 @@ $('#mngmntlogin').click(function(e) {
 });
 
 
-
 $('#facultylogin').click(function(e) {
 	e.preventDefault();
 	var a = document.facultylogin.id.value;
@@ -245,7 +244,6 @@ $('#facultylogin').click(function(e) {
 		}
 	}
 });
-
 
 
 $('#gcmlogin').click(function(e) {
@@ -408,7 +406,6 @@ $('#studentlogin').click(function(e) {
 });
 
 
-
 $('#parentlogin').click(function(e) {
 	e.preventDefault();
 	var a = document.parentlogin.id.value;
@@ -487,7 +484,6 @@ $('#parentlogin').click(function(e) {
 		}
 	}
 });
-
 
 
 $('#nonteachinglogin').click(function(e) {
@@ -664,6 +660,11 @@ $('#studentsignupbutton').click(function(e) {
 			return false;
 		}
 
+		else if ($("#student-progress-container .progress .bg-danger").length > 0){ 
+	  		$('.student-reg-form small').text('Password too Weak!');
+			return false;
+		}
+
 		$.ajax({
 			type: 'post',
 			datatype: "json",
@@ -691,17 +692,17 @@ $('#studentsignupbutton').click(function(e) {
 		    		$('.student-reg-form small').text('User already registered and waiting for Admin approval.');
 		    		return false;
 		    	}
-					else if (error.responseText == 'Already Registered,verified and admin approved. Now you can Login') {
+		    	else if (error.responseText == 'Already Registered,verified and admin approved. Now you can Login') {
 		    		console.log(error.responseText);
 		    		$('.student-reg-form small').text('User already registered. Please Login.');
 		    		return false;
 		    	}
-					else if (error.responseText == 'Already Registered,verified but admin rejected') {
+		    	else if (error.responseText == 'Already Registered,verified but admin rejected') {
 		    		console.log(error.responseText);
 		    		$('.student-reg-form small').text('User already registered but Rejected by Admin.');
 		    		return false;
 		    	}
-					else if (error.responseText == 'Already Registered but access terminated') {
+		    	else if (error.responseText == 'Already Registered but access terminated') {
 		    		console.log(error.responseText);
 		    		$('.student-reg-form small').text('User already registered but access Terminated.');
 		    		return false;
@@ -724,18 +725,18 @@ $('#studentsignupbutton').click(function(e) {
 		    },
 		    success: function(data) {
 		    	console.log('success');
-					$('.student-reg-form small').text('');
-					$('.student-reg-form .fa-spinner').fadeIn(100);
-					Swal.fire({
-					  position: 'center',
-					  type: 'success',
-					  title: 'Successfully Registered!',
-					  text: 'Please verify your Email Address.',
-					  showConfirmButton: true
-					}).then(function(){
-						location.reload();
-					});
-			    	return false;
+		    	$('.student-reg-form small').text('');
+		    	$('.student-reg-form .fa-spinner').fadeIn(100);
+		    	Swal.fire({
+		    		position: 'center',
+		    		type: 'success',
+		    		title: 'Successfully Registered!',
+		    		text: 'Please verify your Email Address.',
+		    		showConfirmButton: true
+		    	}).then(function(){
+		    		location.reload();
+		    	});
+		    	return false;
 		    }
 		});
 	}else{
@@ -771,6 +772,11 @@ $('#facultysignupbutton').click(function(e) {
 			return false;
 		}
 
+		else if ($("#faculty-progress-container .progress .bg-danger").length > 0){ 
+	  		$('.faculty-reg-form small').text('Password too Weak!');
+			return false;
+		}
+
 		$.ajax({
 			type: 'post',
 			datatype: "json",
@@ -786,7 +792,7 @@ $('#facultysignupbutton').click(function(e) {
 				password2: pass2
 			},
 		    url: 'http://localhost:3000/faculty/register', //node.js server is running
-				error: function(error){
+		    error: function(error){
 		    	if (error.responseText == 'already reg not verified') {
 		    		console.log(error.responseText);
 		    		$('.faculty-reg-form small').text('User already registered but Email not verified.');
@@ -797,17 +803,17 @@ $('#facultysignupbutton').click(function(e) {
 		    		$('.faculty-reg-form small').text('User already registered and waiting for Admin approval.');
 		    		return false;
 		    	}
-					else if (error.responseText == 'Already Registered,verified and admin approved. Now you can Login') {
+		    	else if (error.responseText == 'Already Registered,verified and admin approved. Now you can Login') {
 		    		console.log(error.responseText);
 		    		$('.faculty-reg-form small').text('User already registered. Please Login.');
 		    		return false;
 		    	}
-					else if (error.responseText == 'Already Registered,verified but admin rejected') {
+		    	else if (error.responseText == 'Already Registered,verified but admin rejected') {
 		    		console.log(error.responseText);
 		    		$('.faculty-reg-form small').text('User already registered but Rejected by Admin.');
 		    		return false;
 		    	}
-					else if (error.responseText == 'Already Registered but access terminated') {
+		    	else if (error.responseText == 'Already Registered but access terminated') {
 		    		console.log(error.responseText);
 		    		$('.faculty-reg-form small').text('User already registered but access Terminated.');
 		    		return false;
@@ -830,17 +836,17 @@ $('#facultysignupbutton').click(function(e) {
 		    },
 		    success: function(data) {
 		    	console.log('success');
-					$('.faculty-reg-form small').text('');
-					$('.faculty-reg-form .fa-spinner').fadeIn(100);
-					Swal.fire({
-					  position: 'center',
-					  type: 'success',
-					  title: 'Successfully Registered!',
-					  text: 'Please verify your Email Address.',
-					  showConfirmButton: true
-					}).then(function(){
-						location.reload();
-					});
+		    	$('.faculty-reg-form small').text('');
+		    	$('.faculty-reg-form .fa-spinner').fadeIn(100);
+		    	Swal.fire({
+		    		position: 'center',
+		    		type: 'success',
+		    		title: 'Successfully Registered!',
+		    		text: 'Please verify your Email Address.',
+		    		showConfirmButton: true
+		    	}).then(function(){
+		    		location.reload();
+		    	});
 		    	return false;
 		    }
 		});
@@ -881,6 +887,11 @@ $('#parentsignupbutton').click(function(e) {
 			return false;
 		}
 
+		else if ($("#parent-progress-container .progress .bg-danger").length > 0){ 
+	  		$('.parent-reg-form small').text('Password too Weak!');
+			return false;
+		}
+
 		$.ajax({
 			type: 'post',
 			datatype: "json",
@@ -895,7 +906,7 @@ $('#parentsignupbutton').click(function(e) {
 				password2: pass2
 			},
 		    url: 'http://localhost:3000/Parent/register', //node.js server is running
-				error: function(error){
+		    error: function(error){
 		    	if (error.responseText == 'already reg not verified') {
 		    		console.log(error.responseText);
 		    		$('.parent-reg-form small').text('User already registered but Email not verified.');
@@ -906,17 +917,17 @@ $('#parentsignupbutton').click(function(e) {
 		    		$('.parent-reg-form small').text('User already registered and waiting for Admin approval.');
 		    		return false;
 		    	}
-					else if (error.responseText == 'Already Registered,verified and admin approved. Now you can Login') {
+		    	else if (error.responseText == 'Already Registered,verified and admin approved. Now you can Login') {
 		    		console.log(error.responseText);
 		    		$('.parent-reg-form small').text('User already registered. Please Login.');
 		    		return false;
 		    	}
-					else if (error.responseText == 'Already Registered,verified but admin rejected') {
+		    	else if (error.responseText == 'Already Registered,verified but admin rejected') {
 		    		console.log(error.responseText);
 		    		$('.parent-reg-form small').text('User already registered but Rejected by Admin.');
 		    		return false;
 		    	}
-					else if (error.responseText == 'Already Registered but access terminated') {
+		    	else if (error.responseText == 'Already Registered but access terminated') {
 		    		console.log(error.responseText);
 		    		$('.parent-reg-form small').text('User already registered but access Terminated.');
 		    		return false;
@@ -939,17 +950,17 @@ $('#parentsignupbutton').click(function(e) {
 		    },
 		    success: function(data) {
 		    	console.log('success');
-					$('.parent-reg-form small').text('');
-					$('.parent-reg-form .fa-spinner').fadeIn(100);
-					Swal.fire({
-					  position: 'center',
-					  type: 'success',
-					  title: 'Successfully Registered!',
-					  text: 'Please verify your Email Address.',
-					  showConfirmButton: true
-					}).then(function(){
-						location.reload();
-					});
+		    	$('.parent-reg-form small').text('');
+		    	$('.parent-reg-form .fa-spinner').fadeIn(100);
+		    	Swal.fire({
+		    		position: 'center',
+		    		type: 'success',
+		    		title: 'Successfully Registered!',
+		    		text: 'Please verify your Email Address.',
+		    		showConfirmButton: true
+		    	}).then(function(){
+		    		location.reload();
+		    	});
 		    	return false;
 		    }
 		});
@@ -986,6 +997,11 @@ $('#nonteachingsignupbutton').click(function(e) {
 			return false;
 		}
 
+		else if ($("#nonteaching-progress-container .progress .bg-danger").length > 0){ 
+	  		$('.nonteaching-reg-form small').text('Password too Weak!');
+			return false;
+		}
+
 		$.ajax({
 			type: 'post',
 			datatype: "json",
@@ -1001,7 +1017,7 @@ $('#nonteachingsignupbutton').click(function(e) {
 				password2: pass2
 			},
 		    url: 'http://localhost:3000/staff/register', //node.js server is running
-				error: function(error){
+		    error: function(error){
 		    	if (error.responseText == 'already reg not verified') {
 		    		console.log(error.responseText);
 		    		$('.nonteaching-reg-form small').text('User already registered but Email not verified.');
@@ -1012,17 +1028,17 @@ $('#nonteachingsignupbutton').click(function(e) {
 		    		$('.nonteaching-reg-form small').text('User already registered and waiting for Admin approval.');
 		    		return false;
 		    	}
-					else if (error.responseText == 'Already Registered,verified and admin approved. Now you can Login') {
+		    	else if (error.responseText == 'Already Registered,verified and admin approved. Now you can Login') {
 		    		console.log(error.responseText);
 		    		$('.nonteaching-reg-form small').text('User already registered. Please Login.');
 		    		return false;
 		    	}
-					else if (error.responseText == 'Already Registered,verified but admin rejected') {
+		    	else if (error.responseText == 'Already Registered,verified but admin rejected') {
 		    		console.log(error.responseText);
 		    		$('.nonteaching-reg-form small').text('User already registered but Rejected by Admin.');
 		    		return false;
 		    	}
-					else if (error.responseText == 'Already Registered but access terminated') {
+		    	else if (error.responseText == 'Already Registered but access terminated') {
 		    		console.log(error.responseText);
 		    		$('.nonteaching-reg-form small').text('User already registered but access Terminated.');
 		    		return false;
@@ -1045,17 +1061,17 @@ $('#nonteachingsignupbutton').click(function(e) {
 		    },
 		    success: function(data) {
 		    	console.log('success');
-					$('.nonteaching-reg-form small').text('');
-					$('.nonteaching-reg-form .fa-spinner').fadeIn(100);
-					Swal.fire({
-					  position: 'center',
-					  type: 'success',
-					  title: 'Successfully Registered!',
-					  text: 'Please verify your Email Address.',
-					  showConfirmButton: true
-					}).then(function(){
-						location.reload();
-					});
+		    	$('.nonteaching-reg-form small').text('');
+		    	$('.nonteaching-reg-form .fa-spinner').fadeIn(100);
+		    	Swal.fire({
+		    		position: 'center',
+		    		type: 'success',
+		    		title: 'Successfully Registered!',
+		    		text: 'Please verify your Email Address.',
+		    		showConfirmButton: true
+		    	}).then(function(){
+		    		location.reload();
+		    	});
 		    	return false;
 		    }
 		});

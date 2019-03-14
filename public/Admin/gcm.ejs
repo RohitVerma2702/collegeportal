@@ -39,7 +39,7 @@
             <h1>Add New Member</h1>
 
             <div class="detail-data">
-                <form class="form-group">
+                <form class="form-group" ng-submit="create()">
                     <div class="row">
                         <div class="col-sm-4 offset-sm-1">
                             <label class="label-control">Name:</label>
@@ -55,7 +55,7 @@
                             <label class="label-control">Select Grievance Type:</label>
                             <br>
                             <small>*Use Ctrl(Windows)/Commang(Mac) button to select multiple.</small>
-                            <select class="form-control" ng-model="Gtype" size="1" required multiple>
+                            <select class="form-control" ng-model="Gtype" required multiple>
                                <!-- <option value="">Select</option>-->
                                 <option ng-repeat="result in result" value="{{result.seq}}">{{result.grvtype}}</option>
                             </select>
@@ -81,7 +81,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4 offset-sm-1">
-                            <button type="submit" class="btn btn-primary" ng-click="create()">Create</button>
+                            <input type="submit" class="btn btn-primary" value="Create">
                         </div>
                     </div>
                 </form>

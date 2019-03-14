@@ -33,7 +33,7 @@
             <h1>Add New Grievance-Type</h1>
 
             <div class="detail-data">
-                <form class="form-group">
+                <form class="form-group" ng-submit="Create()">
                     <div class="row">
                         <div class="col-sm-4 offset-sm-1">
                             <label class="label-control">Grievance Name:</label>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4 offset-sm-1">
-                            <button type="submit" class="btn btn-primary" ng-click="Create()">Create</button>
+                            <button type="submit" class="btn btn-primary">Create</button>
                         </div>
                     </div>
                 </form>

@@ -3,10 +3,10 @@
 <div ng-app="grievances" ng-controller="Termination" >
     <h1>Student Termination</h1>
     <div id="terminate" class="contenttable">
-        <form class="form-group">
+        <form class="form-group" ng-submit="Termination('Student')">
             <label>Enter Year</label>
             <input type="number" class="form-control w-50" ng-model="year" placeholder="(ex. 2016)" maxlength="4" minlength="4" required>
-            <button type="submit" ng-click="Termination('Student')" class="btn btn-danger my-3">Terminate</button>
+            <button type="submit" class="btn btn-danger my-3">Terminate</button>
         </form>
     </div>
 
