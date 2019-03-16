@@ -500,8 +500,15 @@ router.get('/Grievances',function(req,res,next){// for all pending grievances
     numbers: true
 });
 
+
 if((req.body.mngmnt)==1)
 {
+ mngmnt.getUserByID(email,function(err,user){
+   if(user){
+     console.log('mngmnt member already exists');
+     res.status(500).send('mngmnt member already Exists');
+   }
+   else{ 
    var newuser=new mngmnt({
     name:name,
     designation:Des,
@@ -519,7 +526,17 @@ if((req.body.mngmnt)==1)
      // res.end('Managment Member Created');
     });
   }
+})
+}
   else{
+    cell.getUserByID(email,function(err,user){
+    if(err) throw err;
+    if(user){
+      console.log('mngmnt member already exists');
+      res.status(500).send('mngmnt member already Exists');
+       
+    }
+    else{
     var newuser=new cell({
       name:name,
       designation:Des,
@@ -536,7 +553,9 @@ if((req.body.mngmnt)==1)
     console.log(user);
    // res.end('Cell Member Created');
   });
-  }
+}
+    })  
+}
 
 
   host=req.get('host');
