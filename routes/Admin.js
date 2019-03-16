@@ -520,11 +520,42 @@ if((req.body.mngmnt)==1)
   });
 
     console.log("create management");
+    var created=true;
     mngmnt.createUser(newuser,function(err,user){
       if(err) throw err;
       console.log(user);
      // res.end('Managment Member Created');
     });
+    host=req.get('host');
+    mailOptions={
+         to :email,
+         subject : "Added to Anand Cell ",
+         html : "Hello "+name+", <br><br>Greetings from Anand International College of Engineering Online Grievance Redressal Portal!<br><br>You have been added as Cell Member to the Grievance Redressal Portal of Anand International College of Engineering<br><br>You can login with your email Id or mobile number as username and "+password+ " as password to access the posts and updates.<br><br>Thanks and Regards<br><br>Admin-Grievance Redressal Portal<br><br><h1>Anand International College of Engineering</h1><br>" 
+     }
+     
+     console.log(mailOptions);
+     smtpTransport.sendMail(mailOptions, function(error, response){
+      if(error){
+             console.log(error);
+         res.end("error");
+      }
+      else{
+       var mail_doc=new Mail_log({
+         emailid:email,
+         subject:"Added to Anand Cell ",
+         status:'Sent',
+         date:new Date(dt.now()) 
+       });
+ 
+       Mail_log.mail_log(mail_doc,function(err){
+         if(err) throw err;
+       });
+         console.log("Message sent: " + response.message);
+         res.end("sent");
+          }
+ });
+ 
+ 
   }
 })
 }
@@ -548,17 +579,12 @@ if((req.body.mngmnt)==1)
     });
   
     console.log('cell created');
+    var created=true;
   cell.createUser(newuser,function(err,user){
     if(err) throw err;
     console.log(user);
-   // res.end('Cell Member Created');
-  });
-}
-    })  
-}
-
-
-  host=req.get('host');
+   });
+   host=req.get('host');
    mailOptions={
         to :email,
         subject : "Added to Anand Cell ",
@@ -587,9 +613,10 @@ if((req.body.mngmnt)==1)
          }
 });
 
-
-
-
+  
+}
+})  
+}
   });
 
  router.post('/password_reset',function(req,res,next){

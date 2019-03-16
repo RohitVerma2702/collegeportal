@@ -2,7 +2,6 @@ $('#adminlogin').click(function(e) {
 	e.preventDefault();
 	var a = document.adminlogin.id.value;
 	var b = document.adminlogin.password.value;
-
 	if (a=="") {
 		$('#adminid .fa-times').removeClass('hide');
 		$('#adminid .fa-times').attr('title', 'Please Enter Username');
@@ -20,8 +19,14 @@ $('#adminlogin').click(function(e) {
 	}
 
 	if(a!=""){
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;	
+		if(!re.test(a))
+	{	$('#adminid .fa-times').removeClass('hide');
+		$('#adminid').addClass('wrong').removeClass('correct');
+	return false;
+	}
 
-		$('#adminid .fa-times').addClass('hide');
+   $('#adminid .fa-times').addClass('hide');
 
 		if (b=="") {
 			$('#adminpass .fa-times').removeClass('hide');
@@ -102,7 +107,12 @@ $('#mngmntlogin').click(function(e) {
 	}
 
 	if(a!=""){
-
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;	
+		if(!re.test(a))
+	{		$('#mngmntid .fa-times').removeClass('hide');
+	$('#mngmntid').addClass('wrong').removeClass('correct');
+	return false;
+	}
 		$('#mngmntid .fa-times').addClass('hide');
 
 		if (b=="") {
@@ -182,7 +192,13 @@ $('#facultylogin').click(function(e) {
 	}
 
 	if(a!=""){
-
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;	
+		if(!re.test(a))
+	{		
+	 $('#facultyid .fa-times').removeClass('hide');
+	 $('#facultyid').addClass('wrong').removeClass('correct');
+	 return false;
+	}
 		$('#facultyid .fa-times').addClass('hide');
 
 		if (b=="") {
@@ -266,6 +282,13 @@ $('#gcmlogin').click(function(e) {
 	}
 
 	if(a!=""){
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;	
+		if(!re.test(a))
+	{		
+		$('#gcmid .fa-times').removeClass('hide');
+		$('#gcmid').addClass('wrong').removeClass('correct');
+return false;
+	}
 
 		$('#gcmid .fa-times').addClass('hide');
 
@@ -346,6 +369,14 @@ $('#studentlogin').click(function(e) {
 	}
 
 	if(a!=""){
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;	
+		if(!re.test(a))
+	{		
+		$('#studentid .fa-times').removeClass('hide');
+		$('#studentid').addClass('wrong').removeClass('correct');
+
+		return false;
+	}
 
 		$('#studentid .fa-times').addClass('hide');
 
@@ -426,6 +457,13 @@ $('#parentlogin').click(function(e) {
 	}
 
 	if(a!=""){
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;	
+		if(!re.test(a))
+	     {		
+		$('#parentid .fa-times').removeClass('hide');
+		$('#parentid').addClass('wrong').removeClass('correct');
+		return false;
+		} 
 
 		$('#parentid .fa-times').addClass('hide');
 
@@ -506,6 +544,13 @@ $('#nonteachinglogin').click(function(e) {
 	}
 
 	if(a!=""){
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;	
+		if(!re.test(a))
+	     {		
+			$('#nonteachingid .fa-times').removeClass('hide');
+			$('#nonteachingid').addClass('wrong').removeClass('correct');
+			return false;
+		} 
 
 		$('#nonteachingid .fa-times').addClass('hide');
 

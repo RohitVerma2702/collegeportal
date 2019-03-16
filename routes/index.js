@@ -6,7 +6,6 @@ var app=express();
 
 var sess;
 function requireLogin(req, res, next) {
-console.log(req.session.active)
   if (req.session.active) {
     next(); // allow the next route to run
   } else {
@@ -23,7 +22,6 @@ router.get('/', function(req, res, next) {
  
  if(sess.active)
  {
-console.log('someone logged in  '+sess.type);
 res.redirect('/'+sess.type+'/Home#!/');
   
   }
