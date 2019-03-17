@@ -190,19 +190,26 @@ $(function() {
           easing: 'cubic-bezier(.5, 0, .2, 1.2)'
         });
 
-        sr.reveal('#aboutheading', {
-          duration: 2000,
-          origin:'left',
-          distance: '300px',
-          viewFactor: 0.5
-        });
+        // sr.reveal('#aboutheading', {
+        //   duration: 2000,
+        //   origin:'top',
+        //   distance: '300px',
+        //   viewFactor: 0.5
+        // });
 
-        sr.reveal('#aboutinfo', {
-          duration: 1000,
-          origin:'right',
-          distance: '300px',
-          viewFactor: 0.5
-        });
+        // sr.reveal('#ourteam', {
+        //   duration: 2000,
+        //   origin:'left',
+        //   distance: '300px',
+        //   viewFactor: 1
+        // });
+
+        // sr.reveal('#aboutinfo', {
+        //   duration: 1000,
+        //   origin:'right',
+        //   distance: '300px',
+        //   viewFactor: 0
+        // });
 
         sr.reveal('#contactheading', {
           duration: 2000,
@@ -224,6 +231,17 @@ $(function() {
           distance:'300px',
           viewFactor: 0.5
         });
+
+$('#about-us-button').click(function(){
+  $('#maincontainer, footer').fadeOut(500);
+  $('.aboutuspage').show();
+});
+
+$('.aboutuspage i').click(function(){
+  console.log('helljaskdjfkl');
+  $('#maincontainer, footer').fadeIn(500);
+  $('.aboutuspage').fadeOut(100);
+});
 
 $('body').show();
 

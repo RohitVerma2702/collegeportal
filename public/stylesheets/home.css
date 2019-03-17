@@ -404,6 +404,75 @@ iframe{
   min-width: 100%;
 }
 
+
+/*About Us page design...!!!*/
+
+/* width */
+.aboutuspage::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.aboutuspage::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+ 
+/* Handle */
+.aboutuspage::-webkit-scrollbar-thumb {
+  background: #5aa2d5; 
+}
+
+/* Handle on hover */
+.aboutuspage::-webkit-scrollbar-thumb:hover {
+  background: #1e8bd8; 
+}
+
+
+.aboutuspage{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(to bottom right, #5aa2d5 70%, #1e8bd8);
+  color: #fff;
+  padding: 3rem;
+  overflow: hidden;
+  animation-name: aboutus;
+  animation-duration: .5s;
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+.aboutuspage p{
+  font-weight: bold;
+}
+
+@keyframes aboutus{
+  from{
+    height: 0%;
+    width: 0%;
+    border-radius: 0rem 0 20rem 0;
+    padding: 0;
+  }
+  to{
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+    padding: 3rem;
+    overflow-y: auto;
+  }
+}
+
+.aboutuspage .team h4{
+  font-weight: bold;
+}
+
+.aboutuspage .fa-times{
+  cursor: pointer;
+}
+
+/*About us page design ends */
+
 footer{
   background-color: #000;
   height: 20rem;
@@ -539,6 +608,10 @@ footer{
   }
   .forms ul{
     display: none;
+  }
+
+  .aboutuspage{
+    padding: 1rem !important;
   }
 
 }

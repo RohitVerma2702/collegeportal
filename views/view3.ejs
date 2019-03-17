@@ -11,8 +11,8 @@
 	<script src="/angular/angular.min.js"></script>
 	<script src="/angular-route/angular-route.js"></script>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	<!-- Bootstrap CSS CDN -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -29,877 +29,878 @@
 </head>
 
 <body>
+	<div id="maincontainer">
+		<nav id="mainnavbar" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 
-	<nav id="mainnavbar" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+			<!--Navbar for main panel (home, about,,,,,)-->
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-		<!--Navbar for main panel (home, about,,,,,)-->
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+			<a href="https://anandice.ac.in/" target="_blank"><img class="hide" id="logo" src="../images/a.png"></a>
 
-		<a href="https://anandice.ac.in/" target="_blank"><img class="hide" id="logo" src="../images/a.png"></a>
+			<!--Login button for sidebar panel navbar-->
+			<button class="navbar-toggler padding-00" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="btn btn-primary">Login</span>
+			</button>
 
-		<!--Login button for sidebar panel navbar-->
-		<button class="navbar-toggler padding-00" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="btn btn-primary">Login</span>
-		</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
+					<li class="nav-item active">
+						<a class="nav-link" id="home">HOME <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a id="about-us-button" class="nav-link" href="#">ABOUT</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#contact">CONTACT</a>
+					</li>
+				</ul>
+			</div>
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
-				<li class="nav-item active">
-					<a class="nav-link" id="home">HOME <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#about-us">ABOUT</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#contact">CONTACT</a>
-				</li>
-			</ul>
-		</div>
+			<!--this is top menu/login panel for mobile versions-->
+			<div class="collapse navbar-collapse wrapper navwrapper" id="sidebar">
+				<ul class="list-unstyled components d-lg-none d-xl-none" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false">
+					<li>
+						<a class="admin-login" href="#">admin</a>
+					</li>
+					<li>
+						<a class="management-login" href="#">management</a>
+					</li>
+					<li>
+						<a class="faculty-login" href="#">faculty</a>
+					</li>
+					<li>
+						<a class="gcm-login" href="#">Grievance cell member</a>
+					</li>
+					<li>
+						<a class="student-login" href="#">student</a>
+					</li>
+					<li>
+						<a class="parent-login" href="#">parent</a>
+					</li>
+					<li>
+						<a class="nonteaching-login" href="#">nonteaching</a>
+					</li>
+				</ul>
+			</div>
 
-		<!--this is top menu/login panel for mobile versions-->
-		<div class="collapse navbar-collapse wrapper navwrapper" id="sidebar">
-			<ul class="list-unstyled components d-lg-none d-xl-none" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false">
-				<li>
-					<a class="admin-login" href="#">admin</a>
-				</li>
-				<li>
-					<a class="management-login" href="#">management</a>
-				</li>
-				<li>
-					<a class="faculty-login" href="#">faculty</a>
-				</li>
-				<li>
-					<a class="gcm-login" href="#">Grievance cell member</a>
-				</li>
-				<li>
-					<a class="student-login" href="#">student</a>
-				</li>
-				<li>
-					<a class="parent-login" href="#">parent</a>
-				</li>
-				<li>
-					<a class="nonteaching-login" href="#">nonteaching</a>
-				</li>
-			</ul>
-		</div>
+		</nav>
 
-	</nav>
+		<div class="container-fluid row margin-0 padding-0">
+			<div class="col-lg-9 padding-0">
+				<div id="background">
+					<div id="layer">
 
-	<div class="container-fluid row margin-0 padding-0">
-		<div class="col-lg-9 padding-0">
-			<div id="background">
-				<div id="layer">
-
-					<div class="container-fluid">
-						<div class="heading hide">
-							<h1 id="heading1">GRIEVANCE REDRESSAL</h1>
-							<h1 id="heading2">PORTAL</h1>
+						<div class="container-fluid">
+							<div class="heading hide">
+								<h1 id="heading1">GRIEVANCE REDRESSAL</h1>
+								<h1 id="heading2">PORTAL</h1>
+							</div>
 						</div>
-					</div>
 
-					<!--here starts the forms for login and register-->
-					<!--login forms-->
+						<!--here starts the forms for login and register-->
+						<!--login forms-->
 
-					<!--admin login form-->
-					<section class="forms adminlogin">
-						<div class="row margin-0 padding-0">
-							<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
-								<div class="left-form-image">
-									<div class="left-form-image-layer">
-										<div class="closebtn">
-											<i class="fas fa-times"></i>
+						<!--admin login form-->
+						<section class="forms adminlogin">
+							<div class="row margin-0 padding-0">
+								<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
+									<div class="left-form-image">
+										<div class="left-form-image-layer">
+											<div class="closebtn">
+												<i class="fas fa-times"></i>
+											</div>
+											<h1>WELCOME TO</h1>
+											<h5>GRIEVANCE REDRESSAL PORTAL</h5>
+											<ul>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+											</ul>
 										</div>
-										<h1>WELCOME TO</h1>
-										<h5>GRIEVANCE REDRESSAL PORTAL</h5>
-										<ul>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-										</ul>
+									</div>
+								</div>
+								<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
+									<div class="form-content">
+										<form class="form-group" name="adminlogin">
+											<h3>Admin Login</h3>
+											<div class="input-group">
+												<input type="text" class="form-control" name="id" placeholder="Username">
+											</div>
+											<div class="input-group">
+												<input type="password" class="form-control" name="password" placeholder="Password">
+											</div>
+											<small></small>
+											<br>
+											<a href="#" class="Admin_forgotpassword">Forgot Password?</a>
+											<br>
+											<button type="submit" class="btn btn-primary" id="adminlogin">
+												Login
+												<i class="fas fa-spinner hide"></i>
+											</button>
+										</form>
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
-								<div class="form-content">
-									<form class="form-group" name="adminlogin">
-										<h3>Admin Login</h3>
-										<div class="input-group">
-											<input type="text" class="form-control" name="id" placeholder="Username">
-										</div>
-										<div class="input-group">
-											<input type="password" class="form-control" name="password" placeholder="Password">
-										</div>
-										<small></small>
-										<br>
-										<a href="#" class="Admin_forgotpassword">Forgot Password?</a>
-										<br>
-										<button type="submit" class="btn btn-primary" id="adminlogin">
-											Login
-											<i class="fas fa-spinner hide"></i>
-										</button>
-									</form>
-								</div>
-							</div>
-						</div>
-					</section>
+						</section>
 
-					<!--management login form-->
-					<section class="forms mngmntlogin">
-						<div class="row margin-0 padding-0">
-							<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
-								<div class="left-form-image">
-									<div class="left-form-image-layer">
-										<div class="closebtn">
-											<i class="fas fa-times"></i>
+						<!--management login form-->
+						<section class="forms mngmntlogin">
+							<div class="row margin-0 padding-0">
+								<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
+									<div class="left-form-image">
+										<div class="left-form-image-layer">
+											<div class="closebtn">
+												<i class="fas fa-times"></i>
+											</div>
+											<h1>WELCOME TO</h1>
+											<h5>GRIEVANCE REDRESSAL PORTAL</h5>
+											<ul>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+											</ul>
 										</div>
-										<h1>WELCOME TO</h1>
-										<h5>GRIEVANCE REDRESSAL PORTAL</h5>
-										<ul>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-										</ul>
+									</div>
+								</div>
+								<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
+									<div class="form-content">
+										<form class="form-group" name="mngmntlogin">
+											<h3>Management Login</h3>
+											<div class="input-group">
+												<input type="text" class="form-control" name="id" placeholder="Username" required>
+											</div>
+											<div class="input-group">
+												<input type="password" class="form-control" name="password" placeholder="Password">
+											</div>
+											<small></small>
+											<br>
+											<a href="#" class="mngmnt_forgotpassword">Forgot Password?</a>
+											<br>
+											<button type="submit" class="btn btn-primary" id="mngmntlogin">
+												Login
+												<i class="fas fa-spinner hide"></i>
+											</button>
+										</form>
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
-								<div class="form-content">
-									<form class="form-group" name="mngmntlogin">
-										<h3>Management Login</h3>
-										<div class="input-group">
-											<input type="text" class="form-control" name="id" placeholder="Username" required>
-										</div>
-										<div class="input-group">
-											<input type="password" class="form-control" name="password" placeholder="Password">
-										</div>
-										<small></small>
-										<br>
-										<a href="#" class="mngmnt_forgotpassword">Forgot Password?</a>
-										<br>
-										<button type="submit" class="btn btn-primary" id="mngmntlogin">
-											Login
-											<i class="fas fa-spinner hide"></i>
-										</button>
-									</form>
-								</div>
-							</div>
-						</div>
-					</section>
+						</section>
 
-					<!--faculty login form-->
-					<section class="forms facultylogin">
-						<div class="row margin-0 padding-0">
-							<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
-								<div class="left-form-image">
-									<div class="left-form-image-layer">
-										<div class="closebtn">
-											<i class="fas fa-times"></i>
+						<!--faculty login form-->
+						<section class="forms facultylogin">
+							<div class="row margin-0 padding-0">
+								<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
+									<div class="left-form-image">
+										<div class="left-form-image-layer">
+											<div class="closebtn">
+												<i class="fas fa-times"></i>
+											</div>
+											<h1>WELCOME TO</h1>
+											<h5>GRIEVANCE REDRESSAL PORTAL</h5>
+											<ul>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+											</ul>
 										</div>
-										<h1>WELCOME TO</h1>
-										<h5>GRIEVANCE REDRESSAL PORTAL</h5>
-										<ul>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-										</ul>
+									</div>
+								</div>
+								<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
+									<div class="form-content">
+										<form class="form-group" name="facultylogin">
+											<h3>Faculty Login</h3>
+											<div class="input-group">
+												<input type="text" class="form-control" name="id" placeholder="Username" required>
+											</div>
+											<div class="input-group">
+												<input type="password" class="form-control" name="password" placeholder="Password">
+											</div>
+											<small></small>
+											<br>
+											<a href="#" class="Faculty_forgotpassword">Forgot Password?</a>
+											<br>
+											<button type="submit" class="btn btn-primary" id="facultylogin">
+												Login
+												<i class="fas fa-spinner hide"></i>
+											</button>
+											<br>
+											<label>DON'T HAVE AN ACCOUNT? <a href="#" id="facultysignup">SIGN UP</a></label>
+										</form>
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
-								<div class="form-content">
-									<form class="form-group" name="facultylogin">
-										<h3>Faculty Login</h3>
-										<div class="input-group">
-											<input type="text" class="form-control" name="id" placeholder="Username" required>
-										</div>
-										<div class="input-group">
-											<input type="password" class="form-control" name="password" placeholder="Password">
-										</div>
-										<small></small>
-										<br>
-										<a href="#" class="Faculty_forgotpassword">Forgot Password?</a>
-										<br>
-										<button type="submit" class="btn btn-primary" id="facultylogin">
-											Login
-											<i class="fas fa-spinner hide"></i>
-										</button>
-										<br>
-										<label>DON'T HAVE AN ACCOUNT? <a href="#" id="facultysignup">SIGN UP</a></label>
-									</form>
-								</div>
-							</div>
-						</div>
-					</section>
+						</section>
 
-					<!--grievance cell member login form-->
-					<section class="forms gcmlogin">
-						<div class="row margin-0 padding-0">
-							<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
-								<div class="left-form-image">
-									<div class="left-form-image-layer">
-										<div class="closebtn">
-											<i class="fas fa-times"></i>
+						<!--grievance cell member login form-->
+						<section class="forms gcmlogin">
+							<div class="row margin-0 padding-0">
+								<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
+									<div class="left-form-image">
+										<div class="left-form-image-layer">
+											<div class="closebtn">
+												<i class="fas fa-times"></i>
+											</div>
+											<h1>WELCOME TO</h1>
+											<h5>GRIEVANCE REDRESSAL PORTAL</h5>
+											<ul>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+											</ul>
 										</div>
-										<h1>WELCOME TO</h1>
-										<h5>GRIEVANCE REDRESSAL PORTAL</h5>
-										<ul>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-										</ul>
+									</div>
+								</div>
+								<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
+									<div class="form-content">
+										<form class="form-group" name="gcmlogin">
+											<h3>Grievance Cell Member Login</h3>
+											<div class="input-group">
+												<input type="text" class="form-control" name="id" placeholder="Username" required>
+											</div>
+											<div class="input-group">
+												<input type="password" class="form-control" name="password" placeholder="Password">
+											</div>
+											<small></small>
+											<br>
+											<a href="#" class="Gcm_forgotpassword">Forgot Password?</a>
+											<br>
+											<button type="submit" class="btn btn-primary" id="gcmlogin">
+												Login
+												<i class="fas fa-spinner hide"></i>
+											</button>
+										</form>
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
-								<div class="form-content">
-									<form class="form-group" name="gcmlogin">
-										<h3>Grievance Cell Member Login</h3>
-										<div class="input-group">
-											<input type="text" class="form-control" name="id" placeholder="Username" required>
-										</div>
-										<div class="input-group">
-											<input type="password" class="form-control" name="password" placeholder="Password">
-										</div>
-										<small></small>
-										<br>
-										<a href="#" class="Gcm_forgotpassword">Forgot Password?</a>
-										<br>
-										<button type="submit" class="btn btn-primary" id="gcmlogin">
-											Login
-											<i class="fas fa-spinner hide"></i>
-										</button>
-									</form>
-								</div>
-							</div>
-						</div>
-					</section>
+						</section>
 
-					<!--student login form-->
-					<section class="forms studentlogin">
-						<div class="row margin-0 padding-0">
-							<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
-								<div class="left-form-image">
-									<div class="left-form-image-layer">
-										<div class="closebtn">
-											<i class="fas fa-times"></i>
+						<!--student login form-->
+						<section class="forms studentlogin">
+							<div class="row margin-0 padding-0">
+								<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
+									<div class="left-form-image">
+										<div class="left-form-image-layer">
+											<div class="closebtn">
+												<i class="fas fa-times"></i>
+											</div>
+											<h1>WELCOME TO</h1>
+											<h5>GRIEVANCE REDRESSAL PORTAL</h5>
+											<ul>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+											</ul>
 										</div>
-										<h1>WELCOME TO</h1>
-										<h5>GRIEVANCE REDRESSAL PORTAL</h5>
-										<ul>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-										</ul>
+									</div>
+								</div>
+								<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
+									<div class="form-content">
+										<form class="form-group" name="studentlogin">
+											<h3>Student Login</h3>
+											<div class="input-group">
+												<input type="text" class="form-control" name="id" placeholder="Username" required>
+											</div>
+											<div class="input-group">
+												<input type="password" class="form-control" name="password" placeholder="Password">
+											</div>
+											<small></small>
+											<br>
+											<a href="#"  class="Student_forgotpassword">Forgot Password?</a>
+											<br>
+											<button type="submit" class="btn btn-primary" id="studentlogin">
+												Login
+												<i class="fas fa-spinner hide"></i>
+											</button>
+											<br>
+											<label>DON'T HAVE AN ACCOUNT? <a href="#" id="studentsignup">SIGN UP</a></label>
+										</form>
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
-								<div class="form-content">
-									<form class="form-group" name="studentlogin">
-										<h3>Student Login</h3>
-										<div class="input-group">
-											<input type="text" class="form-control" name="id" placeholder="Username" required>
-										</div>
-										<div class="input-group">
-											<input type="password" class="form-control" name="password" placeholder="Password">
-										</div>
-										<small></small>
-										<br>
-										<a href="#"  class="Student_forgotpassword">Forgot Password?</a>
-										<br>
-										<button type="submit" class="btn btn-primary" id="studentlogin">
-											Login
-											<i class="fas fa-spinner hide"></i>
-										</button>
-										<br>
-										<label>DON'T HAVE AN ACCOUNT? <a href="#" id="studentsignup">SIGN UP</a></label>
-									</form>
-								</div>
-							</div>
-						</div>
-					</section>
+						</section>
 
-					<!--parent login form-->
-					<section class="forms parentlogin">
-						<div class="row margin-0 padding-0">
-							<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
-								<div class="left-form-image">
-									<div class="left-form-image-layer">
-										<div class="closebtn">
-											<i class="fas fa-times"></i>
+						<!--parent login form-->
+						<section class="forms parentlogin">
+							<div class="row margin-0 padding-0">
+								<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
+									<div class="left-form-image">
+										<div class="left-form-image-layer">
+											<div class="closebtn">
+												<i class="fas fa-times"></i>
+											</div>
+											<h1>WELCOME TO</h1>
+											<h5>GRIEVANCE REDRESSAL PORTAL</h5>
+											<ul>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+											</ul>
 										</div>
-										<h1>WELCOME TO</h1>
-										<h5>GRIEVANCE REDRESSAL PORTAL</h5>
-										<ul>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-										</ul>
+									</div>
+								</div>
+								<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
+									<div class="form-content">
+										<form class="form-group" name="parentlogin">
+											<h3>Parent Login</h3>
+											<div class="input-group">
+												<input type="text" class="form-control" name="id" placeholder="Username" required>
+											</div>
+											<div class="input-group">
+												<input type="password" class="form-control" name="password" placeholder="Password">
+											</div>
+											<small></small>
+											<br>
+											<a href="#" class="Parent_forgotpassword">Forgot Password?</a>
+											<br>
+											<button type="submit" class="btn btn-primary" id="parentlogin">
+												Login
+												<i class="fas fa-spinner hide"></i>
+											</button>
+											<br>
+											<label>DON'T HAVE AN ACCOUNT? <a href="#" id="parentsignup">SIGN UP</a></label>
+										</form>
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
-								<div class="form-content">
-									<form class="form-group" name="parentlogin">
-										<h3>Parent Login</h3>
-										<div class="input-group">
-											<input type="text" class="form-control" name="id" placeholder="Username" required>
-										</div>
-										<div class="input-group">
-											<input type="password" class="form-control" name="password" placeholder="Password">
-										</div>
-										<small></small>
-										<br>
-										<a href="#" class="Parent_forgotpassword">Forgot Password?</a>
-										<br>
-										<button type="submit" class="btn btn-primary" id="parentlogin">
-											Login
-											<i class="fas fa-spinner hide"></i>
-										</button>
-										<br>
-										<label>DON'T HAVE AN ACCOUNT? <a href="#" id="parentsignup">SIGN UP</a></label>
-									</form>
-								</div>
-							</div>
-						</div>
-					</section>
+						</section>
 
-					<!--nonteaching login form-->
-					<section class="forms nonteachinglogin">
-						<div class="row margin-0 padding-0">
-							<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
-								<div class="left-form-image">
-									<div class="left-form-image-layer">
-										<div class="closebtn">
-											<i class="fas fa-times"></i>
+						<!--nonteaching login form-->
+						<section class="forms nonteachinglogin">
+							<div class="row margin-0 padding-0">
+								<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
+									<div class="left-form-image">
+										<div class="left-form-image-layer">
+											<div class="closebtn">
+												<i class="fas fa-times"></i>
+											</div>
+											<h1>WELCOME TO</h1>
+											<h5>GRIEVANCE REDRESSAL PORTAL</h5>
+											<ul>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+											</ul>
 										</div>
-										<h1>WELCOME TO</h1>
-										<h5>GRIEVANCE REDRESSAL PORTAL</h5>
-										<ul>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-										</ul>
+									</div>
+								</div>
+								<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
+									<div class="form-content">
+										<form class="form-group" name="nonteachinglogin">
+											<h3>NonTeaching Login</h3>
+											<div class="input-group">
+												<input type="text" class="form-control" name="id" placeholder="Username" required>
+											</div>
+											<div class="input-group">
+												<input type="password" class="form-control" name="password" placeholder="Password">
+											</div>
+											<small></small>
+											<br>
+											<a href="#" id="Staff_forgotpassword" class="Staff_forgotpassword">Forgot Password?</a>
+											<br>
+											<button type="submit" class="btn btn-primary" id="nonteachinglogin">
+												Login
+												<i class="fas fa-spinner hide"></i>
+											</button>
+											<br>
+											<label>DON'T HAVE AN ACCOUNT? <a href="#" id="nonteachingsignup">SIGN UP</a></label>
+										</form>
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
-								<div class="form-content">
-									<form class="form-group" name="nonteachinglogin">
-										<h3>NonTeaching Login</h3>
-										<div class="input-group">
-											<input type="text" class="form-control" name="id" placeholder="Username" required>
-										</div>
-										<div class="input-group">
-											<input type="password" class="form-control" name="password" placeholder="Password">
-										</div>
-										<small></small>
-										<br>
-										<a href="#" id="Staff_forgotpassword" class="Staff_forgotpassword">Forgot Password?</a>
-										<br>
-										<button type="submit" class="btn btn-primary" id="nonteachinglogin">
-											Login
-											<i class="fas fa-spinner hide"></i>
-										</button>
-										<br>
-										<label>DON'T HAVE AN ACCOUNT? <a href="#" id="nonteachingsignup">SIGN UP</a></label>
-									</form>
-								</div>
-							</div>
-						</div>
-					</section>
+						</section>
 
 
-					<!--signup forms-->
+						<!--signup forms-->
 
-					<!--faculty sign up form-->
-					<section class="forms faculty-reg-form">
-						<div class="row margin-0 padding-0">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-0">
-								<div class="closebtn">
-									<i class="fas fa-times"></i>
-								</div>
-								<div class="form-content signup">
-									<form class="form-group" name="facultysignup">
-										<h3>Faculty Sign Up</h3>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>FULL NAME</label>
-												<input type="text" class="form-control" name="name" placeholder="Name">
+						<!--faculty sign up form-->
+						<section class="forms faculty-reg-form">
+							<div class="row margin-0 padding-0">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-0">
+									<div class="closebtn">
+										<i class="fas fa-times"></i>
+									</div>
+									<div class="form-content signup">
+										<form class="form-group" name="facultysignup">
+											<h3>Faculty Sign Up</h3>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>FULL NAME</label>
+													<input type="text" class="form-control" name="name" placeholder="Name">
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>gender</label><br>
+													<label class="radio-inline">male<input type="radio" name="gender" value="M"><span class="checkmark"></span></label>
+													<label class="radio-inline">female<input type="radio" name="gender" value="F"><span class="checkmark"></span></label>
+													<label class="radio-inline">other<input type="radio" name="gender" value="O"><span class="checkmark"></span></label>
+												</div>
 											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>gender</label><br>
-												<label class="radio-inline">male<input type="radio" name="gender" value="M"><span class="checkmark"></span></label>
-												<label class="radio-inline">female<input type="radio" name="gender" value="F"><span class="checkmark"></span></label>
-												<label class="radio-inline">other<input type="radio" name="gender" value="O"><span class="checkmark"></span></label>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label for="dep">department</label>
+													<select class="form-control" name="dep">
+														<option value="CS">CS</option>
+														<option value="EE">EE</option>
+														<option value="ME">ME</option>
+														<option value="EC">EC</option>
+														<option value="CE">CE</option>
+														<option value="SLLL">SLLL</option>
+													</select>
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>designation</label>
+													<input type="text" class="form-control" name="desig" placeholder="Designation">
+												</div>
 											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label for="dep">department</label>
-												<select class="form-control" name="dep">
-													<option value="CS">CS</option>
-													<option value="EE">EE</option>
-													<option value="ME">ME</option>
-													<option value="EC">EC</option>
-													<option value="CE">CE</option>
-													<option value="SLLL">SLLL</option>
-												</select>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>employee id</label>
+													<input type="text" class="form-control" name="id" placeholder="Employee ID">
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>email id</label>
+													<input type="email" class="form-control" name="email" placeholder="Email ID">
+												</div>
 											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>designation</label>
-												<input type="text" class="form-control" name="desig" placeholder="Designation">
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>mobile no.</label>
+													<input type="number" class="form-control" name="mobile" placeholder="Mobile No.">
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>password</label>
+													<input type="password" class="form-control" name="password" id="faculty-progress" placeholder="Password" maxlength="16" minlength="8">
+													<div id="faculty-progress-container"></div>
+												</div>
 											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>employee id</label>
-												<input type="text" class="form-control" name="id" placeholder="Employee ID">
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>email id</label>
-												<input type="email" class="form-control" name="email" placeholder="Email ID">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>mobile no.</label>
-												<input type="number" class="form-control" name="mobile" placeholder="Mobile No.">
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>password</label>
-												<input type="password" class="form-control" name="password" id="faculty-progress" placeholder="Password" maxlength="16" minlength="8">
-												<div id="faculty-progress-container"></div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>confirm PASSWORD</label>
-												<input type="password" class="form-control" name="password2" placeholder="Confirm Password" maxlength="16" minlength="8">
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>confirm PASSWORD</label>
+													<input type="password" class="form-control" name="password2" placeholder="Confirm Password" maxlength="16" minlength="8">
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 
+												</div>
 											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-												<small></small>
+											<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<small></small>
+												</div>
 											</div>
-										</div>
-										<button type="submit" id="facultysignupbutton" class="btn btn-primary" name="">
-											Sign Up
-											<i class="fas fa-spinner hide"></i>
-										</button>
-										<br>
-										<label>ALREADY HAVE AN ACCOUNT? <a href="#" class="faculty-login">SIGN IN</a></label>
-									</form>
-								</div>
-							</div>
-						</div>
-					</section>
-
-					<!--student signup form-->
-					<section class="forms student-reg-form">
-						<div class="row margin-0 padding-0">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-0">
-								<div class="closebtn">
-									<i class="fas fa-times"></i>
-								</div>
-								<div class="form-content signup">
-									<form class="form-group" name="studentsignup">
-										<h3>Student Sign Up</h3>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>FULL NAME</label>
-												<input type="text" class="form-control" name="name" placeholder="Name">
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>gender</label><br>
-												<label class="radio-inline">male<input type="radio" name="gender" value="M"><span class="checkmark"></span></label>
-												<label class="radio-inline">female<input type="radio" name="gender" value="F"><span class="checkmark"></span></label>
-												<label class="radio-inline">other<input type="radio" name="gender" value="O"><span class="checkmark"></span></label>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>department</label>
-												<select class="form-control" name="dep">
-													<option value="First Year">First Year</option>
-													<option value="CS">CS</option>
-													<option value="EE">EE</option>
-													<option value="ME">ME</option>
-													<option value="EC">EC</option>
-													<option value="CE">CE</option>
-												</select>
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>batch/class</label>
-												<select class="form-control" name="batch">
-													<option value="First year">First Year</option>
-													<option value="Second year" >Second Year</option>
-													<option value="Third year">Third Year</option>
-													<option value="Final year">Final Year</option>
-												</select>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>college id</label>
-												<input type="text" class="form-control" name="id" placeholder="College ID">
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>course completion year</label>
-												<input type="text" id="datepicker-student" class="form-control" name="Lyear" placeholder="(ex. 2020)">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>email id</label>
-												<input type="email" class="form-control" name="email" placeholder="Email ID">
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>mobile no.</label>
-												<input type="number" class="form-control" name="mobile" placeholder="Mobile No.">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>password</label>
-												<input type="password" class="form-control" name="password" id="student-progress" placeholder="Password">
-												<div id="student-progress-container"></div>
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>confirm PASSWORD</label>
-												<input type="password" class="form-control" name="password2" placeholder="Confirm Password">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-												<small></small>
-											</div>
-										</div>
-										<button type="submit" id="studentsignupbutton" class="btn btn-primary" name="">
-											Sign Up
-											<i class="fas fa-spinner hide"></i>
-										</button>
-										<br>
-										<label>ALREADY HAVE AN ACCOUNT? <a href="#" class="student-login">SIGN IN</a></label>
-									</form>
-								</div>
-							</div>
-						</div>
-					</section>
-
-					<!--parent signup form-->
-					<section class="forms parent-reg-form">
-						<div class="row margin-0 padding-0">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-0">
-								<div class="closebtn">
-									<i class="fas fa-times"></i>
-								</div>
-								<div class="form-content signup">
-									<form class="form-group" name="parentsignup">
-										<h3>Parent Sign Up</h3>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>FULL NAME</label>
-												<input type="text" class="form-control" name="name" placeholder="Name">
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>email id</label>
-												<input type="email" class="form-control" name="email" placeholder="Email ID">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>student's college id</label>
-												<input type="text" class="form-control" name="id" placeholder="College ID Of Student">
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>course completion year</label>
-												<input type="text" id="datepicker-parent" class="form-control" name="Lyear" placeholder="(ex. 2020)">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>relation</label>
-												<input type="text" class="form-control" name="relation" placeholder="Relation">
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>mobile no.</label>
-												<input type="number" class="form-control" name="mobile" placeholder="Mobile No.">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>password</label>
-												<input type="password" class="form-control" name="password" id="parent-progress" placeholder="Password">
-												<div id="parent-progress-container"></div>
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>confirm PASSWORD</label>
-												<input type="password" class="form-control" name="password2" placeholder="Confirm Password">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-												<small></small>
-											</div>
-										</div>
-										<button type="submit" id="parentsignupbutton" class="btn btn-primary" name="">
-											Sign Up
-											<i class="fas fa-spinner hide"></i>
-										</button>
-										<br>
-										<label>ALREADY HAVE AN ACCOUNT? <a href="#" class="parent-login">SIGN IN</a></label>
-									</form>
-								</div>
-							</div>
-						</div>
-					</section>
-
-					<!--Nonteaching signup form-->
-					<section class="forms nonteaching-reg-form">
-						<div class="row margin-0 padding-0">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-0">
-								<div class="closebtn">
-									<i class="fas fa-times"></i>
-								</div>
-								<div class="form-content signup">
-									<form class="form-group" name="nonteachingsignup">
-										<h3>NonTeaching Sign Up</h3>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>FULL NAME</label>
-												<input type="text" class="form-control" name="name" placeholder="Name">
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>gender</label><br>
-												<label class="radio-inline">male<input type="radio" name="gender" value="M"><span class="checkmark"></span></label>
-												<label class="radio-inline">female<input type="radio" name="gender" value="F"><span class="checkmark"></span></label>
-												<label class="radio-inline">other<input type="radio" name="gender" value="O"><span class="checkmark"></span></label>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label for="dep">department</label>
-												<select class="form-control" name="dep">
-													<option value="CS">CS</option>
-													<option value="EE">EE</option>
-													<option value="ME">ME</option>
-													<option value="EC">EC</option>
-													<option value="CE">CE</option>
-													<option value="SLLL">SLLL</option>
-												</select>
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>designation</label>
-												<input type="text" class="form-control" name="desig" placeholder="Designation">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>employee id</label>
-												<input type="text" class="form-control" name="id" placeholder="Employee ID">
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>email id</label>
-												<input type="email" class="form-control" name="email" placeholder="Email ID">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>mobile no.</label>
-												<input type="number" class="form-control" name="mobile" placeholder="Mobile No.">
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-												<label>password</label>
-												<input type="password" class="form-control" name="password" id="nonteaching-progress" placeholder="Password">
-												<div id="nonteaching-progress-container"></div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-												<label>confirm PASSWORD</label>
-												<input type="password" class="form-control" name="password2" placeholder="Confirm Password">
-											</div>
-											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-												<small></small>
-											</div>
-										</div>
-										<button type="submit" id="nonteachingsignupbutton" class="btn btn-primary" name="">
-											Sign Up
-											<i class="fas fa-spinner hide"></i>
-										</button>
-										<br>
-										<label>ALREADY HAVE AN ACCOUNT? <a href="#" class="nonteaching-login">SIGN IN</a></label>
-									</form>
-								</div>
-							</div>
-						</div>
-					</section>
-
-
-					<!--forgot password form-->
-
-					<section class="forms Admin_forgotpass">
-						<div class="row margin-0 padding-0">
-							<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
-								<div class="left-form-image">
-									<div class="left-form-image-layer">
-										<div class="closebtn">
-											<i class="fas fa-times"></i>
-										</div>
-										<h1>WELCOME TO</h1>
-										<h5>GRIEVANCE REDRESSAL PORTAL</h5>
-										<ul>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-										</ul>
+											<button type="submit" id="facultysignupbutton" class="btn btn-primary" name="">
+												Sign Up
+												<i class="fas fa-spinner hide"></i>
+											</button>
+											<br>
+											<label>ALREADY HAVE AN ACCOUNT? <a href="#" class="faculty-login">SIGN IN</a></label>
+										</form>
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
-								<div class="form-content">
-									<form class="form-group" name="Admin_forgotpass">
-										<h3>Forgot Your Password?</h3>
-										<small>An email will be sent to the registered mail address.</small>
-										<div class="input-group">
-											<input type="text" class="form-control" name="email" placeholder="Email">
-											<span id="forgotemail" class="input-group-addon"><i class="fas fa-check hide"></i><i class="fas fa-times hide" title="wrong"></i></span>
-										</div>
-										<br>
-										<br>
-										<button type="submit" id="Admin_forgotpass" class="btn btn-primary" name="">
-											Send Email
-											<i class="fas fa-spinner hide"></i>
-										</button>
-									</form>
-								</div>
-							</div>
-						</div>
-					</section>
+						</section>
 
-					<section class="forms Gcm_forgotpass">
-						<div class="row margin-0 padding-0">
-							<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
-								<div class="left-form-image">
-									<div class="left-form-image-layer">
-										<div class="closebtn">
-											<i class="fas fa-times"></i>
-										</div>
-										<h1>WELCOME TO</h1>
-										<h5>GRIEVANCE REDRESSAL PORTAL</h5>
-										<ul>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-										</ul>
+						<!--student signup form-->
+						<section class="forms student-reg-form">
+							<div class="row margin-0 padding-0">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-0">
+									<div class="closebtn">
+										<i class="fas fa-times"></i>
+									</div>
+									<div class="form-content signup">
+										<form class="form-group" name="studentsignup">
+											<h3>Student Sign Up</h3>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>FULL NAME</label>
+													<input type="text" class="form-control" name="name" placeholder="Name">
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>gender</label><br>
+													<label class="radio-inline">male<input type="radio" name="gender" value="M"><span class="checkmark"></span></label>
+													<label class="radio-inline">female<input type="radio" name="gender" value="F"><span class="checkmark"></span></label>
+													<label class="radio-inline">other<input type="radio" name="gender" value="O"><span class="checkmark"></span></label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>department</label>
+													<select class="form-control" name="dep">
+														<option value="First Year">First Year</option>
+														<option value="CS">CS</option>
+														<option value="EE">EE</option>
+														<option value="ME">ME</option>
+														<option value="EC">EC</option>
+														<option value="CE">CE</option>
+													</select>
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>batch/class</label>
+													<select class="form-control" name="batch">
+														<option value="First year">First Year</option>
+														<option value="Second year" >Second Year</option>
+														<option value="Third year">Third Year</option>
+														<option value="Final year">Final Year</option>
+													</select>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>college id</label>
+													<input type="text" class="form-control" name="id" placeholder="College ID">
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>course completion year</label>
+													<input type="text" id="datepicker-student" class="form-control" name="Lyear" placeholder="(ex. 2020)">
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>email id</label>
+													<input type="email" class="form-control" name="email" placeholder="Email ID">
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>mobile no.</label>
+													<input type="number" class="form-control" name="mobile" placeholder="Mobile No.">
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>password</label>
+													<input type="password" class="form-control" name="password" id="student-progress" placeholder="Password">
+													<div id="student-progress-container"></div>
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>confirm PASSWORD</label>
+													<input type="password" class="form-control" name="password2" placeholder="Confirm Password">
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<small></small>
+												</div>
+											</div>
+											<button type="submit" id="studentsignupbutton" class="btn btn-primary" name="">
+												Sign Up
+												<i class="fas fa-spinner hide"></i>
+											</button>
+											<br>
+											<label>ALREADY HAVE AN ACCOUNT? <a href="#" class="student-login">SIGN IN</a></label>
+										</form>
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
-								<div class="form-content">
-									<form class="form-group" name="Gcm_forgotpass">
-										<h3>Forgot Your Password?</h3>
-										<small>An email will be sent to the registered mail address.</small>
-										<div class="input-group">
-											<input type="text" class="form-control" name="email" placeholder="Email">
-											<span id="forgotemail" class="input-group-addon"><i class="fas fa-check hide"></i><i class="fas fa-times hide" title="wrong"></i></span>
-										</div>
-										<br>
-										<br>
-										<button type="submit" id="Gcm_forgotpass" class="btn btn-primary" name="">
-											Send Email
-											<i class="fas fa-spinner hide"></i>
-										</button>
-									</form>
-								</div>
-							</div>
-						</div>
-					</section>
+						</section>
 
-					<section class="forms mngmnt_forgotpass">
-						<div class="row margin-0 padding-0">
-							<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
-								<div class="left-form-image">
-									<div class="left-form-image-layer">
-										<div class="closebtn">
-											<i class="fas fa-times"></i>
-										</div>
-										<h1>WELCOME TO</h1>
-										<h5>GRIEVANCE REDRESSAL PORTAL</h5>
-										<ul>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-										</ul>
+						<!--parent signup form-->
+						<section class="forms parent-reg-form">
+							<div class="row margin-0 padding-0">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-0">
+									<div class="closebtn">
+										<i class="fas fa-times"></i>
+									</div>
+									<div class="form-content signup">
+										<form class="form-group" name="parentsignup">
+											<h3>Parent Sign Up</h3>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>FULL NAME</label>
+													<input type="text" class="form-control" name="name" placeholder="Name">
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>email id</label>
+													<input type="email" class="form-control" name="email" placeholder="Email ID">
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>student's college id</label>
+													<input type="text" class="form-control" name="id" placeholder="College ID Of Student">
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>course completion year</label>
+													<input type="text" id="datepicker-parent" class="form-control" name="Lyear" placeholder="(ex. 2020)">
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>relation</label>
+													<input type="text" class="form-control" name="relation" placeholder="Relation">
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>mobile no.</label>
+													<input type="number" class="form-control" name="mobile" placeholder="Mobile No.">
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>password</label>
+													<input type="password" class="form-control" name="password" id="parent-progress" placeholder="Password">
+													<div id="parent-progress-container"></div>
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>confirm PASSWORD</label>
+													<input type="password" class="form-control" name="password2" placeholder="Confirm Password">
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<small></small>
+												</div>
+											</div>
+											<button type="submit" id="parentsignupbutton" class="btn btn-primary" name="">
+												Sign Up
+												<i class="fas fa-spinner hide"></i>
+											</button>
+											<br>
+											<label>ALREADY HAVE AN ACCOUNT? <a href="#" class="parent-login">SIGN IN</a></label>
+										</form>
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
-								<div class="form-content">
-									<form class="form-group" name="mngmnt_forgotpass">
-										<h3>Forgot Your Password?</h3>
-										<small>An email will be sent to the registered mail address.</small>
-										<div class="input-group">
-											<input type="text" class="form-control" name="email" placeholder="Email">
-											<span id="forgotemail" class="input-group-addon"><i class="fas fa-check hide"></i><i class="fas fa-times hide" title="wrong"></i></span>
-										</div>
-										<br>
-										<br>
-										<button type="submit" id="mngmnt_forgotpass" class="btn btn-primary" name="">
-											Send Email
-											<i class="fas fa-spinner hide"></i>
-										</button>
-									</form>
-								</div>
-							</div>
-						</div>
-					</section>
+						</section>
 
-					<section class="forms Student_forgotpass">
-						<div class="row margin-0 padding-0">
-							<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
-								<div class="left-form-image">
-									<div class="left-form-image-layer">
-										<div class="closebtn">
-											<i class="fas fa-times"></i>
-										</div>
-										<h1>WELCOME TO</h1>
-										<h5>GRIEVANCE REDRESSAL PORTAL</h5>
-										<ul>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-											<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
-										</ul>
+						<!--Nonteaching signup form-->
+						<section class="forms nonteaching-reg-form">
+							<div class="row margin-0 padding-0">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding-0">
+									<div class="closebtn">
+										<i class="fas fa-times"></i>
+									</div>
+									<div class="form-content signup">
+										<form class="form-group" name="nonteachingsignup">
+											<h3>NonTeaching Sign Up</h3>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>FULL NAME</label>
+													<input type="text" class="form-control" name="name" placeholder="Name">
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>gender</label><br>
+													<label class="radio-inline">male<input type="radio" name="gender" value="M"><span class="checkmark"></span></label>
+													<label class="radio-inline">female<input type="radio" name="gender" value="F"><span class="checkmark"></span></label>
+													<label class="radio-inline">other<input type="radio" name="gender" value="O"><span class="checkmark"></span></label>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label for="dep">department</label>
+													<select class="form-control" name="dep">
+														<option value="CS">CS</option>
+														<option value="EE">EE</option>
+														<option value="ME">ME</option>
+														<option value="EC">EC</option>
+														<option value="CE">CE</option>
+														<option value="SLLL">SLLL</option>
+													</select>
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>designation</label>
+													<input type="text" class="form-control" name="desig" placeholder="Designation">
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>employee id</label>
+													<input type="text" class="form-control" name="id" placeholder="Employee ID">
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>email id</label>
+													<input type="email" class="form-control" name="email" placeholder="Email ID">
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>mobile no.</label>
+													<input type="number" class="form-control" name="mobile" placeholder="Mobile No.">
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+													<label>password</label>
+													<input type="password" class="form-control" name="password" id="nonteaching-progress" placeholder="Password">
+													<div id="nonteaching-progress-container"></div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+													<label>confirm PASSWORD</label>
+													<input type="password" class="form-control" name="password2" placeholder="Confirm Password">
+												</div>
+												<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+													<small></small>
+												</div>
+											</div>
+											<button type="submit" id="nonteachingsignupbutton" class="btn btn-primary" name="">
+												Sign Up
+												<i class="fas fa-spinner hide"></i>
+											</button>
+											<br>
+											<label>ALREADY HAVE AN ACCOUNT? <a href="#" class="nonteaching-login">SIGN IN</a></label>
+										</form>
 									</div>
 								</div>
 							</div>
-							<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
-								<div class="form-content">
-									<form class="form-group" name="Student_forgotpass">
-										<h3>Forgot Your Password?</h3>
-										<small>An email will be sent to the registered mail address.</small>
-										<div class="input-group">
-											<input type="text" class="form-control" name="email" placeholder="Email">
-											<span id="forgotemail" class="input-group-addon"><i class="fas fa-check hide"></i><i class="fas fa-times hide" title="wrong"></i></span>
+						</section>
+
+
+						<!--forgot password form-->
+
+						<section class="forms Admin_forgotpass">
+							<div class="row margin-0 padding-0">
+								<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
+									<div class="left-form-image">
+										<div class="left-form-image-layer">
+											<div class="closebtn">
+												<i class="fas fa-times"></i>
+											</div>
+											<h1>WELCOME TO</h1>
+											<h5>GRIEVANCE REDRESSAL PORTAL</h5>
+											<ul>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+											</ul>
 										</div>
-										<br>
-										<br>
-										<button type="submit" id="Student_forgotpass" class="btn btn-primary" name="">
-											Send Email
-											<i class="fas fa-spinner hide"></i>
-										</button>
-									</form>
+									</div>
+								</div>
+								<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
+									<div class="form-content">
+										<form class="form-group" name="Admin_forgotpass">
+											<h3>Forgot Your Password?</h3>
+											<small>An email will be sent to the registered mail address.</small>
+											<div class="input-group">
+												<input type="text" class="form-control" name="email" placeholder="Email">
+												<span id="forgotemail" class="input-group-addon"><i class="fas fa-check hide"></i><i class="fas fa-times hide" title="wrong"></i></span>
+											</div>
+											<br>
+											<br>
+											<button type="submit" id="Admin_forgotpass" class="btn btn-primary" name="">
+												Send Email
+												<i class="fas fa-spinner hide"></i>
+											</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<section class="forms Gcm_forgotpass">
+							<div class="row margin-0 padding-0">
+								<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
+									<div class="left-form-image">
+										<div class="left-form-image-layer">
+											<div class="closebtn">
+												<i class="fas fa-times"></i>
+											</div>
+											<h1>WELCOME TO</h1>
+											<h5>GRIEVANCE REDRESSAL PORTAL</h5>
+											<ul>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
+									<div class="form-content">
+										<form class="form-group" name="Gcm_forgotpass">
+											<h3>Forgot Your Password?</h3>
+											<small>An email will be sent to the registered mail address.</small>
+											<div class="input-group">
+												<input type="text" class="form-control" name="email" placeholder="Email">
+												<span id="forgotemail" class="input-group-addon"><i class="fas fa-check hide"></i><i class="fas fa-times hide" title="wrong"></i></span>
+											</div>
+											<br>
+											<br>
+											<button type="submit" id="Gcm_forgotpass" class="btn btn-primary" name="">
+												Send Email
+												<i class="fas fa-spinner hide"></i>
+											</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<section class="forms mngmnt_forgotpass">
+							<div class="row margin-0 padding-0">
+								<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
+									<div class="left-form-image">
+										<div class="left-form-image-layer">
+											<div class="closebtn">
+												<i class="fas fa-times"></i>
+											</div>
+											<h1>WELCOME TO</h1>
+											<h5>GRIEVANCE REDRESSAL PORTAL</h5>
+											<ul>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
+									<div class="form-content">
+										<form class="form-group" name="mngmnt_forgotpass">
+											<h3>Forgot Your Password?</h3>
+											<small>An email will be sent to the registered mail address.</small>
+											<div class="input-group">
+												<input type="text" class="form-control" name="email" placeholder="Email">
+												<span id="forgotemail" class="input-group-addon"><i class="fas fa-check hide"></i><i class="fas fa-times hide" title="wrong"></i></span>
+											</div>
+											<br>
+											<br>
+											<button type="submit" id="mngmnt_forgotpass" class="btn btn-primary" name="">
+												Send Email
+												<i class="fas fa-spinner hide"></i>
+											</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<section class="forms Student_forgotpass">
+							<div class="row margin-0 padding-0">
+								<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 padding-0">
+									<div class="left-form-image">
+										<div class="left-form-image-layer">
+											<div class="closebtn">
+												<i class="fas fa-times"></i>
+											</div>
+											<h1>WELCOME TO</h1>
+											<h5>GRIEVANCE REDRESSAL PORTAL</h5>
+											<ul>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+												<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 padding-0">
+									<div class="form-content">
+										<form class="form-group" name="Student_forgotpass">
+											<h3>Forgot Your Password?</h3>
+											<small>An email will be sent to the registered mail address.</small>
+											<div class="input-group">
+												<input type="text" class="form-control" name="email" placeholder="Email">
+												<span id="forgotemail" class="input-group-addon"><i class="fas fa-check hide"></i><i class="fas fa-times hide" title="wrong"></i></span>
+											</div>
+											<br>
+											<br>
+											<button type="submit" id="Student_forgotpass" class="btn btn-primary" name="">
+												Send Email
+												<i class="fas fa-spinner hide"></i>
+											</button>
+										</form>
+									</div>
 								</div>
 							</div>
 						</section>
@@ -1056,28 +1057,6 @@
 
 				</div>
 			</div>
-
-		</div>
-
-		<div class="tooltip">Hover over mekdfjhsjadhfjhdshdfhdfhsdhfsadjfklsjadksdf
-			<span class="tooltiptext">Tooltip text</span>
-		</div>
-
-		<div class="info jumbotron container" id="about-us"><br><br>
-			<h1 id="aboutheading">About Us</h1>
-
-			<div id="aboutinfo" class="information">
-				<h3>“Be Acknowledged Globally for Value based Education & Innovation in Service of Humankind”</h3>
-				<p>
-					The Anand International College of Engineering (Anand-ICE),   approved     by AICTE and affiliated to RTU, Kota is established at India’s Pink City-Jaipur  in year 2010. Since its inception, the institute persists its credentials  of  joyous teaching-learning environs of global standards and offers B.Tech. degree programme in five engineering disciplines i.e. Civil, Computer Science, Electrical, Electronics & Communication, and Mechanical Engineering. The institute nurtures intellectually inspiring Academic Environment at lush-green landscaped campus with state-of-the-art infrastructure.<br><br>
-
-					The Anand-ICE has been distinguished for its qualitative teaching-learning processes that place it among the best emerging engineering institutions of India (Times of India). The Anand family comprises eminent academicians & scientists as faculty who also extend Academic parenting to the students. The family further broadens its intellectual arena by bringing internationally renowned professionals on board for achieving higher mark of academic intelligence.<br>
-					The institute with Anand Edge, empowers students to redesign their curriculum through unique FSBT4 while facilitating students to not only deeply understand the fundamentals of engineering sciences but also train to obtain sustainable solutions of real-life problems.
-					The institute extends strategic partnerships with various renowned foreign universities for exposing students through Abroad Training Programme. The institute also encourages the students to incubate their innovative concepts in order to foster new ventures.<br>
-					The campus enriches students with diverse range of competencies through 390o evolving processes and gears them up to respond to the challenges of every aspect of life and compete globally.<br>
-				The success of our students in the wider world itself speaks for them. Join us and be part of stream of success!</p>
-
-			</div>
 		</div>
 
 		<div class="info jumbotron container" id="contact"><br><br>
@@ -1101,37 +1080,156 @@
 
 		<a id="totop" title="Back To Top"></a>
 
-		<footer>
 
-			<div class="follow">
-				<span>Follow Us</span><br>
-				<a href="https://twitter.com/AnandcollegeEng" class="fab fa-twitter" target="_blank"></a>
-				<a href="https://www.youtube.com/channel/UCAcHeVvVgwRx7wSWw69RgYg/" class="fab fa-youtube" target="_blank"></a>
-				<a href="https://www.pinterest.com/anandice/" class="fab fa-pinterest-p" target="_blank"></a>
-				<a href="https://plus.google.com/u/1/114413981688380933224" class="fab fa-google-plus-g" target="_blank"></a>
-				<a href="https://www.facebook.com/Anand-International-College-of-Engineering-Jaipur-789735534445909/" class="fab fa-facebook-f" target="_blank"></a>
-				<a href="https://www.instagram.com/anandcollege.eng/" class="fab fa-instagram" target="_blank"></a><br>
+	</div>
 
-				<p>We Are The Influencers, Not The Followers!!!</p><br>
-				<p>Designed By: Yo Yo Honey Singh</p>
+	<div class="aboutuspage hide">
+		<i><span class="fas fa-times"></span></i>
+		<h1 class="text-center">About Us</h1>
+		<div class="row information text-justify">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+				<h4>“Be Acknowledged Globally for Value based Education & Innovation in Service of Humankind”</h4>
+				<p>
+					The Anand International College of Engineering (Anand-ICE),   approved     by AICTE and affiliated to RTU, Kota is established at India’s Pink City-Jaipur  in year 2010. Since its inception, the institute persists its credentials  of  joyous teaching-learning environs of global standards and offers B.Tech. degree programme in five engineering disciplines i.e. Civil, Computer Science, Electrical, Electronics & Communication, and Mechanical Engineering. The institute nurtures intellectually inspiring Academic Environment at lush-green landscaped campus with state-of-the-art infrastructure.<br><br>
+
+					The Anand-ICE has been distinguished for its qualitative teaching-learning processes that place it among the best emerging engineering institutions of India (Times of India). The Anand family comprises eminent academicians & scientists as faculty who also extend Academic parenting to the students. The family further broadens its intellectual arena by bringing internationally renowned professionals on board for achieving higher mark of academic intelligence.<br>
+					The institute with Anand Edge, empowers students to redesign their curriculum through unique FSBT4 while facilitating students to not only deeply understand the fundamentals of engineering sciences but also train to obtain sustainable solutions of real-life problems.
+					The institute extends strategic partnerships with various renowned foreign universities for exposing students through Abroad Training Programme. The institute also encourages the students to incubate their innovative concepts in order to foster new ventures.<br>
+					The campus enriches students with diverse range of competencies through 390o evolving processes and gears them up to respond to the challenges of every aspect of life and compete globally.<br>
+				The success of our students in the wider world itself speaks for them. Join us and be part of stream of success!</p>
 			</div>
+		</div>
+		<h1 id="ourteam" class="text-center py-3">Our Team</h1>
+		<div class="container team">
+			<div class="row">
+				<div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-12 px-3 text-center">
+					<img class="img-fluid rounded-circle" src="../images/AnubhavSir.jpg">
+					<br>
+					<h4>Mentor: Asst. Prof. Mr. Anubhav Saxena</h4>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</div>
+			</div>
+			<div class="row py-5">
+				<div class="col-lg-4 col-md-6 col-sm-12 text-center p-5">
+					<img class="img-fluid rounded-circle" src="../images/AnubhavSir.jpg">
+					<br>
+					<h4>Mentor: Asst. Prof. Mr. Anubhav Saxena</h4>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 text-center p-5">
+					<img class="img-fluid rounded-circle" src="../images/AnubhavSir.jpg">
+					<br>
+					<h4>Mentor: Asst. Prof. Mr. Anubhav Saxena</h4>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 text-center p-5">
+					<img class="img-fluid rounded-circle" src="../images/AnubhavSir.jpg">
+					<br>
+					<h4>Mentor: Asst. Prof. Mr. Anubhav Saxena</h4>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 text-center p-5">
+					<img class="img-fluid rounded-circle" src="../images/AnubhavSir.jpg">
+					<br>
+					<h4>Mentor: Asst. Prof. Mr. Anubhav Saxena</h4>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 text-center p-5">
+					<img class="img-fluid rounded-circle" src="../images/AnubhavSir.jpg">
+					<br>
+					<h4>Mentor: Asst. Prof. Mr. Anubhav Saxena</h4>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</div>
+				<div class="col-lg-4 col-md-6 col-sm-12 text-center p-5">
+					<img class="img-fluid rounded-circle" src="../images/AnubhavSir.jpg">
+					<br>
+					<h4>Mentor: Asst. Prof. Mr. Anubhav Saxena</h4>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
-		</footer>
+	<footer>
+
+		<div class="follow">
+			<span>Follow Us</span><br>
+			<a href="https://twitter.com/AnandcollegeEng" class="fab fa-twitter" target="_blank"></a>
+			<a href="https://www.youtube.com/channel/UCAcHeVvVgwRx7wSWw69RgYg/" class="fab fa-youtube" target="_blank"></a>
+			<a href="https://www.pinterest.com/anandice/" class="fab fa-pinterest-p" target="_blank"></a>
+			<a href="https://plus.google.com/u/1/114413981688380933224" class="fab fa-google-plus-g" target="_blank"></a>
+			<a href="https://www.facebook.com/Anand-International-College-of-Engineering-Jaipur-789735534445909/" class="fab fa-facebook-f" target="_blank"></a>
+			<a href="https://www.instagram.com/anandcollege.eng/" class="fab fa-instagram" target="_blank"></a><br>
+
+			<p>We Are The Influencers, Not The Followers!!!</p><br>
+			<p>Designed By: Yo Yo Honey Singh</p>
+		</div>
+
+	</footer>
 
 
 
-		<!-- Popper.JS -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-		<!-- Bootstrap JS -->
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-		<script src="https://unpkg.com/scrollreveal"></script>
-		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-		<script type="text/javascript" src="javascripts/password-score.js"></script>
-		<script type="text/javascript" src="javascripts/password-score-options.js"></script>
-		<script type="text/javascript" src="javascripts/bootstrap-strength-meter.js"></script>
-		<script src="/javascripts/home.js"></script>
-		<script type="text/javascript" src="javascripts/validate.js"></script>
+	<!-- Popper.JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+	<!-- Bootstrap JS -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/scrollreveal"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<script type="text/javascript" src="javascripts/password-score.js"></script>
+	<script type="text/javascript" src="javascripts/password-score-options.js"></script>
+	<script type="text/javascript" src="javascripts/bootstrap-strength-meter.js"></script>
+	<script src="/javascripts/home.js"></script>
+	<script type="text/javascript" src="javascripts/validate.js"></script>
 
-	</body>
+</body>
 
-	</html>
+</html>
