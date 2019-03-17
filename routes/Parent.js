@@ -199,7 +199,7 @@ router.get('/Home',requireLogin, function(req, res, next) {
     req.checkBody('name','Name field is required').notEmpty();
     req.checkBody('email','Email is not valid').isEmail();
     req.checkBody('relation','relation field is required').notEmpty();
-    req.checkBody('cdate','course completion date field is required').notEmpty();
+    // req.checkBody('cdate','course completion date field is required').notEmpty();
     req.checkBody('mobile','mobile no. field is required').notEmpty();
     req.checkBody('password','password field is required').notEmpty();
     req.checkBody('password2','password do not match').equals(password);
@@ -234,7 +234,7 @@ router.get('/Home',requireLogin, function(req, res, next) {
           var random=Math.floor((Math.random() * 100) + 54);
       var newUser=new Parent({
         name: name,
-        Cdate:cdate,
+        // Cdate:cdate,
         ward_id:ward_id,
         Last_year:Last_year,
         relation:relation,

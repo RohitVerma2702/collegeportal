@@ -1,88 +1,60 @@
+//email validation variable 're'...
+var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 $('#adminlogin').click(function(e) {
 	e.preventDefault();
 	var a = document.adminlogin.id.value;
 	var b = document.adminlogin.password.value;
-	if (a=="") {
-		$('#adminid .fa-times').removeClass('hide');
-		$('#adminid .fa-times').attr('title', 'Please Enter Username');
-		$('#adminid').addClass('wrong').removeClass('correct');
-
-		if (b=="") {
-			$('#adminpass .fa-times').removeClass('hide');
-			$('#adminpass .fa-times').attr('title', 'Please Enter Password');
-			$('#adminpass').addClass('wrong').removeClass('correct');
-			return false;
-		}else{
-			$('#adminpass .fa-times').addClass('hide');
-		}
-
+	if (a=="" || b=="") {
+		$('.adminlogin small').text('Please fill all the fields.');
+		return false;
 	}
-
-	if(a!=""){
-		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;	
-		if(!re.test(a))
-	{	$('#adminid .fa-times').removeClass('hide');
-		$('#adminid').addClass('wrong').removeClass('correct');
-	return false;
+	else if (!re.test(a)) {
+		$('.adminlogin small').text('Enter valid Email address.');
+		return false;	
 	}
-
-   $('#adminid .fa-times').addClass('hide');
-
-		if (b=="") {
-			$('#adminpass .fa-times').removeClass('hide');
-			$('#adminpass .fa-times').attr('title', 'Please Enter Password');
-			$('#adminpass').addClass('wrong').removeClass('correct');
-			return false;
-		}else{
-			$('#adminpass .fa-times').addClass('hide');
-
-			$.ajax({
-				type: 'post',
-				datatype: "json",
-				data: {
-					id: a,
-					password: b,
-				},
-				     url: 'http://localhost:3000/Admin/login', //node.js server is running
-				     error: function(error){
-				     	if(error.responseText == 'Unauthorized User'){
-				     		console.log(error.responseText);
-				     		$('#adminid').addClass('wrong').removeClass('correct');
-				     		$('#adminid .fa-times').removeClass('hide');
-				     		$('#adminid .fa-times').attr('title', 'Unauthorized User');
-				     		$('#adminid .fa-check').addClass('hide');
-				     		return false;
-				     	}
-				     	else if (error.responseText == 'pass') {
-				     		console.log(error.responseText);
-				     		$('#adminpass').addClass('wrong');
-				     		$('#adminpass .fa-times').removeClass('hide');
-				     		$('#adminpass .fa-times').attr('title', 'Invalid Password');
-				     		$('#adminid').removeClass('wrong').addClass('correct');
-				     		$('#adminid .fa-check').removeClass('hide');
-				     		$('#adminid .fa-times').addClass('hide');
-				     	}
-				     	else if (error.responseText == 'some') {
-				     		console.log(error.responseText);
-				     		$('#adminerror').text('Someone already logged in!');
-				     	}
-				     	else{
-				     		console.log('Unknown Error');
-				     		$('#adminerror').text('unknown error! please try again.');
-				     	}
-				     },
-				     success: function(data) {
-				     	if (data === 'success') {
-				     		console.log(data);
-				     		$('#adminid, #adminpass').removeClass('wrong').addClass('correct');
-				     		$('#adminid .fa-times, #adminpass .fa-times').addClass('hide');
-				     		$('#adminid .fa-check, #adminpass .fa-check').removeClass('hide');
-				     		window.location.href = "http://localhost:3000/Admin/Home";
-				     		return false;
-				     	}
-				     }
-				 });
-		}
+	else{
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				id: a,
+				password: b,
+			},
+			url: 'http://localhost:3000/Admin/login', //node.js server is running
+			error: function(error){
+				if(error.responseText == 'Unauthorized User'){
+					console.log(error.responseText);
+					$('.adminlogin small').text('Unauthorized User!');
+					return false;
+				}
+				else if (error.responseText == 'pass') {
+					console.log(error.responseText);
+					$('.adminlogin small').text('Invalid Password!');
+					return false;
+					
+				}
+				else if (error.responseText == 'some') {
+					console.log(error.responseText);
+					$('.adminlogin small').text('Someone already logged in!');
+					return false;
+				}
+				else{
+					console.log('Unknown Error');
+					$('.adminlogin small').text('Unknown Error! Please try again.');
+					return false;
+				}
+			},
+			success: function(data) {
+				if (data === 'success') {
+					console.log(data);
+					$('.adminlogin .fa-spinner').fadeIn(100);
+					$('.adminlogin small').text('');
+					window.location.href = "http://localhost:3000/Admin/Home";
+					return false;
+				}
+			}
+		});
 	}
 });
 
@@ -91,83 +63,56 @@ $('#mngmntlogin').click(function(e) {
 	e.preventDefault();
 	var a = document.mngmntlogin.id.value;
 	var b = document.mngmntlogin.password.value;
-
-	if (a=="") {
-		$('#mngmntid .fa-times').removeClass('hide');
-		$('#mngmntid').addClass('wrong').removeClass('correct');
-
-		if (b=="") {
-			$('#mngmntpass .fa-times').removeClass('hide');
-			$('#mngmntpass').addClass('wrong').removeClass('correct');
-			return false;
-		}else{
-			$('#mngmntpass .fa-times').addClass('hide');
-		}
-
+	if (a=="" || b=="") {
+		$('.mngmntlogin small').text('Please fill all the fields.');
+		return false;
 	}
-
-	if(a!=""){
-		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;	
-		if(!re.test(a))
-	{		$('#mngmntid .fa-times').removeClass('hide');
-	$('#mngmntid').addClass('wrong').removeClass('correct');
-	return false;
+	else if (!re.test(a)) {
+		$('.mngmntlogin small').text('Enter valid Email address.');
+		return false;	
 	}
-		$('#mngmntid .fa-times').addClass('hide');
-
-		if (b=="") {
-			$('#mngmntpass .fa-times').removeClass('hide');
-			$('#mngmntpass').addClass('wrong').removeClass('correct');
-			return false;
-		}else{
-			$('#mngmntpass .fa-times').addClass('hide');
-
-
-			$.ajax({
-				type: 'post',
-				datatype: "json",
-				data: {
-					id: a,
-					password: b,
-				},
-				     url: 'http://localhost:3000/mngmnt/login', //node.js server is running
-				     error: function(error){
-				     	if(error.responseText == 'Unauthorized User'){
-				     		console.log(error.responseText);
-				     		$('#mngmntid').addClass('wrong').removeClass('correct');
-				     		$('#mngmntid .fa-times').removeClass('hide');
-				     		$('#mngmntid .fa-check').addClass('hide');
-				     		return false;
-				     	}
-				     	else if (error.responseText == 'pass') {
-				     		console.log(error.responseText);
-				     		$('#mngmntpass').addClass('wrong');
-				     		$('#mngmntpass .fa-times').removeClass('hide');
-				     		$('#mngmntid').removeClass('wrong').addClass('correct');
-				     		$('#mngmntid .fa-check').removeClass('hide');
-				     		$('#mngmntid .fa-times').addClass('hide');
-				     	}
-				     	else if (error.responseText == 'some') {
-				     		console.log(error.responseText);
-				     		$('#mngmnterror').text('Someone already logged in!');
-				     	}
-				     	else{
-				     		console.log('Unknown Error');
-				     		$('#mngmnterror').text('unknown error! please try again.');
-				     	}
-				     },
-				     success: function(data) {
-				     	if (data === 'success') {
-				     		console.log(data);
-				     		$('#mngmntid, #mngmntpass').removeClass('wrong').addClass('correct');
-				     		$('#mngmntid .fa-times, #mngmntpass .fa-times').addClass('hide');
-				     		$('#mngmntid .fa-check, #mngmntpass .fa-check').removeClass('hide');
-				     		window.location.href = "http://localhost:3000/mngmnt/Home";
-				     		return false;
-				     	}
-				     }
-				 });
-		}
+	else{
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				id: a,
+				password: b,
+			},
+			url: 'http://localhost:3000/mngmnt/login', //node.js server is running
+			error: function(error){
+				if(error.responseText == 'Unauthorized User'){
+					console.log(error.responseText);
+					$('.mngmntlogin small').text('Unauthorized User!');
+					return false;
+				}
+				else if (error.responseText == 'pass') {
+					console.log(error.responseText);
+					$('.mngmntlogin small').text('Invalid Password!');
+					return false;
+					
+				}
+				else if (error.responseText == 'some') {
+					console.log(error.responseText);
+					$('.mngmntlogin small').text('Someone already logged in!');
+					return false;
+				}
+				else{
+					console.log('Unknown Error');
+					$('.mngmntlogin small').text('Unknown Error! Please try again.');
+					return false;
+				}
+			},
+			success: function(data) {
+				if (data === 'success') {
+					console.log(data);
+					$('.mngmntlogin .fa-spinner').fadeIn(100);
+					$('.mngmntlogin small').text('');
+					window.location.href = "http://localhost:3000/mngmnt/Home";
+					return false;
+				}
+			}
+		});
 	}
 });
 
@@ -176,88 +121,56 @@ $('#facultylogin').click(function(e) {
 	e.preventDefault();
 	var a = document.facultylogin.id.value;
 	var b = document.facultylogin.password.value;
-
-	if (a=="") {
-		$('#facultyid .fa-times').removeClass('hide');
-		$('#facultyid').addClass('wrong').removeClass('correct');
-
-		if (b=="") {
-			$('#facultypass .fa-times').removeClass('hide');
-			$('#facultypass').addClass('wrong').removeClass('correct');
-			return false;
-		}else{
-			$('#facultypass .fa-times').addClass('hide');
-		}
-
+	if (a=="" || b=="") {
+		$('.facultylogin small').text('Please fill all the fields.');
+		return false;
 	}
-
-	if(a!=""){
-		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;	
-		if(!re.test(a))
-	{		
-	 $('#facultyid .fa-times').removeClass('hide');
-	 $('#facultyid').addClass('wrong').removeClass('correct');
-	 return false;
+	else if (!re.test(a)) {
+		$('.facultylogin small').text('Enter valid Email address.');
+		return false;	
 	}
-		$('#facultyid .fa-times').addClass('hide');
-
-		if (b=="") {
-			$('#facultypass .fa-times').removeClass('hide');
-			$('#facultypass').addClass('wrong').removeClass('correct');
-			return false;
-		}else{
-			$('#facultypass .fa-times').addClass('hide');
-
-
-			$.ajax({
-				type: 'post',
-				datatype: "json",
-				data: {
-					id: a,
-					password: b,
-				},
-				     url: 'http://localhost:3000/faculty/login', //node.js server is running
-				     error: function(error){
-				     	if(error.responseText == 'Unauthorized User'){
-				     		console.log(error.responseText);
-				     		$('#facultyid').addClass('wrong').removeClass('correct');
-				     		$('#facultyid .fa-times').removeClass('hide');
-				     		$('#facultyid .fa-check').addClass('hide');
-				     		return false;
-				     	}
-				     	else if (error.responseText == 'pass') {
-				     		console.log(error.responseText);
-				     		$('#facultypass').addClass('wrong');
-				     		$('#facultypass .fa-times').removeClass('hide');
-				     		$('#facultyid').removeClass('wrong').addClass('correct');
-				     		$('#facultyid .fa-check').removeClass('hide');
-				     		$('#facultyid .fa-times').addClass('hide');
-				     	}
-				     	else if (error.responseText == 'some') {
-				     		console.log(error.responseText);
-				     		$('#facultyerror').text('Someone already logged in!');
-				     	}
-				     	else if (error.responseText == 'not apprv') {
-				     		console.log(error.responseText);
-				     		$('#facultyerror').text('Waiting for approval!');
-				     	}
-				     	else{
-				     		console.log('Unknown Error');
-				     		$('#facultyerror').text('unknown error! please try again.');
-				     	}
-				     },
-				     success: function(data) {
-				     	if (data === 'success') {
-				     		console.log(data);
-				     		$('#facultyid, #facultypass').removeClass('wrong').addClass('correct');
-				     		$('#facultyid .fa-times, #facultypass .fa-times').addClass('hide');
-				     		$('#facultyid .fa-check, #facultypass .fa-check').removeClass('hide');
-				     		window.location.href = "http://localhost:3000/faculty/Home";
-				     		return false;
-				     	}
-				     }
-				 });
-		}
+	else{
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				id: a,
+				password: b,
+			},
+			url: 'http://localhost:3000/faculty/login', //node.js server is running
+			error: function(error){
+				if(error.responseText == 'Unauthorized User'){
+					console.log(error.responseText);
+					$('.facultylogin small').text('Unauthorized User!');
+					return false;
+				}
+				else if (error.responseText == 'pass') {
+					console.log(error.responseText);
+					$('.facultylogin small').text('Invalid Password!');
+					return false;
+					
+				}
+				else if (error.responseText == 'some') {
+					console.log(error.responseText);
+					$('.facultylogin small').text('Someone already logged in!');
+					return false;
+				}
+				else{
+					console.log('Unknown Error');
+					$('.facultylogin small').text('Unknown Error! Please try again.');
+					return false;
+				}
+			},
+			success: function(data) {
+				if (data === 'success') {
+					console.log(data);
+					$('.facultylogin .fa-spinner').fadeIn(100);
+					$('.facultylogin small').text('');
+					window.location.href = "http://localhost:3000/faculty/Home";
+					return false;
+				}
+			}
+		});
 	}
 });
 
@@ -266,85 +179,56 @@ $('#gcmlogin').click(function(e) {
 	e.preventDefault();
 	var a = document.gcmlogin.id.value;
 	var b = document.gcmlogin.password.value;
-
-	if (a=="") {
-		$('#gcmid .fa-times').removeClass('hide');
-		$('#gcmid').addClass('wrong').removeClass('correct');
-
-		if (b=="") {
-			$('#gcmpass .fa-times').removeClass('hide');
-			$('#gcmpass').addClass('wrong').removeClass('correct');
-			return false;
-		}else{
-			$('#gcmpass .fa-times').addClass('hide');
-		}
-
+	if (a=="" || b=="") {
+		$('.gcmlogin small').text('Please fill all the fields.');
+		return false;
 	}
-
-	if(a!=""){
-		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;	
-		if(!re.test(a))
-	{		
-		$('#gcmid .fa-times').removeClass('hide');
-		$('#gcmid').addClass('wrong').removeClass('correct');
-return false;
+	else if (!re.test(a)) {
+		$('.gcmlogin small').text('Enter valid Email address.');
+		return false;	
 	}
-
-		$('#gcmid .fa-times').addClass('hide');
-
-		if (b=="") {
-			$('#gcmpass .fa-times').removeClass('hide');
-			$('#gcmpass').addClass('wrong').removeClass('correct');
-			return false;
-		}else{
-			$('#gcmpass .fa-times').addClass('hide');
-
-
-			$.ajax({
-				type: 'post',
-				datatype: "json",
-				data: {
-					id: a,
-					password: b,
-				},
-				     url: 'http://localhost:3000/Members/login', //node.js server is running
-				     error: function(error){
-				     	if(error.responseText == 'Unauthorized User'){
-				     		console.log(error.responseText);
-				     		$('#gcmid').addClass('wrong').removeClass('correct');
-				     		$('#gcmid .fa-times').removeClass('hide');
-				     		$('#gcmid .fa-check').addClass('hide');
-				     		return false;
-				     	}
-				     	else if (error.responseText == 'pass') {
-				     		console.log(error.responseText);
-				     		$('#gcmpass').addClass('wrong');
-				     		$('#gcmpass .fa-times').removeClass('hide');
-				     		$('#gcmid').removeClass('wrong').addClass('correct');
-				     		$('#gcmid .fa-check').removeClass('hide');
-				     		$('#gcmid .fa-times').addClass('hide');
-				     	}
-				     	else if (error.responseText == 'some') {
-				     		console.log(error.responseText);
-				     		$('#gcmerror').text('Someone already logged in!');
-				     	}
-				     	else{
-				     		console.log('Unknown Error');
-				     		$('#gcmerror').text('unknown error! please try again.');
-				     	}
-				     },
-				     success: function(data) {
-				     	if (data === 'success') {
-				     		console.log(data);
-				     		$('#gcmid, #gcmpass').removeClass('wrong').addClass('correct');
-				     		$('#gcmid .fa-times, #gcmpass .fa-times').addClass('hide');
-				     		$('#gcmid .fa-check, #gcmpass .fa-check').removeClass('hide');
-				     		window.location.href = "http://localhost:3000/Members/Home";
-				     		return false;
-				     	}
-				     }
-				 });
-		}
+	else{
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				id: a,
+				password: b,
+			},
+			url: 'http://localhost:3000/Members/login', //node.js server is running
+			error: function(error){
+				if(error.responseText == 'Unauthorized User'){
+					console.log(error.responseText);
+					$('.gcmlogin small').text('Unauthorized User!');
+					return false;
+				}
+				else if (error.responseText == 'pass') {
+					console.log(error.responseText);
+					$('.gcmlogin small').text('Invalid Password!');
+					return false;
+					
+				}
+				else if (error.responseText == 'some') {
+					console.log(error.responseText);
+					$('.gcmlogin small').text('Someone already logged in!');
+					return false;
+				}
+				else{
+					console.log('Unknown Error');
+					$('.gcmlogin small').text('Unknown Error! Please try again.');
+					return false;
+				}
+			},
+			success: function(data) {
+				if (data === 'success') {
+					console.log(data);
+					$('.gcmlogin .fa-spinner').fadeIn(100);
+					$('.gcmlogin small').text('');
+					window.location.href = "http://localhost:3000/Members/Home";
+					return false;
+				}
+			}
+		});
 	}
 });
 
@@ -353,86 +237,56 @@ $('#studentlogin').click(function(e) {
 	e.preventDefault();
 	var a = document.studentlogin.id.value;
 	var b = document.studentlogin.password.value;
-
-	if (a=="") {
-		$('#studentid .fa-times').removeClass('hide');
-		$('#studentid').addClass('wrong').removeClass('correct');
-
-		if (b=="") {
-			$('#studentpass .fa-times').removeClass('hide');
-			$('#studentpass').addClass('wrong').removeClass('correct');
-			return false;
-		}else{
-			$('#studentpass .fa-times').addClass('hide');
-		}
-
-	}
-
-	if(a!=""){
-		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;	
-		if(!re.test(a))
-	{		
-		$('#studentid .fa-times').removeClass('hide');
-		$('#studentid').addClass('wrong').removeClass('correct');
-
+	if (a=="" || b=="") {
+		$('.studentlogin small').text('Please fill all the fields.');
 		return false;
 	}
-
-		$('#studentid .fa-times').addClass('hide');
-
-		if (b=="") {
-			$('#studentpass .fa-times').removeClass('hide');
-			$('#studentpass').addClass('wrong').removeClass('correct');
-			return false;
-		}else{
-			$('#studentpass .fa-times').addClass('hide');
-
-
-			$.ajax({
-				type: 'post',
-				datatype: "json",
-				data: {
-					id: a,
-					password: b,
-				},
-				     url: 'http://localhost:3000/Student/login', //node.js server is running
-				     error: function(error){
-				     	if(error.responseText == 'Unauthorized User'){
-				     		console.log(error.responseText);
-				     		$('#studentid').addClass('wrong').removeClass('correct');
-				     		$('#studentid .fa-times').removeClass('hide');
-				     		$('#studentid .fa-check').addClass('hide');
-				     		return false;
-				     	}
-				     	else if (error.responseText == 'pass') {
-				     		console.log(error.responseText);
-				     		$('#studentpass').addClass('wrong');
-				     		$('#studentpass .fa-times').removeClass('hide');
-				     		$('#studentid').removeClass('wrong').addClass('correct');
-				     		$('#studentid .fa-check').removeClass('hide');
-				     		$('#studentid .fa-times').addClass('hide');
-				     	}
-				     	else if (error.responseText == 'some') {
-				     		console.log(error.responseText);
-				     		$('#studenterror').text('Someone already logged in!');
-				     	}
-				     	else{
-				     		console.log('Unknown Error');
-				     		$('#studenterror').text('unknown error! please try again.');
-				     	}
-				     },
-				     success: function(data) {
-				     	if (data === 'success') {
-				     		console.log(data);
-				     		$('#studentid, #studentpass').removeClass('wrong').addClass('correct');
-				     		$('#studentid .fa-times, #studentpass .fa-times').addClass('hide');
-				     		$('#studentid .fa-check, #studentpass .fa-check').removeClass('hide');
-				     		window.location.href = "http://localhost:3000/Student/Home";
-				     		return false;
-				     	}
-				     }
-				 });
-		}
+	else if (!re.test(a)) {
+		$('.studentlogin small').text('Enter valid Email address.');
+		return false;	
+	}
+	else{
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				id: a,
+				password: b,
+			},
+			url: 'http://localhost:3000/Student/login', //node.js server is running
+			error: function(error){
+				if(error.responseText == 'Unauthorized User'){
+					console.log(error.responseText);
+					$('.studentlogin small').text('Unauthorized User!');
+					return false;
+				}
+				else if (error.responseText == 'pass') {
+					console.log(error.responseText);
+					$('.studentlogin small').text('Invalid Password!');
+					return false;
+					
+				}
+				else if (error.responseText == 'some') {
+					console.log(error.responseText);
+					$('.studentlogin small').text('Someone already logged in!');
+					return false;
+				}
+				else{
+					console.log('Unknown Error');
+					$('.studentlogin small').text('Unknown Error! Please try again.');
+					return false;
+				}
+			},
+			success: function(data) {
+				if (data === 'success') {
+					console.log(data);
+					$('.studentlogin .fa-spinner').fadeIn(100);
+					$('.studentlogin small').text('');
+					window.location.href = "http://localhost:3000/Student/Home";
+					return false;
+				}
+			}
+		});
 	}
 });
 
@@ -441,85 +295,56 @@ $('#parentlogin').click(function(e) {
 	e.preventDefault();
 	var a = document.parentlogin.id.value;
 	var b = document.parentlogin.password.value;
-
-	if (a=="") {
-		$('#parentid .fa-times').removeClass('hide');
-		$('#parentid').addClass('wrong').removeClass('correct');
-
-		if (b=="") {
-			$('#parentpass .fa-times').removeClass('hide');
-			$('#parentpass').addClass('wrong').removeClass('correct');
-			return false;
-		}else{
-			$('#parentpass .fa-times').addClass('hide');
-		}
-
-	}
-
-	if(a!=""){
-		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;	
-		if(!re.test(a))
-	     {		
-		$('#parentid .fa-times').removeClass('hide');
-		$('#parentid').addClass('wrong').removeClass('correct');
+	if (a=="" || b=="") {
+		$('.parentlogin small').text('Please fill all the fields.');
 		return false;
-		} 
-
-		$('#parentid .fa-times').addClass('hide');
-
-		if (b=="") {
-			$('#parentpass .fa-times').removeClass('hide');
-			$('#parentpass').addClass('wrong').removeClass('correct');
-			return false;
-		}else{
-			$('#parentpass .fa-times').addClass('hide');
-
-
-			$.ajax({
-				type: 'post',
-				datatype: "json",
-				data: {
-					id: a,
-					password: b,
-				},
-				     url: 'http://localhost:3000/Parent/login', //node.js server is running
-				     error: function(error){
-				     	if(error.responseText == 'Unauthorized User'){
-				     		console.log(error.responseText);
-				     		$('#parentid').addClass('wrong').removeClass('correct');
-				     		$('#parentid .fa-times').removeClass('hide');
-				     		$('#parentid .fa-check').addClass('hide');
-				     		return false;
-				     	}
-				     	else if (error.responseText == 'pass') {
-				     		console.log(error.responseText);
-				     		$('#parentpass').addClass('wrong');
-				     		$('#parentpass .fa-times').removeClass('hide');
-				     		$('#parentid').removeClass('wrong').addClass('correct');
-				     		$('#parentid .fa-check').removeClass('hide');
-				     		$('#parentid .fa-times').addClass('hide');
-				     	}
-				     	else if (error.responseText == 'some') {
-				     		console.log(error.responseText);
-				     		$('#parenterror').text('Someone already logged in!');
-				     	}
-				     	else{
-				     		console.log('Unknown Error');
-				     		$('#parenterror').text('unknown error! please try again.');
-				     	}
-				     },
-				     success: function(data) {
-				     	if (data === 'success') {
-				     		console.log(data);
-				     		$('#parentid, #parentpass').removeClass('wrong').addClass('correct');
-				     		$('#parentid .fa-times, #parentpass .fa-times').addClass('hide');
-				     		$('#parentid .fa-check, #parentpass .fa-check').removeClass('hide');
-				     		window.location.href = "http://localhost:3000/Parent/Home";
-				     		return false;
-				     	}
-				     }
-				 });
-		}
+	}
+	else if (!re.test(a)) {
+		$('.parentlogin small').text('Enter valid Email address.');
+		return false;	
+	}
+	else{
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				id: a,
+				password: b,
+			},
+			url: 'http://localhost:3000/Parent/login', //node.js server is running
+			error: function(error){
+				if(error.responseText == 'Unauthorized User'){
+					console.log(error.responseText);
+					$('.parentlogin small').text('Unauthorized User!');
+					return false;
+				}
+				else if (error.responseText == 'pass') {
+					console.log(error.responseText);
+					$('.parentlogin small').text('Invalid Password!');
+					return false;
+					
+				}
+				else if (error.responseText == 'some') {
+					console.log(error.responseText);
+					$('.parentlogin small').text('Someone already logged in!');
+					return false;
+				}
+				else{
+					console.log('Unknown Error');
+					$('.parentlogin small').text('Unknown Error! Please try again.');
+					return false;
+				}
+			},
+			success: function(data) {
+				if (data === 'success') {
+					console.log(data);
+					$('.parentlogin .fa-spinner').fadeIn(100);
+					$('.parentlogin small').text('');
+					window.location.href = "http://localhost:3000/Parent/Home";
+					return false;
+				}
+			}
+		});
 	}
 });
 
@@ -528,87 +353,59 @@ $('#nonteachinglogin').click(function(e) {
 	e.preventDefault();
 	var a = document.nonteachinglogin.id.value;
 	var b = document.nonteachinglogin.password.value;
-
-	if (a=="") {
-		$('#nonteachingid .fa-times').removeClass('hide');
-		$('#nonteachingid').addClass('wrong').removeClass('correct');
-
-		if (b=="") {
-			$('#nonteachingpass .fa-times').removeClass('hide');
-			$('#nonteachingpass').addClass('wrong').removeClass('correct');
-			return false;
-		}else{
-			$('#nonteachingpass .fa-times').addClass('hide');
-		}
-
+	if (a=="" || b=="") {
+		$('.nonteachinglogin small').text('Please fill all the fields.');
+		return false;
 	}
-
-	if(a!=""){
-		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;	
-		if(!re.test(a))
-	     {		
-			$('#nonteachingid .fa-times').removeClass('hide');
-			$('#nonteachingid').addClass('wrong').removeClass('correct');
-			return false;
-		} 
-
-		$('#nonteachingid .fa-times').addClass('hide');
-
-		if (b=="") {
-			$('#nonteachingpass .fa-times').removeClass('hide');
-			$('#nonteachingpass').addClass('wrong').removeClass('correct');
-			return false;
-		}else{
-			$('#nonteachingpass .fa-times').addClass('hide');
-
-
-			$.ajax({
-				type: 'post',
-				datatype: "json",
-				data: {
-					id: a,
-					password: b,
-				},
-				     url: 'http://localhost:3000/staff/login', //node.js server is running
-				     error: function(error){
-				     	if(error.responseText == 'Unauthorized User'){
-				     		console.log(error.responseText);
-				     		$('#nonteachingid').addClass('wrong').removeClass('correct');
-				     		$('#nonteachingid .fa-times').removeClass('hide');
-				     		$('#nonteachingid .fa-check').addClass('hide');
-				     		return false;
-				     	}
-				     	else if (error.responseText == 'pass') {
-				     		console.log(error.responseText);
-				     		$('#nonteachingpass').addClass('wrong');
-				     		$('#nonteachingpass .fa-times').removeClass('hide');
-				     		$('#nonteachingid').removeClass('wrong').addClass('correct');
-				     		$('#nonteachingid .fa-check').removeClass('hide');
-				     		$('#nonteachingid .fa-times').addClass('hide');
-				     	}
-				     	else if (error.responseText == 'some') {
-				     		console.log(error.responseText);
-				     		$('#nonteachingerror').text('Someone already logged in!');
-				     	}
-				     	else{
-				     		console.log('Unknown Error');
-				     		$('#nonteachingerror').text('unknown error! please try again.');
-				     	}
-				     },
-				     success: function(data) {
-				     	if (data === 'success') {
-				     		console.log(data);
-				     		$('#nonteachingid, #nonteachingpass').removeClass('wrong').addClass('correct');
-				     		$('#nonteachingid .fa-times, #nonteachingpass .fa-times').addClass('hide');
-				     		$('#nonteachingid .fa-check, #nonteachingpass .fa-check').removeClass('hide');
-				     		window.location.href = "http://localhost:3000/staff/Home";
-				     		return false;
-				     	}
-				     }
-				 });
-		}
+	else if (!re.test(a)) {
+		$('.nonteachinglogin small').text('Enter valid Email address.');
+		return false;	
+	}
+	else{
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				id: a,
+				password: b,
+			},
+			url: 'http://localhost:3000/staff/login', //node.js server is running
+			error: function(error){
+				if(error.responseText == 'Unauthorized User'){
+					console.log(error.responseText);
+					$('.nonteachinglogin small').text('Unauthorized User!');
+					return false;
+				}
+				else if (error.responseText == 'pass') {
+					console.log(error.responseText);
+					$('.nonteachinglogin small').text('Invalid Password!');
+					return false;
+					
+				}
+				else if (error.responseText == 'some') {
+					console.log(error.responseText);
+					$('.nonteachinglogin small').text('Someone already logged in!');
+					return false;
+				}
+				else{
+					console.log('Unknown Error');
+					$('.nonteachinglogin small').text('Unknown Error! Please try again.');
+					return false;
+				}
+			},
+			success: function(data) {
+				if (data === 'success') {
+					console.log(data);
+					$('.nonteachinglogin .fa-spinner').fadeIn(100);
+					$('.nonteachinglogin small').text('');
+					window.location.href = "http://localhost:3000/staff/Home";
+					return false;
+				}
+			}
+		});
 	}
 });
+
 
 //password strength checker for signup
 
@@ -688,7 +485,7 @@ $('#studentsignupbutton').click(function(e) {
 	var pass2 = document.studentsignup.password2.value;
 	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-	if (name && gender && dep && batch && id && cdate && email && mobile && pass1 && pass2 ) {
+	if (name && gender && dep && batch && id && Last_year && email && mobile && pass1 && pass2 ) {
 
 		if (re.test(email) == false) {
 			$('.student-reg-form small').text('Please enter a valid Email Address!');
@@ -700,13 +497,13 @@ $('#studentsignupbutton').click(function(e) {
 			return false;
 		}
 
-		else if (cdate <= 2000 || cdate >=9999) {
-			$('.student-reg-form small').text('Please enter a valid Course Completion Date!');
-			return false;
-		}
+		// else if (cdate <= 2000 || cdate >=9999) {
+		// 	$('.student-reg-form small').text('Please enter a valid Course Completion Date!');
+		// 	return false;
+		// }
 
 		else if ($("#student-progress-container .progress .bg-danger").length > 0){ 
-	  		$('.student-reg-form small').text('Password too Weak!');
+			$('.student-reg-form small').text('Password too Weak!');
 			return false;
 		}
 
@@ -818,7 +615,7 @@ $('#facultysignupbutton').click(function(e) {
 		}
 
 		else if ($("#faculty-progress-container .progress .bg-danger").length > 0){ 
-	  		$('.faculty-reg-form small').text('Password too Weak!');
+			$('.faculty-reg-form small').text('Password too Weak!');
 			return false;
 		}
 
@@ -915,7 +712,7 @@ $('#parentsignupbutton').click(function(e) {
 	var pass2 = document.parentsignup.password2.value;
 	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-	if (name && id && cdate && relation && email && mobile && pass1 && pass2 ) {
+	if (name && id && Last_year && relation && email && mobile && pass1 && pass2 ) {
 
 		if (re.test(email) == false) {
 			$('.parent-reg-form small').text('Please enter a valid Email Address!');
@@ -927,13 +724,13 @@ $('#parentsignupbutton').click(function(e) {
 			return false;
 		}
 
-		else if (cdate >= 9999 || cdate <= 2000) {
-			$('.parent-reg-form small').text('Please enter a valid Course Completion Date!');
-			return false;
-		}
+		// else if (cdate >= 9999 || cdate <= 2000) {
+		// 	$('.parent-reg-form small').text('Please enter a valid Course Completion Date!');
+		// 	return false;
+		// }
 
 		else if ($("#parent-progress-container .progress .bg-danger").length > 0){ 
-	  		$('.parent-reg-form small').text('Password too Weak!');
+			$('.parent-reg-form small').text('Password too Weak!');
 			return false;
 		}
 
@@ -1043,7 +840,7 @@ $('#nonteachingsignupbutton').click(function(e) {
 		}
 
 		else if ($("#nonteaching-progress-container .progress .bg-danger").length > 0){ 
-	  		$('.nonteaching-reg-form small').text('Password too Weak!');
+			$('.nonteaching-reg-form small').text('Password too Weak!');
 			return false;
 		}
 
@@ -1126,6 +923,8 @@ $('#nonteachingsignupbutton').click(function(e) {
 	}
 });
 
+
+
 //Forgot Password Validation
 $('#Student_forgotpass').click(function(e) {
 	e.preventDefault();
@@ -1184,6 +983,7 @@ $('#Student_forgotpass').click(function(e) {
 
 			}
 		});
+
 
 $('#Staff_forgotpass').click(function(e) {
 	e.preventDefault();
@@ -1360,6 +1160,8 @@ $('#Faculty_forgotpass').click(function(e) {
 
 			}
 		});
+
+
 $('#Admin_forgotpass').click(function(e) {
 	e.preventDefault();
 	var a = document.Admin_forgotpass.email.value;
@@ -1410,6 +1212,7 @@ $('#Admin_forgotpass').click(function(e) {
 
 	}
 });
+
 
 $('#Gcm_forgotpass').click(function(e) {
 	e.preventDefault();
@@ -1468,6 +1271,7 @@ $('#Gcm_forgotpass').click(function(e) {
 
 			}
 		});
+
 
 $('#mngmnt_forgotpass').click(function(e) {
 	e.preventDefault();

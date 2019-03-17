@@ -1307,5 +1307,3 @@ app.controller('Mail_Log',function($http,$window,$mdDialog,$scope){
        $scope.maillog=response.data.info;
    });
 })
-
-

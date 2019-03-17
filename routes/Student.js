@@ -208,7 +208,7 @@ Student.getinfobyID(req.session.user,function(err, user){
         req.checkBody('email','Email is not valid').isEmail();
         req.checkBody('dep','department field is required').notEmpty();
         req.checkBody('batch','batch/class field is required').notEmpty();
-        req.checkBody('cdate','course completion date field is required').notEmpty();
+        // req.checkBody('cdate','course completion date field is required').notEmpty();
         req.checkBody('id','id field is required').notEmpty();
         req.checkBody('mobile','username field is required').notEmpty();
         req.checkBody('password','password field is required').notEmpty();
@@ -248,7 +248,7 @@ Student.getinfobyID(req.session.user,function(err, user){
         id: id,
         dep: dep,
         gender: gender,
-        Cdate:cdate,
+        // Cdate:cdate,
         Last_year:Last_year,
         Batch:batch,
         emailid: email,
