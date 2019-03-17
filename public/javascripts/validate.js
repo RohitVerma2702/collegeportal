@@ -32,7 +32,6 @@ $('#adminlogin').click(function(e) {
 					console.log(error.responseText);
 					$('.adminlogin small').text('Invalid Password!');
 					return false;
-					
 				}
 				else if (error.responseText == 'some') {
 					console.log(error.responseText);
@@ -90,7 +89,6 @@ $('#mngmntlogin').click(function(e) {
 					console.log(error.responseText);
 					$('.mngmntlogin small').text('Invalid Password!');
 					return false;
-					
 				}
 				else if (error.responseText == 'some') {
 					console.log(error.responseText);
@@ -148,7 +146,11 @@ $('#facultylogin').click(function(e) {
 					console.log(error.responseText);
 					$('.facultylogin small').text('Invalid Password!');
 					return false;
-					
+				}
+				else if (error.responseText == 'not apprv') {
+					console.log(error.responseText);
+					$('.facultylogin small').text('User not yet approved. Please try after some time.');
+					return false;
 				}
 				else if (error.responseText == 'some') {
 					console.log(error.responseText);
@@ -206,7 +208,6 @@ $('#gcmlogin').click(function(e) {
 					console.log(error.responseText);
 					$('.gcmlogin small').text('Invalid Password!');
 					return false;
-					
 				}
 				else if (error.responseText == 'some') {
 					console.log(error.responseText);
@@ -264,7 +265,11 @@ $('#studentlogin').click(function(e) {
 					console.log(error.responseText);
 					$('.studentlogin small').text('Invalid Password!');
 					return false;
-					
+				}
+				else if (error.responseText == 'not apprv') {
+					console.log(error.responseText);
+					$('.studentlogin small').text('User not yet approved. Please try after some time.');
+					return false;
 				}
 				else if (error.responseText == 'some') {
 					console.log(error.responseText);
@@ -322,7 +327,11 @@ $('#parentlogin').click(function(e) {
 					console.log(error.responseText);
 					$('.parentlogin small').text('Invalid Password!');
 					return false;
-					
+				}
+				else if (error.responseText == 'not apprv') {
+					console.log(error.responseText);
+					$('.parentlogin small').text('User not yet approved. Please try after some time.');
+					return false;
 				}
 				else if (error.responseText == 'some') {
 					console.log(error.responseText);
@@ -380,7 +389,11 @@ $('#nonteachinglogin').click(function(e) {
 					console.log(error.responseText);
 					$('.nonteachinglogin small').text('Invalid Password!');
 					return false;
-					
+				}
+				else if (error.responseText == 'not apprv') {
+					console.log(error.responseText);
+					$('.nonteachinglogin small').text('User not yet approved. Please try after some time.');
+					return false;
 				}
 				else if (error.responseText == 'some') {
 					console.log(error.responseText);
