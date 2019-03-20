@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var session = require('express-session');
 var nodemailer = require("nodemailer");
-var app=express();
+var app = express();
 
 var sess;
 function requireLogin(req, res, next) {
@@ -13,32 +13,29 @@ function requireLogin(req, res, next) {
     res.redirect("/s1"); // or render a form, etc.
   }
 }
-app.all("/*", requireLogin, function(req, res, next) {
+app.all("/*", requireLogin, function (req, res, next) {
   next(); // if the middleware allowed us to get here,
-          // just move on to the next route handler
+  // just move on to the next route handler
 });
-router.get('/', function(req, res, next) {
- sess=req.session;
- 
- if(sess.active)
- {
-res.redirect('/'+sess.type+'/Home#!/');
-  
+router.get('/', function (req, res, next) {
+  sess = req.session;
+
+  if (sess.active) {
+    res.redirect('/' + sess.type + '/Home#!/');
+
   }
-  else
-  {
+  else {
     res.render('view3');
-  } 
+  }
 });
 
-router.get('/logout', function(req, res, next) {
- sess=req.session;
-  console.log(sess.user+' is logged out');
-  req.session.destroy(function(err)
-{
-  if(err) throw err;
-});
-res.render('view3', { title: 'Members' });
+router.get('/logout', function (req, res, next) {
+  sess = req.session;
+  console.log(sess.user + ' is logged out');
+  req.session.destroy(function (err) {
+    if (err) throw err;
+  });
+  res.render('view3', { title: 'Members' });
 })
 
 module.exports = router;
