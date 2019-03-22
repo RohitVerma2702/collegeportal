@@ -103,31 +103,38 @@ $('.closebtn').click(function(){
 $('.Admin_forgotpassword').click(function(){
   $('.forms').fadeOut(500);
   $('.Admin_forgotpass').delay(500).fadeIn(1000);
+  $('#forgotemail .fa-times').addClass('hide');
 });
 $('.Student_forgotpassword').click(function(){
   $('.forms').fadeOut(500);
   $('.Student_forgotpass').delay(500).fadeIn(1000);
+  $('#forgotemail .fa-times').addClass('hide');
 });
 $('.Staff_forgotpassword').click(function(){
   $('.forms').fadeOut(500);
   $('.Staff_forgotpass').delay(500).fadeIn(1000);
+  $('#forgotemail .fa-times').addClass('hide');
 });
 $('.Parent_forgotpassword').click(function(){
   $('.forms').fadeOut(500);
   $('.Parent_forgotpass').delay(500).fadeIn(1000);
+  $('#forgotemail .fa-times').addClass('hide');
 });
 $('.Faculty_forgotpassword').click(function(){
   $('.forms').fadeOut(500);
   $('.Faculty_forgotpass').delay(500).fadeIn(1000);
+  $('#forgotemail .fa-times').addClass('hide');
 });
 $('.Gcm_forgotpassword').click(function(){
   $('.forms').fadeOut(500);
   $('.Gcm_forgotpass').delay(500).fadeIn(1000);
+  $('#forgotemail .fa-times').addClass('hide');
 });
 
 $('.mngmnt_forgotpassword').click(function(){
   $('.forms').fadeOut(500);
   $('.mngmnt_forgotpass').delay(500).fadeIn(1000);
+  $('#forgotemail').addClass('hide');
 });
 
 //yearpicker for course year...

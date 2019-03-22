@@ -949,8 +949,13 @@ $('#Student_forgotpass').click(function(e) {
 				$('#forgotemail').addClass('wrong').removeClass('correct');
 
 			}
-
-			if(a!=""){
+			else if (!re.test(a)) {
+				$('.Student_forgotpass small').text('Enter valid Email address.');	
+				$('#forgotemail .fa-times').removeClass('hide');
+				$('#forgotemail').addClass('wrong').removeClass('correct');
+				return false;	
+			}
+			else {
 
 				$('#forgotemail .fa-times').addClass('hide');
 
@@ -964,7 +969,8 @@ $('#Student_forgotpass').click(function(e) {
 							 url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
 							 error: function(error){
 							 	if(error.responseText == 'Unauthorized User'){
-							 		console.log(error.responseText);
+									 console.log(error.responseText);
+									 $('.Student_forgotpass small').text('User not registered');
 							 		$('#forgotemail').addClass('wrong').removeClass('correct');
 							 		$('#forgotemail .fa-times').removeClass('hide');
 							 		$('#forgotemail .fa-check').addClass('hide');
@@ -1008,8 +1014,13 @@ $('#Staff_forgotpass').click(function(e) {
 				$('#forgotemail').addClass('wrong').removeClass('correct');
 
 			}
-
-			if(a!=""){
+			else if (!re.test(a)) {
+				$('.Staff_forgotpass small').text('Enter valid Email address.');
+				$('#forgotemail .fa-times').removeClass('hide');
+				$('#forgotemail').addClass('wrong').removeClass('correct');
+				return false;	
+			}
+			else {
 
 				$('#forgotemail .fa-times').addClass('hide');
 
@@ -1023,7 +1034,8 @@ $('#Staff_forgotpass').click(function(e) {
 							 url: 'http://localhost:3000/staff/forgot_pass', //node.js server is running
 							 error: function(error){
 							 	if(error.responseText == 'Unauthorized User'){
-							 		console.log(error.responseText);
+									 console.log(error.responseText);
+									 $('.Staff_forgotpass small').text('User not registered');
 							 		$('#forgotemail').addClass('wrong').removeClass('correct');
 							 		$('#forgotemail .fa-times').removeClass('hide');
 							 		$('#forgotemail .fa-check').addClass('hide');
@@ -1067,8 +1079,13 @@ $('#Parent_forgotpass').click(function(e) {
 				$('#forgotemail').addClass('wrong').removeClass('correct');
 
 			}
-
-			if(a!=""){
+			else if (!re.test(a)) {
+				$('.Parent_forgotpass small').text('Enter valid Email address.');
+				$('#forgotemail .fa-times').removeClass('hide');
+				$('#forgotemail').addClass('wrong').removeClass('correct');
+				return false;	
+			}
+			else {
 
 				$('#forgotemail .fa-times').addClass('hide');
 
@@ -1082,7 +1099,8 @@ $('#Parent_forgotpass').click(function(e) {
 							 url: 'http://localhost:3000/Parent/forgot_pass', //node.js server is running
 							 error: function(error){
 							 	if(error.responseText == 'Unauthorized User'){
-							 		console.log(error.responseText);
+									 console.log(error.responseText);
+									 $('.Parent_forgotpass small').text('User not registered');
 							 		$('#forgotemail').addClass('wrong').removeClass('correct');
 							 		$('#forgotemail .fa-times').removeClass('hide');
 							 		$('#forgotemail .fa-check').addClass('hide');
@@ -1126,8 +1144,13 @@ $('#Faculty_forgotpass').click(function(e) {
 				$('#forgotemail').addClass('wrong').removeClass('correct');
 
 			}
-
-			if(a!=""){
+			else if (!re.test(a)) {
+				$('.Faculty_forgotpass small').text('Enter valid Email address.');
+				$('#forgotemail .fa-times').removeClass('hide');
+				$('#forgotemail').addClass('wrong').removeClass('correct');
+				return false;	
+			}
+			else {
 
 				$('#forgotemail .fa-times').addClass('hide');
 
@@ -1141,7 +1164,8 @@ $('#Faculty_forgotpass').click(function(e) {
 							 url: 'http://localhost:3000/faculty/forgot_pass', //node.js server is running
 							 error: function(error){
 							 	if(error.responseText == 'Unauthorized User'){
-							 		console.log(error.responseText);
+									 console.log(error.responseText);
+									 $('.Faculty_forgotpass small').text('User not registered');
 							 		$('#forgotemail').addClass('wrong').removeClass('correct');
 							 		$('#forgotemail .fa-times').removeClass('hide');
 							 		$('#forgotemail .fa-check').addClass('hide');
@@ -1183,8 +1207,13 @@ $('#Admin_forgotpass').click(function(e) {
 		$('#forgotemail').addClass('wrong').removeClass('correct');
 
 	}
-
-	if(a!=""){
+	else if (!re.test(a)) {
+		$('.Admin_forgotpass small').text('Enter valid Email address.');
+		$('#forgotemail .fa-times').removeClass('hide');
+		$('#forgotemail').addClass('wrong').removeClass('correct');
+		return false;	
+	}
+	else {
 
 		$('#forgotemail .fa-times').addClass('hide');
 
@@ -1198,7 +1227,8 @@ $('#Admin_forgotpass').click(function(e) {
 							 url: 'http://localhost:3000/Admin/forgot_pass', //node.js server is running
 							 error: function(error){
 							 	if(error.responseText == 'Unauthorized User'){
-							 		console.log(error.responseText);
+									 console.log(error.responseText);
+									 $('.Admin_forgotpass small').text('User not registered');
 							 		$('#forgotemail').addClass('wrong').removeClass('correct');
 							 		$('#forgotemail .fa-times').removeClass('hide');
 							 		$('#forgotemail .fa-check').addClass('hide');
@@ -1237,8 +1267,14 @@ $('#Gcm_forgotpass').click(function(e) {
 				$('#forgotemail').addClass('wrong').removeClass('correct');
 
 			}
+			else if (!re.test(a)) {
+				$('.Gcm_forgotpass small').text('Enter valid Email address.');
+				$('#forgotemail .fa-times').removeClass('hide');
+				$('#forgotemail').addClass('wrong').removeClass('correct');
+				return false;	
+			}
 
-			if(a!=""){
+			else{
 
 				$('#forgotemail .fa-times').addClass('hide');
 
@@ -1252,7 +1288,8 @@ $('#Gcm_forgotpass').click(function(e) {
 							 url: 'http://localhost:3000/Members/forgot_pass', //node.js server is running
 							 error: function(error){
 							 	if(error.responseText == 'Unauthorized User'){
-							 		console.log(error.responseText);
+									 console.log(error.responseText);
+									 $('.Gcm_forgotpass small').text('User not registered');
 							 		$('#forgotemail').addClass('wrong').removeClass('correct');
 							 		$('#forgotemail .fa-times').removeClass('hide');
 							 		$('#forgotemail .fa-check').addClass('hide');
@@ -1296,10 +1333,16 @@ $('#mngmnt_forgotpass').click(function(e) {
 				$('#forgotemail').addClass('wrong').removeClass('correct');
 
 			}
+			else if (!re.test(a)) {
+				$('.mngmnt_forgotpass small').text('Enter valid Email address.');
+				$('#forgotemail .fa-times').removeClass('hide');
+				$('#forgotemail').addClass('wrong').removeClass('correct');
+				return false;	
+			}
 
-			if(a!=""){
+			else {
 
-				$('#forgotemail .fa-times').addClass('hide');
+				$('#forgotemail .fa-times, #mngmnt_forgotpass .fa-times').addClass('hide');
 
 
 				$.ajax({
@@ -1311,7 +1354,8 @@ $('#mngmnt_forgotpass').click(function(e) {
 							 url: 'http://localhost:3000/mngmnt/forgot_pass', //node.js server is running
 							 error: function(error){
 							 	if(error.responseText == 'Unauthorized User'){
-							 		console.log(error.responseText);
+									 console.log(error.responseText);
+									 $('.mngmnt_forgotpass small').text('User not registered');
 							 		$('#forgotemail').addClass('wrong').removeClass('correct');
 							 		$('#forgotemail .fa-times').removeClass('hide');
 							 		$('#forgotemail .fa-check').addClass('hide');
