@@ -339,11 +339,10 @@ router.post('/forgot_pass', function (req, res, next) {
       res.status(500).send('Unauthorized User');
       return;
     }
-    /*var password = generator.generate({
+    var password = generator.generate({
       length: 10,
       numbers: true
-  });*/
-    var password = 'sahil';
+  });
     Parent.update_password(id, password, function (err) {
       if (err) throw err;
 

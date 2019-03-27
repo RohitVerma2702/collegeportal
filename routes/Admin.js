@@ -685,11 +685,10 @@ router.post('/forgot_pass', function (req, res, next) {
       res.status(500).send('Unauthorized User');
       return;
     }
-    /*var password = generator.generate({
+    var password = generator.generate({
       length: 10,
       numbers: true
-  });*/
-    var password = 'sahil';
+  });
     admin.update_password(id, password, function (err) {
       if (err) throw err;
 
@@ -760,13 +759,10 @@ router.get('/Mail_Log', requireLogin, function (req, res, next) {
 router.get('/grievance_type', requireLogin, function (req, res, next) {
   console.log('hiitype');
   console.log(req.session.email)
-  //console.log(req.query.id)
   Grvtype.grvtype_find(function (err, result) {
     if (err) throw err;
-    // console.log(result);
     data = { info: result };
     res.send(data);
-    //)
   }
 
   );
