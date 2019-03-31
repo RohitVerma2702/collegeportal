@@ -606,7 +606,8 @@ router.post('/password_reset', function (req, res, next) {
     if (err) throw err;
     if (!user) {
       console.log("unknown user");
-      res.redirect('/faculty/unknw');
+      res.status(500).send('Unknown User!');
+      //res.redirect('/faculty/unknw');
       return;
     }
 
@@ -617,6 +618,7 @@ router.post('/password_reset', function (req, res, next) {
           if (err) throw err;
           else {
             console.log(' password updated');
+            res.send('Password Updated!');
             //res.redirect('/Student/Home')
           }
         });
@@ -624,7 +626,7 @@ router.post('/password_reset', function (req, res, next) {
 
       else {
         console.log('password doesnt match');
-        res.redirect('/failed');
+        res.status(500).send('Passwords do not match!');
         return;
       }
     });

@@ -881,18 +881,46 @@ app.controller("Admin", function ($http, $scope, $window, $mdDialog) {
             new_password: $scope.new_password,
             new_password1: $scope.new_password1
         }
-        $http.post("/Admin/password_reset", $scope.form).then(function (response) {
 
-        })
-
-        var confirmpass = $mdDialog.confirm()
-            .title('Password Updated!')
+        if ($("#new-pass-container .progress .bg-danger").length > 0) {
+            console.log('weak password');
+            var confirmpass = $mdDialog.confirm()
+            .title('Password too weak!')
             .targetEvent(ev)
-            .ok('Thank You!');
+            .ok('Go Back');
 
-        $mdDialog.show(confirmpass).then(function () {
-            $window.location.reload();
-        })
+            $mdDialog.show(confirmpass).then(function () {
+                
+            })
+        }
+        else{
+            $http.post("/Admin/password_reset", $scope.form).then(function success(response) {
+                console.log('Password Updated.');
+
+                var confirmpass = $mdDialog.confirm()
+                .title(response.data)
+                .targetEvent(ev)
+                .ok('Thank You!');
+
+                $mdDialog.show(confirmpass).then(function () {
+                    $window.location.reload();
+                });
+
+            }, function error(response) {
+                console.log(response.data);
+
+                var confirmpass = $mdDialog.confirm()
+                .title(response.data)
+                .targetEvent(ev)
+                .ok('OK');
+
+                $mdDialog.show(confirmpass).then(function () {
+                    
+                });
+
+            });
+
+        }
 
     }
 
@@ -952,7 +980,7 @@ app.controller("Admin_GCM", function ($http, $scope, $window, $mdDialog) {
         }, function error(response){
             
             console.log(response.data);
-            
+
             var update = $mdDialog.confirm()
             .title(response.data)
             .targetEvent(ev)
