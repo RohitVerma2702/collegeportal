@@ -52,7 +52,7 @@ module.exports.update_password = function (id, password, callback) {
 }
 module.exports.getUserByID = function (id, callback) {
     var query = (id.indexOf('@') === -1) ? { _id: id } : { emailid: id };
-    Member.findOne(query, callback);
+    Member.findOne({$and:[{access:"approved"},query]}, callback);
 }
 
 module.exports.comparePassword = function (candidatePassword, hash, callback) {

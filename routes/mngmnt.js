@@ -333,6 +333,7 @@ router.post('/login', function (req, res, next) {
 
     mngmnt.getUserByID(id, function (err, user) {
       if (err) throw err;
+      console.log(user);
       if (!user) {
         console.log("unknown user");
         //res.redirect('/mngmnt/unknw');

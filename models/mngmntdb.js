@@ -41,7 +41,7 @@ var mngmnt = module.exports = mongoose.model('Mngmnt', mngmntSchema, 'Mngmnt');
 module.exports.getUserByID = function (id, callback) {
     var query = (id.indexOf('@') === -1) ? { _id: id } : { emailid: id };
 
-    mngmnt.findOne(query, callback);
+    mngmnt.findOne({$and:[{access:'approved'},query]}, callback);
 }
 module.exports.getinfobyID = function (id, callback) {
     var query = (id.indexOf('@') === -1) ? { _id: id } : { emailid: id };
