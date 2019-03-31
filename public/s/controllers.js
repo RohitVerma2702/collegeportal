@@ -78,29 +78,54 @@ app.controller("Gcm", function ($http, $scope, $mdDialog, $window) {
     }
 
     $scope.resetpass = function (ev) {
-        $scope.new;
         $scope.form = {
             current_password: $scope.current_password,
             new_password: $scope.new_password,
             new_password1: $scope.new_password1
         }
-        $http.post("/Members/password_reset", $scope.form).then(function (response) {
-            $scope.new = "yes"
-        })
-        var confirmpass = $mdDialog.confirm()
-            .title('Password Updated!')
-            .targetEvent(ev)
-            .ok('Thank You!');
-        var error = $mdDialog.confirm()
-            .title('error in updating')
-            .targetEvent(ev)
-            .ok('Thank You!');
-        $mdDialog.show(confirmpass).then(function () {
-            $window.location.reload();
-        })
 
+        if ($("#new-pass-container .progress .bg-danger").length > 0) {
+            console.log('weak password');
+            var confirmpass = $mdDialog.confirm()
+            .title('Password too weak!')
+            .targetEvent(ev)
+            .ok('Go Back');
+
+            $mdDialog.show(confirmpass).then(function () {
+                
+            })
+        }
+        else{
+            $http.post("/Members/password_reset", $scope.form).then(function success(response) {
+                console.log('Password Updated.');
+
+                var confirmpass = $mdDialog.confirm()
+                .title(response.data)
+                .targetEvent(ev)
+                .ok('Thank You!');
+
+                $mdDialog.show(confirmpass).then(function () {
+                    $window.location.reload();
+                });
+
+            }, function error(response) {
+                console.log(response.data);
+
+                var confirmpass = $mdDialog.confirm()
+                .title(response.data)
+                .targetEvent(ev)
+                .ok('OK');
+
+                $mdDialog.show(confirmpass).then(function () {
+                    
+                });
+
+            });
+
+        }
 
     }
+
 });
 
 
@@ -184,17 +209,46 @@ app.controller("Student", function ($http, $scope, $window, $mdDialog) {
             new_password: $scope.new_password,
             new_password1: $scope.new_password1
         }
-        $http.post("/Student/password_reset", $scope.form).then(function (response) {
-        })
 
-        var confirmpass = $mdDialog.confirm()
-            .title('Password Updated!')
+        if ($("#new-pass-container .progress .bg-danger").length > 0) {
+            console.log('weak password');
+            var confirmpass = $mdDialog.confirm()
+            .title('Password too weak!')
             .targetEvent(ev)
-            .ok('Thank You!');
+            .ok('Go Back');
 
-        $mdDialog.show(confirmpass).then(function () {
-            $window.location.reload();
-        })
+            $mdDialog.show(confirmpass).then(function () {
+                
+            })
+        }
+        else{
+            $http.post("/Student/password_reset", $scope.form).then(function success(response) {
+                console.log('Password Updated.');
+
+                var confirmpass = $mdDialog.confirm()
+                .title(response.data)
+                .targetEvent(ev)
+                .ok('Thank You!');
+
+                $mdDialog.show(confirmpass).then(function () {
+                    $window.location.reload();
+                });
+
+            }, function error(response) {
+                console.log(response.data);
+
+                var confirmpass = $mdDialog.confirm()
+                .title(response.data)
+                .targetEvent(ev)
+                .ok('OK');
+
+                $mdDialog.show(confirmpass).then(function () {
+                    
+                });
+
+            });
+
+        }
 
     }
 
@@ -296,17 +350,46 @@ app.controller("Parent", function ($http, $scope, $window, $mdDialog) {
             new_password: $scope.new_password,
             new_password1: $scope.new_password1
         }
-        $http.post("/Parent/password_reset", $scope.form).then(function (response) {
-        })
 
-        var confirmpass = $mdDialog.confirm()
-            .title('Password Updated!')
+        if ($("#new-pass-container .progress .bg-danger").length > 0) {
+            console.log('weak password');
+            var confirmpass = $mdDialog.confirm()
+            .title('Password too weak!')
             .targetEvent(ev)
-            .ok('Thank You!');
+            .ok('Go Back');
 
-        $mdDialog.show(confirmpass).then(function () {
-            $window.location.reload();
-        })
+            $mdDialog.show(confirmpass).then(function () {
+                
+            })
+        }
+        else{
+            $http.post("/Parent/password_reset", $scope.form).then(function success(response) {
+                console.log('Password Updated.');
+
+                var confirmpass = $mdDialog.confirm()
+                .title(response.data)
+                .targetEvent(ev)
+                .ok('Thank You!');
+
+                $mdDialog.show(confirmpass).then(function () {
+                    $window.location.reload();
+                });
+
+            }, function error(response) {
+                console.log(response.data);
+
+                var confirmpass = $mdDialog.confirm()
+                .title(response.data)
+                .targetEvent(ev)
+                .ok('OK');
+
+                $mdDialog.show(confirmpass).then(function () {
+                    
+                });
+
+            });
+
+        }
 
     }
 
@@ -418,17 +501,46 @@ app.controller("NonTeaching", function ($http, $scope, $window, $mdDialog) {
             new_password: $scope.new_password,
             new_password1: $scope.new_password1
         }
-        $http.post("/staff/password_reset", $scope.form).then(function (response) {
-        })
 
-        var confirmpass = $mdDialog.confirm()
-            .title('Password Updated!')
+        if ($("#new-pass-container .progress .bg-danger").length > 0) {
+            console.log('weak password');
+            var confirmpass = $mdDialog.confirm()
+            .title('Password too weak!')
             .targetEvent(ev)
-            .ok('Thank You!');
+            .ok('Go Back');
 
-        $mdDialog.show(confirmpass).then(function () {
-            $window.location.reload();
-        })
+            $mdDialog.show(confirmpass).then(function () {
+                
+            })
+        }
+        else{
+            $http.post("/staff/password_reset", $scope.form).then(function success(response) {
+                console.log('Password Updated.');
+
+                var confirmpass = $mdDialog.confirm()
+                .title(response.data)
+                .targetEvent(ev)
+                .ok('Thank You!');
+
+                $mdDialog.show(confirmpass).then(function () {
+                    $window.location.reload();
+                });
+
+            }, function error(response) {
+                console.log(response.data);
+
+                var confirmpass = $mdDialog.confirm()
+                .title(response.data)
+                .targetEvent(ev)
+                .ok('OK');
+
+                $mdDialog.show(confirmpass).then(function () {
+                    
+                });
+
+            });
+
+        }
 
     }
 
@@ -542,17 +654,46 @@ app.controller("Faculty", function ($http, $scope, $window, $mdDialog) {
             new_password: $scope.new_password,
             new_password1: $scope.new_password1
         }
-        $http.post("/faculty/password_reset", $scope.form).then(function (response) {
-        })
 
-        var confirmpass = $mdDialog.confirm()
-            .title('Password Updated!')
+        if ($("#new-pass-container .progress .bg-danger").length > 0) {
+            console.log('weak password');
+            var confirmpass = $mdDialog.confirm()
+            .title('Password too weak!')
             .targetEvent(ev)
-            .ok('Thank You!');
+            .ok('Go Back');
 
-        $mdDialog.show(confirmpass).then(function () {
-            $window.location.reload();
-        })
+            $mdDialog.show(confirmpass).then(function () {
+                
+            })
+        }
+        else{
+            $http.post("/faculty/password_reset", $scope.form).then(function success(response) {
+                console.log('Password Updated.');
+
+                var confirmpass = $mdDialog.confirm()
+                .title(response.data)
+                .targetEvent(ev)
+                .ok('Thank You!');
+
+                $mdDialog.show(confirmpass).then(function () {
+                    $window.location.reload();
+                });
+
+            }, function error(response) {
+                console.log(response.data);
+
+                var confirmpass = $mdDialog.confirm()
+                .title(response.data)
+                .targetEvent(ev)
+                .ok('OK');
+
+                $mdDialog.show(confirmpass).then(function () {
+                    
+                });
+
+            });
+
+        }
 
     }
 
@@ -717,17 +858,46 @@ app.controller("Management", function ($http, $scope, $window, $mdDialog) {
             new_password: $scope.new_password,
             new_password1: $scope.new_password1
         }
-        $http.post("/mngmnt/password_reset", $scope.form).then(function (response) {
-        })
 
-        var confirmpass = $mdDialog.confirm()
-            .title('Password Updated!')
+        if ($("#new-pass-container .progress .bg-danger").length > 0) {
+            console.log('weak password');
+            var confirmpass = $mdDialog.confirm()
+            .title('Password too weak!')
             .targetEvent(ev)
-            .ok('Thank You!');
+            .ok('Go Back');
 
-        $mdDialog.show(confirmpass).then(function () {
-            $window.location.reload();
-        })
+            $mdDialog.show(confirmpass).then(function () {
+                
+            })
+        }
+        else{
+            $http.post("/mngmnt/password_reset", $scope.form).then(function success(response) {
+                console.log('Password Updated.');
+
+                var confirmpass = $mdDialog.confirm()
+                .title(response.data)
+                .targetEvent(ev)
+                .ok('Thank You!');
+
+                $mdDialog.show(confirmpass).then(function () {
+                    $window.location.reload();
+                });
+
+            }, function error(response) {
+                console.log(response.data);
+
+                var confirmpass = $mdDialog.confirm()
+                .title(response.data)
+                .targetEvent(ev)
+                .ok('OK');
+
+                $mdDialog.show(confirmpass).then(function () {
+                    
+                });
+
+            });
+
+        }
 
     }
 });

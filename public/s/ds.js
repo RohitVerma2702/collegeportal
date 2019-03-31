@@ -31,4 +31,5 @@ $(document).ready(function(){
 	$('.setting-toggle').click(function(){
 		$('.settings').slideToggle(500);
 	});
+
 });

@@ -66,27 +66,33 @@ router.post('/password_reset', function (req, res, next) {
     if (err) throw err;
     if (!user) {
       console.log("unknown user");
+      res.status(500).send('Unknown user!');
       return;
     }
 
     staff.comparePassword(cpass, user.password, function (err, isMatch) {
       if (err) throw err;
       if (isMatch) {
-
-
-
+        if (npass == npass2) {
         staff.update_password(sess.user, npass, function (err) {
           if (err) throw err;
           else {
             console.log(' password updated');
+            res.send('Password Updated!');
             //res.redirect('/Student/Home')
           }
         });
       }
+      else{
+        console.log('password doesnt match');
+        res.status(500).send('Passwords do not match.');
+      }
+      }
 
       else {
         console.log('password doesnt match');
-        res.redirect('/failed');
+        res.status(500).send('Passwords do not match.');
+        //res.redirect('/failed');
         return;
       }
     });

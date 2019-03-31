@@ -99,7 +99,8 @@ router.post('/password_reset', function (req, res, next) {
   Member.getUserByID(req.session.user, function (err, user) {
     if (err) throw err;
     if (!user) {
-      res.redirect('/faculty/unknw');
+      res.status(500).send('Unknown User!');
+      //res.redirect('/faculty/unknw');
       return;
     }
 
@@ -111,17 +112,20 @@ router.post('/password_reset', function (req, res, next) {
             if (err) throw err;
             else {
               console.log(' password updates');
-              res.redirect('/success')
+              res.send('Password Updated!');
+              //res.redirect('/success')
             }
           });
         }
         else {
           console.log("new password does'nt match");
+          res.status(500).send('Passwords do not match.');
         }
       }
 
       else {
         console.log('password doesnt match');
+        res.status(500).send('Passwords do not match.');
         //res.redirect('/failed');
         return;
       }
