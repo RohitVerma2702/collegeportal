@@ -483,7 +483,7 @@ router.post('/create', function (req, res, next) {
     mngmnt.getUserByID(email, function (err, user) {
       if (user) {
         console.log('mngmnt member already exists');
-        res.status(500).send('mngmnt member already Exists');
+        res.status(500).send('Management member already exists!');
       }
       else {
         var newuser = new mngmnt({
@@ -540,8 +540,8 @@ router.post('/create', function (req, res, next) {
     cell.getUserByID(email, function (err, user) {
       if (err) throw err;
       if (user) {
-        console.log('mngmnt member already exists');
-        res.status(500).send('mngmnt member already Exists');
+        console.log('member already exists');
+        res.status(500).send('Member already exists!');
 
       }
       else {
@@ -788,7 +788,7 @@ router.post('/grvtype_add', requireLogin, function (req, res, next) { //For addi
     if (err) throw err;
     if (grv) {
       console.log('Grvtype Already Exists');
-      res.status(500).send("Grvtype Already Exists");
+      res.status(500).send("Grievance type already exists!");
     }
     else {
       Grvtype.grvtype_post(newGrv, function (err, grv) {

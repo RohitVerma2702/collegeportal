@@ -937,18 +937,32 @@ app.controller("Admin_GCM", function ($http, $scope, $window, $mdDialog) {
             gtype: $scope.Gtype,
             mngmnt: $scope.mngmnt
         };
-        $http.post('/Admin/create', $scope.form).then(function (response) {
+        $http.post('/Admin/create', $scope.form).then(function success(response) {
 
-        });
+            console.log('Created.');
 
-        var update = $mdDialog.confirm()
-            .title('Created!')
+            var update = $mdDialog.confirm()
+            .title('Member Created!')
             .targetEvent(ev)
             .ok('Thank You!');
 
-        $mdDialog.show(update).then(function () {
-            $window.location.reload();
+            $mdDialog.show(update).then(function () {
+                $window.location.reload();
+            });
+        }, function error(response){
+            
+            console.log(response.data);
+            
+            var update = $mdDialog.confirm()
+            .title(response.data)
+            .targetEvent(ev)
+            .ok('Go Back');
+
+            $mdDialog.show(update).then(function () {
+                $window.location.reload();
+            });
         });
+
 
     }
 });
@@ -1236,19 +1250,35 @@ app.controller('GRV_TYPE', function ($http, $scope, $window, $mdDialog) {
             description: $scope.description
         };
 
-        $http.post('/Admin/grvtype_add', $scope.form).then(function (success) {
 
-        });
+        $http.post('/Admin/grvtype_add', $scope.form).then(function success(response) {
 
-        var Created = $mdDialog.confirm()
-            .title('Successfully Created!')
+            console.log('Successfully created!');
+
+            var Created = $mdDialog.confirm()
+                .title("Successfully created!")
+                .targetEvent(ev)
+                .ok('Thank You!');
+
+            $mdDialog.show(Created).then(function () {
+                $window.location.reload();
+
+            });
+
+        }, function error(response){
+            console.log(response.data);
+
+            var Error = $mdDialog.confirm()
+            .title(response.data)
             .targetEvent(ev)
-            .ok('Thank You!');
+            .ok('Go Back');
 
-        $mdDialog.show(Created).then(function () {
-            $window.location.reload();
+            $mdDialog.show(Error).then(function () {
+                $window.location.reload();
 
+            });
         });
+ 
     }
 
 

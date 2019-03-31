@@ -1,9 +1,254 @@
-<h1><%= title%> HomePage!!</h1>
-<h1>Login Successful</h1>
-<form action='/logout'>
-    <button type="submit">Logout</button>
-</form>
-<form action='/<%=title%>/Grievances'>
-    <input type="hidden" value="<%= Gtype%>" name="Gtype" > 
-    <button type="submit">Grievances</button>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="HandheldFriendly" content="true">
+  <title>Dashboard</title>
+
+  <script type="text/javascript" src="/javascripts/jquery.js"></script>
+  <!--<script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>-->
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script type="text/javascript" src="/s/ds.js"></script>
+  
+  <script type="text/javascript" src="/angular/angular.min.js"></script>
+  <script type="text/javascript" src="/angular-route/angular-route.min.js"></script>
+  <script type="text/javascript" src="/angular-material/angular-material.min.js"></script>
+  <script type="text/javascript" src="/angular-messages/angular-messages.min.js"></script>
+  <script type="text/javascript" src="/angular-aria/angular-aria.min.js"></script>
+  <script type="text/javascript" src="/angular-animate/angular-animate.min.js"></script>
+
+  <script type="text/javascript" src="/Admin/Admin_dash.js"></script>
+  <script type="text/javascript" src="/s/controllers.js"></script>
+  
+  <link rel="stylesheet" type="text/css" href="/stylesheets/home.css">
+  <link rel="stylesheet" type="text/css" href="/angular-material/angular-material.css">
+  <!--<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">-->
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/s/dash-grievances.css">
+  <link rel="stylesheet" type="text/css" href="/s/dash-myaccount.css">
+  <link rel="stylesheet" type="text/css" href="/s/dash-reset-password.css">
+  <link rel="stylesheet" type="text/css" href="/s/dash-post.css">
+  <link rel="stylesheet" type="text/css" href="/s/dash-reports.css">
+
+</head>
+<body ng-app="grievances">
+
+  <nav id="heading" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+
+    <a class="navbar-brand">GRIEVANCE PORTAL || ANAND INTERNATIONAL COLLEGE OF ENGINEERING</a>
+
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a href="/logout" title="Logout"><i class="fas fa-power-off"></i></a>
+      </li>
+    </ul>
+
+  </nav>
+
+  <nav class="navbar navbar-dark bg-dark sticky-top d-lg-none">
+    <!--Login button for sidebar panel navbar-->
+    <button class="navbar-toggler padding-00" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!--this is top menu/login panel for mobile versions-->
+    <div class="collapse navbar-collapse realsidemenu" id="sidebar">
+      <ul class="list-unstyled components d-lg-none d-xl-none">
+        <li><a href="#!/my-account"><span class="fas fa-user"></span> My Account</a></li>
+        <li>
+          <a class="setting-toggle" href=""><span class="fas fa-gear"></span>Settings<span class="fas fa-caret-down"></span></a>
+          <ul class="settings hide">
+            <li><a href="#!/education-group">Education Group</a></li>
+            <li><a href="#!/course">Course</a></li>
+            <li><a href="#!/class">Class</a></li>
+            <li><a href="#!/grievance-type">Grievance Type</a></li>
+            <li><a href="#!/student-termination">Student Termination</a></li>
+            <li><a href="#!/parent-termination">Parent Termination</a></li>
+            <li><a href="#!/resetpassword">Password Reset</a></li>
+          </ul>
+        </li>
+        <li><a href="#!/gcm"><span class="fas fa-user"></span> Grievance Cell Members</a></li>
+        <li><a href="#!/mngmnt"><span class="fas fa-user"></span> Management Members</a></li>
+        <li>
+          <a href="" class="rejected-users"><span class="fas fa-users"></span>Rejected Users<span class="fas fa-caret-down"></span></a>
+          <ul class="rejected hide">
+            <li><a href="#!/rejected-students">Students</a></li>
+            <li><a href="#!/rejected-parents">Parents</a></li>
+            <li><a href="#!/rejected-nonteaching">Non Teaching Staff</a></li>
+            <li><a href="#!/rejected-faculty">Faculty</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="" class="pending-approval"><span class="fas fa-users"></span>Pending Approval / Users<span class="fas fa-caret-down"></span></a>
+          <ul class="approve hide">
+            <li><a href="#!/pending-students">Students</a></li>
+            <li><a href="#!/pending-parents">Parents</a></li>
+            <li><a href="#!/pending-nonteaching">Non Teaching Staff</a></li>
+            <li><a href="#!/pending-faculty">Faculty</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="" class="approved"><span class="fas fa-users"></span>Approved Users<span class="fas fa-caret-down"></span></a>
+          <ul class="approved-users hide">
+            <li><a href="#!/approved-students">Students</a></li>
+            <li><a href="#!/approved-parents">Parents</a></li>
+            <li><a href="#!/approved-nonteaching">Non Teaching Staff</a></li>
+            <li><a href="#!/approved-faculty">Faculty</a></li>
+          </ul>
+        </li>
+        <li><a href="#!/grievance-details"><span class="fas fa-exclamation-triangle"></span> Grievances</a></li>
+        <li><a href="#!/deleted-grievances"><span class="fas fa-exclamation-triangle"></span>Deleted Grievances</a></li>
+        <li>
+          <a href="" class="report"><span class="fas fa-bar-chart"></span>Reports<i class="fas fa-caret-down"></i></a>
+          <ul class="reports hide">
+            <li><a href="#!/report1"><span class="fa fa-file"></span>Consolidated Grievance Redressal Report</a></li>
+            <li><a href="#!/report2"><span class="fa fa-file"></span>Detailed Grievance Report</a></li>
+            <li><a href="#!/report3"><span class="fa fa-file"></span>Report Based On Action Taken</a></li>
+            <li><a href="#!/report4"><span class="fa fa-file"></span>Report On Pending Grievances</a></li>
+            <li><a href="#!/report5"><span class="fa fa-file"></span>Report On Closed Grievances</a></li>
+            <li>
+              <a href="" class="cacwr"><span class="fa fa-bar-chart"></span>Course & Class Wise Report<i class="fas fa-caret-down"></i></a>
+              <ul class="cacwr-reports hide">
+                <li><a href="#!/report21"><span class="fa fa-file"></span>Consolidated Grievance Redressal Report</a></li>
+                <li><a href="#!/report22"><span class="fa fa-file"></span>Detailed Grievance Report</a></li>
+                <li><a href="#!/report23"><span class="fa fa-file"></span>Report On Pending Grievances</a></li>
+                <li><a href="#!/report24"><span class="fa fa-file"></span>Report On Closed Grievances</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="" class="rbogt"><span class="fa fa-bar-chart"></span>Reports Based On Grievance Type<i class="fas fa-caret-down"></i></a>
+              <ul class="rbogt-reports hide">
+                <li><a href="#!/report31"><span class="fa fa-file"></span>Detailed Report</a></li>
+                <li><a href="#!/report32"><span class="fa fa-file"></span>Report Based On Action Taken</a></li>
+                <li><a href="#!/report33"><span class="fa fa-file"></span>Pending Report</a></li>
+                <li><a href="#!/report34"><span class="fa fa-file"></span>Closed Report</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="" class="rbogcm"><span class="fa fa-bar-chart"></span>Reports Based On Grievance Cell Member<i class="fas fa-caret-down"></i></a>
+              <ul class="rbogcm-reports hide">
+                <li><a href="#!/report41"><span class="fa fa-file"></span>Pending Report</a></li>
+                <li><a href="#!/report42"><span class="fa fa-file"></span>Closed Report</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#!/mail-log"><span class="fa fa-info"></span>Mail Log</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section>
+    <div class="row padding-0 margin-0">
+      <div class="col-lg-3 col-md-3">
+        <div id="realsidemenu" class="realsidemenu">
+          <!-- Sidebar -->
+          <nav>
+            <ul class="list-unstyled components">
+              <li><a href="#!/my-account"><span class="fas fa-user"></span> My Account</a></li>
+              <li>
+                <a class="setting-toggle" href=""><span class="fas fa-gear"></span>Settings<span class="fas fa-caret-down"></span></a>
+                <ul class="settings hide">
+                  <li><a href="#!/education-group">Education Group</a></li>
+                  <li><a href="#!/course">Course</a></li>
+                  <li><a href="#!/class">Class</a></li>
+                  <li><a href="#!/grievance-type">Grievance Type</a></li>
+                  <li><a href="#!/student-termination">Student Termination</a></li>
+                  <li><a href="#!/parent-termination">Parent Termination</a></li>
+                  <li><a href="#!/resetpassword">Password Reset</a></li>
+                </ul>
+              </li>
+              <li><a href="#!/gcm"><span class="fas fa-user"></span> Grievance Cell Members</a></li>
+              <li><a href="#!/mngmnt"><span class="fas fa-user"></span> Management Members</a></li>
+              <li>
+                <a href="" class="rejected-users"><span class="fas fa-users"></span>Rejected Users<span class="fas fa-caret-down"></span></a>
+                <ul class="rejected hide">
+                  <li><a href="#!/rejected-students">Students</a></li>
+                  <li><a href="#!/rejected-parents">Parents</a></li>
+                  <li><a href="#!/rejected-nonteaching">Non Teaching Staff</a></li>
+                  <li><a href="#!/rejected-faculty">Faculty</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="" class="pending-approval"><span class="fas fa-users"></span>Pending Approval / Users<span class="fas fa-caret-down"></span></a>
+                <ul class="approve hide">
+                  <li><a href="#!/pending-students">Students</a></li>
+                  <li><a href="#!/pending-parents">Parents</a></li>
+                  <li><a href="#!/pending-nonteaching">Non Teaching Staff</a></li>
+                  <li><a href="#!/pending-faculty">Faculty</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="" class="approved"><span class="fas fa-users"></span>Approved Users<span class="fas fa-caret-down"></span></a>
+                <ul class="approved-users hide">
+                  <li><a href="#!/approved-students">Students</a></li>
+                  <li><a href="#!/approved-parents">Parents</a></li>
+                  <li><a href="#!/approved-nonteaching">Non Teaching Staff</a></li>
+                  <li><a href="#!/approved-faculty">Faculty</a></li>
+                </ul>
+              </li>
+              <li><a href="#!/grievance-details"><span class="fas fa-exclamation-triangle"></span> Grievances</a></li>
+              <li><a href="#!/deleted-grievances"><span class="fas fa-exclamation-triangle"></span>Deleted Grievances</a></li>
+              <li>
+                <a href="" class="report"><span class="fas fa-bar-chart"></span>Reports<i class="fas fa-caret-down"></i></a>
+                <ul class="reports hide">
+                  <li><a href="#!/report1"><span class="fa fa-file"></span>Consolidated Grievance Redressal Report</a></li>
+                  <li><a href="#!/report2"><span class="fa fa-file"></span>Detailed Grievance Report</a></li>
+                  <li><a href="#!/report3"><span class="fa fa-file"></span>Report Based On Action Taken</a></li>
+                  <li><a href="#!/report4"><span class="fa fa-file"></span>Report On Pending Grievances</a></li>
+                  <li><a href="#!/report5"><span class="fa fa-file"></span>Report On Closed Grievances</a></li>
+                  <li>
+                    <a href="" class="cacwr"><span class="fa fa-bar-chart"></span>Course & Class Wise Report<i class="fas fa-caret-down"></i></a>
+                    <ul class="cacwr-reports hide">
+                      <li><a href="#!/report21"><span class="fa fa-file"></span>Consolidated Grievance Redressal Report</a></li>
+                      <li><a href="#!/report22"><span class="fa fa-file"></span>Detailed Grievance Report</a></li>
+                      <li><a href="#!/report23"><span class="fa fa-file"></span>Report On Pending Grievances</a></li>
+                      <li><a href="#!/report24"><span class="fa fa-file"></span>Report On Closed Grievances</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="" class="rbogt"><span class="fa fa-bar-chart"></span>Reports Based On Grievance Type<i class="fas fa-caret-down"></i></a>
+                    <ul class="rbogt-reports hide">
+                      <li><a href="#!/report31"><span class="fa fa-file"></span>Detailed Report</a></li>
+                      <li><a href="#!/report32"><span class="fa fa-file"></span>Report Based On Action Taken</a></li>
+                      <li><a href="#!/report33"><span class="fa fa-file"></span>Pending Report</a></li>
+                      <li><a href="#!/report34"><span class="fa fa-file"></span>Closed Report</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="" class="rbogcm"><span class="fa fa-bar-chart"></span>Reports Based On Grievance Cell Member<i class="fas fa-caret-down"></i></a>
+                    <ul class="rbogcm-reports hide">
+                      <li><a href="#!/report41"><span class="fa fa-file"></span>Pending Report</a></li>
+                      <li><a href="#!/report42"><span class="fa fa-file"></span>Closed Report</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><a href="#!/mail-log"><span class="fa fa-info"></span>Mail Log</a></li>
+            </ul>
+          </nav>
+
+        </div>
+      </div>
+      <div class="col-sm-12 col-xs-12 col-md-12 col-lg-9">
+        <div class="container-fluid content" ng-view>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Popper.JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
