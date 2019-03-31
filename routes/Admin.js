@@ -384,7 +384,7 @@ router.post('/GRV_delete', requireLogin, function (req, res, next) {//To deactiv
   var id = { grv_id: req.query.grv_id }
   var newvalues = {
     $set:
-      { active: 0 }
+    { active: 0 }
   };
 
   Grv.update_grv(id, newvalues, function (err, isUpdate) {
@@ -614,14 +614,20 @@ router.post('/password_reset', function (req, res, next) {
     admin.comparePassword(cpass, user.password, function (err, isMatch) {
       if (err) throw err;
       if (isMatch) {
-        admin.update_password(sess.email, npass, function (err) {
-          if (err) throw err;
-          else {
-            console.log(' password updated');
-            res.send('Password Updated!');
+        if (npass == npass2) {
+          admin.update_password(sess.email, npass, function (err) {
+            if (err) throw err;
+            else {
+              console.log(' password updated');
+              res.send('Password Updated!');
             //res.redirect('/Student/Home')
-          }
-        });
+            }
+          });
+        }
+        else{
+          console.log('password doesnt match');
+          res.status(500).send('Passwords do not match.');
+        }
       }
 
       else {
@@ -690,7 +696,7 @@ router.post('/forgot_pass', function (req, res, next) {
     var password = generator.generate({
       length: 10,
       numbers: true
-  });
+    });
     admin.update_password(id, password, function (err) {
       if (err) throw err;
 
@@ -739,7 +745,7 @@ router.post('/termination', requireLogin, function (req, res, next) {//For Perma
   else if (req.query.type == 'Parent') {
     Parent.Terminate(req.body.year, newvalues, function (err) {
       if (err) throw err
-      console.log('Parent Terminated');
+        console.log('Parent Terminated');
     })
   }
   res.end();
