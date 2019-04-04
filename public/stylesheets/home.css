@@ -407,6 +407,10 @@ iframe{
 
 /*About Us page design...!!!*/
 
+.aboutuspage div, .aboutuspage i, .aboutuspage h1{
+  display: none;
+}
+
 /* width */
 .aboutuspage::-webkit-scrollbar {
   width: 5px;
@@ -451,13 +455,13 @@ iframe{
   from{
     height: 0%;
     width: 0%;
-    border-radius: 0rem 0 20rem 0;
+    border-radius: 0 0 200rem 0;
     padding: 0;
   }
   to{
     height: 100%;
     width: 100%;
-    border-radius: 0;
+    border-radius: 0rem 0 20rem 0;
     padding: 3rem;
     overflow-y: auto;
   }

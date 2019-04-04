@@ -240,14 +240,15 @@ $(function() {
         });
 
 $('#about-us-button').click(function(){
-  $('#maincontainer, footer').fadeOut(500);
+  $('#maincontainer, footer').fadeOut(1500);
   $('.aboutuspage').show();
+  $('.aboutuspage div, .aboutuspage i, .aboutuspage h1').delay(800).fadeIn();
 });
 
 $('.aboutuspage i').click(function(){
-  console.log('helljaskdjfkl');
   $('#maincontainer, footer').fadeIn(500);
   $('.aboutuspage').fadeOut(100);
+  $('.aboutuspage div, .aboutuspage i, .aboutuspage h1').hide();
 });
 
 $('body').show();
