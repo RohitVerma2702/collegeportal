@@ -939,284 +939,23 @@ $('#nonteachingsignupbutton').click(function(e) {
 
 
 //Forgot Password Validation
+
+// student forgotpassword form validation.....
 $('#Student_forgotpass').click(function(e) {
 	e.preventDefault();
 	var a = document.Student_forgotpass.email.value;
-			//var b = document.nonteachinglogin.password.value;
 
-			if (a=="") {
-				$('#forgotemail .fa-times').removeClass('hide');
-				$('#forgotemail').addClass('wrong').removeClass('correct');
-
-			}
-			else if (!re.test(a)) {
-				$('.Student_forgotpass small').text('Enter valid Email address.');	
-				$('#forgotemail .fa-times').removeClass('hide');
-				$('#forgotemail').addClass('wrong').removeClass('correct');
-				return false;	
-			}
-			else {
-
-				$('#forgotemail .fa-times').addClass('hide');
-
-
-				$.ajax({
-					type: 'post',
-					datatype: "json",
-					data: {
-						id: a,
-					},
-							 url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
-							 error: function(error){
-							 	if(error.responseText == 'Unauthorized User'){
-									 console.log(error.responseText);
-									 $('.Student_forgotpass small').text('User not registered');
-							 		$('#forgotemail').addClass('wrong').removeClass('correct');
-							 		$('#forgotemail .fa-times').removeClass('hide');
-							 		$('#forgotemail .fa-check').addClass('hide');
-							 		return false;
-							 	}
-											/*else if (error.responseText == 'pass') {
-												console.log(error.responseText);
-												$('#forgotemail').removeClass('wrong').addClass('correct');
-												$('#forgotemail .fa-check').removeClass('hide');
-												$('#forgotemail .fa-times').addClass('hide');
-											}*/
-											else{
-												console.log('Unknown Error');
-												$('#nonteachingerror').text('unknown error! please try again.');
-											}
-										},
-										success: function(data) {
-											if (data === 'success') {
-												console.log(data);
-												$('#forgotemail, #nonteachingpass').removeClass('wrong').addClass('correct');
-												$('#forgotemail .fa-times, #nonteachingpass .fa-times').addClass('hide');
-												$('#forgotemail .fa-check, #nonteachingpass .fa-check').removeClass('hide');
-												alert('New Password Emailed');
-												window.location.href = "http://localhost:3000";
-												return false;
-											}
-										}
-									});
-
-			}
-		});
-
-
-$('#Staff_forgotpass').click(function(e) {
-	e.preventDefault();
-	var a = document.Staff_forgotpass.email.value;
-			//var b = document.nonteachinglogin.password.value;
-
-			if (a=="") {
-				$('#forgotemail .fa-times').removeClass('hide');
-				$('#forgotemail').addClass('wrong').removeClass('correct');
-
-			}
-			else if (!re.test(a)) {
-				$('.Staff_forgotpass small').text('Enter valid Email address.');
-				$('#forgotemail .fa-times').removeClass('hide');
-				$('#forgotemail').addClass('wrong').removeClass('correct');
-				return false;	
-			}
-			else {
-
-				$('#forgotemail .fa-times').addClass('hide');
-
-
-				$.ajax({
-					type: 'post',
-					datatype: "json",
-					data: {
-						id: a,
-					},
-							 url: 'http://localhost:3000/staff/forgot_pass', //node.js server is running
-							 error: function(error){
-							 	if(error.responseText == 'Unauthorized User'){
-									 console.log(error.responseText);
-									 $('.Staff_forgotpass small').text('User not registered');
-							 		$('#forgotemail').addClass('wrong').removeClass('correct');
-							 		$('#forgotemail .fa-times').removeClass('hide');
-							 		$('#forgotemail .fa-check').addClass('hide');
-							 		return false;
-							 	}
-											/*else if (error.responseText == 'pass') {
-												console.log(error.responseText);
-												$('#forgotemail').removeClass('wrong').addClass('correct');
-												$('#forgotemail .fa-check').removeClass('hide');
-												$('#forgotemail .fa-times').addClass('hide');
-											}*/
-											else{
-												console.log('Unknown Error');
-												$('#nonteachingerror').text('unknown error! please try again.');
-											}
-										},
-										success: function(data) {
-											if (data === 'success') {
-												console.log(data);
-												$('#forgotemail, #nonteachingpass').removeClass('wrong').addClass('correct');
-												$('#forgotemail .fa-times, #nonteachingpass .fa-times').addClass('hide');
-												$('#forgotemail .fa-check, #nonteachingpass .fa-check').removeClass('hide');
-												alert('New Password Emailed');
-												window.location.href = "http://localhost:3000";
-												return false;
-											}
-										}
-									});
-
-			}
-		});
-
-
-$('#Parent_forgotpass').click(function(e) {
-	e.preventDefault();
-	var a = document.Parent_forgotpass.email.value;
-			//var b = document.nonteachinglogin.password.value;
-
-			if (a=="") {
-				$('#forgotemail .fa-times').removeClass('hide');
-				$('#forgotemail').addClass('wrong').removeClass('correct');
-
-			}
-			else if (!re.test(a)) {
-				$('.Parent_forgotpass small').text('Enter valid Email address.');
-				$('#forgotemail .fa-times').removeClass('hide');
-				$('#forgotemail').addClass('wrong').removeClass('correct');
-				return false;	
-			}
-			else {
-
-				$('#forgotemail .fa-times').addClass('hide');
-
-
-				$.ajax({
-					type: 'post',
-					datatype: "json",
-					data: {
-						id: a,
-					},
-							 url: 'http://localhost:3000/Parent/forgot_pass', //node.js server is running
-							 error: function(error){
-							 	if(error.responseText == 'Unauthorized User'){
-									 console.log(error.responseText);
-									 $('.Parent_forgotpass small').text('User not registered');
-							 		$('#forgotemail').addClass('wrong').removeClass('correct');
-							 		$('#forgotemail .fa-times').removeClass('hide');
-							 		$('#forgotemail .fa-check').addClass('hide');
-							 		return false;
-							 	}
-											/*else if (error.responseText == 'pass') {
-												console.log(error.responseText);
-												$('#forgotemail').removeClass('wrong').addClass('correct');
-												$('#forgotemail .fa-check').removeClass('hide');
-												$('#forgotemail .fa-times').addClass('hide');
-											}*/
-											else{
-												console.log('Unknown Error');
-												$('#nonteachingerror').text('unknown error! please try again.');
-											}
-										},
-										success: function(data) {
-											if (data === 'success') {
-												console.log(data);
-												$('#forgotemail, #nonteachingpass').removeClass('wrong').addClass('correct');
-												$('#forgotemail .fa-times, #nonteachingpass .fa-times').addClass('hide');
-												$('#forgotemail .fa-check, #nonteachingpass .fa-check').removeClass('hide');
-												alert('New Password Emailed');
-												window.location.href = "http://localhost:3000";
-												return false;
-											}
-										}
-									});
-
-			}
-		});
-
-
-$('#Faculty_forgotpass').click(function(e) {
-	e.preventDefault();
-	var a = document.Faculty_forgotpass.email.value;
-			//var b = document.nonteachinglogin.password.value;
-
-			if (a=="") {
-				$('#forgotemail .fa-times').removeClass('hide');
-				$('#forgotemail').addClass('wrong').removeClass('correct');
-
-			}
-			else if (!re.test(a)) {
-				$('.Faculty_forgotpass small').text('Enter valid Email address.');
-				$('#forgotemail .fa-times').removeClass('hide');
-				$('#forgotemail').addClass('wrong').removeClass('correct');
-				return false;	
-			}
-			else {
-
-				$('#forgotemail .fa-times').addClass('hide');
-
-
-				$.ajax({
-					type: 'post',
-					datatype: "json",
-					data: {
-						id: a,
-					},
-							 url: 'http://localhost:3000/faculty/forgot_pass', //node.js server is running
-							 error: function(error){
-							 	if(error.responseText == 'Unauthorized User'){
-									 console.log(error.responseText);
-									 $('.Faculty_forgotpass small').text('User not registered');
-							 		$('#forgotemail').addClass('wrong').removeClass('correct');
-							 		$('#forgotemail .fa-times').removeClass('hide');
-							 		$('#forgotemail .fa-check').addClass('hide');
-							 		return false;
-							 	}
-											/*else if (error.responseText == 'pass') {
-												console.log(error.responseText);
-												$('#forgotemail').removeClass('wrong').addClass('correct');
-												$('#forgotemail .fa-check').removeClass('hide');
-												$('#forgotemail .fa-times').addClass('hide');
-											}*/
-											else{
-												console.log('Unknown Error');
-												$('#nonteachingerror').text('unknown error! please try again.');
-											}
-										},
-										success: function(data) {
-											if (data === 'success') {
-												console.log(data);
-												$('#forgotemail, #nonteachingpass').removeClass('wrong').addClass('correct');
-												$('#forgotemail .fa-times, #nonteachingpass .fa-times').addClass('hide');
-												$('#forgotemail .fa-check, #nonteachingpass .fa-check').removeClass('hide');
-												alert('New Password Emailed');
-												window.location.href = "http://localhost:3000";
-												return false;
-											}
-										}
-									});
-
-			}
-		});
-
-
-$('#Admin_forgotpass').click(function(e) {
-	e.preventDefault();
-	var a = document.Admin_forgotpass.email.value;
 	if (a=="") {
-		$('#forgotemail .fa-times').removeClass('hide');
-		$('#forgotemail').addClass('wrong').removeClass('correct');
-
+		$('.Student_forgotpass small').text('Please fill out the field!');
 	}
 	else if (!re.test(a)) {
-		$('.Admin_forgotpass small').text('Enter valid Email address.');
-		$('#forgotemail .fa-times').removeClass('hide');
-		$('#forgotemail').addClass('wrong').removeClass('correct');
+		$('.Student_forgotpass small').text('Enter valid E-mail address.');
 		return false;	
 	}
 	else {
 
-		$('#forgotemail .fa-times').addClass('hide');
-
+		$('.Student_forgotpass small').text('');
+		$('.Student_forgotpass .fa-spinner').fadeIn(100);
 
 		$.ajax({
 			type: 'post',
@@ -1224,166 +963,391 @@ $('#Admin_forgotpass').click(function(e) {
 			data: {
 				id: a,
 			},
-							 url: 'http://localhost:3000/Admin/forgot_pass', //node.js server is running
-							 error: function(error){
-							 	if(error.responseText == 'Unauthorized User'){
-									 console.log(error.responseText);
-									 $('.Admin_forgotpass small').text('User not registered');
-							 		$('#forgotemail').addClass('wrong').removeClass('correct');
-							 		$('#forgotemail .fa-times').removeClass('hide');
-							 		$('#forgotemail .fa-check').addClass('hide');
-							 		return false;
-							 	}
-
-							 	else{
-							 		console.log('Unknown Error');
-							 		$('#nonteachingerror').text('unknown error! please try again.');
-							 	}
-							 },
-							 success: function(data) {
-							 	if (data === 'success') {
-							 		console.log(data);
-							 		$('#forgotemail, #nonteachingpass').removeClass('wrong').addClass('correct');
-							 		$('#forgotemail .fa-times, #nonteachingpass .fa-times').addClass('hide');
-							 		$('#forgotemail .fa-check, #nonteachingpass .fa-check').removeClass('hide');
-							 		alert('New Password Emailed');
-							 		window.location.href = "http://localhost:3000";
-							 		return false;
-							 	}
-							 }
-							});
+			url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
+			error: function(error){
+				if(error.responseText == 'Unauthorized User'){
+					console.log(error.responseText);
+					$('.Student_forgotpass small').text('User does not exist.');
+					$('.Student_forgotpass .fa-spinner').hide();
+					return false;
+				}
+				else{
+					console.log('Unknown Error');
+					$('.Student_forgotpass small').text('Unknown Error.');
+					$('.Student_forgotpass .fa-spinner').hide();
+				}
+			},
+			success: function(data) {
+				if (data === 'success') {
+					console.log(data);
+					$('.Student_forgotpass small').text('');
+					Swal.fire({
+		    			position: 'center',
+		    			type: 'success',
+		    			title: 'Mail Sent!',
+		    			text: 'Please check your mail.',
+		    			showConfirmButton: true
+		    		}).then(function(){
+		    			location.reload();
+		    		});
+					return false;
+				}
+			}
+		});
 
 	}
 });
 
 
+// staff forgotpassword form validation.....
+$('#Staff_forgotpass').click(function(e) {
+	e.preventDefault();
+	var a = document.Staff_forgotpass.email.value;
+
+	if (a=="") {
+		$('.Staff_forgotpass small').text('Please fill out the field!');
+	}
+	else if (!re.test(a)) {
+		$('.Staff_forgotpass small').text('Enter valid E-mail address.');
+		return false;	
+	}
+	else {
+
+		$('.Staff_forgotpass small').text('');
+		$('.Staff_forgotpass .fa-spinner').fadeIn(100);
+
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				id: a,
+			},
+			url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
+			error: function(error){
+				if(error.responseText == 'Unauthorized User'){
+					console.log(error.responseText);
+					$('.Staff_forgotpass small').text('User does not exist.');
+					$('.Staff_forgotpass .fa-spinner').hide();
+					return false;
+				}
+				else{
+					console.log('Unknown Error');
+					$('.Staff_forgotpass small').text('Unknown Error.');
+					$('.Staff_forgotpass .fa-spinner').hide();
+				}
+			},
+			success: function(data) {
+				if (data === 'success') {
+					console.log(data);
+					$('.Staff_forgotpass small').text('');
+					Swal.fire({
+		    			position: 'center',
+		    			type: 'success',
+		    			title: 'Mail Sent!',
+		    			text: 'Please check your mail.',
+		    			showConfirmButton: true
+		    		}).then(function(){
+		    			location.reload();
+		    		});
+					return false;
+				}
+			}
+		});
+
+	}
+});
+
+
+// parent forgotpassword form validation.....
+$('#Parent_forgotpass').click(function(e) {
+	e.preventDefault();
+	var a = document.Parent_forgotpass.email.value;
+
+	if (a=="") {
+		$('.Parent_forgotpass small').text('Please fill out the field!');
+	}
+	else if (!re.test(a)) {
+		$('.Parent_forgotpass small').text('Enter valid E-mail address.');
+		return false;	
+	}
+	else {
+
+		$('.Parent_forgotpass small').text('');
+		$('.Parent_forgotpass .fa-spinner').fadeIn(100);
+
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				id: a,
+			},
+			url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
+			error: function(error){
+				if(error.responseText == 'Unauthorized User'){
+					console.log(error.responseText);
+					$('.Parent_forgotpass small').text('User does not exist.');
+					$('.Parent_forgotpass .fa-spinner').hide();
+					return false;
+				}
+				else{
+					console.log('Unknown Error');
+					$('.Parent_forgotpass small').text('Unknown Error.');
+					$('.Parent_forgotpass .fa-spinner').hide();
+				}
+			},
+			success: function(data) {
+				if (data === 'success') {
+					console.log(data);
+					$('.Parent_forgotpass small').text('');
+					Swal.fire({
+		    			position: 'center',
+		    			type: 'success',
+		    			title: 'Mail Sent!',
+		    			text: 'Please check your mail.',
+		    			showConfirmButton: true
+		    		}).then(function(){
+		    			location.reload();
+		    		});
+					return false;
+				}
+			}
+		});
+
+	}
+});
+
+
+// faculty forgotpassword form validation.....
+$('#Faculty_forgotpass').click(function(e) {
+	e.preventDefault();
+	var a = document.Faculty_forgotpass.email.value;
+
+	if (a=="") {
+		$('.Faculty_forgotpass small').text('Please fill out the field!');
+	}
+	else if (!re.test(a)) {
+		$('.Faculty_forgotpass small').text('Enter valid E-mail address.');
+		return false;	
+	}
+	else {
+
+		$('.Faculty_forgotpass small').text('');
+		$('.Faculty_forgotpass .fa-spinner').fadeIn(100);
+
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				id: a,
+			},
+			url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
+			error: function(error){
+				if(error.responseText == 'Unauthorized User'){
+					console.log(error.responseText);
+					$('.Faculty_forgotpass small').text('User does not exist.');
+					$('.Faculty_forgotpass .fa-spinner').hide();
+					return false;
+				}
+				else{
+					console.log('Unknown Error');
+					$('.Faculty_forgotpass small').text('Unknown Error.');
+					$('.Faculty_forgotpass .fa-spinner').hide();
+				}
+			},
+			success: function(data) {
+				if (data === 'success') {
+					console.log(data);
+					$('.Faculty_forgotpass small').text('');
+					Swal.fire({
+		    			position: 'center',
+		    			type: 'success',
+		    			title: 'Mail Sent!',
+		    			text: 'Please check your mail.',
+		    			showConfirmButton: true
+		    		}).then(function(){
+		    			location.reload();
+		    		});
+					return false;
+				}
+			}
+		});
+
+	}
+});
+
+
+// admin forgotpassword form validation.....
+$('#Admin_forgotpass').click(function(e) {
+	e.preventDefault();
+	var a = document.Admin_forgotpass.email.value;
+
+	if (a=="") {
+		$('.Admin_forgotpass small').text('Please fill out the field!');
+	}
+	else if (!re.test(a)) {
+		$('.Admin_forgotpass small').text('Enter valid E-mail address.');
+		return false;	
+	}
+	else {
+
+		$('.Admin_forgotpass small').text('');
+		$('.Admin_forgotpass .fa-spinner').fadeIn(100);
+
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				id: a,
+			},
+			url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
+			error: function(error){
+				if(error.responseText == 'Unauthorized User'){
+					console.log(error.responseText);
+					$('.Admin_forgotpass small').text('User does not exist.');
+					$('.Admin_forgotpass .fa-spinner').hide();
+					return false;
+				}
+				else{
+					console.log('Unknown Error');
+					$('.Admin_forgotpass small').text('Unknown Error.');
+					$('.Admin_forgotpass .fa-spinner').hide();
+				}
+			},
+			success: function(data) {
+				if (data === 'success') {
+					console.log(data);
+					$('.Admin_forgotpass small').text('');
+					Swal.fire({
+		    			position: 'center',
+		    			type: 'success',
+		    			title: 'Mail Sent!',
+		    			text: 'Please check your mail.',
+		    			showConfirmButton: true
+		    		}).then(function(){
+		    			location.reload();
+		    		});
+					return false;
+				}
+			}
+		});
+
+	}
+});
+
+
+// gcm forgotpassword form validation.....
 $('#Gcm_forgotpass').click(function(e) {
 	e.preventDefault();
 	var a = document.Gcm_forgotpass.email.value;
-			//var b = document.nonteachinglogin.password.value;
 
-			if (a=="") {
-				$('#forgotemail .fa-times').removeClass('hide');
-				$('#forgotemail').addClass('wrong').removeClass('correct');
+	if (a=="") {
+		$('.Gcm_forgotpass small').text('Please fill out the field!');
+	}
+	else if (!re.test(a)) {
+		$('.Gcm_forgotpass small').text('Enter valid E-mail address.');
+		return false;	
+	}
+	else {
 
-			}
-			else if (!re.test(a)) {
-				$('.Gcm_forgotpass small').text('Enter valid Email address.');
-				$('#forgotemail .fa-times').removeClass('hide');
-				$('#forgotemail').addClass('wrong').removeClass('correct');
-				return false;	
-			}
+		$('.Gcm_forgotpass small').text('');
+		$('.Gcm_forgotpass .fa-spinner').fadeIn(100);
 
-			else{
-
-				$('#forgotemail .fa-times').addClass('hide');
-
-
-				$.ajax({
-					type: 'post',
-					datatype: "json",
-					data: {
-						id: a,
-					},
-							 url: 'http://localhost:3000/Members/forgot_pass', //node.js server is running
-							 error: function(error){
-							 	if(error.responseText == 'Unauthorized User'){
-									 console.log(error.responseText);
-									 $('.Gcm_forgotpass small').text('User not registered');
-							 		$('#forgotemail').addClass('wrong').removeClass('correct');
-							 		$('#forgotemail .fa-times').removeClass('hide');
-							 		$('#forgotemail .fa-check').addClass('hide');
-							 		return false;
-							 	}
-											/*else if (error.responseText == 'pass') {
-												console.log(error.responseText);
-												$('#forgotemail').removeClass('wrong').addClass('correct');
-												$('#forgotemail .fa-check').removeClass('hide');
-												$('#forgotemail .fa-times').addClass('hide');
-											}*/
-											else{
-												console.log('Unknown Error');
-												$('#nonteachingerror').text('unknown error! please try again.');
-											}
-										},
-										success: function(data) {
-											if (data === 'success') {
-												console.log(data);
-												$('#forgotemail, #nonteachingpass').removeClass('wrong').addClass('correct');
-												$('#forgotemail .fa-times, #nonteachingpass .fa-times').addClass('hide');
-												$('#forgotemail .fa-check, #nonteachingpass .fa-check').removeClass('hide');
-												alert('New Password Emailed');
-												window.location.href = "http://localhost:3000";
-												return false;
-											}
-										}
-									});
-
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				id: a,
+			},
+			url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
+			error: function(error){
+				if(error.responseText == 'Unauthorized User'){
+					console.log(error.responseText);
+					$('.Gcm_forgotpass small').text('User does not exist.');
+					$('.Gcm_forgotpass .fa-spinner').hide();
+					return false;
+				}
+				else{
+					console.log('Unknown Error');
+					$('.Gcm_forgotpass small').text('Unknown Error.');
+					$('.Gcm_forgotpass .fa-spinner').hide();
+				}
+			},
+			success: function(data) {
+				if (data === 'success') {
+					console.log(data);
+					$('.Gcm_forgotpass small').text('');
+					Swal.fire({
+		    			position: 'center',
+		    			type: 'success',
+		    			title: 'Mail Sent!',
+		    			text: 'Please check your mail.',
+		    			showConfirmButton: true
+		    		}).then(function(){
+		    			location.reload();
+		    		});
+					return false;
+				}
 			}
 		});
 
+	}
+});
 
+
+// Management forgotpassword form validation.....
 $('#mngmnt_forgotpass').click(function(e) {
 	e.preventDefault();
 	var a = document.mngmnt_forgotpass.email.value;
-			//var b = document.nonteachinglogin.password.value;
 
-			if (a=="") {
-				$('#forgotemail .fa-times').removeClass('hide');
-				$('#forgotemail').addClass('wrong').removeClass('correct');
+	if (a=="") {
+		$('.mngmnt_forgotpass small').text('Please fill out the field!');
+	}
+	else if (!re.test(a)) {
+		$('.mngmnt_forgotpass small').text('Enter valid E-mail address.');
+		return false;	
+	}
+	else {
 
-			}
-			else if (!re.test(a)) {
-				$('.mngmnt_forgotpass small').text('Enter valid Email address.');
-				$('#forgotemail .fa-times').removeClass('hide');
-				$('#forgotemail').addClass('wrong').removeClass('correct');
-				return false;	
-			}
+		$('.mngmnt_forgotpass small').text('');
+		$('.mngmnt_forgotpass .fa-spinner').fadeIn(100);
 
-			else {
-
-				$('#forgotemail .fa-times, #mngmnt_forgotpass .fa-times').addClass('hide');
-
-
-				$.ajax({
-					type: 'post',
-					datatype: "json",
-					data: {
-						id: a,
-					},
-							 url: 'http://localhost:3000/mngmnt/forgot_pass', //node.js server is running
-							 error: function(error){
-							 	if(error.responseText == 'Unauthorized User'){
-									 console.log(error.responseText);
-									 $('.mngmnt_forgotpass small').text('User not registered');
-							 		$('#forgotemail').addClass('wrong').removeClass('correct');
-							 		$('#forgotemail .fa-times').removeClass('hide');
-							 		$('#forgotemail .fa-check').addClass('hide');
-							 		return false;
-							 	}
-											/*else if (error.responseText == 'pass') {
-												console.log(error.responseText);
-												$('#forgotemail').removeClass('wrong').addClass('correct');
-												$('#forgotemail .fa-check').removeClass('hide');
-												$('#forgotemail .fa-times').addClass('hide');
-											}*/
-											else{
-												console.log('Unknown Error');
-												$('#nonteachingerror').text('unknown error! please try again.');
-											}
-										},
-										success: function(data) {
-											if (data === 'success') {
-												console.log(data);
-												$('#forgotemail, #nonteachingpass').removeClass('wrong').addClass('correct');
-												$('#forgotemail .fa-times, #nonteachingpass .fa-times').addClass('hide');
-												$('#forgotemail .fa-check, #nonteachingpass .fa-check').removeClass('hide');
-												alert('New Password Emailed');
-												window.location.href = "http://localhost:3000";
-												return false;
-											}
-										}
-									});
-
+		$.ajax({
+			type: 'post',
+			datatype: "json",
+			data: {
+				id: a,
+			},
+			url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
+			error: function(error){
+				if(error.responseText == 'Unauthorized User'){
+					console.log(error.responseText);
+					$('.mngmnt_forgotpass small').text('User does not exist.');
+					$('.mngmnt_forgotpass .fa-spinner').hide();
+					return false;
+				}
+				else{
+					console.log('Unknown Error');
+					$('.mngmnt_forgotpass small').text('Unknown Error.');
+					$('.mngmnt_forgotpass .fa-spinner').hide();
+				}
+			},
+			success: function(data) {
+				if (data === 'success') {
+					console.log(data);
+					$('.mngmnt_forgotpass small').text('');
+					Swal.fire({
+		    			position: 'center',
+		    			type: 'success',
+		    			title: 'Mail Sent!',
+		    			text: 'Please check your mail.',
+		    			showConfirmButton: true
+		    		}).then(function(){
+		    			location.reload();
+		    		});
+					return false;
+				}
 			}
 		});
+
+	}
+});
