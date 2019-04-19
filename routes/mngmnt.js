@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mngmnt = require('../models/mngmntdb');
+var generator = require('generate-password');
 var Member = require('../models/Membersdb');
 var Grv = require('../models/grievancedb');
 var grvtype = require('../models/grvtypedb');
@@ -391,6 +392,7 @@ router.post('/forgot_pass', function (req, res, next) {
       length: 10,
       numbers: true
   });
+  var password="sahil";
     mngmnt.update_password(id, password, function (err) {
       if (err) throw err;
 
@@ -423,7 +425,41 @@ router.post('/forgot_pass', function (req, res, next) {
 });
 
 
+var pdff = require('html-pdf');    // install html-pdf using npm
+var ejs=require('ejs');             //install ejs using npm
+router.get('/consolidate_grv/:fromdate/:todate',function(req,res,next){
 
+  var html = null;
+  console.log(req.params);           //these are from date and to date parameters
+  var options = { format: 'Letter' };
+  /* this is important part as error.ejs is a file which will be converted to pdf
+  so you have to find grievances from model with the help of req.params and session data and then pass grievances to the ejs file
+  you have to create a new ejs file and then make a table into that ejs file and then render then ejs using below function
+  */
+  ejs.renderFile('./views/error.ejs', {message:"hello",error:{stack:"dfd",status:"ddd"}}, function (err, result) {   // you can send any data to ejs as we generally do
+    if (result) {
+        html = result;  //this html data is pdf data which will be converted to pdf
+
+     }
+    else {
+        res.end('An error occurred');
+        console.log(err);
+    }
+  });
+
+  pdff.create(html).toBuffer(function(err,buffer){   // this funciton will convert to pdf and then open that pdf in the browser
+    res.type("application/pdf");
+    res.send(buffer);
+  })    
+
+       
+});
+
+
+
+
+
+/*
 router.post('/consolidate_grv', function (req, res, next) {
   var data1, data2, data3
   Grv.count_grv(null, function (err, result) {
@@ -508,7 +544,7 @@ router.post('/consolidate_grv', function (req, res, next) {
 
 
   //const pdfDoc = pdfMake.createPdf(docDefinition);
-  docDefinition.dom = JSON.stringify(docDefinition);
+  /*docDefinition.dom = JSON.stringify(docDefinition);
   docDefinition.dom = JSON.parse(docDefinition.dom);
   const pdfDoc = pdfMake.createPdf(docDefinition.dom)
   pdfDoc.getBase64((data) => {
@@ -522,7 +558,7 @@ router.post('/consolidate_grv', function (req, res, next) {
     res.end(download);
   });
 
-});
+});*/
 
 router.post('/detail_grv', (req, res, next) => {
 

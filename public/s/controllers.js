@@ -991,7 +991,7 @@ app.controller("Management_pending_user", function ($http, $scope, $window, $mdD
         }
     }
 });
-
+/*
 
 app.controller("Management_grievances_report", function ($http, $scope, $window) {
     $scope.consolidate = function () {
@@ -1008,10 +1008,22 @@ app.controller("Management_grievances_report", function ($http, $scope, $window)
 
         });
     }
-
-
-});
-
+});*/
+app.controller("ExampleCtrl", function($scope,$http) {
+    var vm = this;
+          vm.consolidate=function(){
+  
+                
+                 var fromdate=$scope.from_date;
+                 var todate=$scope.to_date;
+                 console.log(fromdate);
+                 console.log(todate);
+                  m=window.open('/mngmnt/consolidate_grv/:'+fromdate+'/:'+todate);
+                  
+    
+     }
+  });
+  
 
 //------------------------------------ADMIN-------------------------------------------------------//
 

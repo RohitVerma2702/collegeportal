@@ -6,6 +6,7 @@ var Grv = require('../models/grievancedb');
 var Grvtype = require('../models/grvtypedb');
 var datetime = require('node-datetime');
 var nodemailer = require("nodemailer");
+var generator = require('generate-password');
 var Mail_log = require('../models/Maildb');
 var dt = datetime.create();
 console.log('successful');

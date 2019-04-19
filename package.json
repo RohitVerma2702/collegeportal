@@ -27,6 +27,7 @@
     "express-session-expire-timeout": "^1.0.3",
     "express-validator": "^5.3.0",
     "generate-password": "^1.4.1",
+    "html-pdf": "^2.2.0",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
     "mongodb": "*",
@@ -39,7 +40,8 @@
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
-    "pdfmake": "^0.1.40",
+    "pdfmake": "^0.1.54",
+    "phantomjs-prebuilt": "^2.1.16",
     "smtp-server": "^3.4.7",
     "uniqid": "^5.0.3"
   }
