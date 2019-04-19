@@ -1,6 +1,7 @@
 $('body').hide();
 
-$(document).ready(function(){
+window.addEventListener('load', function(){  
+  $('body').show();
 
   console.log($(window).width());
 
@@ -242,7 +243,7 @@ $(function() {
 $('#about-us-button').click(function(){
   $('#maincontainer, footer').fadeOut(1500);
   $('.aboutuspage').show();
-  $('.aboutuspage div, .aboutuspage i, .aboutuspage h1').delay(800).fadeIn();
+  $('.aboutuspage div, .aboutuspage i, .aboutuspage h1').delay(500).fadeIn();
 });
 
 $('.aboutuspage i').click(function(){
@@ -251,6 +252,6 @@ $('.aboutuspage i').click(function(){
   $('.aboutuspage div, .aboutuspage i, .aboutuspage h1').hide();
 });
 
-$('body').show();
+$('.aboutuspage div, .aboutuspage i, .aboutuspage h1').hide();
 
 });

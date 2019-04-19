@@ -152,21 +152,9 @@ small{
   padding-top: 5rem;
   padding-bottom: 5rem;
 }
-.forms h1,.forms h5{
+.forms h3{
   color: #ffffff;
   font-weight: normal;
-}
-.forms ul{
-  list-style: upper-roman;
-  padding: 0;
-}
-.forms ul li{
-  margin: 1rem;
-  padding: 0;
-  font-size: 1rem;
-  color: #ffffff;
-  text-align: left;
-  line-height: 1rem;
 }
 
 .reg-form{
@@ -186,6 +174,8 @@ small{
   z-index: 1;
   min-height: 100%;
   padding: 1rem;
+  display: grid;
+  place-items:center;
 }
 
 .correct, .wrong{
@@ -407,8 +397,12 @@ iframe{
 
 /*About Us page design...!!!*/
 
-.aboutuspage div, .aboutuspage i, .aboutuspage h1{
+.aboutuspage .team p{
   display: none;
+}
+
+.aboutuspage .team h4{
+  padding-top: 1rem;
 }
 
 /* width */
@@ -479,13 +473,14 @@ iframe{
 
 footer{
   background-color: #000;
-  height: 20rem;
+  height: auto;
   margin-top: 2rem;
 }
 
 .follow{
   position: relative;
-  top: 3rem;
+  padding-top: 3rem;
+  height: 100%;
   text-align: center;
 }
 
@@ -516,7 +511,11 @@ footer{
 
 .follow p{
   color: #fff;
-  padding-top: 2rem;
+  position: relative;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 5rem;
   letter-spacing: .1rem;
   font-weight: bold;
 }
