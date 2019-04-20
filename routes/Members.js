@@ -7,6 +7,7 @@ var grvtype = require('../models/grvtypedb');
 const flash = require('express-flash-notification');
 var session = require('express-session');
 var Mail_log = require('../models/Maildb');
+var generator = require('generate-password');
 var datetime = require('node-datetime');
 console.log('successful');
 var app = express();

@@ -69,8 +69,8 @@ Grv.grv_findbyid=function(query,callback)
 {
     Grv.findOne({grv_id:query},null,callback);}
 
-Grv.grv_all=function(query,callback)//all grievances either either active or not 
-{
+Grv.grv_all=function(query,date,callback)//all grievances either either active or not 
+{console.log("date="+date);
     Grv.find({active:query},null,{sort:{time:-1}},callback);
 }
 
@@ -87,4 +87,24 @@ Grv.grv_findformembers_and_mngmnt=function(query,callback)
 console.log(query);
     Grv.find({$and:[{active:1},{gseq: { $in: query} },{status:{$in:['pending','viewed','disposed']}}]},null,{sort:{time:-1}},callback);
 }
+Grv.Report_grv_all=function(query,Fdate,Tdate,callback)//all grievances either either active or not 
+{
+    Grv.find({$and:[{active:query},{time:{$lt:Tdate,$gt:Fdate}}]},null,{sort:{time:-1}},callback);
+}
+Grv.Report_grv_status=function(query,Fdate,Tdate,callback)//all grievances either either active or not 
+{
+    Grv.find({$and:[{status:query},{time:{$lt:Tdate,$gt:Fdate}}]},null,{sort:{time:-1}},callback);
+}
+Grv.Report_grv_DGtype=function(query,gtype,Fdate,Tdate,callback)//all grievances either either active or not 
+{
+    Grv.find({$and:[{active:query},{Gtype:gtype},{time:{$lt:Tdate,$gt:Fdate}}]},null,{sort:{time:-1}},callback);
+}
+Grv.Report_grv_PGtype=function(query,status,gtype,Fdate,Tdate,callback)//all grievances either either active or not 
+{
+    Grv.find({$and:[{status:status},{active:query},{Gtype:gtype},{time:{$lt:Tdate,$gt:Fdate}}]},null,{sort:{time:-1}},callback);
+}
 
+Grv.Report_grv_GCMtype=function(query,status,GCM,Fdate,Tdate,callback)//all grievances either either active or not 
+{
+    Grv.find({$and:[{status:status},{active:query},{GCM:GCM},{time:{$lt:Tdate,$gt:Fdate}}]},null,{sort:{time:-1}},callback);
+}

@@ -1022,7 +1022,7 @@ $('#Staff_forgotpass').click(function(e) {
 			data: {
 				id: a,
 			},
-			url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
+			url: 'http://localhost:3000/staff/forgot_pass', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -1081,7 +1081,7 @@ $('#Parent_forgotpass').click(function(e) {
 			data: {
 				id: a,
 			},
-			url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
+			url: 'http://localhost:3000/Parent/forgot_pass', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -1140,7 +1140,7 @@ $('#Faculty_forgotpass').click(function(e) {
 			data: {
 				id: a,
 			},
-			url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
+			url: 'http://localhost:3000/faculty/forgot_pass', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -1199,7 +1199,7 @@ $('#Admin_forgotpass').click(function(e) {
 			data: {
 				id: a,
 			},
-			url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
+			url: 'http://localhost:3000/Admin/forgot_pass', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -1258,7 +1258,7 @@ $('#Gcm_forgotpass').click(function(e) {
 			data: {
 				id: a,
 			},
-			url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
+			url: 'http://localhost:3000/Members/forgot_pass', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -1317,7 +1317,7 @@ $('#mngmnt_forgotpass').click(function(e) {
 			data: {
 				id: a,
 			},
-			url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
+			url: 'http://localhost:3000/mngmnt/forgot_pass', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);

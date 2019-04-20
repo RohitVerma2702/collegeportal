@@ -1,43 +1,44 @@
-<h1>Detailed Report Based On Grievance Type</h1>
-<div ng-app="grievances" ng-controller="Admin">
+
+
+
 <div class="form-group">
-   <div class="row">
-    <div class="col-sm-2 offset-sm-1">
-       <label class="control-label"> From Date</label>
-   </div>
-   <div class="col-sm-7">
-       <input class="form-control" type="date" name="from-date" value="2018-10-10">
-   </div>
-</div>
-</div>
-<div class="form-group">
-    <div class="row">
-        <div class="col-sm-2 offset-sm-1">
-           <label class="control-label"> To Date</label>
-       </div>
-       <div class="col-sm-7">
-           <input class="form-control" type="date" name="to-date" value="2018-10-10">
-       </div>
-   </div>
-</div>
-<div class="form-group">
-    <div class="row">
-        <div class="col-sm-2 offset-sm-1">
-           <label class="control-label">Grievance Type</label>
-       </div>
-       <div class="col-sm-7">
-        <select ng-model="Gtype">
-            <option value="">Select One</option>
-            <!--<option ng-repeat="obj in grievance_type" value="{{obj.seq}}&{{obj.grvtype}}">{{obj.grvtype}}</option>-->
-        </select>
+    <h1>Detailed Report Based On Grievance Type</h1>
+
+    <div class="content" ng-app="grievances" ng-controller="Gtype_report as vm">
+        <form class="form-group" ng-submit="vm.consolidate()">
+            <div class="row pb-3">
+                <div class="col-sm-2 offset-sm-1">
+                    <label class="control-lable">From Date</label>
+                </div>
+                <div class="col-sm-7">
+                    <input type="date" ng-model="from_date" name="from_date" class="form-control" required>
+                </div>
+            </div>
+            <div class="row pb-3">
+                <div class="col-sm-2 offset-sm-1">
+                    <label class="control-lable">To Date</label>
+                </div>
+                <div class="col-sm-7">
+                    <input type="date" ng-model="to_date" name="to_date" class="form-control"  required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-2 offset-sm-1">
+                       <label class="control-label">Grievance Type</label>
+                   </div>
+                   <div class="col-sm-7">
+                    <select ng-model="Gtype" name="Gtype">
+                        <option value="">Select One</option>
+                        <option ng-repeat="obj in grievance_type" value="{{obj.grvtype}}">{{obj.grvtype}}</option>
+                    </select>
+                </div>
+            </div>
+            </div>
+            <div class="col-sm-7 offset-sm-3">
+                <button type="submit" class="btn btn-default" name="">
+                    Create
+                </button>
+            </div>
+        </form>
     </div>
-</div>
-</div>
-<div class="form-group">
-    <div class="col-sm-7 offset-sm-3">
-        <button>
-            <a class="btn btn-default" href="reports.ejs" download="Reports"> Create</a>
-        </button>
-    </div>
-</div>
-</div>

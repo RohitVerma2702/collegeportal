@@ -1023,7 +1023,129 @@ app.controller("ExampleCtrl", function($scope,$http) {
     
      }
   });
+  app.controller("Detail_report", function($scope,$http) {
+    var vm = this;
+          vm.consolidate=function(){
   
+                
+                 var fromdate=$scope.from_date;
+                 var todate=$scope.to_date;
+                
+                  m=window.open('/mngmnt/detail_grv/:'+fromdate+'/:'+todate);
+                  
+    
+     }
+  });
+  
+  app.controller("Action_report", function($scope,$http) {
+    var vm = this;
+          vm.consolidate=function(){
+  
+                
+                 var fromdate=$scope.from_date;
+                 var todate=$scope.to_date;
+                
+                  m=window.open('/mngmnt/Action_grv/:'+fromdate+'/:'+todate);
+                  
+    
+     }
+  });
+  
+  app.controller("Pending_report", function($scope,$http) {
+    var vm = this;
+          vm.consolidate=function(){
+  
+                
+                 var fromdate=$scope.from_date;
+                 var todate=$scope.to_date;
+                
+                  m=window.open('/mngmnt/Pending_grv/:'+fromdate+'/:'+todate);
+                  
+    
+     }
+  });
+
+  app.controller("Closed_report", function($scope,$http) {
+    var vm = this;
+          vm.consolidate=function(){
+  
+                
+                 var fromdate=$scope.from_date;
+                 var todate=$scope.to_date;
+                
+                  m=window.open('/mngmnt/Closed_grv/:'+fromdate+'/:'+todate);
+                  
+    
+     }
+  });
+  app.controller("Gtype_report", function($scope,$http) {
+    $http.get("/mngmnt/grievance_type").then(function (response) {
+        $scope.grievance_type = response.data;
+    });
+    $http.get("/mngmnt/GCM_List").then(function (response) {
+        $scope.members = response.data.info;
+        $('#loading').hide();
+        $('#grievances').fadeIn(500);
+    });
+
+    var vm = this;
+          vm.consolidate=function(){
+  
+                
+                 var fromdate=$scope.from_date;
+                 var todate=$scope.to_date;
+                 var Gtype=$scope.Gtype;
+                
+                  m=window.open('/mngmnt/DGtype_grv?fromdate='+fromdate+'&todate='+todate+'&Gtype='+Gtype);
+                  
+    
+     }
+
+     vm.Action=function(){
+  
+                
+        var fromdate=$scope.from_date;
+        var todate=$scope.to_date;
+        var Gtype=$scope.Gtype;
+       
+         m=window.open('/mngmnt/AGtype_grv?fromdate='+fromdate+'&todate='+todate+'&Gtype='+Gtype);
+         
+
+}
+
+vm.Pending=function(){
+  
+                
+    var fromdate=$scope.from_date;
+    var todate=$scope.to_date;
+    var Gtype=$scope.Gtype;
+   
+     m=window.open('/mngmnt/PGtype_grv?fromdate='+fromdate+'&todate='+todate+'&Gtype='+Gtype);
+     
+
+}
+vm.Closed=function(){
+  
+                
+    var fromdate=$scope.from_date;
+    var todate=$scope.to_date;
+    var Gtype=$scope.Gtype;
+   
+     m=window.open('/mngmnt/CGtype_grv?fromdate='+fromdate+'&todate='+todate+'&Gtype='+Gtype);
+     
+
+}
+vm.GCMtype=function(){
+    var fromdate=$scope.from_date;
+    var todate=$scope.to_date;
+    var GCM=$scope.GCM;
+   
+     m=window.open('/mngmnt/GCMtype_grv?fromdate='+fromdate+'&todate='+todate+'&GCM='+GCM);
+     
+
+}
+
+  });
 
 //------------------------------------ADMIN-------------------------------------------------------//
 

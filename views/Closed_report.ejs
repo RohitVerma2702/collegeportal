@@ -1,0 +1,32 @@
+<html>
+<h1>ANAND INTERNATIONAL COLLEGE OF ENGINEERING</h1>
+    <body>
+        <h2>Report on Closed Grievances</h2>
+        <table class="table table-hover table-striped">
+            <thead class="table-success">
+               <table>                <tr>
+                    <th>S.No.</th>
+                    <th>Grievant</th>
+                    <th>Grievance type</th>
+                    <th>Grievnace Category</th>
+                    <th>Grievance date</th>
+                    <th>Subject</th>
+                    <th>Attended by</th>
+               
+                </tr> 
+            <% for(var i=0; i<message.length; i++){ %>
+               <tr>
+                <td><%=i+1%></td>
+                <td><%=message[i].Grievant%></td>
+                <td><%=message[i].Gtype%></td>
+                <td><%=message[i].Utype%></td>
+                <td><%=message[i].time%></td>
+                <td><%=message[i].subject%></td>
+                <td><%=message[i].GCM%></td>
+            </tr>
+                <%}%>
+            </table>
+
+
+    </body>
+</html>

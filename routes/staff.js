@@ -12,7 +12,7 @@ var app = express();
 var Mail_log = require('../models/Maildb');
 var sess;
 var nodemailer = require("nodemailer");
-
+var generator = require('generate-password');
 var smtpTransport = nodemailer.createTransport({
   service: "Gmail",
   //secure: false,

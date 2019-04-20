@@ -9,6 +9,7 @@ var Student = require('../models/Studentdb');
 var Parent = require('../models/Parentdb');
 var faculty = require('../models/facultydb');
 var datetime = require('node-datetime');
+var Grvtype = require('../models/grvtypedb');
 var Mail_log = require('../models/Maildb');
 var Staff = require('../models/staffdb');
 var dt = datetime.create();
@@ -423,20 +424,57 @@ router.post('/forgot_pass', function (req, res, next) {
     });
   });
 });
+router.get('/grievance_type', function (req, res, next) {
+  Grvtype.grvtype_find(function (err, result) {
+    if (err) throw err;
+    console.log(result);
+    res.send(result);
+  }
+
+  );
+});
+router.get('/GCM_List', function (req, res, next) {//to Display all th Grievance Cell Member 
+  Member.find_all(function (err, result) {
+    if (err) throw err;
+    else {
+      console.log(result);
+      var data = {
+        info: result
+      }
+      res.send(data);
+    }
+  })
+
+});
 
 
 var pdff = require('html-pdf');    // install html-pdf using npm
 var ejs=require('ejs');             //install ejs using npm
 router.get('/consolidate_grv/:fromdate/:todate',function(req,res,next){
-
-  var html = null;
+//var as=path.join(__dirname+"/../public/");
+//as=as.replace(new  RegExp(/\\/g),'/');
+console.log(req.params.todate);
+var html = null;
   console.log(req.params);           //these are from date and to date parameters
-  var options = { format: 'Letter' };
+  var options = { format: 'Letter',
+  type:"pdf",
+  width:1700,
+  height:700,
+  name:"Detailed Grievance Report",
+   //base: "file:///"+as 
+  
+};
   /* this is important part as error.ejs is a file which will be converted to pdf
   so you have to find grievances from model with the help of req.params and session data and then pass grievances to the ejs file
   you have to create a new ejs file and then make a table into that ejs file and then render then ejs using below function
   */
-  ejs.renderFile('./views/error.ejs', {message:"hello",error:{stack:"dfd",status:"ddd"}}, function (err, result) {   // you can send any data to ejs as we generally do
+
+ Grv.Report_grv_all(1,req.params.fromdate,req.params.todate,function(err,result)
+ 
+ {
+   if(err) throw err;
+
+   ejs.renderFile('./views/Detail_report.ejs', {message:result,error:{stack:"dfd",status:"ddd"}}, function (err, result) {   // you can send any data to ejs as we generally do
     if (result) {
         html = result;  //this html data is pdf data which will be converted to pdf
 
@@ -447,18 +485,407 @@ router.get('/consolidate_grv/:fromdate/:todate',function(req,res,next){
     }
   });
 
-  pdff.create(html).toBuffer(function(err,buffer){   // this funciton will convert to pdf and then open that pdf in the browser
+  pdff.create(html,options).toBuffer(function(err,buffer){   // this funciton will convert to pdf and then open that pdf in the browser
     res.type("application/pdf");
     res.send(buffer);
   })    
 
-       
+ })  
 });
 
 
+  
+
+router.get('/detail_grv/:fromdate/:todate',function(req,res,next){
+  //var as=path.join(__dirname+"/../public/");
+  //as=as.replace(new  RegExp(/\\/g),'/');
+  console.log(req.params.todate);
+  var html = null;
+    console.log(req.params);           //these are from date and to date parameters
+    var options = { format: 'Letter',
+    type:"pdf",
+    width:1700,
+    height:700,
+    name:"Detailed Grievance Report",
+     //base: "file:///"+as 
+    
+  };
+    /* this is important part as error.ejs is a file which will be converted to pdf
+    so you have to find grievances from model with the help of req.params and session data and then pass grievances to the ejs file
+    you have to create a new ejs file and then make a table into that ejs file and then render then ejs using below function
+    */
+  
+   Grv.Report_grv_all(1,req.params.fromdate,req.params.todate,function(err,result)
+   
+   {
+     if(err) throw err;
+  
+     ejs.renderFile('./views/Detail_report.ejs', {message:result,error:{stack:"dfd",status:"ddd"}}, function (err, result) {   // you can send any data to ejs as we generally do
+      if (result) {
+          html = result;  //this html data is pdf data which will be converted to pdf
+  
+       }
+      else {
+          res.end('An error occurred');
+          console.log(err);
+      }
+    });
+  
+    pdff.create(html,options).toBuffer(function(err,buffer){   // this funciton will convert to pdf and then open that pdf in the browser
+      res.type("application/pdf");
+      res.send(buffer);
+    })    
+  
+   })  
+  });
+  
+  router.get('/Action_grv/:fromdate/:todate',function(req,res,next){
+    //var as=path.join(__dirname+"/../public/");
+    //as=as.replace(new  RegExp(/\\/g),'/');
+    console.log(req.params.todate);
+    var html = null;
+      console.log(req.params);           //these are from date and to date parameters
+      var options = { format: 'Letter',
+      type:"pdf",
+      width:1700,
+      height:700,
+      name:"Detailed Grievance Report",
+       //base: "file:///"+as 
+      
+    };
+      /* this is important part as error.ejs is a file which will be converted to pdf
+      so you have to find grievances from model with the help of req.params and session data and then pass grievances to the ejs file
+      you have to create a new ejs file and then make a table into that ejs file and then render then ejs using below function
+      */
+    
+     Grv.Report_grv_all(1,req.params.fromdate,req.params.todate,function(err,result)
+     
+     {
+       if(err) throw err;
+    
+       ejs.renderFile('./views/Action_report.ejs', {message:result,error:{stack:"dfd",status:"ddd"}}, function (err, result) {   // you can send any data to ejs as we generally do
+        if (result) {
+            html = result;  //this html data is pdf data which will be converted to pdf
+    
+         }
+        else {
+            res.end('An error occurred');
+            console.log(err);
+        }
+      });
+    
+      pdff.create(html,options).toBuffer(function(err,buffer){   // this funciton will convert to pdf and then open that pdf in the browser
+        res.type("application/pdf");
+        res.send(buffer);
+      })    
+    
+     })  
+    });
 
 
+    router.get('/Pending_grv/:fromdate/:todate',function(req,res,next){
+      //var as=path.join(__dirname+"/../public/");
+      //as=as.replace(new  RegExp(/\\/g),'/');
+      console.log(req.params.todate);
+      var html = null;
+        console.log(req.params);           //these are from date and to date parameters
+        var options = { format: 'Letter',
+        type:"pdf",
+        width:1700,
+        height:700,
+        name:"Detailed Grievance Report",
+         //base: "file:///"+as 
+        
+      };
+        /* this is important part as error.ejs is a file which will be converted to pdf
+        so you have to find grievances from model with the help of req.params and session data and then pass grievances to the ejs file
+        you have to create a new ejs file and then make a table into that ejs file and then render then ejs using below function
+        */
+      
+       Grv.Report_grv_status('pending',req.params.fromdate,req.params.todate,function(err,result)
+       
+       {
+         if(err) throw err;
+      
+         ejs.renderFile('./views/Pending_report.ejs', {message:result,error:{stack:"dfd",status:"ddd"}}, function (err, result) {   // you can send any data to ejs as we generally do
+          if (result) {
+              html = result;  //this html data is pdf data which will be converted to pdf
+      
+           }
+          else {
+              res.end('An error occurred');
+              console.log(err);
+          }
+        });
+      
+        pdff.create(html,options).toBuffer(function(err,buffer){   // this funciton will convert to pdf and then open that pdf in the browser
+          res.type("application/pdf");
+          res.send(buffer);
+        })    
+      
+       })  
+      });
+      router.get('/DGtype_grv',function(req,res,next){
+        //var as=path.join(__dirname+"/../public/");
+        //as=as.replace(new  RegExp(/\\/g),'/');
+        console.log(req.query.todate);
+        var html = null;
+          console.log(req.query);           //these are from date and to date parameters
+          var options = { format: 'Letter',
+          type:"pdf",
+          width:1700,
+          height:700,
+          name:"Detailed Grievance Report",
+           //base: "file:///"+as 
+          
+        };
+          /* this is important part as error.ejs is a file which will be converted to pdf
+          so you have to find grievances from model with the help of req.params and session data and then pass grievances to the ejs file
+          you have to create a new ejs file and then make a table into that ejs file and then render then ejs using below function
+          */
+        console.log(req.query.Gtype)
+         Grv.Report_grv_DGtype(1,req.query.Gtype,req.query.fromdate,req.query.todate,function(err,result)
+         
+         {
+           if(err) throw err;
+        
+           ejs.renderFile('./views/DGtype_report.ejs', {message:result,error:{stack:req.query.Gtype,status:"ddd"}}, function (err, result) {   // you can send any data to ejs as we generally do
+            if (result) {
+                html = result;  //this html data is pdf data which will be converted to pdf
+        
+             }
+            else {
+                res.end('An error occurred');
+                console.log(err);
+            }
+          });
+        
+          pdff.create(html,options).toBuffer(function(err,buffer){   // this funciton will convert to pdf and then open that pdf in the browser
+            res.type("application/pdf");
+            res.send(buffer);
+          })    
+        
+         })  
+        });
 
+        
+      router.get('/AGtype_grv',function(req,res,next){
+        //var as=path.join(__dirname+"/../public/");
+        //as=as.replace(new  RegExp(/\\/g),'/');
+        console.log(req.query.todate);
+        var html = null;
+          console.log(req.query);           //these are from date and to date parameters
+          var options = { format: 'Letter',
+          type:"pdf",
+          width:1700,
+          height:700,
+          name:"Detailed Grievance Report",
+           //base: "file:///"+as 
+          
+        };
+          /* this is important part as error.ejs is a file which will be converted to pdf
+          so you have to find grievances from model with the help of req.params and session data and then pass grievances to the ejs file
+          you have to create a new ejs file and then make a table into that ejs file and then render then ejs using below function
+          */
+        console.log(req.query.Gtype)
+         Grv.Report_grv_DGtype(1,req.query.Gtype,req.query.fromdate,req.query.todate,function(err,result)
+         
+         {
+           if(err) throw err;
+        
+           ejs.renderFile('./views/AGtype_report.ejs', {message:result,error:{stack:req.query.Gtype,status:"ddd"}}, function (err, result) {   // you can send any data to ejs as we generally do
+            if (result) {
+                html = result;  //this html data is pdf data which will be converted to pdf
+        
+             }
+            else {
+                res.end('An error occurred');
+                console.log(err);
+            }
+          });
+        
+          pdff.create(html,options).toBuffer(function(err,buffer){   // this funciton will convert to pdf and then open that pdf in the browser
+            res.type("application/pdf");
+            res.send(buffer);
+          })    
+        
+         })  
+        });
+
+        
+        router.get('/PGtype_grv',function(req,res,next){
+          //var as=path.join(__dirname+"/../public/");
+          //as=as.replace(new  RegExp(/\\/g),'/');
+          console.log(req.query.todate);
+          var html = null;
+            console.log(req.query);           //these are from date and to date parameters
+            var options = { format: 'Letter',
+            type:"pdf",
+            width:1700,
+            height:700,
+            name:"Detailed Grievance Report",
+             //base: "file:///"+as 
+            
+          };
+            /* this is important part as error.ejs is a file which will be converted to pdf
+            so you have to find grievances from model with the help of req.params and session data and then pass grievances to the ejs file
+            you have to create a new ejs file and then make a table into that ejs file and then render then ejs using below function
+            */
+          console.log(req.query.Gtype)
+           Grv.Report_grv_PGtype(1,'pending',req.query.Gtype,req.query.fromdate,req.query.todate,function(err,result)
+           
+           {
+             if(err) throw err;
+          
+             ejs.renderFile('./views/PGtype_report.ejs', {message:result,error:{stack:req.query.Gtype,status:"ddd"}}, function (err, result) {   // you can send any data to ejs as we generally do
+              if (result) {
+                  html = result;  //this html data is pdf data which will be converted to pdf
+          
+               }
+              else {
+                  res.end('An error occurred');
+                  console.log(err);
+              }
+            });
+          
+            pdff.create(html,options).toBuffer(function(err,buffer){   // this funciton will convert to pdf and then open that pdf in the browser
+              res.type("application/pdf");
+              res.send(buffer);
+            })    
+          
+           })  
+          });
+
+            
+        router.get('/CGtype_grv',function(req,res,next){
+          //var as=path.join(__dirname+"/../public/");
+          //as=as.replace(new  RegExp(/\\/g),'/');
+          console.log(req.query.todate);
+          var html = null;
+            console.log(req.query);           //these are from date and to date parameters
+            var options = { format: 'Letter',
+            type:"pdf",
+            width:1700,
+            height:700,
+            name:"Detailed Grievance Report",
+             //base: "file:///"+as 
+            
+          };
+            /* this is important part as error.ejs is a file which will be converted to pdf
+            so you have to find grievances from model with the help of req.params and session data and then pass grievances to the ejs file
+            you have to create a new ejs file and then make a table into that ejs file and then render then ejs using below function
+            */
+          console.log(req.query.Gtype)
+           Grv.Report_grv_PGtype(1,'disposed',req.query.Gtype,req.query.fromdate,req.query.todate,function(err,result)
+           
+           {
+             if(err) throw err;
+          
+             ejs.renderFile('./views/CGtype_report.ejs', {message:result,error:{stack:req.query.Gtype,status:"ddd"}}, function (err, result) {   // you can send any data to ejs as we generally do
+              if (result) {
+                  html = result;  //this html data is pdf data which will be converted to pdf
+          
+               }
+              else {
+                  res.end('An error occurred');
+                  console.log(err);
+              }
+            });
+          
+            pdff.create(html,options).toBuffer(function(err,buffer){   // this funciton will convert to pdf and then open that pdf in the browser
+              res.type("application/pdf");
+              res.send(buffer);
+            })    
+          
+           })  
+          });
+                      
+        router.get('/GCMtype_grv',function(req,res,next){
+          //var as=path.join(__dirname+"/../public/");
+          //as=as.replace(new  RegExp(/\\/g),'/');
+          console.log(req.query.todate);
+          var html = null;
+            console.log(req.query);           //these are from date and to date parameters
+            var options = { format: 'Letter',
+            type:"pdf",
+            width:1700,
+            height:700,
+            name:"Detailed Grievance Report",
+             //base: "file:///"+as 
+            
+          };
+            /* this is important part as error.ejs is a file which will be converted to pdf
+            so you have to find grievances from model with the help of req.params and session data and then pass grievances to the ejs file
+            you have to create a new ejs file and then make a table into that ejs file and then render then ejs using below function
+            */
+          console.log(req.query.Gtype)
+           Grv.Report_grv_GCMtype(1,'disposed',req.query.GCM,req.query.fromdate,req.query.todate,function(err,result)
+           
+           {
+             if(err) throw err;
+          
+             ejs.renderFile('./views/GCMtype_report.ejs', {message:result,error:{stack:req.query.Gtype,status:"ddd"}}, function (err, result) {   // you can send any data to ejs as we generally do
+              if (result) {
+                  html = result;  //this html data is pdf data which will be converted to pdf
+          
+               }
+              else {
+                  res.end('An error occurred');
+                  console.log(err);
+              }
+            });
+          
+            pdff.create(html,options).toBuffer(function(err,buffer){   // this funciton will convert to pdf and then open that pdf in the browser
+              res.type("application/pdf");
+              res.send(buffer);
+            })    
+          
+           })  
+          });
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        router.get('/Closed_grv/:fromdate/:todate',function(req,res,next){
+          //var as=path.join(__dirname+"/../public/");
+          //as=as.replace(new  RegExp(/\\/g),'/');
+          console.log(req.params.todate);
+          var html = null;
+            console.log(req.params);           //these are from date and to date parameters
+            var options = { format: 'Letter',
+            type:"pdf",
+            width:1700,
+            height:700,
+            name:"Detailed Grievance Report",
+             //base: "file:///"+as 
+            
+          };
+            /* this is important part as error.ejs is a file which will be converted to pdf
+            so you have to find grievances from model with the help of req.params and session data and then pass grievances to the ejs file
+            you have to create a new ejs file and then make a table into that ejs file and then render then ejs using below function
+            */
+          
+           Grv.Report_grv_status('disposed',req.params.fromdate,req.params.todate,function(err,result)
+           
+           {
+             if(err) throw err;
+          
+             ejs.renderFile('./views/Closed_report.ejs', {message:result,error:{stack:"dfd",status:"ddd"}}, function (err, result) {   // you can send any data to ejs as we generally do
+              if (result) {
+                  html = result;  //this html data is pdf data which will be converted to pdf
+          
+               }
+              else {
+                  res.end('An error occurred');
+                  console.log(err);
+              }
+            });
+          
+            pdff.create(html,options).toBuffer(function(err,buffer){   // this funciton will convert to pdf and then open that pdf in the browser
+              res.type("application/pdf");
+              res.send(buffer);
+            })    
+          
+           })  
+          });
+    
 /*
 router.post('/consolidate_grv', function (req, res, next) {
   var data1, data2, data3
