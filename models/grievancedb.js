@@ -33,6 +33,12 @@ time:{
 status:{// pending/viewed/disposed
     type:String
 },
+Batch:{
+    type:String
+},
+dep:{
+      type: String
+    },
 active:{//  1:-active 0:-deleted
 type:Boolean,
 default:true
@@ -107,4 +113,12 @@ Grv.Report_grv_PGtype=function(query,status,gtype,Fdate,Tdate,callback)//all gri
 Grv.Report_grv_GCMtype=function(query,status,GCM,Fdate,Tdate,callback)//all grievances either either active or not 
 {
     Grv.find({$and:[{status:status},{active:query},{GCM:GCM},{time:{$lt:Tdate,$gt:Fdate}}]},null,{sort:{time:-1}},callback);
+}
+Grv.Report_grv_class_type=function(query,dep,batch,Fdate,Tdate,callback)//all grievances either either active or not 
+{
+    Grv.find({$and:[{Batch:batch},{dep:dep},{active:query},{time:{$lt:Tdate,$gt:Fdate}}]},null,{sort:{time:-1}},callback);
+}
+Grv.Report_grv_Pclass_type=function(query,status,dep,batch,Fdate,Tdate,callback)//all grievances either either active or not 
+{
+    Grv.find({$and:[{status:status},{Batch:batch},{dep:dep},{active:query},{time:{$lt:Tdate,$gt:Fdate}}]},null,{sort:{time:-1}},callback);
 }

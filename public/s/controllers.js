@@ -1031,7 +1031,7 @@ app.controller("ExampleCtrl", function($scope,$http) {
                  var fromdate=$scope.from_date;
                  var todate=$scope.to_date;
                 
-                  m=window.open('/mngmnt/detail_grv/:'+fromdate+'/:'+todate);
+                  m=window.open('/mngmnt/detail_grv?fromdate='+fromdate+'&todate='+todate);
                   
     
      }
@@ -1045,7 +1045,7 @@ app.controller("ExampleCtrl", function($scope,$http) {
                  var fromdate=$scope.from_date;
                  var todate=$scope.to_date;
                 
-                  m=window.open('/mngmnt/Action_grv/:'+fromdate+'/:'+todate);
+                  m=window.open('/mngmnt/Action_grv?fromdate='+fromdate+'&todate='+todate);
                   
     
      }
@@ -1059,7 +1059,7 @@ app.controller("ExampleCtrl", function($scope,$http) {
                  var fromdate=$scope.from_date;
                  var todate=$scope.to_date;
                 
-                  m=window.open('/mngmnt/Pending_grv/:'+fromdate+'/:'+todate);
+                  m=window.open('/mngmnt/Pending_grv?fromdate='+fromdate+'&todate='+todate);
                   
     
      }
@@ -1073,7 +1073,7 @@ app.controller("ExampleCtrl", function($scope,$http) {
                  var fromdate=$scope.from_date;
                  var todate=$scope.to_date;
                 
-                  m=window.open('/mngmnt/Closed_grv/:'+fromdate+'/:'+todate);
+                  m=window.open('/mngmnt/Closed_grv?fromdate='+fromdate+'&todate='+todate);
                   
     
      }
@@ -1142,6 +1142,52 @@ vm.GCMtype=function(){
    
      m=window.open('/mngmnt/GCMtype_grv?fromdate='+fromdate+'&todate='+todate+'&GCM='+GCM);
      
+
+}
+
+  });
+
+
+  app.controller("Class_Type_report", function($scope,$http) {
+    var vm = this;
+          vm.consolidate=function(){
+  
+                
+                 var fromdate=$scope.from_date;
+                 var todate=$scope.to_date;
+                 var dep=$scope.Dep;
+                 var batch=$scope.Batch;
+                
+                 m=window.open('/mngmnt/ClassType_grv?fromdate='+fromdate+'&todate='+todate+'&dep='+dep+'&batch='+batch);
+     
+   
+    
+     }
+
+     vm.pending=function(){
+  
+                
+        var fromdate=$scope.from_date;
+        var todate=$scope.to_date;
+        var dep=$scope.Dep;
+        var batch=$scope.Batch;
+       
+        m=window.open('/mngmnt/PClassType_grv?fromdate='+fromdate+'&todate='+todate+'&dep='+dep+'&batch='+batch);
+
+
+
+}
+vm.closed_grv=function(){
+  
+                
+    var fromdate=$scope.from_date;
+    var todate=$scope.to_date;
+    var dep=$scope.Dep;
+    var batch=$scope.Batch;
+   
+    m=window.open('/mngmnt/CClassType_grv?fromdate='+fromdate+'&todate='+todate+'&dep='+dep+'&batch='+batch);
+
+
 
 }
 

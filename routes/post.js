@@ -186,6 +186,16 @@ router.post('/complaint', uploads.single('file'), function (req, res, next) {//T
     var utype = req.body.usertype;
     var gseq = type.substr(0, type.indexOf('&'));
     var gtype = type.substr(type.indexOf('&') + 1);
+    var dep=null;
+    var batch=null;
+    if(sess.dep)
+    {
+         dep=sess.dep;
+    }
+    if(sess.batch)
+    {
+         batch=sess.batch;
+    }
     if (!req.file) {
         file = 'no file';
     }
@@ -214,6 +224,8 @@ router.post('/complaint', uploads.single('file'), function (req, res, next) {//T
             Grv: comp, // Grievance posted
             Grievant: sess.email,
             active: 1,
+            dep:dep,
+            Batch:batch,
             status: 'pending', // Status of Grv. pending/viewed/disposed/deleted
             file: file //any Doc. to be uploaded
 
