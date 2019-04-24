@@ -353,7 +353,7 @@ router.get('/All_Grievances', requireLogin, function (req, res, next) {
   query = req.query.active;
   Grv.grv_all(query, function (err, result) {
     if (err) throw err;
-    console.log(result);
+    //console.log(result);
     var data = {
       info: result
     }

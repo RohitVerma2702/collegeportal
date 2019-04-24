@@ -75,8 +75,8 @@ Grv.grv_findbyid=function(query,callback)
 {
     Grv.findOne({grv_id:query},null,callback);}
 
-Grv.grv_all=function(query,date,callback)//all grievances either either active or not 
-{console.log("date="+date);
+Grv.grv_all=function(query,callback)//all grievances either either active or not 
+{
     Grv.find({active:query},null,{sort:{time:-1}},callback);
 }
 
