@@ -1,0 +1,22 @@
+h1{
+	font-size: 50pt;
+}
+
+h2{
+	font-size: 140pt;
+}
+
+table{
+	width: 100%;
+	border-spacing: 10px;
+}
+
+th, td{
+	padding: 40px;
+	font-size: 25pt;
+	border-spacing: 110px;
+}
+
+th{
+	text-align: left;
+}
