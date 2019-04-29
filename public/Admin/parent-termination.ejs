@@ -1,12 +1,14 @@
 <!--Parent Termination-->
 <!--Admin-->
 <div ng-app="grievances" ng-controller="Termination" >
-    <h1>Parent Termination</h1>
+    <h3>Parent Termination</h3>
     <div id="terminate" class="contenttable">
         <form class="form-group" ng-submit="Termination('Parent')">
+        	<div class="col-sm-5">
             <label>Enter Year</label>
-            <input type="number" class="form-control w-50" ng-model="year" placeholder="(ex. 2016)" maxlength="4" minlength="4" required>
-            <button type="submit" class="btn btn-danger my-3">Terminate</button>
+            <input type="number" class="form-control" ng-model="year" placeholder="(ex. 2016)" maxlength="4" minlength="4" required>
+            <button type="submit" class="btn btn-danger my-1">Terminate</button>
+        	</div>
         </form>
     </div>
 

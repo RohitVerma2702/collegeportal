@@ -1,26 +1,28 @@
-<h1>Detail Grievance  Report</h1>
-<div class="content" ng-app="grievances" ng-controller="Detail_report as vm">
+<h3>Detail Grievance  Report</h3>
+<div  ng-app="grievances" ng-controller="Detail_report as vm">
     <form class="form-group" ng-submit="vm.consolidate()">
-        <div class="row pb-3">
-            <div class="col-sm-2 offset-sm-1">
+        <div class="row pb-1">
+            <div class="col-xs-12">
                 <label class="control-lable">From Date</label>
             </div>
             <div class="col-sm-7">
                 <input type="date" ng-model="from_date" name="from_date" class="form-control" required>
             </div>
         </div>
-        <div class="row pb-3">
-            <div class="col-sm-2 offset-sm-1">
+        <div class="row pb-1">
+            <div class="col-xs-12">
                 <label class="control-lable">To Date</label>
             </div>
             <div class="col-sm-7">
                 <input type="date" ng-model="to_date" name="to_date" class="form-control"  required>
             </div>
         </div>
-        <div class="col-sm-7 offset-sm-3">
-            <button type="submit" class="btn btn-default" name="">
+        <div class="row">
+            <div class="col-sm-7">
+            <button type="submit" class="btn btn-secondary" name="">
                 Create
             </button>
+        </div>
         </div>
     </form>
 </div>

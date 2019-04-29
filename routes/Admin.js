@@ -39,7 +39,7 @@ function requireLogin(req, res, next) {
 var app = express();
 var sess;
 router.get('/Home', requireLogin, function (req, res, next) {
-  res.render('Home2', { title: 'Admin_Login' });
+  res.render('Rohit-dashboard', { title: 'Admin_Login' });
 });
 
 

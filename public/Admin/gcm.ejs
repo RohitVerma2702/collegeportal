@@ -1,105 +1,110 @@
 <!--Grievance cell members-->
 <!--Admin-->
 <div ng-app="grievances" ng-controller="Admin_GCM">
-    <h1>Grievance Cell Members List</h1>
-    <div>
-        <button class="btn" id="createnew">Create New</button>
-    </div>
+    <h3>Grievance Cell Members List</h3>
+    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#default">
+        Create New
+    </button>
     <div id="grievances" class="contenttable">
-        <table class="table table-hover table-striped">
-            <thead class="table-success">
-                <tr>
-                    <th>S.No.</th>
-                    <th>Name</th>
-                    <th>Designation</th>
-                    <th>Email ID</th>
-                    <th>Mobile No.</th>
-                    <th>Action</th>
-                </tr> 
-            </thead>
-            <tr ng-repeat="member in members">
-                <td>{{$index+1}}</td>
-                <td>{{member.name}}</td>
-                <td>{{member.designation}}</td>
-                <td>{{member.emailid}}</td>
-                <td>{{member.mobileno}}</td>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead class="table-inverse">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Email ID</th>
+                        <th>Mobile No.</th>
+                        <th>Action</th>
+                    </tr> 
+                </thead>
+                <tr ng-repeat="member in members">
+                    <td>{{$index+1}}</td>
+                    <td>{{member.name}}</td>
+                    <td>{{member.designation}}</td>
+                    <td>{{member.emailid}}</td>
+                    <td>{{member.mobileno}}</td>
 
-                <td>
-                    <button ng-click="Deactivate(member.emailid)" class="btn btn-danger tablebuttons">
-                        Deactivate
-                    </button>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="detailbackground hide">
-        <div class="detailpopup">
-
-            <h1>Add New Member</h1>
-
-            <div class="detail-data">
-                <form class="form-group" ng-submit="create()">
-                    <div class="row">
-                        <div class="col-sm-4 offset-sm-1">
-                            <label class="label-control">Name:</label>
-                            <input type="text" ng-model="name" class="form-control" required>
-                        </div>
-                        <div class="col-sm-4 offset-sm-1">
-                            <label class="label-control">Designation:</label>
-                            <input type="text" ng-model="desig" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4 offset-sm-1">
-                            <label class="label-control">Select Grievance Type:</label>
-                            <br>
-                            <small>*Use Ctrl(Windows)/Commang(Mac) button to select multiple.</small>
-                            <select class="form-control" ng-model="Gtype" required multiple>
-                               <!-- <option value="">Select</option>-->
-                                <option ng-repeat="result in result" value="{{result.seq}}">{{result.grvtype}}</option>
-                            </select>
-                        </div>
-                        <div class="col-sm-4 offset-sm-1">
-                            <label class="label-control">Email:</label>
-                            <input type="text" ng-model="email" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4 offset-sm-1">
-                            <label class="label-control">Contact No.:</label>
-                            <input type="number" ng-model="mobile" class="form-control" maxlength="10" minlength="10" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4 offset-sm-1">
-                            <label class="label-control">
-                                Is Management ?
-                                <input type="checkbox" ng-model="mngmnt">
-                            </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4 offset-sm-1">
-                            <input type="submit" class="btn btn-primary" value="Create">
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="closebutton">
-                <button id="closebutton" class="btn btn-default">Close</button>
-            </div>
-
+                    <td>
+                        <button ng-click="Deactivate(member.emailid)" class="btn btn-sm btn-danger btn-sm">
+                            Deactivate
+                        </button>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 
-    <div id="loading">
-        <div class="loader">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="form-group">
+            <!-- Modal -->
+            <div class="modal fade text-xs-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel1">Add New Grievance Cell Member</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-group" ng-submit="create()">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <label class="label-control">Name:</label>
+                                        <input type="text" ng-model="name" class="form-control" required>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <label class="label-control">Designation:</label>
+                                        <input type="text" ng-model="desig" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <label class="label-control">Select Grievance Type:</label>
+                                        <br>
+                                        <small>*Use Ctrl(Windows)/Commang(Mac) button to select multiple.</small>
+                                        <select class="form-control" ng-model="Gtype" required multiple>
+                                           <!-- <option value="">Select</option>-->
+                                           <option ng-repeat="result in result" value="{{result.seq}}">{{result.grvtype}}</option>
+                                       </select>
+                                   </div>
+                                   <div class="col-xs-12">
+                                    <label class="label-control">Email:</label>
+                                    <input type="text" ng-model="email" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label class="label-control">Contact No.:</label>
+                                    <input type="number" ng-model="mobile" class="form-control" maxlength="10" minlength="10" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label class="label-control">
+                                        Is Management ?
+                                        <input type="checkbox" ng-model="mngmnt">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="modal-footer pr-0 pb-0">
+                                <button type="submit" class="btn btn-outline-primary">Create</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <h1>Loading...</h1>
     </div>
+</div>
+
+<div id="loading">
+    <div class="loader">
+    </div>
+
+    <h3>Loading...</h3>
+</div>
 
 </div>
 

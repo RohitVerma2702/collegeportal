@@ -15,17 +15,17 @@
 
 body.vertical-layout.vertical-menu.menu-expanded .navbar .navbar-header {
   float: left;
-  width: 240px; }
+  width: 250px; }
 
 body.vertical-layout.vertical-menu.menu-expanded .navbar.navbar-brand-center .navbar-header {
   float: left;
   width: auto; }
 
 body.vertical-layout.vertical-menu.menu-expanded .navbar .navbar-container {
-  margin-left: 240px; }
+  margin-left: 250px; }
 
 body.vertical-layout.vertical-menu.menu-expanded .main-menu {
-  width: 240px;
+  width: 250px;
   transition: 300ms ease all;
   backface-visibility: hidden; }
   body.vertical-layout.vertical-menu.menu-expanded .main-menu .navigation .navigation-header .icon-ellipsis {
@@ -57,7 +57,7 @@ body.vertical-layout.vertical-menu.menu-expanded .main-menu {
 
 body.vertical-layout.vertical-menu.menu-expanded .content,
 body.vertical-layout.vertical-menu.menu-expanded .footer {
-  margin-left: 240px; }
+  margin-left: 250px; }
 
 body.vertical-layout.vertical-menu.menu-expanded .navbar-brand-center .content,
 body.vertical-layout.vertical-menu.menu-expanded .navbar-brand-center .footer {
@@ -216,7 +216,7 @@ body.vertical-layout.vertical-menu.menu-collapsed.menu-flipped .footer {
     width: 240px; }
   body.vertical-layout.vertical-menu .content,
   body.vertical-layout.vertical-menu .footer {
-    margin-left: 240px; }
+    margin-left: 250px; }
   body.vertical-layout.vertical-menu.menu-flipped .content {
     margin: 0;
     margin-right: 240px; }

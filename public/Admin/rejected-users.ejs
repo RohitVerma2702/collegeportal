@@ -1,13 +1,13 @@
 <!--Grievance cell members-->
 <!--Admin-->
 <div ng-app="grievances" ng-controller="Rejected_user" >
-    <h1>Rejected Users</h1>
-    <h1>{{msg}}</h1>
+    <h3>Rejected Users</h3>
+    <h3>{{msg}}</h3>
     <div id="rejected_user" class="contenttable hide">
         <table class="table table-hover table-striped">
-            <thead class="table-success">
+            <thead class="table-inverse">
                 <tr>
-                    <th>S.No.</th>
+                    <th>#</th>
                     <th>Name</th>
                     <th>User Type</th>
                     <th>Email ID</th>
@@ -23,7 +23,7 @@
                     <td>{{student.emailid}}</td>
                     <td>{{student.mobileno}}</td>
                     <td>
-                        <button class="btn btn-primary tablebuttons"><span class="fas fa-undo"></span> Undo Reject</button>
+                        <button class="btn btn-primary btn-sm"><span class="fas fa-undo"></span> Undo Reject</button>
                     </td>
                 </tr>
         </table>
@@ -32,7 +32,7 @@
         <div class="loader">
         </div>
 
-        <h1>Loading...</h1>
+        <h3>Loading...</h3>
     </div>
 
 </div>

@@ -13,6 +13,7 @@
     "angular-material": "^1.1.10",
     "angular-messages": "^1.7.5",
     "angular-route": "^1.7.5",
+    "angular-sweetalert-service": "^2.0.2",
     "bcryptjs": "^2.4.3",
     "connect-flash": "*",
     "cookie-parser": "~1.4.3",

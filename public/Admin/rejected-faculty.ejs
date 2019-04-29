@@ -1,12 +1,12 @@
 <!--Grievance cell members-->
 <!--Admin-->
 <div ng-app="grievances" ng-controller="Admin_Rejected_user" ng-init="init('faculty')">
-    <h1>Rejected Faculty List</h1>
-    <div id="rejected_list" class="contenttable hide">
+    <h3>Rejected Faculty List</h3>
+    <div id="rejected_list" class="table-responsive">
         <table class="table table-hover table-striped">
-            <thead class="table-success">
+            <thead class="table-inverse">
                 <tr>
-                    <th>S.No.</th>
+                    <th>#</th>
                     <th>Name</th>
                     <th>Gender</th>
                     <th>Department</th>
@@ -27,7 +27,7 @@
                 <td>{{user.emailid}}</td>
                 <td>{{user.mobileno}}</td>
                 <td>
-                <button ng-click="Undo_rejected('Faculty',user.emailid)" class="btn btn-success">
+                <button ng-click="Undo_rejected('Faculty',user.emailid)" class="btn btn-success btn-sm">
                         Undo Reject
                     </button>
                     </td>
@@ -38,7 +38,7 @@
         <div class="loader">
         </div>
 
-        <h1>Loading...</h1>
+        <h3>Loading...</h3>
     </div>
 
 </div>

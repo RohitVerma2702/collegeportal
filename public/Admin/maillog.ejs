@@ -1,34 +1,36 @@
 <!--Mail Log-->
 <!--Admin-->
 <div ng-app="grievances" ng-controller="Mail_Log">
-    <h1>Mail Log</h1>
+    <h3>Mail Log</h3>
     <div id="mail" class="contenttable">
-        <table class="table table-hover table-striped">
-            <thead class="table-success">
-                <tr>
-                    <th>S.No.</th>
-                    <th>Email ID</th>
-                    <th>Subject</th>
-                    <th>status</th>
-                    <th>date</th>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead class="table-inverse">
+                    <tr>
+                        <th>#</th>
+                        <th>Email ID</th>
+                        <th>Subject</th>
+                        <th>status</th>
+                        <th>date</th>
 
-                </tr> 
-            </thead>
-            <tr ng-repeat="mail in maillog">
+                    </tr> 
+                </thead>
+                <tr ng-repeat="mail in maillog">
                     <td>{{$index+1}}</td>
                     <td>{{mail.subject}}</td>
                     <td>{{mail.emailid}}</td>
                     <td>{{mail.status}}</td>
                     <td>{{mail.date}}</td>
                 </tr>
-        </table>
+            </table>
+        </div>
     </div>
-   <!-- <div id="loading">
+    <div id="loading">
         <div class="loader">
         </div>
         
-        <h1>Loading...</h1>
+        <h3>Loading...</h3>
     </div>
--->
+
 </div>
 

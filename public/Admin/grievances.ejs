@@ -1,11 +1,11 @@
 <!--Admin-->
 <div class="content" ng-app="grievances" ng-controller="Admin_grievances">
-    <h1>Grievance Details</h1>
+    <h3>Grievance Details</h3>
     <div id="grievances" class="contenttable">
         <table class="table table-hover table-striped">
-            <thead class="table-success">
+            <thead class="table-inverse">
                 <tr>
-                    <th>S.No.</th>
+                    <th>#</th>
                     <th>Grievance No.</th>
                     <th>Date</th>
                     <th>Grievance Type</th>
@@ -22,11 +22,11 @@
                 <td>{{result.Gtype}} </td>
                 <td>{{result.subject}}</td>
                 <td>
-                    <button id="viewbtn{{index+1}}" ng-click="popup(result.grv_id)" class="btn btn-primary tablebuttons"><span class="fas fa-eye"></span>View</button>
+                    <button id="viewbtn{{index+1}}" ng-click="popup(result.grv_id)" class="btn btn-primary btn-sm"><span class="fas fa-eye"></span>View</button>
                 </td>
                 <td>{{result.status}}</td>
                 <td>
-                    <button class="btn btn-success tablebuttons" ng-click="reply_popup(result.grv_id)"><span class="fas fa-reply"></span> Reply</button>
+                    <button class="btn btn-success btn-sm" ng-click="reply_popup(result.grv_id)"><span class="fas fa-reply"></span> Reply</button>
                 </td>
             </tr>
         </table>
@@ -35,13 +35,13 @@
         <div class="loader">
         </div>
         
-        <h1>Loading...</h1>
+        <h3>Loading...</h3>
     </div>
 
     <div class="detailbackground hide">
         <div class="detailpopup">
 
-            <h1>Grievance Details</h1>
+            <h3>Grievance Details</h3>
 
             <div class="detail-data">
                 <table class="table table-striped">
@@ -94,7 +94,7 @@
             </div>
 
             <div class="closebutton">
-                <button id="closebutton" class="btn btn-default">Close</button>
+                <button id="closebutton" class="btn btn-secondary">Close</button>
             </div>
 
         </div>
@@ -102,7 +102,7 @@
 
     <div class="detailbackground-reply hide">
         <div class="replyform">
-            <h1>Reply Form</h1>
+            <h3>Reply Form</h3>
             <form ng-submit="replyform()">
                 <div class="form-group" >
                  <div class="row">
@@ -128,12 +128,12 @@
 
              <div class="form-group" >
                  <div class="col-sm-7 offset-sm-3">
-                     <button class="btn btn-default" type="submit" ng-click="reply(data.grv_id)">Reply</button>
+                     <button class="btn btn-secondary" type="submit" ng-click="reply(data.grv_id)">Reply</button>
                  </div>
              </div>
          </form>
             <div class="closebutton">
-                <button id="closebutton-reply" class="btn btn-default">Close</button>
+                <button id="closebutton-reply" class="btn btn-secondary">Close</button>
             </div>
      </div>
  </div>

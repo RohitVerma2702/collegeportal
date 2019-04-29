@@ -15,6 +15,7 @@ html {
       transition: 300ms ease all;
       backface-visibility: hidden; }
       html body .content .content-wrapper {
+        min-height: calc(100vh - 8.4rem);
         padding: 1.8rem; }
         html body .content .content-wrapper .content-header-right {
           margin-top: 6px; }
@@ -290,7 +291,8 @@ footer.footer-dark {
         .main-menu.menu-dark .main-menu-header .menu-search:focus {
           border-color: #020304; }
     .main-menu.menu-dark .navigation {
-      background: #1D2B36; }
+      background: #1D2B36;
+      padding-bottom: 2rem; }
       .main-menu.menu-dark .navigation .navigation-header {
         color: #dcdcdc;
         padding: 24px 20px 8px 20px; }
@@ -452,7 +454,8 @@ footer.footer-dark {
   .main-menu ul {
     list-style: none;
     margin: 0;
-    padding: 0; }
+    padding: 0;
+    margin-bottom: 5rem; }
     .main-menu ul.navigation-main {
       overflow-x: hidden; }
   .main-menu a {

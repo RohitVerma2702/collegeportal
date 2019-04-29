@@ -1,12 +1,13 @@
 <!--Management members-->
 <!--Admin-->
 <div ng-app="grievances" ng-controller="Admin_mngmnt">
-    <h1>Management Members List</h1>
+    <h3>Management Members List</h3>
     <div id="grievances" class="contenttable">
+        <div class="table-responsive">
         <table class="table table-hover table-striped">
-            <thead class="table-success">
+            <thead class="table-inverse">
                 <tr>
-                    <th>S.No.</th>
+                    <th>#</th>
                     <th>Name</th>
                     <th>Designation</th>
                     <th>Email ID</th>
@@ -22,12 +23,13 @@
                 <td>{{member.mobileno}}</td>
 
                 <td>
-                    <button ng-click="Deactivate(member.emailid)" class="btn btn-danger tablebuttons">
+                    <button ng-click="Deactivate(member.emailid)" class="btn btn-danger btn-sm">
                         Deactivate
                     </button>
                 </td>
             </tr>
         </table>
+    </div>
     </div>
 
 
@@ -35,7 +37,7 @@
         <div class="loader">
         </div>
         
-        <h1>Loading...</h1>
+        <h3>Loading...</h3>
     </div>
 
 </div>
