@@ -1,34 +1,46 @@
 <!--Grievance cell members-->
 <!--Management-->
-
 <div ng-app="grievances" ng-controller="Management_GCM">
-    <h1>Grievance Cell Members</h1>
+    <h3>Grievance Cell Members List</h3>
     <div id="grievances" class="contenttable">
-        <table class="table table-hover table-striped">
-            <thead class="table-success">
-                <tr>
-                    <th>S.No.</th>
-                    <th>Name</th>
-                    <th>Designation</th>
-                    <th>Email ID</th>
-                    <th>Mobile No.</th>
-                </tr> 
-            </thead>
-            <tr ng-repeat="member in members">
-                <td>{{$index+1}}</td>
-                <td>{{member.name}}</td>
-                <td>{{member.designation}}</td>
-                <td>{{member.emailid}}</td>
-                <td>{{member.mobileno}}</td>
-            </tr>
-        </table>
-    </div>
-    <div id="loading">
-        <div class="loader">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead class="table-inverse">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Email ID</th>
+                        <th>Mobile No.</th>
+                    </tr> 
+                </thead>
+                <tr ng-repeat="member in members">
+                    <td>{{$index+1}}</td>
+                    <td>{{member.name}}</td>
+                    <td>{{member.designation}}</td>
+                    <td>{{member.emailid}}</td>
+                    <td>{{member.mobileno}}</td>
+                </tr>
+            </table>
         </div>
-        
-        <h1>Loading...</h1>
     </div>
+</div>
+
+<div id="loading">
+    <div class="loader">
+    </div>
+
+    <h3>Loading...</h3>
+</div>
 
 </div>
 
+<script type="text/javascript">
+    $('#closebutton').click(function(){
+        $('.detailbackground').fadeOut(500);
+    });
+
+    $('#createnew').click(function(){
+        $('.detailbackground').fadeIn(500);
+    });
+</script>

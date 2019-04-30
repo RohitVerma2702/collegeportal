@@ -1,10 +1,16 @@
-var app = angular.module('grievances', ['ngRoute', 'ngMaterial']);
+var app = angular
+			.module('grievances', ['ngRoute', 'ngMaterial'])
+			.factory('swal', SweetAlert);
+
+function SweetAlert() {
+  return window.swal;
+};
 
 app.config(function($routeProvider){
 
 	$routeProvider
 	.when('/', {
-		templateUrl: '/Management/grievances.ejs'
+		templateUrl: '/Management/myaccount.ejs'
 	})
 
 	.when('/my-account', {

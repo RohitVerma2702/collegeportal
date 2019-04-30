@@ -1,5 +1,5 @@
 
-
+// controller for Grievance Cell Nenvers starts here...
 app.controller("Gcm_grievances", function ($http, $scope, $window) {
     $scope.msg = "I love London";
     $http.get("/Members/Grievances").then(function (response) {
@@ -17,7 +17,6 @@ app.controller("Gcm_grievances", function ($http, $scope, $window) {
             $scope.data = response.data;
             $scope.msg = "hiiiii";
         });
-
     }
     $scope.reply_popup = function (id) {
         $('.detailbackground-reply').fadeIn(500);
@@ -38,10 +37,7 @@ app.controller("Gcm_grievances", function ($http, $scope, $window) {
         $http.post("/post/reply", $scope.form).then(function (response) {
             $window.location.reload();
         })
-
     }
-
-
 });
 
 app.controller("Gcm", function ($http, $scope, $mdDialog, $window) {
@@ -67,9 +63,9 @@ app.controller("Gcm", function ($http, $scope, $mdDialog, $window) {
         });
 
         var update = $mdDialog.confirm()
-            .title('Successfully Updated!')
-            .targetEvent(ev)
-            .ok('Thank You!');
+        .title('Successfully Updated!')
+        .targetEvent(ev)
+        .ok('Thank You!');
 
         $mdDialog.show(update).then(function () {
             $window.location.reload();
@@ -92,7 +88,7 @@ app.controller("Gcm", function ($http, $scope, $mdDialog, $window) {
             .ok('Go Back');
 
             $mdDialog.show(confirmpass).then(function () {
-                
+
             })
         }
         else{
@@ -117,7 +113,7 @@ app.controller("Gcm", function ($http, $scope, $mdDialog, $window) {
                 .ok('OK');
 
                 $mdDialog.show(confirmpass).then(function () {
-                    
+
                 });
 
             });
@@ -125,10 +121,10 @@ app.controller("Gcm", function ($http, $scope, $mdDialog, $window) {
         }
 
     }
-
 });
+// controller for Grievance Cell Member ends here....
 
-
+// controller for Student starts here...
 app.controller("Student_grievances", function ($http, $scope, $window) {
     $http.get("/Student/My_Grievances").then(function (response) {
         $scope.result = response.data.info;
@@ -152,9 +148,9 @@ app.controller("Student_grievances", function ($http, $scope, $window) {
         });
 
         var update = $mdDialog.confirm()
-            .title('Reminder Sent!')
-            .targetEvent(ev)
-            .ok('Thank You!');
+        .title('Reminder Sent!')
+        .targetEvent(ev)
+        .ok('Thank You!');
 
         $mdDialog.show(update).then(function () {
             $window.location.reload();
@@ -193,9 +189,9 @@ app.controller("Student", function ($http, $scope, $window, $mdDialog) {
         });
 
         var update = $mdDialog.confirm()
-            .title('Successfully Updated!')
-            .targetEvent(ev)
-            .ok('Thank You!');
+        .title('Successfully Updated!')
+        .targetEvent(ev)
+        .ok('Thank You!');
 
         $mdDialog.show(update).then(function () {
             $window.location.reload();
@@ -218,7 +214,7 @@ app.controller("Student", function ($http, $scope, $window, $mdDialog) {
             .ok('Go Back');
 
             $mdDialog.show(confirmpass).then(function () {
-                
+
             })
         }
         else{
@@ -243,7 +239,7 @@ app.controller("Student", function ($http, $scope, $window, $mdDialog) {
                 .ok('OK');
 
                 $mdDialog.show(confirmpass).then(function () {
-                    
+
                 });
 
             });
@@ -265,15 +261,18 @@ app.controller("Student", function ($http, $scope, $window, $mdDialog) {
         })
 
         var confirm = $mdDialog.confirm()
-            .title('Grivance Posted!')
-            .targetEvent(ev)
-            .ok('Thank You!');
+        .title('Grivance Posted!')
+        .targetEvent(ev)
+        .ok('Thank You!');
 
         $mdDialog.show(confirm).then(function () {
             $window.location.reload();
         })
     }
 });
+// controller for Student ends here...
+
+// controller for Parent starts here...
 app.controller("Parent_grievances", function ($http, $scope) {
     $scope.msg = "I love London";
     $http.get("/Parent/My_Grievances").then(function (response) {
@@ -300,9 +299,9 @@ app.controller("Parent_grievances", function ($http, $scope) {
         });
 
         var update = $mdDialog.confirm()
-            .title('Reminder Sent!')
-            .targetEvent(ev)
-            .ok('Thank You!');
+        .title('Reminder Sent!')
+        .targetEvent(ev)
+        .ok('Thank You!');
 
         $mdDialog.show(update).then(function () {
             $window.location.reload();
@@ -334,9 +333,9 @@ app.controller("Parent", function ($http, $scope, $window, $mdDialog) {
         })
 
         var update = $mdDialog.confirm()
-            .title('Successfully Updated!')
-            .targetEvent(ev)
-            .ok('Thank You!');
+        .title('Successfully Updated!')
+        .targetEvent(ev)
+        .ok('Thank You!');
 
         $mdDialog.show(update).then(function () {
             $window.location.reload();
@@ -359,7 +358,7 @@ app.controller("Parent", function ($http, $scope, $window, $mdDialog) {
             .ok('Go Back');
 
             $mdDialog.show(confirmpass).then(function () {
-                
+
             })
         }
         else{
@@ -384,7 +383,7 @@ app.controller("Parent", function ($http, $scope, $window, $mdDialog) {
                 .ok('OK');
 
                 $mdDialog.show(confirmpass).then(function () {
-                    
+
                 });
 
             });
@@ -403,17 +402,18 @@ app.controller("Parent", function ($http, $scope, $window, $mdDialog) {
         $http.post("/post/complaint", $scope.form).then(function (response) {
         })
         var confirm = $mdDialog.confirm()
-            .title('Grivance Posted!')
-            .targetEvent(ev)
-            .ok('Thank You!');
+        .title('Grivance Posted!')
+        .targetEvent(ev)
+        .ok('Thank You!');
 
         $mdDialog.show(confirm).then(function () {
             $window.location.reload();
         })
     }
 });
+// controller for Parent ends here...
 
-
+// controller for Staff starts here...
 app.controller("NonTeaching_grievances", function ($http, $scope, $window) {
     $scope.msg = "I love London";
     $http.get("/staff/My_Grievances").then(function (response) {
@@ -441,15 +441,14 @@ app.controller("NonTeaching_grievances", function ($http, $scope, $window) {
         });
 
         var update = $mdDialog.confirm()
-            .title('Reminder Sent!')
-            .targetEvent(ev)
-            .ok('Thank You!');
+        .title('Reminder Sent!')
+        .targetEvent(ev)
+        .ok('Thank You!');
 
         $mdDialog.show(update).then(function () {
             $window.location.reload();
         })
     }
-
 });
 
 app.controller("NonTeaching", function ($http, $scope, $window, $mdDialog) {
@@ -485,9 +484,9 @@ app.controller("NonTeaching", function ($http, $scope, $window, $mdDialog) {
         })
 
         var update = $mdDialog.confirm()
-            .title('Successfully Updated!')
-            .targetEvent(ev)
-            .ok('Thank You!');
+        .title('Successfully Updated!')
+        .targetEvent(ev)
+        .ok('Thank You!');
 
         $mdDialog.show(update).then(function () {
             $window.location.reload();
@@ -510,7 +509,7 @@ app.controller("NonTeaching", function ($http, $scope, $window, $mdDialog) {
             .ok('Go Back');
 
             $mdDialog.show(confirmpass).then(function () {
-                
+
             })
         }
         else{
@@ -535,7 +534,7 @@ app.controller("NonTeaching", function ($http, $scope, $window, $mdDialog) {
                 .ok('OK');
 
                 $mdDialog.show(confirmpass).then(function () {
-                    
+
                 });
 
             });
@@ -557,17 +556,18 @@ app.controller("NonTeaching", function ($http, $scope, $window, $mdDialog) {
         })
 
         var confirm = $mdDialog.confirm()
-            .title('Grivance Posted!')
-            .targetEvent(ev)
-            .ok('Thank You!');
+        .title('Grivance Posted!')
+        .targetEvent(ev)
+        .ok('Thank You!');
 
         $mdDialog.show(confirm).then(function () {
             $window.location.reload();
         })
     }
 });
+// controller for Staff ends here...
 
-
+// controller for Faculty starts here...
 app.controller("Faculty_grievances", function ($http, $scope, $window) {
     $scope.msg = "I love London";
     $http.get("/faculty/My_Grievances").then(function (response) {
@@ -594,15 +594,14 @@ app.controller("Faculty_grievances", function ($http, $scope, $window) {
         });
 
         var update = $mdDialog.confirm()
-            .title('Reminder Sent!')
-            .targetEvent(ev)
-            .ok('Thank You!');
+        .title('Reminder Sent!')
+        .targetEvent(ev)
+        .ok('Thank You!');
 
         $mdDialog.show(update).then(function () {
             $window.location.reload();
         })
     }
-
 });
 
 app.controller("Faculty", function ($http, $scope, $window, $mdDialog) {
@@ -638,9 +637,9 @@ app.controller("Faculty", function ($http, $scope, $window, $mdDialog) {
         })
 
         var update = $mdDialog.confirm()
-            .title('Successfully Updated!')
-            .targetEvent(ev)
-            .ok('Thank You!');
+        .title('Successfully Updated!')
+        .targetEvent(ev)
+        .ok('Thank You!');
 
         $mdDialog.show(update).then(function () {
             $window.location.reload();
@@ -663,7 +662,7 @@ app.controller("Faculty", function ($http, $scope, $window, $mdDialog) {
             .ok('Go Back');
 
             $mdDialog.show(confirmpass).then(function () {
-                
+
             })
         }
         else{
@@ -688,7 +687,7 @@ app.controller("Faculty", function ($http, $scope, $window, $mdDialog) {
                 .ok('OK');
 
                 $mdDialog.show(confirmpass).then(function () {
-                    
+
                 });
 
             });
@@ -710,18 +709,18 @@ app.controller("Faculty", function ($http, $scope, $window, $mdDialog) {
         })
 
         var confirm = $mdDialog.confirm()
-            .title('Grivance Posted!')
-            .targetEvent(ev)
-            .ok('Thank You!');
+        .title('Grivance Posted!')
+        .targetEvent(ev)
+        .ok('Thank You!');
 
         $mdDialog.show(confirm).then(function () {
             $window.location.reload();
         })
     }
 });
+// controller for Faculty ends here...
 
-
-
+// controller for Management starts here...
 app.controller("Management_grievances", function ($http, $scope, $window) {
 
     $http.get("/mngmnt/Grievances").then(function (response) {
@@ -765,7 +764,6 @@ app.controller("Management_grievances", function ($http, $scope, $window) {
         })
 
     }
-
 });
 
 app.controller("Management_active_deactive_grv", function ($http, $scope, $window, $mdDialog) {
@@ -783,15 +781,23 @@ app.controller("Management_active_deactive_grv", function ($http, $scope, $windo
     $scope.delete = function (id, ev) {
         $scope.id = id;
 
-        $http.post("/mngmnt/GRV_delete?grv_id=" + $scope.id).then(function (response) {
-            var update = $mdDialog.confirm()
-                .title('Successfully Deleted!')
-                .targetEvent(ev)
-                .ok('Thank You!');
+        $http.post("/mngmnt/GRV_delete?grv_id=" + $scope.id).then(function success(response) {
+            swal({
+              title: "Grievance Deleted!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
+            $window.location.reload();
+        });
 
-            $mdDialog.show(update).then(function () {
-                $window.location.reload();
-            });
+      }, function error(response) {
+        console.log(response.data);
+
+        swal({
+          title: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      });
         });
     }
 
@@ -813,6 +819,7 @@ app.controller("Management_active_deactive_grv", function ($http, $scope, $windo
         }
     }
 });
+
 app.controller("Management", function ($http, $scope, $window, $mdDialog) {
     // $scope.msg = "I love London";
 
@@ -830,21 +837,25 @@ app.controller("Management", function ($http, $scope, $window, $mdDialog) {
             //emailid:$scope.email,
             mobileno: $scope.mobile,
         }
-        $http.post("/mngmnt/update", $scope.form).then(function (response) {
-
-
-        })
-
-        var update = $mdDialog.confirm()
-            .title('Successfully Updated!')
-            .targetEvent(ev)
-            .ok('Thank You!');
-
-        $mdDialog.show(update).then(function () {
+        $http.post("/mngmnt/update", $scope.form).then(function success(response) {
+            swal({
+              title: "Successful",
+              text: "Your changes have been updated!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
             $window.location.reload();
-        })
-
-
+        });
+      }, function error(response){
+        swal({
+          title: "Error",
+          text: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      }).then(() => {
+        $window.location.reload();
+    });
+        });
     }
 
     //author: Ankit Sharma
@@ -861,39 +872,34 @@ app.controller("Management", function ($http, $scope, $window, $mdDialog) {
 
         if ($("#new-pass-container .progress .bg-danger").length > 0) {
             console.log('weak password');
-            var confirmpass = $mdDialog.confirm()
-            .title('Password too weak!')
-            .targetEvent(ev)
-            .ok('Go Back');
-
-            $mdDialog.show(confirmpass).then(function () {
-                
-            })
+            swal({
+              title: "Password too weak!",
+              icon: "warning",
+              button: "Change",
+          });
         }
         else{
             $http.post("/mngmnt/password_reset", $scope.form).then(function success(response) {
                 console.log('Password Updated.');
 
-                var confirmpass = $mdDialog.confirm()
-                .title(response.data)
-                .targetEvent(ev)
-                .ok('Thank You!');
+                swal({
+                  title: "Successful",
+                  text: "Password Successfully updated!",
+                  icon: "success",
+                  button: "Thank You",
+              }).then(() => {
+                $window.location.reload();
+            });
 
-                $mdDialog.show(confirmpass).then(function () {
-                    $window.location.reload();
-                });
+          }, function error(response) {
+            console.log(response.data);
 
-            }, function error(response) {
-                console.log(response.data);
-
-                var confirmpass = $mdDialog.confirm()
-                .title(response.data)
-                .targetEvent(ev)
-                .ok('OK');
-
-                $mdDialog.show(confirmpass).then(function () {
-                    
-                });
+            swal({
+              title: "Error",
+              text: response.data,
+              icon: "warning",
+              button: "OK",
+          });
 
             });
 
@@ -909,8 +915,8 @@ app.controller("Management_GCM", function ($http, $scope, $window, $mdDialog) {
         $('#loading').hide();
         $('#grievances').fadeIn(500);
     });
+});
 
-})
 app.controller("Management_apprv_user", function ($http, $scope, $window, $mdDialog) {
 
     $scope.init = function (user) {
@@ -951,6 +957,7 @@ app.controller("Management_apprv_user", function ($http, $scope, $window, $mdDia
         }
     }
 });
+
 app.controller("Management_pending_user", function ($http, $scope, $window, $mdDialog) {
 
     $scope.init = function (user) {
@@ -991,8 +998,8 @@ app.controller("Management_pending_user", function ($http, $scope, $window, $mdD
         }
     }
 });
+// controller for Management ends here...
 /*
-
 app.controller("Management_grievances_report", function ($http, $scope, $window) {
     $scope.consolidate = function () {
 
@@ -1009,76 +1016,79 @@ app.controller("Management_grievances_report", function ($http, $scope, $window)
         });
     }
 });*/
+// controller for Reports starts here...
 app.controller("ExampleCtrl", function($scope,$http) {
     var vm = this;
-          vm.consolidate=function(){
-  
-                
-                 var fromdate=$scope.from_date;
-                 var todate=$scope.to_date;
-                 console.log(fromdate);
-                 console.log(todate);
-                  m=window.open('/mngmnt/consolidate_grv/:'+fromdate+'/:'+todate);
-                  
-    
-     }
-  });
-  app.controller("Detail_report", function($scope,$http) {
-    var vm = this;
-          vm.consolidate=function(){
-  
-                
-                 var fromdate=$scope.from_date;
-                 var todate=$scope.to_date;
-                
-                  m=window.open('/mngmnt/detail_grv?fromdate='+fromdate+'&todate='+todate);
-                  
-    
-     }
-  });
-  
-  app.controller("Action_report", function($scope,$http) {
-    var vm = this;
-          vm.consolidate=function(){
-  
-                
-                 var fromdate=$scope.from_date;
-                 var todate=$scope.to_date;
-                
-                  m=window.open('/mngmnt/Action_grv?fromdate='+fromdate+'&todate='+todate);
-                  
-    
-     }
-  });
-  
-  app.controller("Pending_report", function($scope,$http) {
-    var vm = this;
-          vm.consolidate=function(){
-  
-                
-                 var fromdate=$scope.from_date;
-                 var todate=$scope.to_date;
-                
-                  m=window.open('/mngmnt/Pending_grv?fromdate='+fromdate+'&todate='+todate);
-                  
-    
-     }
-  });
+    vm.consolidate=function(){
 
-  app.controller("Closed_report", function($scope,$http) {
+
+       var fromdate=$scope.from_date;
+       var todate=$scope.to_date;
+       console.log(fromdate);
+       console.log(todate);
+       m=window.open('/mngmnt/consolidate_grv/:'+fromdate+'/:'+todate);
+
+
+   }
+});
+
+app.controller("Detail_report", function($scope,$http) {
     var vm = this;
-          vm.consolidate=function(){
-  
-                
-                 var fromdate=$scope.from_date;
-                 var todate=$scope.to_date;
-                
-                  m=window.open('/mngmnt/Closed_grv?fromdate='+fromdate+'&todate='+todate);
-                  
-    
-     }
-  });
-  app.controller("Gtype_report", function($scope,$http) {
+    vm.consolidate=function(){
+
+
+       var fromdate=$scope.from_date;
+       var todate=$scope.to_date;
+
+       m=window.open('/mngmnt/detail_grv?fromdate='+fromdate+'&todate='+todate);
+
+
+   }
+});
+
+app.controller("Action_report", function($scope,$http) {
+    var vm = this;
+    vm.consolidate=function(){
+
+
+       var fromdate=$scope.from_date;
+       var todate=$scope.to_date;
+
+       m=window.open('/mngmnt/Action_grv?fromdate='+fromdate+'&todate='+todate);
+
+
+   }
+});
+
+app.controller("Pending_report", function($scope,$http) {
+    var vm = this;
+    vm.consolidate=function(){
+
+
+       var fromdate=$scope.from_date;
+       var todate=$scope.to_date;
+
+       m=window.open('/mngmnt/Pending_grv?fromdate='+fromdate+'&todate='+todate);
+
+
+   }
+});
+
+app.controller("Closed_report", function($scope,$http) {
+    var vm = this;
+    vm.consolidate=function(){
+
+
+       var fromdate=$scope.from_date;
+       var todate=$scope.to_date;
+
+       m=window.open('/mngmnt/Closed_grv?fromdate='+fromdate+'&todate='+todate);
+
+
+   }
+});
+
+app.controller("Gtype_report", function($scope,$http) {
     $http.get("/mngmnt/grievance_type").then(function (response) {
         $scope.grievance_type = response.data;
     });
@@ -1089,113 +1099,110 @@ app.controller("ExampleCtrl", function($scope,$http) {
     });
 
     var vm = this;
-          vm.consolidate=function(){
-  
-                
-                 var fromdate=$scope.from_date;
-                 var todate=$scope.to_date;
-                 var Gtype=$scope.Gtype;
-                
-                  m=window.open('/mngmnt/DGtype_grv?fromdate='+fromdate+'&todate='+todate+'&Gtype='+Gtype);
-                  
-    
-     }
+    vm.consolidate=function(){
 
-     vm.Action=function(){
-  
-                
-        var fromdate=$scope.from_date;
-        var todate=$scope.to_date;
-        var Gtype=$scope.Gtype;
-       
-         m=window.open('/mngmnt/AGtype_grv?fromdate='+fromdate+'&todate='+todate+'&Gtype='+Gtype);
-         
 
-}
+       var fromdate=$scope.from_date;
+       var todate=$scope.to_date;
+       var Gtype=$scope.Gtype;
 
-vm.Pending=function(){
-  
-                
+       m=window.open('/mngmnt/DGtype_grv?fromdate='+fromdate+'&todate='+todate+'&Gtype='+Gtype);
+
+
+   }
+
+   vm.Action=function(){
+
+
     var fromdate=$scope.from_date;
     var todate=$scope.to_date;
     var Gtype=$scope.Gtype;
-   
-     m=window.open('/mngmnt/PGtype_grv?fromdate='+fromdate+'&todate='+todate+'&Gtype='+Gtype);
-     
 
-}
-vm.Closed=function(){
-  
-                
+    m=window.open('/mngmnt/AGtype_grv?fromdate='+fromdate+'&todate='+todate+'&Gtype='+Gtype);
+
+
+    }
+
+    vm.Pending=function(){
+
+
     var fromdate=$scope.from_date;
     var todate=$scope.to_date;
     var Gtype=$scope.Gtype;
-   
-     m=window.open('/mngmnt/CGtype_grv?fromdate='+fromdate+'&todate='+todate+'&Gtype='+Gtype);
-     
 
-}
-vm.GCMtype=function(){
+    m=window.open('/mngmnt/PGtype_grv?fromdate='+fromdate+'&todate='+todate+'&Gtype='+Gtype);
+
+
+    }
+    vm.Closed=function(){
+
+
+    var fromdate=$scope.from_date;
+    var todate=$scope.to_date;
+    var Gtype=$scope.Gtype;
+
+    m=window.open('/mngmnt/CGtype_grv?fromdate='+fromdate+'&todate='+todate+'&Gtype='+Gtype);
+
+
+    }
+    vm.GCMtype=function(){
     var fromdate=$scope.from_date;
     var todate=$scope.to_date;
     var GCM=$scope.GCM;
-   
-     m=window.open('/mngmnt/GCMtype_grv?fromdate='+fromdate+'&todate='+todate+'&GCM='+GCM);
-     
 
-}
-
-  });
+    m=window.open('/mngmnt/GCMtype_grv?fromdate='+fromdate+'&todate='+todate+'&GCM='+GCM);
 
 
-  app.controller("Class_Type_report", function($scope,$http) {
+    }
+});
+
+app.controller("Class_Type_report", function($scope,$http) {
     var vm = this;
-          vm.consolidate=function(){
-  
-                
-                 var fromdate=$scope.from_date;
-                 var todate=$scope.to_date;
-                 var dep=$scope.Dep;
-                 var batch=$scope.Batch;
-                
-                 m=window.open('/mngmnt/ClassType_grv?fromdate='+fromdate+'&todate='+todate+'&dep='+dep+'&batch='+batch);
-     
-   
-    
-     }
+    vm.consolidate=function(){
 
-     vm.pending=function(){
-  
-                
-        var fromdate=$scope.from_date;
-        var todate=$scope.to_date;
-        var dep=$scope.Dep;
-        var batch=$scope.Batch;
-       
-        m=window.open('/mngmnt/PClassType_grv?fromdate='+fromdate+'&todate='+todate+'&dep='+dep+'&batch='+batch);
+
+     var fromdate=$scope.from_date;
+     var todate=$scope.to_date;
+     var dep=$scope.Dep;
+     var batch=$scope.Batch;
+
+     m=window.open('/mngmnt/ClassType_grv?fromdate='+fromdate+'&todate='+todate+'&dep='+dep+'&batch='+batch);
 
 
 
-}
-vm.closed_grv=function(){
-  
-                
+    }
+
+    vm.pending=function(){
+
+
     var fromdate=$scope.from_date;
     var todate=$scope.to_date;
     var dep=$scope.Dep;
     var batch=$scope.Batch;
-   
+
+    m=window.open('/mngmnt/PClassType_grv?fromdate='+fromdate+'&todate='+todate+'&dep='+dep+'&batch='+batch);
+
+
+
+    }
+    vm.closed_grv=function(){
+
+
+    var fromdate=$scope.from_date;
+    var todate=$scope.to_date;
+    var dep=$scope.Dep;
+    var batch=$scope.Batch;
+
     m=window.open('/mngmnt/CClassType_grv?fromdate='+fromdate+'&todate='+todate+'&dep='+dep+'&batch='+batch);
 
 
 
-}
-
-  });
-
+    }
+});
+// controller for Reports ends here...
 //------------------------------------ADMIN-------------------------------------------------------//
 
-
+// controller for Admin starts here...
 app.controller("Admin", function ($http, $scope, $window, $mdDialog) {
 
     $http.get("/Admin/my-account").then(function (response) {
@@ -1217,19 +1224,19 @@ app.controller("Admin", function ($http, $scope, $window, $mdDialog) {
               text: "Your changes have been updated!",
               icon: "success",
               button: "OK",
-            }).then(() => {
-                $window.location.reload();
-            });
-        }, function error(response){
-            swal({
-              title: "Error",
-              text: "Unknown Error!",
-              icon: "warning",
-              button: "OK",
-            }).then(() => {
-                $window.location.reload();
-            });
+          }).then(() => {
+            $window.location.reload();
         });
+      }, function error(response){
+        swal({
+          title: "Error",
+          text: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      }).then(() => {
+        $window.location.reload();
+    });
+  });
 
     }
 
@@ -1246,7 +1253,7 @@ app.controller("Admin", function ($http, $scope, $window, $mdDialog) {
               title: "Password too weak!",
               icon: "warning",
               button: "Change",
-            });
+          });
         }
         else{
             $http.post("/Admin/password_reset", $scope.form).then(function success(response) {
@@ -1257,31 +1264,28 @@ app.controller("Admin", function ($http, $scope, $window, $mdDialog) {
                   text: "Password Successfully updated!",
                   icon: "success",
                   button: "Thank You",
-                }).then(() => {
-                    $window.location.reload();
-                });
-
-            }, function error(response) {
-                console.log(response.data);
-
-                swal({
-                  title: "Error",
-                  text: response.data,
-                  icon: "warning",
-                  button: "OK",
-                });
-
+              }).then(() => {
+                $window.location.reload();
             });
+
+          }, function error(response) {
+            console.log(response.data);
+
+            swal({
+              title: "Error",
+              text: response.data,
+              icon: "warning",
+              button: "OK",
+          });
+
+        });
 
         }
 
     }
-
-
 });
 
 app.controller("Admin_GCM", function ($http, $scope, $window, $mdDialog) {
-
 
     $http.get("/Admin/GCM_List").then(function (response) {
         $scope.members = response.data.info;
@@ -1299,24 +1303,24 @@ app.controller("Admin_GCM", function ($http, $scope, $window, $mdDialog) {
         };
         $http.post("/Admin/GCM_Deactivate", $scope.form).then(function success(response) {
             swal({
-                  title: "Successful",
-                  text: "Grievance Cell Member deactivated!",
-                  icon: "success",
-                  button: "OK",
-                }).then(() => {
-                    $window.location.reload();
-                });
-
-            }, function error(response) {
-                console.log(response.data);
-
-                swal({
-                  title: "Error",
-                  text: "Unknown Error!",
-                  icon: "warning",
-                  button: "OK",
-                });
+              title: "Successful",
+              text: "Grievance Cell Member deactivated!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
+            $window.location.reload();
         });
+
+      }, function error(response) {
+        console.log(response.data);
+
+        swal({
+          title: "Error",
+          text: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      });
+    });
     }
 
     $scope.create = function (ev) {
@@ -1333,28 +1337,29 @@ app.controller("Admin_GCM", function ($http, $scope, $window, $mdDialog) {
             console.log('Created.');
 
             swal({
-                  title: "Successful",
-                  text: "New Grievance Cell Member Created!",
-                  icon: "success",
-                  button: "OK",
-                }).then(() => {
-                    $window.location.reload();
-                });
-
-            }, function error(response) {
-                console.log(response.data);
-
-                swal({
-                  title: "Error",
-                  text: response.data,
-                  icon: "warning",
-                  button: "OK",
-                });
+              title: "Successful",
+              text: "New Grievance Cell Member Created!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
+            $window.location.reload();
         });
+
+      }, function error(response) {
+        console.log(response.data);
+
+        swal({
+          title: "Error",
+          text: response.data,
+          icon: "warning",
+          button: "OK",
+      });
+    });
 
 
     }
 });
+
 app.controller("Admin_mngmnt", function ($http, $scope, $window, $mdDialog) {
 
 
@@ -1367,24 +1372,25 @@ app.controller("Admin_mngmnt", function ($http, $scope, $window, $mdDialog) {
         $scope.form = { email: user };
         $http.post("/Admin/Mngmnt_Deactivate", $scope.form).then(function success(response) {
             swal({
-                  title: "Member Deactivated!",
-                  icon: "success",
-                  button: "OK",
-                }).then(() => {
-                    $window.location.reload();
-                });
-
-            }, function error(response) {
-                console.log(response.data);
-
-                swal({
-                  title: "Unknown Error!",
-                  icon: "warning",
-                  button: "OK",
-                });
+              title: "Member Deactivated!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
+            $window.location.reload();
         });
+
+      }, function error(response) {
+        console.log(response.data);
+
+        swal({
+          title: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      });
+    });
     }
-})
+});
+
 app.controller('Admin_Rejected_user', function ($http, $scope, $window) {
     $scope.init = function (user, ev) {
         if (user == 'faculty') {
@@ -1434,28 +1440,29 @@ app.controller('Admin_Rejected_user', function ($http, $scope, $window) {
 
         $http.post('/Admin/undo_rejected', $scope.form).then(function success(response) {
             swal({
-                  title: "Done!",
-                  icon: "success",
-                  button: "OK",
-                }).then(() => {
-                    $window.location.reload();
-                });
-
-            }, function error(response) {
-                console.log(response.data);
-
-                swal({
-                  title: "Unknown Error!",
-                  icon: "warning",
-                  button: "OK",
-                });
-
+              title: "Done!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
+            $window.location.reload();
         });
+
+      }, function error(response) {
+        console.log(response.data);
+
+        swal({
+          title: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      });
+
+    });
 
 
 
     }
-})
+});
+
 app.controller("Admin_apprv_user", function ($http, $scope, $window, $mdDialog) {
 
     $scope.init = function (user) {
@@ -1504,28 +1511,28 @@ app.controller("Admin_apprv_user", function ($http, $scope, $window, $mdDialog) 
         }
         $http.post('/Admin/Deactivate_user', $scope.form).then(function success(response) {
             swal({
-                  title: "User Deactivated!",
-                  icon: "success",
-                  button: "OK",
-                }).then(() => {
-                    $window.location.reload();
-                });
-
-            }, function error(response) {
-                console.log(response.data);
-
-                swal({
-                  title: "Unknown Error!",
-                  icon: "warning",
-                  button: "OK",
-                });
-
+              title: "User Deactivated!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
+            $window.location.reload();
         });
+
+      }, function error(response) {
+        console.log(response.data);
+
+        swal({
+          title: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      });
+
+    });
 
 
     }
-
 });
+
 app.controller("Admin_pending_user", function ($http, $scope, $window, $mdDialog) {
 
     $scope.init = function (user) {
@@ -1575,23 +1582,23 @@ app.controller("Admin_pending_user", function ($http, $scope, $window, $mdDialog
         }
         $http.post('/Admin/Approve_User', $scope.form).then(function success(response) {
             swal({
-                  title: "User Approved!",
-                  icon: "success",
-                  button: "OK",
-                }).then(() => {
-                    $window.location.reload();
-                });
-
-            }, function error(response) {
-                console.log(response.data);
-
-                swal({
-                  title: "Unknown Error!",
-                  icon: "warning",
-                  button: "OK",
-                });
-
+              title: "User Approved!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
+            $window.location.reload();
         });
+
+      }, function error(response) {
+        console.log(response.data);
+
+        swal({
+          title: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      });
+
+    });
 
 
     }
@@ -1613,22 +1620,22 @@ app.controller("Admin_active_deactive_grv", function ($http, $scope, $window, $m
 
         $http.post("/Admin/GRV_delete?grv_id=" + $scope.id).then(function success(response) {
             swal({
-                  title: "Grievance Deleted!",
-                  icon: "success",
-                  button: "OK",
-                }).then(() => {
-                    $window.location.reload();
-                });
-
-            }, function error(response) {
-                console.log(response.data);
-
-                swal({
-                  title: "Unknown Error!",
-                  icon: "warning",
-                  button: "OK",
-                });
+              title: "Grievance Deleted!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
+            $window.location.reload();
         });
+
+      }, function error(response) {
+        console.log(response.data);
+
+        swal({
+          title: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      });
+    });
     }
 
 
@@ -1649,6 +1656,7 @@ app.controller("Admin_active_deactive_grv", function ($http, $scope, $window, $m
         }
     }
 });
+
 app.controller('GRV_TYPE', function ($http, $scope, $window, $mdDialog) {
     $http.get('/Admin/grievance_type').then(function (response) {
         $scope.result = response.data.info;
@@ -1666,19 +1674,19 @@ app.controller('GRV_TYPE', function ($http, $scope, $window, $mdDialog) {
               text: "Grievance Type has been deactivated!",
               icon: "success",
               button: "OK",
-            }).then(() => {
-                $window.location.reload();
-            });
-        }, function error(response){
-            swal({
-              title: "Error",
-              text: "Something went wrong!",
-              icon: "warning",
-              button: "OK",
-            }).then(() => {
-                $window.location.reload();
-            });
+          }).then(() => {
+            $window.location.reload();
         });
+      }, function error(response){
+        swal({
+          title: "Error",
+          text: "Something went wrong!",
+          icon: "warning",
+          button: "OK",
+      }).then(() => {
+        $window.location.reload();
+    });
+  });
     }
     $scope.Create = function (ev) {
         $scope.form = {
@@ -1695,23 +1703,22 @@ app.controller('GRV_TYPE', function ($http, $scope, $window, $mdDialog) {
               text: "New Grievance Type has been created!",
               icon: "success",
               button: "OK",
-            }).then(() => {
-                $window.location.reload();
-            });
-
-        }, function error(response){
-            console.log(response.data);
-            swal({
-              title: "Error",
-              text: response.data,
-              icon: "warning",
-              button: "OK",
-            }).then(() => {
-                $window.location.reload();
-            });
+          }).then(() => {
+            $window.location.reload();
         });
-    }
 
+      }, function error(response){
+        console.log(response.data);
+        swal({
+          title: "Error",
+          text: response.data,
+          icon: "warning",
+          button: "OK",
+      }).then(() => {
+        $window.location.reload();
+    });
+  });
+    }
 });
 
 app.controller('Termination', function ($http, $window, $mdDialog, $scope) {
@@ -1724,22 +1731,22 @@ app.controller('Termination', function ($http, $window, $mdDialog, $scope) {
               title: "Successfully Terminated!",
               icon: "success",
               button: "OK",
-            }).then(() => {
-                $window.location.reload();
-            });
-        }, function error(response){
-            swal({
-              title: "Error",
-              text: "Something went wrong!",
-              icon: "warning",
-              button: "OK",
-            }).then(() => {
-                $window.location.reload();
-            });
+          }).then(() => {
+            $window.location.reload();
         });
+      }, function error(response){
+        swal({
+          title: "Error",
+          text: "Something went wrong!",
+          icon: "warning",
+          button: "OK",
+      }).then(() => {
+        $window.location.reload();
+    });
+  });
 
     }
-})
+});
 
 app.controller('Mail_Log', function ($http, $window, $mdDialog, $scope) {
     $http.get('/Admin/Mail_Log').then(function (response) {
@@ -1747,4 +1754,5 @@ app.controller('Mail_Log', function ($http, $window, $mdDialog, $scope) {
 
         $('#loading').fadeOut();
     });
-})
+});
+// controller for Admin ends here,,,

@@ -54,7 +54,7 @@ function requireLogin(req, res, next) {
   }
 }
 router.get('/Home', requireLogin, function (req, res, next) {
-  res.render('mngmnt_dash', { title: 'Management' });
+  res.render('Management-Dashboard', { title: 'Management' });
 });
 
 

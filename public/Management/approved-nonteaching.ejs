@@ -1,13 +1,13 @@
 <!--Grievance cell members-->
 <!--Management-->
 <div ng-app="grievances" ng-controller="Management_apprv_user" ng-init="init('staff')">
-    <h1>Approved Non Teaching Staff List</h1>
-    
-    <div id="apprv_list" class="contenttable">
+    <h3>Approved Non Teaching Staff List</h3>
+
+    <div id="apprv_list" class="table-responsive">
         <table class="table table-hover table-striped">
-            <thead class="table-success">
+            <thead class="table-inverse">
                 <tr>
-                    <th>S.No.</th>
+                    <th>#</th>
                     <th>Name</th>
                     <th>Gender</th>
                     <th>Department</th>
@@ -15,7 +15,7 @@
                     <th>Employee ID</th>
                     <th>Email ID</th>
                     <th>Mobile No.</th>
-                </tr> 
+                </tr>
             </thead>
             <tr ng-repeat="user in users">
                 <td>{{$index+1}}</td>
@@ -26,16 +26,14 @@
                 <td>{{user.id}}</td>
                 <td>{{user.emailid}}</td>
                 <td>{{user.mobileno}}</td>
-                
             </tr>
         </table>
     </div>
     <div id="loading">
         <div class="loader">
         </div>
-        
-        <h1>Loading...</h1>
+
+        <h3>Loading...</h3>
     </div>
 
 </div>
-

@@ -1,6 +1,4 @@
-$('body').hide();
-
-window.addEventListener('load', function(){  
+$(document).ready(function(){  
   $('body').show();
 
   console.log($(window).width());
