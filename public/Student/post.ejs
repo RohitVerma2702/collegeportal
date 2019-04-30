@@ -1,14 +1,14 @@
 <!--Student-->				
-<h1>Post a Grievance</h1>
+<h3>Post A Grievance</h3>
 
 <form ng-submit="GrvPost()" ng-app="grievances" ng-controller="Student">
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-2 offset-sm-1">
+            <div class="col-sm-2">
                 <label class="control-labell"> Grevience Type</label>
             </div>
             <div class="col-sm-7">
-                <select class="chosen" ng-model="Gtype" style="border-radius: .5rem; height: auto; padding: .2rem;" required>
+                <select class="chosen form-control" ng-model="Gtype" required>
                     <!-- changes made by ankit sharma -->
                     <option value="">Select Grievance Type...</option>
                     <option ng-repeat="obj in grievance_type" value="{{obj.seq}}&{{obj.grvtype}}">{{obj.grvtype}}</option>
@@ -19,7 +19,7 @@
 
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-2 offset-sm-1">
+            <div class="col-sm-2">
                 <label class="control-label"> Subject</label>
             </div>
             <div class="col-sm-7">
@@ -29,7 +29,7 @@
     </div>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-2 offset-sm-1">
+            <div class="col-sm-2">
                 <label class="control-label"> Descripton</label>
             </div>
             <div class="col-sm-7">
@@ -39,17 +39,17 @@
     </div>
     <div class="form-group">
         <div class="row">
-            <div class="col-sm-2 offset-sm-1">
+            <div class="col-sm-2">
                 <label class="control-label"> Files</label>
             </div>
             <div class="col-sm-7">
-                <input ng-model="file" id="filecount" type="file" value="">
+                <input class="form-control" ng-model="file" id="filecount" type="file" value="">
             </div>
         </div>
     </div>
     <div class="form-group">
-        <div class="col-sm-2 offset-sm-3">
-            <input class="btn btn-default" id="submit-grievance" type="submit" name="" value="Submit" >
+        <div class="col-sm-2 offset-sm-2">
+            <input class="btn btn-secondary" id="submit-grievance" type="submit" name="" value="Submit" >
         </div>
     </div>
 </form>

@@ -60,7 +60,7 @@ router.get('/GRV', requireLogin, function (req, res, next) {//For finding a part
 });
 
 router.get('/Home', requireLogin, function (req, res, next) {
-  res.render('gcm_dash', { title: 'Members', Gtype: sess.grv_type });
+  res.render('GCM-Dashboard', { title: 'Members', Gtype: sess.grv_type });
 });
 
 router.get('/my-account', requireLogin, function (req, res, next) {

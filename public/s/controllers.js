@@ -59,17 +59,25 @@ app.controller("Gcm", function ($http, $scope, $mdDialog, $window) {
         $scope.form = {
             mobileno: $scope.mobile,
         }
-        $http.post("/Members/update", $scope.form).then(function (response) {
-        });
-
-        var update = $mdDialog.confirm()
-        .title('Successfully Updated!')
-        .targetEvent(ev)
-        .ok('Thank You!');
-
-        $mdDialog.show(update).then(function () {
+        $http.post("/Members/update", $scope.form).then(function success(response) {
+            swal({
+              title: "Successful",
+              text: "Your changes have been updated!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
             $window.location.reload();
-        })
+        });
+      }, function error(response){
+        swal({
+          title: "Error",
+          text: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      }).then(() => {
+        $window.location.reload();
+    });
+        });
 
     }
 
@@ -82,39 +90,34 @@ app.controller("Gcm", function ($http, $scope, $mdDialog, $window) {
 
         if ($("#new-pass-container .progress .bg-danger").length > 0) {
             console.log('weak password');
-            var confirmpass = $mdDialog.confirm()
-            .title('Password too weak!')
-            .targetEvent(ev)
-            .ok('Go Back');
-
-            $mdDialog.show(confirmpass).then(function () {
-
-            })
+            swal({
+              title: "Password too weak!",
+              icon: "warning",
+              button: "Change",
+          });
         }
         else{
             $http.post("/Members/password_reset", $scope.form).then(function success(response) {
                 console.log('Password Updated.');
 
-                var confirmpass = $mdDialog.confirm()
-                .title(response.data)
-                .targetEvent(ev)
-                .ok('Thank You!');
+                swal({
+                  title: "Successful",
+                  text: "Password Successfully updated!",
+                  icon: "success",
+                  button: "Thank You",
+              }).then(() => {
+                $window.location.reload();
+            });
 
-                $mdDialog.show(confirmpass).then(function () {
-                    $window.location.reload();
-                });
+          }, function error(response) {
+            console.log(response.data);
 
-            }, function error(response) {
-                console.log(response.data);
-
-                var confirmpass = $mdDialog.confirm()
-                .title(response.data)
-                .targetEvent(ev)
-                .ok('OK');
-
-                $mdDialog.show(confirmpass).then(function () {
-
-                });
+            swal({
+              title: "Error",
+              text: response.data,
+              icon: "warning",
+              button: "OK",
+          });
 
             });
 
@@ -184,18 +187,25 @@ app.controller("Student", function ($http, $scope, $window, $mdDialog) {
             emailid: $scope.email,
             mobileno: $scope.mobile,
         }
-        $http.post("/Student/update", $scope.form).then(function (response) {
-
-        });
-
-        var update = $mdDialog.confirm()
-        .title('Successfully Updated!')
-        .targetEvent(ev)
-        .ok('Thank You!');
-
-        $mdDialog.show(update).then(function () {
+        $http.post("/Student/update", $scope.form).then(function success(response) {
+            swal({
+              title: "Successful",
+              text: "Your changes have been updated!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
             $window.location.reload();
-        })
+        });
+      }, function error(response){
+        swal({
+          title: "Error",
+          text: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      }).then(() => {
+        $window.location.reload();
+    });
+        });
 
     }
 
@@ -208,39 +218,34 @@ app.controller("Student", function ($http, $scope, $window, $mdDialog) {
 
         if ($("#new-pass-container .progress .bg-danger").length > 0) {
             console.log('weak password');
-            var confirmpass = $mdDialog.confirm()
-            .title('Password too weak!')
-            .targetEvent(ev)
-            .ok('Go Back');
-
-            $mdDialog.show(confirmpass).then(function () {
-
-            })
+            swal({
+              title: "Password too weak!",
+              icon: "warning",
+              button: "Change",
+          });
         }
         else{
             $http.post("/Student/password_reset", $scope.form).then(function success(response) {
                 console.log('Password Updated.');
 
-                var confirmpass = $mdDialog.confirm()
-                .title(response.data)
-                .targetEvent(ev)
-                .ok('Thank You!');
+                swal({
+                  title: "Successful",
+                  text: "Password Successfully updated!",
+                  icon: "success",
+                  button: "Thank You",
+              }).then(() => {
+                $window.location.reload();
+            });
 
-                $mdDialog.show(confirmpass).then(function () {
-                    $window.location.reload();
-                });
+          }, function error(response) {
+            console.log(response.data);
 
-            }, function error(response) {
-                console.log(response.data);
-
-                var confirmpass = $mdDialog.confirm()
-                .title(response.data)
-                .targetEvent(ev)
-                .ok('OK');
-
-                $mdDialog.show(confirmpass).then(function () {
-
-                });
+            swal({
+              title: "Error",
+              text: response.data,
+              icon: "warning",
+              button: "OK",
+          });
 
             });
 
@@ -256,18 +261,27 @@ app.controller("Student", function ($http, $scope, $window, $mdDialog) {
             subject: $scope.subject,
             usertype: "Student"
         }
-        $http.post("/post/complaint", $scope.form).then(function (response) {
+        $http.post("/post/complaint", $scope.form).then(function success(response) {
+            console.log('Posted!!!');
+            swal({
+                  title: "Successful",
+                  text: "Your Grievance has been successfully posted!",
+                  icon: "success",
+                  button: "Thank You",
+              }).then(() => {
+                $window.location.reload();
+            });
 
-        })
+          }, function error(response) {
+            console.log(response.data);
 
-        var confirm = $mdDialog.confirm()
-        .title('Grivance Posted!')
-        .targetEvent(ev)
-        .ok('Thank You!');
-
-        $mdDialog.show(confirm).then(function () {
-            $window.location.reload();
-        })
+            swal({
+              title: "Error",
+              text: "Unknown Error",
+              icon: "warning",
+              button: "OK",
+          });
+        });
     }
 });
 // controller for Student ends here...
@@ -329,17 +343,25 @@ app.controller("Parent", function ($http, $scope, $window, $mdDialog) {
             email: $scope.email,
             mobile: $scope.mobile
         }
-        $http.post("/Parent/update", $scope.form).then(function (response) {
-        })
-
-        var update = $mdDialog.confirm()
-        .title('Successfully Updated!')
-        .targetEvent(ev)
-        .ok('Thank You!');
-
-        $mdDialog.show(update).then(function () {
+        $http.post("/Parent/update", $scope.form).then(function success(response) {
+            swal({
+              title: "Successful",
+              text: "Your changes have been updated!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
             $window.location.reload();
-        })
+        });
+      }, function error(response){
+        swal({
+          title: "Error",
+          text: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      }).then(() => {
+        $window.location.reload();
+    });
+        });
 
     }
 
@@ -352,39 +374,34 @@ app.controller("Parent", function ($http, $scope, $window, $mdDialog) {
 
         if ($("#new-pass-container .progress .bg-danger").length > 0) {
             console.log('weak password');
-            var confirmpass = $mdDialog.confirm()
-            .title('Password too weak!')
-            .targetEvent(ev)
-            .ok('Go Back');
-
-            $mdDialog.show(confirmpass).then(function () {
-
-            })
+            swal({
+              title: "Password too weak!",
+              icon: "warning",
+              button: "Change",
+          });
         }
         else{
             $http.post("/Parent/password_reset", $scope.form).then(function success(response) {
                 console.log('Password Updated.');
 
-                var confirmpass = $mdDialog.confirm()
-                .title(response.data)
-                .targetEvent(ev)
-                .ok('Thank You!');
+                swal({
+                  title: "Successful",
+                  text: "Password Successfully updated!",
+                  icon: "success",
+                  button: "Thank You",
+              }).then(() => {
+                $window.location.reload();
+            });
 
-                $mdDialog.show(confirmpass).then(function () {
-                    $window.location.reload();
-                });
+          }, function error(response) {
+            console.log(response.data);
 
-            }, function error(response) {
-                console.log(response.data);
-
-                var confirmpass = $mdDialog.confirm()
-                .title(response.data)
-                .targetEvent(ev)
-                .ok('OK');
-
-                $mdDialog.show(confirmpass).then(function () {
-
-                });
+            swal({
+              title: "Error",
+              text: response.data,
+              icon: "warning",
+              button: "OK",
+          });
 
             });
 
@@ -399,16 +416,27 @@ app.controller("Parent", function ($http, $scope, $window, $mdDialog) {
             file: $scope.file,
             subject: $scope.subject
         }
-        $http.post("/post/complaint", $scope.form).then(function (response) {
-        })
-        var confirm = $mdDialog.confirm()
-        .title('Grivance Posted!')
-        .targetEvent(ev)
-        .ok('Thank You!');
+        $http.post("/post/complaint", $scope.form).then(function success(response) {
+            console.log('Posted!!!');
+            swal({
+                  title: "Successful",
+                  text: "Your Grievance has been successfully posted!",
+                  icon: "success",
+                  button: "Thank You",
+              }).then(() => {
+                $window.location.reload();
+            });
 
-        $mdDialog.show(confirm).then(function () {
-            $window.location.reload();
-        })
+          }, function error(response) {
+            console.log(response.data);
+
+            swal({
+              title: "Error",
+              text: "Unknown Error",
+              icon: "warning",
+              button: "OK",
+          });
+        });
     }
 });
 // controller for Parent ends here...
@@ -479,18 +507,25 @@ app.controller("NonTeaching", function ($http, $scope, $window, $mdDialog) {
             // emailid:$scope.email,
             mobile: $scope.mobile,
         }
-        $http.post("/staff/update", $scope.form).then(function (response) {
-
-        })
-
-        var update = $mdDialog.confirm()
-        .title('Successfully Updated!')
-        .targetEvent(ev)
-        .ok('Thank You!');
-
-        $mdDialog.show(update).then(function () {
+        $http.post("/staff/update", $scope.form).then(function success(response) {
+            swal({
+              title: "Successful",
+              text: "Your changes have been updated!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
             $window.location.reload();
-        })
+        });
+      }, function error(response){
+        swal({
+          title: "Error",
+          text: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      }).then(() => {
+        $window.location.reload();
+    });
+        });
 
     }
 
@@ -503,39 +538,34 @@ app.controller("NonTeaching", function ($http, $scope, $window, $mdDialog) {
 
         if ($("#new-pass-container .progress .bg-danger").length > 0) {
             console.log('weak password');
-            var confirmpass = $mdDialog.confirm()
-            .title('Password too weak!')
-            .targetEvent(ev)
-            .ok('Go Back');
-
-            $mdDialog.show(confirmpass).then(function () {
-
-            })
+            swal({
+              title: "Password too weak!",
+              icon: "warning",
+              button: "Change",
+          });
         }
         else{
             $http.post("/staff/password_reset", $scope.form).then(function success(response) {
                 console.log('Password Updated.');
 
-                var confirmpass = $mdDialog.confirm()
-                .title(response.data)
-                .targetEvent(ev)
-                .ok('Thank You!');
+                swal({
+                  title: "Successful",
+                  text: "Password Successfully updated!",
+                  icon: "success",
+                  button: "Thank You",
+              }).then(() => {
+                $window.location.reload();
+            });
 
-                $mdDialog.show(confirmpass).then(function () {
-                    $window.location.reload();
-                });
+          }, function error(response) {
+            console.log(response.data);
 
-            }, function error(response) {
-                console.log(response.data);
-
-                var confirmpass = $mdDialog.confirm()
-                .title(response.data)
-                .targetEvent(ev)
-                .ok('OK');
-
-                $mdDialog.show(confirmpass).then(function () {
-
-                });
+            swal({
+              title: "Error",
+              text: response.data,
+              icon: "warning",
+              button: "OK",
+          });
 
             });
 
@@ -551,18 +581,27 @@ app.controller("NonTeaching", function ($http, $scope, $window, $mdDialog) {
             subject: $scope.subject,
             usertype: "staff"
         }
-        $http.post("/post/complaint", $scope.form).then(function (response) {
+        $http.post("/post/complaint", $scope.form).then(function success(response) {
+            console.log('Posted!!!');
+            swal({
+                  title: "Successful",
+                  text: "Your Grievance has been successfully posted!",
+                  icon: "success",
+                  button: "Thank You",
+              }).then(() => {
+                $window.location.reload();
+            });
 
-        })
+          }, function error(response) {
+            console.log(response.data);
 
-        var confirm = $mdDialog.confirm()
-        .title('Grivance Posted!')
-        .targetEvent(ev)
-        .ok('Thank You!');
-
-        $mdDialog.show(confirm).then(function () {
-            $window.location.reload();
-        })
+            swal({
+              title: "Error",
+              text: "Unknown Error",
+              icon: "warning",
+              button: "OK",
+          });
+        });
     }
 });
 // controller for Staff ends here...
@@ -632,18 +671,25 @@ app.controller("Faculty", function ($http, $scope, $window, $mdDialog) {
             //emailid:$scope.email,
             mobileno: $scope.mobile,
         }
-        $http.post("/faculty/update", $scope.form).then(function (response) {
-
-        })
-
-        var update = $mdDialog.confirm()
-        .title('Successfully Updated!')
-        .targetEvent(ev)
-        .ok('Thank You!');
-
-        $mdDialog.show(update).then(function () {
+        $http.post("/faculty/update", $scope.form).then(function success(response) {
+            swal({
+              title: "Successful",
+              text: "Your changes have been updated!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
             $window.location.reload();
-        })
+        });
+      }, function error(response){
+        swal({
+          title: "Error",
+          text: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      }).then(() => {
+        $window.location.reload();
+    });
+        });
 
     }
 
@@ -656,39 +702,34 @@ app.controller("Faculty", function ($http, $scope, $window, $mdDialog) {
 
         if ($("#new-pass-container .progress .bg-danger").length > 0) {
             console.log('weak password');
-            var confirmpass = $mdDialog.confirm()
-            .title('Password too weak!')
-            .targetEvent(ev)
-            .ok('Go Back');
-
-            $mdDialog.show(confirmpass).then(function () {
-
-            })
+            swal({
+              title: "Password too weak!",
+              icon: "warning",
+              button: "Change",
+          });
         }
         else{
             $http.post("/faculty/password_reset", $scope.form).then(function success(response) {
                 console.log('Password Updated.');
 
-                var confirmpass = $mdDialog.confirm()
-                .title(response.data)
-                .targetEvent(ev)
-                .ok('Thank You!');
+                swal({
+                  title: "Successful",
+                  text: "Password Successfully updated!",
+                  icon: "success",
+                  button: "Thank You",
+              }).then(() => {
+                $window.location.reload();
+            });
 
-                $mdDialog.show(confirmpass).then(function () {
-                    $window.location.reload();
-                });
+          }, function error(response) {
+            console.log(response.data);
 
-            }, function error(response) {
-                console.log(response.data);
-
-                var confirmpass = $mdDialog.confirm()
-                .title(response.data)
-                .targetEvent(ev)
-                .ok('OK');
-
-                $mdDialog.show(confirmpass).then(function () {
-
-                });
+            swal({
+              title: "Error",
+              text: response.data,
+              icon: "warning",
+              button: "OK",
+          });
 
             });
 
@@ -704,18 +745,27 @@ app.controller("Faculty", function ($http, $scope, $window, $mdDialog) {
             subject: $scope.subject,
             usertype: "faculty"
         }
-        $http.post("/post/complaint", $scope.form).then(function (response) {
+        $http.post("/post/complaint", $scope.form).then(function success(response) {
+            console.log('Posted!!!');
+            swal({
+                  title: "Successful",
+                  text: "Your Grievance has been successfully posted!",
+                  icon: "success",
+                  button: "Thank You",
+              }).then(() => {
+                $window.location.reload();
+            });
 
-        })
+          }, function error(response) {
+            console.log(response.data);
 
-        var confirm = $mdDialog.confirm()
-        .title('Grivance Posted!')
-        .targetEvent(ev)
-        .ok('Thank You!');
-
-        $mdDialog.show(confirm).then(function () {
-            $window.location.reload();
-        })
+            swal({
+              title: "Error",
+              text: "Unknown Error",
+              icon: "warning",
+              button: "OK",
+          });
+        });
     }
 });
 // controller for Faculty ends here...
@@ -1200,6 +1250,8 @@ app.controller("Class_Type_report", function($scope,$http) {
     }
 });
 // controller for Reports ends here...
+
+
 //------------------------------------ADMIN-------------------------------------------------------//
 
 // controller for Admin starts here...

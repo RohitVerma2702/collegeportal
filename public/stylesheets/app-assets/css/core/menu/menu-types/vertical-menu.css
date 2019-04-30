@@ -15,7 +15,8 @@
 
 body.vertical-layout.vertical-menu.menu-expanded .navbar .navbar-header {
   float: left;
-  width: 250px; }
+  width: 250px;
+  background-color: #ffffff !important; }
 
 body.vertical-layout.vertical-menu.menu-expanded .navbar.navbar-brand-center .navbar-header {
   float: left;

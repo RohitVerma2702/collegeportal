@@ -124,7 +124,7 @@ router.get('/My_Grievances', requireLogin, function (req, res, next) {
   );
 });
 router.get('/Home', requireLogin, function (req, res, next) {
-  res.render('Pdash', { title: 'Parent' });
+  res.render('Parent-Dashboard', { title: 'Parent' });
 });
 
 router.post('/login', function (req, res, next) {

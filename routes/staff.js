@@ -123,7 +123,7 @@ router.get('/My_Grievances', requireLogin, function (req, res, next) {
 });
 
 router.get('/Home', requireLogin, function (req, res, next) {
-  res.render('Staff_dash', { title: 'staff', verify: sess.ver });
+  res.render('Staff-Dashboard', { title: 'staff', verify: sess.ver });
 });
 
 router.post('/login', function (req, res, next) {

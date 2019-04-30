@@ -1,11 +1,10 @@
 	<!--Gcm-->
-
-	<h1>Edit Member Details</h1>
-	<form class="form-horizontal" id="account-details">
-		<div ng-app="grievances" ng-controller="Gcm">
+<div ng-app="grievances" ng-controller="Gcm">
+	<h3>My Account</h3>
+	<form class="form-horizontal" id="account-details" ng-submit="submit()">
 			<div class="form-group">
 				<div class="row">
-					<div class="col-sm-2 offset-sm-1">
+					<div class="col-sm-2">
 						<label class="control-label"> Name </label>
 					</div>
 					<div class="col-sm-7">
@@ -16,7 +15,7 @@
 
 			<div class="form-group">
 				<div class="row">
-					<div class="col-sm-2 offset-sm-1">
+					<div class="col-sm-2">
 						<label class="control-label">Designation</label>
 					</div>
 					<div class="col-sm-7">
@@ -27,7 +26,7 @@
 
 			<div class="form-group">
 				<div class="row">
-					<div class="col-sm-2 offset-sm-1">
+					<div class="col-sm-2">
 						<label class="control-label">Grievance Type</label>
 					</div>
 					<div class="col-sm-7">
@@ -38,7 +37,7 @@
 
 			<div class="form-group">
 				<div class="row">
-					<div class="col-sm-2 offset-sm-1">
+					<div class="col-sm-2">
 						<label class="control-label"> Email Id</label>
 					</div>
 					<div class="col-sm-7">
@@ -49,7 +48,7 @@
 
 			<div class="form-group">
 				<div class="row">
-					<div class="col-sm-2 offset-sm-1">
+					<div class="col-sm-2">
 						<label class="control-label"> Mobile Number</label>
 					</div>
 					<div class="col-sm-7">
@@ -60,19 +59,10 @@
 
 			<div class="form-group">
 
-				<div class="col-sm-9 offset-sm-3">
-					<button ng-click="submit()" class="btn btn-default" type="submit" id="student-details">Update</button>
+				<div class="col-sm-7 offset-sm-2">
+					<button class="btn btn-secondary" type="submit" id="student-details">Update</button>
 				</div>
 
 			</div>
-
-		</div>
-
 	</form>
-
-        <div id="loading">
-            <div class="loader">
-            </div>
-            
-            <h1>Loading...</h1>
-        </div>
+</div>

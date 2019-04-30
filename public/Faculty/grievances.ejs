@@ -1,12 +1,11 @@
-<!--Student-->
-<div class="content" ng-app="grievances" ng-controller="Faculty_grievances">
-    <h1>Grievance Details</h1>
-
-    <div id="grievances" class="contenttable">
+<!--Admin-->
+<div ng-app="grievances" ng-controller="Faculty_grievances">
+    <h3>Grievance Details</h3>
+    <div id="grievances" class="table-responsive">
         <table class="table table-hover table-striped">
-            <thead class="table-success">
+            <thead class="table-inverse">
                 <tr>
-                    <th>S.No.</th>
+                    <th>#</th>
                     <th>Grievance No.</th>
                     <th>Date</th>
                     <th>Grievance Type</th>
@@ -23,11 +22,17 @@
                 <td>{{result.Gtype}} </td>
                 <td>{{result.subject}}</td>
                 <td>
-                    <button id="viewbtn{{index+1}}" ng-click="popup(result.grv_id)" class="btn btn-primary tablebuttons"><span class="fas fa-eye"></span>View</button>
+                    <button ng-click="popup(result.grv_id)" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#View">
+                        <span class="icon-eye"></span>
+                        View
+                    </button>
                 </td>
                 <td>{{result.status}}</td>
                 <td ng-switch on="result.status">
-                    <button ng-switch-when="pending|viewed" ng-switch-when-separator="|" id="remind{{index+1}}" ng-click="remind(result.gseq)" class="btn btn-success tablebuttons"><span class="fa fa-clock-o"></span> Reminder</button>
+                    <button ng-switch-when="pending|viewed" ng-switch-when-separator="|" id="remind{{index+1}}" ng-click="remind(result.gseq)" class="btn btn-success btn-sm">
+                        <span class="icon-clock-o"></span>
+                        Reminder
+                    </button>
                 </td>
             </tr>
         </table>
@@ -36,68 +41,74 @@
         <div class="loader">
         </div>
         
-        <h1>Loading...</h1>
+        <h3>Loading...</h3>
     </div>
 
-    <div class="detailbackground hide">
-        <div class="detailpopup">
-            
-            <h1>Grievance Details</h1>
-
-            <div class="detail-data">
-                <table class="table table-striped">
-                    <tr>
-                        <td>Grievance Number</td>
-                        <td style="text-transform: uppercase;">{{data.grv_id}}</td>
-                    </tr>
-                    <tr>
-                        <td>Grievance Type</td>
-                        <td>{{data.Gtype}}</td>   
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>Subject</td>
-                        <td>{{data.subject}}</td>
-                    </tr>
-                    <tr>
-                        <td>Grievant</td>
-                        <td>{{data.Grievant}}</td>
-                    </tr>
-                    <tr>
-                        <td>Status</td>
-                        <td>{{data.status}}</td>
-                    </tr>
-                    <tr>
-                        <td>Grievance Cell Member</td>
-                        <td>{{data.GCM}}</td>
-                    </tr>
-                    <tr>
-                        <td>Date</td>
-                        <td>{{data.time}}</td>
-                    </tr>
-                    <tr>
-                        <td>Grievance Details</td>
-                        <td>{{data.Grv}}</td>
-                    </tr>
-                    <tr>
-                        <td>Reply</td>
-                        <td>{{data.reply}}</td>
-                    </tr>
-                    <tr>
-                        <td>Grievance Documents</td>
-                        <td>{{data.doc}}</td>
-                    </tr>
-                    <tr>
-                        <td>Reply Documents</td>
-                        <td>{{data.doc}}</td>
-                    </tr>
-                </table>
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="form-group">
+            <!-- Modal -->
+            <div class="modal fade text-xs-left" id="View" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel1">Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <td>Grievance Number</td>
+                                        <td style="text-transform: uppercase;">{{data.grv_id}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grievance Type</td>
+                                        <td>{{data.Gtype}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Subject</td>
+                                        <td>{{data.subject}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grievant</td>
+                                        <td>{{data.Grievant}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <td>{{data.status}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grievance Cell Member</td>
+                                        <td>{{data.GCM}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date</td>
+                                        <td>{{data.time}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grievance Details</td>
+                                        <td>{{data.Grv}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Reply</td>
+                                        <td>{{data.reply}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grievance Documents</td>
+                                        <td>{{data.doc}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Reply Documents</td>
+                                        <td>{{data.doc}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="closebutton">
-                <button id="closebutton" class="btn btn-default">Close</button>
-            </div>
-
         </div>
     </div>
 
@@ -105,7 +116,9 @@
 
 <script type="text/javascript">
 
-    $('#closebutton').click(function(){
+    $('#closebutton, #closebutton-reply').click(function(){
         $('.detailbackground').fadeOut(500);
+        $('.detailbackground-reply').fadeOut(500);
     });
 </script>
+

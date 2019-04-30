@@ -1,0 +1,150 @@
+<!--Management-->
+<div class="content" ng-app="grievances" ng-controller="Management_grievances">
+    <h1>Grievance Details</h1>
+    <div id="grievances" class="contenttable">
+        <table class="table table-hover table-striped">
+            <thead class="table-success">
+                <tr>
+                    <th>S.No.</th>
+                    <th>Grievance No.</th>
+                    <th>Date</th>
+                    <th>Grievance Type</th>
+                    <th>Subject</th>
+                    <th>Grievance</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr> 
+            </thead>
+            <tr ng-repeat="result in result">
+                <td>{{$index+1}}</td>
+                <td style="text-transform: uppercase;">{{result.grv_id}}</td>
+                <td></td>
+                <td>{{result.Gtype}} </td>
+                <td>{{result.subject}}</td>
+                <td>
+                    <button id="viewbtn{{index+1}}" ng-click="popup(result.grv_id)" class="btn btn-primary tablebuttons"><span class="fas fa-eye"></span>View</button>
+                </td>
+                <td>{{result.status}}</td>
+                <td ng-switch on="result.status">
+                    <button ng-switch-when="pending" class="btn btn-success tablebuttons" ng-click="reply_popup(result.grv_id)"><span class="fas fa-reply"></span> Reply</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="loading">
+        <div class="loader">
+        </div>
+        
+        <h1>Loading...</h1>
+    </div>
+
+    <div class="detailbackground hide">
+        <div class="detailpopup">
+
+            <h1>Grievance Details</h1>
+
+            <div class="detail-data">
+                <table class="table table-striped">
+                    <tr>
+                        <td>Grievance Number</td>
+                        <td style="text-transform: uppercase;">{{data.grv_id}}</td>
+                    </tr>
+                    <tr>
+                        <td>Grievance Type</td>
+                        <td>{{data.Gtype}}</td>   
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Subject</td>
+                        <td>{{data.subject}}</td>
+                    </tr>
+                    <tr>
+                        <td>Grievant</td>
+                        <td>{{data.Grievant}}</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td>{{data.status}}</td>
+                    </tr>
+                    <tr>
+                        <td>Grievance Cell Member</td>
+                        <td>{{data.GCM}}</td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td>{{data.time}}</td>
+                    </tr>
+                    <tr>
+                        <td>Grievance Details</td>
+                        <td>{{data.Grv}}</td>
+                    </tr>
+                    <tr>
+                        <td>Reply</td>
+                        <td>{{data.reply}}</td>
+                    </tr>
+                    <tr>
+                        <td>Grievance Documents</td>
+                        <td>{{data.doc}}</td>
+                    </tr>
+                    <tr>
+                        <td>Reply Documents</td>
+                        <td>{{data.doc}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="closebutton">
+                <button id="closebutton" class="btn btn-default">Close</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="detailbackground-reply hide">
+        <div class="replyform">
+            <h1>Reply Form</h1>
+            <form ng-submit="replyform()">
+                <div class="form-group" >
+                 <div class="row">
+                     <div class="col-sm-2 offset-sm-1">
+                         <label class="control-lable">Grievance ID</label>
+                     </div>
+                     <div class="col-sm-7">
+                         <input class="form-control" type="text" value="{{data.grv_id}}" readonly>
+                     </div>
+                 </div>
+             </div>
+
+             <div class="form-group" >
+                 <div class="row">
+                     <div class="col-sm-2 offset-sm-1">
+                         <label class="control-lable">Reply</label>
+                     </div>
+                     <div class="col-sm-7">
+                         <textarea class="form-control" rows="5" data-val-required="The Reply field is required." id="PostedReply" ng-model="Reply" aria-required maxlength="200" placeholder="(max 200 characters)" required></textarea>
+                     </div>
+                 </div>
+             </div>
+
+             <div class="form-group" >
+                 <div class="col-sm-7 offset-sm-3">
+                     <button class="btn btn-default" type="submit" ng-click="reply(data.grv_id)">Reply</button>
+                 </div>
+             </div>
+         </form>
+            <div class="closebutton">
+                <button id="closebutton-reply" class="btn btn-default">Close</button>
+            </div>
+     </div>
+ </div>
+
+</div>
+
+<script type="text/javascript">
+
+    $('#closebutton, #closebutton-reply').click(function(){
+        $('.detailbackground').fadeOut(500);
+        $('.detailbackground-reply').fadeOut(500);
+    });
+</script>
+

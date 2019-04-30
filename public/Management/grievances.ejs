@@ -1,0 +1,170 @@
+<!--Admin-->
+<div ng-app="grievances" ng-controller="Management_grievances">
+    <h3>Grievance Details</h3>
+    <div id="grievances" class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead class="table-inverse">
+                <tr>
+                    <th>#</th>
+                    <th>Grievance No.</th>
+                    <th>Date</th>
+                    <th>Grievance Type</th>
+                    <th>Subject</th>
+                    <th>Action</th>
+                    <th>Status</th>
+                </tr> 
+            </thead>
+            <tr ng-repeat="result in result">
+                <td>{{$index+1}}</td>
+                <td style="text-transform: uppercase;">{{result.grv_id}}</td>
+                <td></td>
+                <td>{{result.Gtype}} </td>
+                <td>{{result.subject}}</td>
+                <td>
+                    <button ng-click="popup(result.grv_id)" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#View">
+                        <span class="icon-eye"></span>
+                        View
+                    </button>
+                    <button class="btn btn-success btn-sm" ng-click="reply_popup(result.grv_id)" data-toggle="modal" data-target="#reply-form">
+                        <span class="icon-reply"></span>
+                        Reply
+                    </button>
+                </td>
+                <td>{{result.status}}</td>
+            </tr>
+        </table>
+    </div>
+    <div id="loading">
+        <div class="loader">
+        </div>
+        
+        <h3>Loading...</h3>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="form-group">
+            <!-- Modal -->
+            <div class="modal fade text-xs-left" id="View" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel1">Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <tr>
+                                        <td>Grievance Number</td>
+                                        <td style="text-transform: uppercase;">{{data.grv_id}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grievance Type</td>
+                                        <td>{{data.Gtype}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Subject</td>
+                                        <td>{{data.subject}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grievant</td>
+                                        <td>{{data.Grievant}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <td>{{data.status}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grievance Cell Member</td>
+                                        <td>{{data.GCM}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date</td>
+                                        <td>{{data.time}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grievance Details</td>
+                                        <td>{{data.Grv}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Reply</td>
+                                        <td>{{data.reply}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grievance Documents</td>
+                                        <td>{{data.doc}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Reply Documents</td>
+                                        <td>{{data.doc}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reply form starts here -->
+    <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="form-group">
+            <div class="modal fade text-xs-left" id="reply-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel1">Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form ng-submit="replyform()">
+                                <div class="form-group" >
+                                 <div class="row">
+                                     <div class="col-xs-12">
+                                         <label class="control-lable">Grievance ID</label>
+                                     </div>
+                                     <div class="col-xs-12">
+                                         <input class="form-control" type="text" ng-model="" readonly>
+                                     </div>
+                                 </div>
+                             </div>
+
+                             <div class="form-group" >
+                                 <div class="row">
+                                     <div class="col-xs-12">
+                                         <label class="control-lable">Reply</label>
+                                     </div>
+                                     <div class="col-xs-12">
+                                         <textarea class="form-control" rows="5" data-val-required="The Reply field is required." id="PostedReply" name="PostedReply" aria-required" maxlength="200" placeholder="(max 200 characters)" required></textarea>
+                                     </div>
+                                 </div>
+                             </div>
+
+                             <div class="form-group" >
+                                <div class="modal-footer pr-0 pb-0">
+                                    <button type="submit" class="btn btn-outline-primary">Reply</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Reply form ends here... -->
+
+</div>
+
+<script type="text/javascript">
+
+    $('#closebutton, #closebutton-reply').click(function(){
+        $('.detailbackground').fadeOut(500);
+        $('.detailbackground-reply').fadeOut(500);
+    });
+</script>
+

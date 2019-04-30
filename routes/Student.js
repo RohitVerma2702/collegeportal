@@ -78,7 +78,7 @@ router.get('/GRV', requireLogin, function (req, res, next) {//For finding a part
 });
 
 router.get('/Home', requireLogin, function (req, res, next) {
-  res.render('Student_dash', { title: 'Student', verify: sess.ver });
+  res.render('Student-Dashboard', { title: 'Student', verify: sess.ver });
 });
 
 
