@@ -17,7 +17,8 @@ type:Number
      type:String
     },
     access:{
-        type:String
+        type:String,
+        default:'pending'
     },
     gender:{
         type: String,

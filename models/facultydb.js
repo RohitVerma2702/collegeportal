@@ -17,7 +17,8 @@ var FacultySchema = mongoose.Schema({
         type:String
     },
     access:{
-       type:String
+        type:String,
+        default:'pending'
     },
     gender:{
         type: String,
