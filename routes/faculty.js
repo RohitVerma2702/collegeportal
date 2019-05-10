@@ -330,7 +330,7 @@ router.get('/verify', function (req, res) {
             status: "verified"
           }
         };
-        faculty.updateuser(user._id, newvalues, function (err) {
+        faculty.updateuser(user.emailid, newvalues, function (err) {
           if (err) throw err;
         });
       }

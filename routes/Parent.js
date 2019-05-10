@@ -321,7 +321,7 @@ router.get('/verify', function (req, res) {
             status: "verified"  //updating status of user
           }
         };
-        Parent.updateuser(user._id, newvalues, function (err) {
+        Parent.updateuser(user.emilid, newvalues, function (err) {
           if (err) throw err;
         });
       }

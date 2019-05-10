@@ -330,7 +330,7 @@ router.get('/verify', function (req, res) {
             status: "verified"
           }
         };
-        staff.updateuser(id, newvalues, function (err) {
+        staff.updateuser(user.emailid, newvalues, function (err) {
           if (err) throw err;
         });
       }
