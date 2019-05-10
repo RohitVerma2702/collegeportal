@@ -171,8 +171,8 @@ router.post('/reply', uploads.single('file'), function (req, res, next) {//For R
     Grv.update_grv(id, newvalues, function (err, isUpdate) {
         if (err) throw err;
         else {
-            console.log(' successfuly update ');
-            res.redirect('/Members/Grievances')
+            console.log(' successfuly update ho hi gaya');
+            res.redirect('/Members/Home')
         }
     });
 

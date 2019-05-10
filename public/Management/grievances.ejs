@@ -119,17 +119,17 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <h4 class="modal-title" id="myModalLabel1">Details</h4>
+                            <h4 class="modal-title" id="myModalLabel1">Reply Form</h4>
                         </div>
                         <div class="modal-body">
-                            <form ng-submit="replyform()">
+                            <form ng-submit="reply()">
                                 <div class="form-group" >
                                  <div class="row">
                                      <div class="col-xs-12">
                                          <label class="control-lable">Grievance ID</label>
                                      </div>
                                      <div class="col-xs-12">
-                                         <input class="form-control" type="text" ng-model="" readonly>
+                                         <input class="form-control text-uppercase" type="text" ng-model="id" readonly>
                                      </div>
                                  </div>
                              </div>
@@ -140,7 +140,7 @@
                                          <label class="control-lable">Reply</label>
                                      </div>
                                      <div class="col-xs-12">
-                                         <textarea class="form-control" rows="5" data-val-required="The Reply field is required." id="PostedReply" name="PostedReply" aria-required" maxlength="200" placeholder="(max 200 characters)" required></textarea>
+                                         <textarea ng-model="Reply" class="form-control" rows="5" data-val-required="The Reply field is required." id="PostedReply" name="PostedReply" aria-required" maxlength="200" placeholder="(max 200 characters)" required></textarea>
                                      </div>
                                  </div>
                              </div>

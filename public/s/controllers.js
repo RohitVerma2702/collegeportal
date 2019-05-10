@@ -32,11 +32,27 @@ app.controller("Gcm_grievances", function ($http, $scope, $window) {
 
         $scope.form = {
             reply: $scope.Reply,
-            id: id
+            id: $scope.id
         };
-        $http.post("/post/reply", $scope.form).then(function (response) {
+        $http.post("/post/reply", $scope.form).then(function success(response) {
+            swal({
+              title: "Done",
+              text: "You have replied to a grievance!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
             $window.location.reload();
-        })
+        });
+      }, function error(response){
+        swal({
+          title: "Error",
+          text: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      }).then(() => {
+        $window.location.reload();
+    });
+        });
     }
 });
 
@@ -805,11 +821,27 @@ app.controller("Management_grievances", function ($http, $scope, $window) {
 
         $scope.form = {
             reply: $scope.Reply,
-            id: id
+            id: $scope.id
         };
         // $scope.reply=$scope.Reply
-        $http.post("/post/reply", $scope.form).then(function (response) {
+        $http.post("/post/reply", $scope.form).then(function success(response) {
+            swal({
+              title: "Done",
+              text: "You have replied to a grievance!",
+              icon: "success",
+              button: "OK",
+          }).then(() => {
             $window.location.reload();
+        });
+      }, function error(response){
+        swal({
+          title: "Error",
+          text: "Unknown Error!",
+          icon: "warning",
+          button: "OK",
+      }).then(() => {
+        $window.location.reload();
+    });
 
         })
 
