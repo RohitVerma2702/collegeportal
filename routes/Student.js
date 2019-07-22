@@ -91,7 +91,7 @@ router.post('/password_reset', function (req, res, next) {
     if (err) throw err;
     if (!user) {
       console.log("unknown user");
-      res,status(500).send('Unknown User!');
+      res.status(500).send('Unknown User!');
       //res.redirect('/faculty/unknw');
       return;
     }
@@ -357,11 +357,11 @@ router.post('/forgot_pass', function (req, res, next) {
       res.status(500).send('Unauthorized User');
       return;
     }
-   /* var password = generator.generate({
+    var password = generator.generate({
       length: 10,
       numbers: true
-  });*/
-  var password='sahil';
+  });
+  var password=password;
     Student.update_password(id, password, function (err) {
       if (err) throw err;
 

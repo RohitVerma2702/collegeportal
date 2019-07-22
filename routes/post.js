@@ -158,6 +158,7 @@ router.get('/grv_action', function (req, res, next) {
 router.post('/reply', uploads.single('file'), function (req, res, next) {//For Replying to particular Grievance
 
     var id = { grv_id: req.body.id }
+    console.log(req.body.email);
     var newvalues = {
         $set:
         {
@@ -168,10 +169,37 @@ router.post('/reply', uploads.single('file'), function (req, res, next) {//For R
         }
     };
 
+    mailOptions = {
+        to: req.body.email,
+        subject: "Grievance Portal Update",
+        html: "Dear User,<br>The Grievance raised by you has been Acknowledged and Replied by the concerned cell/management Member please login to your account and view the details.<br>Thanks and Regard.<br>ANAND INTERNATIONAL COLLEGE OF ENGINEERING"
+    }
+    console.log(mailOptions);
+    smtpTransport.sendMail(mailOptions, function (error, response) {
+        if (error) {
+            console.log(error);
+            //res.status(500).send('error');
+        } else {
+            var mail_doc = new Mail_log({//Entry into Mail Log
+                emailid: req.body.email,
+                subject: "Grievance Portal Update",
+                status: 'Sent',
+                date: new Date(dt.now()),
+            });
+
+            Mail_log.mail_log(mail_doc, function (err) {
+                if (err) throw err;
+            });
+            console.log("Message sent");
+            //res.end("sent");
+        }
+    })
+
+
     Grv.update_grv(id, newvalues, function (err, isUpdate) {
         if (err) throw err;
         else {
-            console.log(' successfuly update ho hi gaya');
+            console.log(' successfuly update');
             res.redirect('/Members/Home')
         }
     });
@@ -187,7 +215,7 @@ router.post('/complaint', uploads.single('file'), function (req, res, next) {//T
     var gseq = type.substr(0, type.indexOf('&'));
     var gtype = type.substr(type.indexOf('&') + 1);
     var dep=null;
-    var batch=null;
+    var batch=null;  
     if(sess.dep)
     {
          dep=sess.dep;

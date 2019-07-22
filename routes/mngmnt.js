@@ -393,7 +393,7 @@ router.post('/forgot_pass', function (req, res, next) {
       length: 10,
       numbers: true
   });
-  var password="sahil";
+  var password=password;
     mngmnt.update_password(id, password, function (err) {
       if (err) throw err;
 

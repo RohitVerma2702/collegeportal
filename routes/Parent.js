@@ -59,7 +59,7 @@ router.post('/password_reset', function (req, res, next) {
   var cpass = req.body.current_password;
   var npass = req.body.new_password;
   var npass2 = req.body.new_password1;
-
+console.log(req.session.user);
   Parent.getinfobyID(req.session.user, function (err, user) {
     if (err) throw err;
     if (!user) {
@@ -78,7 +78,6 @@ router.post('/password_reset', function (req, res, next) {
             else {
               console.log(' password updated');
               res.send('Password Updated!');
-            //res.redirect('/Student/Home')
             }
           });
         }
@@ -148,6 +147,7 @@ router.post('/login', function (req, res, next) {
             console.log('login successful');
 
             sess.user = user._id;
+            console.log(sess.user);
             sess.type = "Parent";
             sess.email = user.emailid;
             sess.active = 1;

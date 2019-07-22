@@ -52,7 +52,7 @@ Parent.getUserByID = function(id, callback){
     Parent.findOne(query,callback);
 }
 Parent.getinfobyID = function(id,callback){
-    var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
+   // var query = (id.indexOf('@') === -1) ? {_id: id} : {emailid: id};
   var query={_id:id};
     Parent.findOne(query, callback);
 }

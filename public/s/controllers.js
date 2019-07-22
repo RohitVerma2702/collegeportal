@@ -18,10 +18,10 @@ app.controller("Gcm_grievances", function ($http, $scope, $window) {
             $scope.msg = "hiiiii";
         });
     }
-    $scope.reply_popup = function (id) {
+    $scope.reply_popup = function (id,email) {
         $('.detailbackground-reply').fadeIn(500);
         $scope.id = id;
-
+        $scope.email=email;
         $http.get("/Members/GRV?grv_id=" + $scope.id).then(function (response) {
             $('.detailbackground-reply').fadeIn(500);
             $scope.data = response.data;
@@ -32,7 +32,8 @@ app.controller("Gcm_grievances", function ($http, $scope, $window) {
 
         $scope.form = {
             reply: $scope.Reply,
-            id: $scope.id
+            id: $scope.id,
+            email:$scope.email
         };
         $http.post("/post/reply", $scope.form).then(function success(response) {
             swal({
@@ -807,9 +808,10 @@ app.controller("Management_grievances", function ($http, $scope, $window) {
         });
         //   $('.detailbackground').fadeIn(500);
     }
-    $scope.reply_popup = function (id) {
+    $scope.reply_popup = function (id,email) {
         $('.detailbackground-reply').fadeIn(500);
         $scope.id = id;
+        $scope.email=email;
 
         $http.get("/mngmnt/GRV?grv_id=" + $scope.id).then(function (response) {
             $('.detailbackground-reply').fadeIn(500);
@@ -821,7 +823,8 @@ app.controller("Management_grievances", function ($http, $scope, $window) {
 
         $scope.form = {
             reply: $scope.Reply,
-            id: $scope.id
+            id: $scope.id,
+            email:$scope.email
         };
         // $scope.reply=$scope.Reply
         $http.post("/post/reply", $scope.form).then(function success(response) {
