@@ -151,6 +151,7 @@ router.post('/login', function (req, res, next) {
             sess.user = user._id;
             sess.type = "staff";
             sess.active = 1;
+            sess.name=user.name;
             res.send('success');
 
           }
@@ -395,7 +396,7 @@ router.post('/forgot_pass', function (req, res, next) {
 router.get('/grievance_type', requireLogin, function (req, res, next) {
   Grvtype.grvtype_find(function (err, result) {
     if (err) throw err;
-    console.log(result);
+    //console.log(result);
     res.send(result);
   }
 

@@ -87,8 +87,8 @@ router.get('/my-account', requireLogin, function (req, res, next) {
 });
 
 router.get('/Grievances', requireLogin, function (req, res, next) {
-  console.log('hiii');
-  console.log(req.session.grv_type)
+  //console.log('hiii');
+  //console.log(req.session.grv_type)
 
   Grv.grv_findformembers_and_mngmnt(req.session.grv_type, function (err, result) {
     if (err) throw err;
@@ -105,7 +105,7 @@ router.get('/Grievances', requireLogin, function (req, res, next) {
 
 router.get('/All_Grievances', requireLogin, function (req, res, next) {
   console.log('hiii');
-  console.log(req.session.grv_type)
+  //console.log(req.session.grv_type)
   query = req.query.active;
   Grv.grv_all(query, function (err, result) {
     if (err) throw err;
@@ -427,7 +427,7 @@ router.post('/forgot_pass', function (req, res, next) {
 router.get('/grievance_type', function (req, res, next) {
   Grvtype.grvtype_find(function (err, result) {
     if (err) throw err;
-    console.log(result);
+    //console.log(result);
     res.send(result);
   }
 
@@ -437,7 +437,7 @@ router.get('/GCM_List', function (req, res, next) {//to Display all th Grievance
   Member.find_all(function (err, result) {
     if (err) throw err;
     else {
-      console.log(result);
+      //console.log(result);
       var data = {
         info: result
       }

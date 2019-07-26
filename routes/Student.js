@@ -58,7 +58,7 @@ router.get('/My_Grievances', requireLogin, function (req, res, next) {
 
   Grv.grv_findbyuser(req.session.email, function (err, result) {
     if (err) throw err;
-    console.log(result);
+    //console.log(result);
     var data = {
       info: result
     }
@@ -152,6 +152,7 @@ router.post('/login', function (req, res, next) {
             sess.email = user.emailid;
             sess.active = 1;
             sess.batch=user.Batch;
+            sess.name=user.name;
             sess.dep=user.dep;
             res.send('success');
           }
@@ -399,7 +400,7 @@ date: 31/10/2018 */
 router.get('/grievance_type', requireLogin, function (req, res, next) {
   Grvtype.grvtype_find(function (err, result) {
     if (err) throw err;
-    console.log(result);
+//    console.log(result);
 
     res.send(result);
     //)

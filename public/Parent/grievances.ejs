@@ -1,5 +1,5 @@
 <!--Admin-->
-<div ng-app="grievances" ng-controller="Student_grievances">
+<div ng-app="grievances" ng-controller="Parent_grievances">
     <h3>Grievance Details</h3>
     <div id="grievances" class="table-responsive">
         <table class="table table-hover table-striped">
@@ -73,7 +73,7 @@
                                     </tr>
                                     <tr>
                                         <td>Grievant</td>
-                                        <td>{{data.Grievant}}</td>
+                                        <td>{{data.name}}({{data.Grievant}})</td>
                                     </tr>
                                     <tr>
                                         <td>Status</td>
@@ -97,7 +97,7 @@
                                     </tr>
                                     <tr>
                                         <td>Grievance Documents</td>
-                                        <td>{{data.doc}}</td>
+                                        <td>{{data.file}}</td>
                                     </tr>
                                     <tr>
                                         <td>Reply Documents</td>

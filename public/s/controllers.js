@@ -28,32 +28,40 @@ app.controller("Gcm_grievances", function ($http, $scope, $window) {
             $scope.msg = "hiiiii";
         });
     }
-    $scope.reply = function (id) {
-
-        $scope.form = {
-            reply: $scope.Reply,
-            id: $scope.id,
-            email:$scope.email
-        };
-        $http.post("/post/reply", $scope.form).then(function success(response) {
+    $scope.reply = function (id, ev) {
+        var file = $scope.file;
+        var uploadUrl = "/post/reply";
+        var fd = new FormData();
+        fd.append('file', file);
+        fd.append('reply', $scope.Reply);
+        fd.append('id', $scope.id);
+        fd.append('email', $scope.email);
+        $http.post(uploadUrl,fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .then(function success(response) {
+            console.log('Posted!!!');
             swal({
-              title: "Done",
-              text: "You have replied to a grievance!",
-              icon: "success",
+                  title: "Successful",
+                  text: "Your Grievance has been successfully posted!",
+                  icon: "success",
+                  button: "Thank You",
+              }).then(() => {
+                $window.location.reload();
+            });
+
+          }, function error(response) {
+            console.log(response.data);
+
+            swal({
+              title: "Error",
+              text: "Unknown Error",
+              icon: "warning",
               button: "OK",
-          }).then(() => {
-            $window.location.reload();
+          });
         });
-      }, function error(response){
-        swal({
-          title: "Error",
-          text: "Unknown Error!",
-          icon: "warning",
-          button: "OK",
-      }).then(() => {
-        $window.location.reload();
-    });
-        });
+        
     }
 });
 
@@ -151,6 +159,9 @@ app.controller("Student_grievances", function ($http, $scope, $window) {
         $('#loading').hide();
         $('#grievances').fadeIn(500);
     });
+   
+ 
+   
     $scope.popup = function (id) {
         $('.detailbackground').fadeIn(500);
         $scope.id = id;
@@ -177,6 +188,50 @@ app.controller("Student_grievances", function ($http, $scope, $window) {
         })
     }
 });
+
+app.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+    
+            element.bind('change', function(){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+    }]);
+
+app.controller("upload", function ($http,$scope,$window,$mdDialog) {
+    $http.get("/Student/grievance_type").then(function (response) {
+        $scope.grievance_type = response.data;
+    });
+    $scope.uploadFile = function(){
+
+        var file = $scope.file;
+        var uploadUrl = "/post/complaint";
+        var fd = new FormData();
+        console.dir(file);
+        fd.append('file', file);
+        fd.append('type', $scope.Gtype);
+        fd.append('grv', $scope.Desc);
+        fd.append('subject', $scope.subject);
+        fd.append('usertype', "Student");
+        $http.post(uploadUrl,fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .success(function(){
+          console.log("success!!");
+        })
+        .error(function(){
+          console.log("error!!");
+        });
+    };
+});
 app.controller("Student", function ($http, $scope, $window, $mdDialog) {
     $http.get("/Student/my-account").then(function (response) {
         $scope.name = response.data.name;
@@ -190,14 +245,14 @@ app.controller("Student", function ($http, $scope, $window, $mdDialog) {
         $('#loading').hide();
         $('#account-details').fadeIn(500);
     });
+    $http.get("/post/download").then(function (response) {
+       
+    });
 
     //author: Ankit Sharma
     $http.get("/Student/grievance_type").then(function (response) {
         $scope.grievance_type = response.data;
     });
-
-
-
 
     $scope.submit = function (ev) {
         $scope.form = {
@@ -271,14 +326,21 @@ app.controller("Student", function ($http, $scope, $window, $mdDialog) {
     }
 
     $scope.GrvPost = function (ev) {
-        $scope.form = {
-            type: $scope.Gtype,
-            grv: $scope.Desc,
-            file: $scope.file,
-            subject: $scope.subject,
-            usertype: "Student"
-        }
-        $http.post("/post/complaint", $scope.form).then(function success(response) {
+      
+        var file = $scope.file;
+        var uploadUrl = "/post/complaint";
+        var fd = new FormData();
+        console.dir(file);
+        fd.append('file', file);
+        fd.append('type', $scope.Gtype);
+        fd.append('grv', $scope.Desc);
+        fd.append('subject', $scope.subject);
+        fd.append('usertype', "Student");
+        $http.post(uploadUrl,fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .then(function success(response) {
             console.log('Posted!!!');
             swal({
                   title: "Successful",
@@ -299,6 +361,7 @@ app.controller("Student", function ($http, $scope, $window, $mdDialog) {
               button: "OK",
           });
         });
+        
     }
 });
 // controller for Student ends here...
@@ -427,13 +490,21 @@ app.controller("Parent", function ($http, $scope, $window, $mdDialog) {
     }
 
     $scope.GrvPost = function (ev) {
-        $scope.form = {
-            type: $scope.Gtype,
-            grv: $scope.Desc,
-            file: $scope.file,
-            subject: $scope.subject
-        }
-        $http.post("/post/complaint", $scope.form).then(function success(response) {
+      
+        var file = $scope.file;
+        var uploadUrl = "/post/complaint";
+        var fd = new FormData();
+        console.dir(file);
+        fd.append('file', file);
+        fd.append('type', $scope.Gtype);
+        fd.append('grv', $scope.Desc);
+        fd.append('subject', $scope.subject);
+        fd.append('usertype', "Parent");
+        $http.post(uploadUrl,fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .then(function success(response) {
             console.log('Posted!!!');
             swal({
                   title: "Successful",
@@ -454,6 +525,7 @@ app.controller("Parent", function ($http, $scope, $window, $mdDialog) {
               button: "OK",
           });
         });
+        
     }
 });
 // controller for Parent ends here...
@@ -591,14 +663,21 @@ app.controller("NonTeaching", function ($http, $scope, $window, $mdDialog) {
     }
 
     $scope.GrvPost = function (ev) {
-        $scope.form = {
-            type: $scope.Gtype,
-            grv: $scope.Desc,
-            file: $scope.file,
-            subject: $scope.subject,
-            usertype: "staff"
-        }
-        $http.post("/post/complaint", $scope.form).then(function success(response) {
+      
+        var file = $scope.file;
+        var uploadUrl = "/post/complaint";
+        var fd = new FormData();
+        console.dir(file);
+        fd.append('file', file);
+        fd.append('type', $scope.Gtype);
+        fd.append('grv', $scope.Desc);
+        fd.append('subject', $scope.subject);
+        fd.append('usertype', "staff");
+        $http.post(uploadUrl,fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .then(function success(response) {
             console.log('Posted!!!');
             swal({
                   title: "Successful",
@@ -619,6 +698,7 @@ app.controller("NonTeaching", function ($http, $scope, $window, $mdDialog) {
               button: "OK",
           });
         });
+        
     }
 });
 // controller for Staff ends here...
@@ -755,14 +835,21 @@ app.controller("Faculty", function ($http, $scope, $window, $mdDialog) {
     }
 
     $scope.GrvPost = function (ev) {
-        $scope.form = {
-            type: $scope.Gtype,
-            grv: $scope.Desc,
-            file: $scope.file,
-            subject: $scope.subject,
-            usertype: "faculty"
-        }
-        $http.post("/post/complaint", $scope.form).then(function success(response) {
+      
+        var file = $scope.file;
+        var uploadUrl = "/post/complaint";
+        var fd = new FormData();
+        console.dir(file);
+        fd.append('file', file);
+        fd.append('type', $scope.Gtype);
+        fd.append('grv', $scope.Desc);
+        fd.append('subject', $scope.subject);
+        fd.append('usertype', "faculty");
+        $http.post(uploadUrl,fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .then(function success(response) {
             console.log('Posted!!!');
             swal({
                   title: "Successful",
@@ -783,6 +870,7 @@ app.controller("Faculty", function ($http, $scope, $window, $mdDialog) {
               button: "OK",
           });
         });
+        
     }
 });
 // controller for Faculty ends here...
@@ -819,35 +907,80 @@ app.controller("Management_grievances", function ($http, $scope, $window) {
             $scope.msg = "hiiiii";
         });
     }
-    $scope.reply = function (id, ev) {
 
-        $scope.form = {
-            reply: $scope.Reply,
-            id: $scope.id,
-            email:$scope.email
-        };
-        // $scope.reply=$scope.Reply
-        $http.post("/post/reply", $scope.form).then(function success(response) {
-            swal({
-              title: "Done",
-              text: "You have replied to a grievance!",
-              icon: "success",
-              button: "OK",
-          }).then(() => {
-            $window.location.reload();
-        });
-      }, function error(response){
-        swal({
-          title: "Error",
-          text: "Unknown Error!",
-          icon: "warning",
-          button: "OK",
-      }).then(() => {
-        $window.location.reload();
-    });
-
+    $scope.GrvPost = function (ev) {
+      
+        var file = $scope.file;
+        var uploadUrl = "/post/complaint";
+        var fd = new FormData();
+        console.dir(file);
+        fd.append('file', file);
+        fd.append('type', $scope.Gtype);
+        fd.append('grv', $scope.Desc);
+        fd.append('subject', $scope.subject);
+        fd.append('usertype', "Student");
+        $http.post(uploadUrl,fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
         })
+        .then(function success(response) {
+            console.log('Posted!!!');
+            swal({
+                  title: "Successful",
+                  text: "Your Grievance has been successfully posted!",
+                  icon: "success",
+                  button: "Thank You",
+              }).then(() => {
+                $window.location.reload();
+            });
 
+          }, function error(response) {
+            console.log(response.data);
+
+            swal({
+              title: "Error",
+              text: "Unknown Error",
+              icon: "warning",
+              button: "OK",
+          });
+        });
+        
+    }
+
+    $scope.reply = function (id, ev) {
+        var file = $scope.file;
+        var uploadUrl = "/post/reply";
+        var fd = new FormData();
+        fd.append('file', file);
+        fd.append('reply', $scope.Reply);
+        fd.append('id', $scope.id);
+        fd.append('email', $scope.email);
+        $http.post(uploadUrl,fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .then(function success(response) {
+            console.log('Posted!!!');
+            swal({
+                  title: "Successful",
+                  text: "Your Grievance has been successfully posted!",
+                  icon: "success",
+                  button: "Thank You",
+              }).then(() => {
+                $window.location.reload();
+            });
+
+          }, function error(response) {
+            console.log(response.data);
+
+            swal({
+              title: "Error",
+              text: "Unknown Error",
+              icon: "warning",
+              button: "OK",
+          });
+        });
+        
     }
 });
 

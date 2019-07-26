@@ -25,7 +25,7 @@
                         <span class="icon-eye"></span>
                         View
                     </button>
-                    <button class="btn btn-success btn-sm" ng-click="reply_popup(result.grv_id,result.Grievant)" data-toggle="modal" data-target="#reply-form">
+                    <button ng-if="result.status=='pending'" class="btn btn-success btn-sm" ng-click="reply_popup(result.grv_id,result.Grievant)" data-toggle="modal" data-target="#reply-form">
                         <span class="icon-reply"></span>
                         Reply
                     </button>
@@ -70,7 +70,7 @@
                                     </tr>
                                     <tr>
                                         <td>Grievant</td>
-                                        <td>{{data.Grievant}}</td>
+                                        <td>{{data.name}}({{data.Grievant}})</td>
                                     </tr>
                                     <tr>
                                         <td>Status</td>
@@ -94,11 +94,11 @@
                                     </tr>
                                     <tr>
                                         <td>Grievance Documents</td>
-                                        <td>{{data.doc}}</td>
+                                        <td>{{data.file}}</td>
                                     </tr>
                                     <tr>
                                         <td>Reply Documents</td>
-                                        <td>{{data.doc}}</td>
+                                        <td>{{data.Reply_file}}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -146,6 +146,10 @@
                              </div>
 
                              <div class="form-group" >
+                                    <div class="col-sm-7">
+                                            <input class="form-control" file-model="file"  type="file" >
+                                        </div>
+                
                                 <div class="modal-footer pr-0 pb-0">
                                     <button type="submit" class="btn btn-outline-primary">Reply</button>
                                 </div>

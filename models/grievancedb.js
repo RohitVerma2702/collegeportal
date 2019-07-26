@@ -18,6 +18,13 @@ subject:{
 file:{
 type:String
 },
+Reply_file:{
+    type:String
+    },
+    name:{
+type:String
+    },
+    
 Utype:{
     type:String
 },

@@ -1,7 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
-var uploads = multer({ dest: './uploads' });
+const path = require('path');
+/*var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname+ '-' + Date.now()+'.jpg')
+    }
+});
+var uploads = multer({ storage: storage });*/
+var uploads = multer({ dest: 'uploads/' });
+var Ruploads=multer({ dest: 'uploads/Reply/' });
 var uniqid = require('uniqid');
 var Grv = require('../models/grievancedb');
 var datetime = require('node-datetime');
@@ -155,16 +166,26 @@ router.get('/grv_action', function (req, res, next) {
 
 });
 
-router.post('/reply', uploads.single('file'), function (req, res, next) {//For Replying to particular Grievance
+router.post('/reply', Ruploads.single('file'), function (req, res, next) {//For Replying to particular Grievance
 
     var id = { grv_id: req.body.id }
     console.log(req.body.email);
+    var file=req.file;
+    if (!req.file) {
+        file = 'no file';
+        console.log('npooooooooo');
+    }
+    else {
+        file = file.filename
+        console.log('yesssssssssss');
+    }
     var newvalues = {
         $set:
         {
             reply: req.body.reply,
             status: 'disposed',
             GCM: req.session.name,
+            Reply_file:file,
             Reply_date: new Date(dt.now())
         }
     };
@@ -205,6 +226,8 @@ router.post('/reply', uploads.single('file'), function (req, res, next) {//For R
     });
 
 })
+
+
 router.post('/complaint', uploads.single('file'), function (req, res, next) {//To raise a Grievance
     sess = req.session;
     var comp = req.body.grv;
@@ -226,9 +249,10 @@ router.post('/complaint', uploads.single('file'), function (req, res, next) {//T
     }
     if (!req.file) {
         file = 'no file';
+        console.log('no file');
     }
     else {
-        file = file.filename
+        file = file.filename;
     }
     req.checkBody('type', 'type field is required').notEmpty();
 
@@ -251,6 +275,7 @@ router.post('/complaint', uploads.single('file'), function (req, res, next) {//T
             subject: sub, //Subject of grievance
             Grv: comp, // Grievance posted
             Grievant: sess.email,
+            name:sess.name,
             active: 1,
             dep:dep,
             Batch:batch,
@@ -260,7 +285,7 @@ router.post('/complaint', uploads.single('file'), function (req, res, next) {//T
         });
         Grv.grv_post(doc, function (err, doc) {
             if (err) throw err;
-            console.log(doc);
+            //console.log(doc);
             console.log('Grievance Posted');
             res.redirect('/' + utype + '/Home');
         });
@@ -290,7 +315,7 @@ router.post('/complaint', uploads.single('file'), function (req, res, next) {//T
                             Mail_log.mail_log(mail_doc, function (err) {
                                 if (err) throw err;
                             });
-                            console.log("Message sent: " + response.message);
+                            //console.log("Message sent: " + response.message);
                             //res.end("sent");
                         }
                     });
@@ -308,7 +333,7 @@ router.post('/complaint', uploads.single('file'), function (req, res, next) {//T
                             subject: "Grievance Portal Reminder",
                             html: "Dear Admin,<br>A user has raised a grievance .Kindly login using your username and password to check grievance.<br>Thanks and Regard.<br>ANAND INTERNATIONAL COLLEGE OF ENGINEERING"
                         }
-                        console.log(mailOptions);
+                        //console.log(mailOptions);
                         smtpTransport.sendMail(mailOptions, function (error, response) {
                             if (error) {
                                 console.log(error);

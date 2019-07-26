@@ -147,10 +147,10 @@ router.post('/login', function (req, res, next) {
             console.log('login successful');
 
             sess.user = user._id;
-            console.log(sess.user);
             sess.type = "Parent";
             sess.email = user.emailid;
             sess.active = 1;
+            sess.name=user.name;
             res.send('success');
           }
           else {
@@ -388,7 +388,7 @@ router.post('/forgot_pass', function (req, res, next) {
 
 router.get('/grievance_type', requireLogin, function (req, res, next) {
   console.log('hiitype');
-  console.log(req.session.email)
+  //console.log(req.session.email)
   //console.log(req.query.id)
   Grvtype.grvtype_find(function (err, result) {
     if (err) throw err;

@@ -1,7 +1,7 @@
-<!--NonTeaching-->				
+<!--Student-->				
 <h3>Post A Grievance</h3>
 
-<form ng-submit="GrvPost()" ng-app="grievances" ng-controller="NonTeaching">
+<form ng-submit="GrvPost()" ng-app="grievances" ng-controller="NonTeaching" enctype="multipart/form-data">
     <div class="form-group">
         <div class="row">
             <div class="col-sm-2">
@@ -43,7 +43,7 @@
                 <label class="control-label"> Files</label>
             </div>
             <div class="col-sm-7">
-                <input class="form-control" ng-model="file" id="filecount" type="file" value="">
+                <input class="form-control" file-model="file"  type="file" >
             </div>
         </div>
     </div>

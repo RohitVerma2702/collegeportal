@@ -1,0 +1,35 @@
+#include <graphics.h>
+
+int main()
+{
+   int gd = DETECT,gm;
+  initgraph(&gd,&gm,NULL);
+int x1,x2,y1,y2;
+printf("Enter the first cordinate\n");
+scanf("%d%d",&x1,&y1);
+printf("Enter the second cordinate\n");
+scanf("%d%d",&x2,&y2);
+int m=(y2-y1)/(x2-x1);
+int dy=y2-y1;
+int dx=x2-x1;
+int p=2*dy-dx;
+int x=x1;
+int y=y1;
+while(x<x2){
+if(p<0){
+putpixel(x,y,YELLOW);
+p+=2*dy;
+}
+else
+{
+putpixel(x,y,YELLOW);
+y++;
+p+=2*dy-2*dx;
+}
+x++;
+
+}  
+getch();
+   closegraph();
+   return 0;
+}
