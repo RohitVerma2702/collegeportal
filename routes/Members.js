@@ -220,6 +220,7 @@ router.post('/forgot_pass', function (req, res, next) {
 
       host = req.get('host');
       mailOptions = {
+        from:'Grievance Portal <gportal33@gmail.com>',
         to: id,
         subject: "Password Updated",
         html: "Hello,<br> your new password for EduGrievance Portal is: <br>" + password + "<br> Thanks and Regards <br> <b>Anand International College Of Engineering</b>"

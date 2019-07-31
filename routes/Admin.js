@@ -563,6 +563,7 @@ router.post('/create', function (req, res, next) {
         });
         host = req.get('host');
         mailOptions = {
+          from:'Grievance Portal <gportal33@gmail.com>',
           to: email,
           subject: "Added to Anand Cell ",
           html: "Hello " + name + ", <br><br>Greetings from Anand International College of Engineering Online Grievance Redressal Portal!<br><br>You have been added as Cell Member to the Grievance Redressal Portal of Anand International College of Engineering<br><br>You can login with your email Id or mobile number as username and " + password + " as password to access the posts and updates.<br><br>Thanks and Regards<br><br>Admin-Grievance Redressal Portal<br><br><h1>Anand International College of Engineering</h1><br>"
@@ -703,6 +704,7 @@ router.post('/forgot_pass', function (req, res, next) {
 
       host = req.get('host');
       mailOptions = {
+        from:'Grievance Portal <gportal33@gmail.com>',
         to: id,
         subject: "Password Updated",
         html: "Hello,<br> your new password for EduGrievance Portal is: <br>" + password + "<br> Thanks and Regards <br> <b>Anand International College Of Engineering</b>"

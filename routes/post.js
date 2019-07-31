@@ -43,6 +43,7 @@ router.get('/reminder', function (req, res, next) {
             console.log(result.length);
             for (i = 0; i < result.length; i++) {
                 mailOptions = {
+                    from:'Grievance Portal <gportal33@gmail.com>',
                     to: result[i].emailid,
                     subject: "Grievance Portal Reminder",
                     html: "Dear Grievance Cell Member,<br>A user has reminded you of a grievance you left unattended.Kindly login using your username and password to check grievance and give reply.<br>Thanks and Regard.<br>ANAND INTERNATIONAL COLLEGE OF ENGINEERING"
@@ -76,6 +77,7 @@ router.get('/reminder', function (req, res, next) {
                 console.log(result.length);
                 for (i = 0; i < result.length; i++) {
                     mailOptions = {
+                        from:'Grievance Portal <gportal33@gmail.com>',
                         to: result[i].emailid,
                         subject: "Grievance Portal Reminder",
                         html: "Dear Grievance Cell Member,<br>A user has reminded you of a grievance you left unattended.Kindly login using your username and password to check grievance and give reply.<br>Thanks and Regard.<br>ANAND INTERNATIONAL COLLEGE OF ENGINEERING"
@@ -110,6 +112,7 @@ router.get('/reminder', function (req, res, next) {
                     for (i = 0; i < result.length; i++) {
 
                         mailOptions = {
+                            from:'Grievance Portal <gportal33@gmail.com>',
                             to: result[i].emailid,
                             subject: "Grievance Portal Reminder",
                             html: "Dear Admin,<br>A user has raised a reminder  of a grievance left unattended by concerned Cell Member.Kindly login using your username and password to check grievance.<br>Thanks and Regard.<br>ANAND INTERNATIONAL COLLEGE OF ENGINEERING"
@@ -192,6 +195,7 @@ router.post('/reply', Ruploads.single('file'), function (req, res, next) {//For 
     };
 
     mailOptions = {
+        from:'Grievance Portal <gportal33@gmail.com>',
         to: req.body.email,
         subject: "Grievance Portal Update",
         html: "Dear User,<br>The Grievance raised by you has been Acknowledged and Replied by the concerned cell/management Member please login to your account and view the details.<br>Thanks and Regard.<br>ANAND INTERNATIONAL COLLEGE OF ENGINEERING"
@@ -297,6 +301,7 @@ router.post('/complaint', uploads.single('file'), function (req, res, next) {//T
                 console.log(result.length);
                 for (i = 0; i < result.length; i++) {
                     mailOptions = {
+                        from:'Grievance Portal <gportal33@gmail.com>',
                         to: result[i].emailid,
                         subject: "Grievance Portal Reminder",
                         html: "Dear Grievance Cell Member,<br>A user has posted a grievance .Kindly login using your username and password to check grievance and give reply.<br>Thanks and Regard.<br>ANAND INTERNATIONAL COLLEGE OF ENGINEERING"
@@ -330,6 +335,7 @@ router.post('/complaint', uploads.single('file'), function (req, res, next) {//T
                     for (i = 0; i < result.length; i++) {
 
                         mailOptions = {
+                            from:'Grievance Portal <gportal33@gmail.com>',
                             to: result[i].emailid,
                             subject: "Grievance Portal Reminder",
                             html: "Dear Admin,<br>A user has raised a grievance .Kindly login using your username and password to check grievance.<br>Thanks and Regard.<br>ANAND INTERNATIONAL COLLEGE OF ENGINEERING"
