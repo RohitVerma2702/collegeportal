@@ -63,6 +63,11 @@ app.controller("Gcm_grievances", function ($http, $scope, $window) {
         });
         
     }
+    $scope.download=function(name,type)
+    {
+        window.open('/post/download?file='+name+'&type='+type);
+
+    }
 });
 
 app.controller("Gcm", function ($http, $scope, $mdDialog, $window) {
@@ -187,6 +192,11 @@ app.controller("Student_grievances", function ($http, $scope, $window) {
             $window.location.reload();
         })
     }
+    $scope.download=function(name,type)
+    {
+        window.open('/post/download?file='+name+'&type='+type);
+
+    }
 });
 
 app.directive('fileModel', ['$parse', function ($parse) {
@@ -245,9 +255,7 @@ app.controller("Student", function ($http, $scope, $window, $mdDialog) {
         $('#loading').hide();
         $('#account-details').fadeIn(500);
     });
-    $http.get("/post/download").then(function (response) {
-       
-    });
+   
 
     //author: Ankit Sharma
     $http.get("/Student/grievance_type").then(function (response) {
@@ -363,7 +371,17 @@ app.controller("Student", function ($http, $scope, $window, $mdDialog) {
         });
         
     }
+    
+    $scope.download=function(name)
+    {
+        window.open('/post/download?file='+name);
+
+    }
+   // $http.get("/post/download").then(function (response) {
+       
+   // });
 });
+
 // controller for Student ends here...
 
 // controller for Parent starts here...
@@ -400,6 +418,11 @@ app.controller("Parent_grievances", function ($http, $scope) {
         $mdDialog.show(update).then(function () {
             $window.location.reload();
         })
+    }
+    $scope.download=function(name,type)
+    {
+        window.open('/post/download?file='+name+'&type='+type);
+
     }
 });
 
@@ -565,6 +588,11 @@ app.controller("NonTeaching_grievances", function ($http, $scope, $window) {
         $mdDialog.show(update).then(function () {
             $window.location.reload();
         })
+    }
+    $scope.download=function(name,type)
+    {
+        window.open('/post/download?file='+name+'&type='+type);
+
     }
 });
 
@@ -737,6 +765,11 @@ app.controller("Faculty_grievances", function ($http, $scope, $window) {
         $mdDialog.show(update).then(function () {
             $window.location.reload();
         })
+    }
+    $scope.download=function(name,type)
+    {
+        window.open('/post/download?file='+name+'&type='+type);
+
     }
 });
 
@@ -982,6 +1015,11 @@ app.controller("Management_grievances", function ($http, $scope, $window) {
         });
         
     }
+    $scope.download=function(name,type)
+    {
+        window.open('/post/download?file='+name+'&type='+type);
+
+    }
 });
 
 app.controller("Management_active_deactive_grv", function ($http, $scope, $window, $mdDialog) {
@@ -1035,6 +1073,11 @@ app.controller("Management_active_deactive_grv", function ($http, $scope, $windo
                 $('#grievances').fadeIn(500);
             });
         }
+    }
+    $scope.download=function(name,type)
+    {
+        window.open('/post/download?file='+name+'&type='+type);
+
     }
 });
 
@@ -1874,6 +1917,11 @@ app.controller("Admin_active_deactive_grv", function ($http, $scope, $window, $m
                 $('#grievances').fadeIn(500);
             });
         }
+    }
+    $scope.download=function(name,type)
+    {
+        window.open('/post/download?file='+name+'&type='+type);
+
     }
 });
 

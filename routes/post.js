@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var multer = require('multer');
 const path = require('path');
+const fs=require('fs');
 /*var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './uploads/')
@@ -11,8 +12,8 @@ const path = require('path');
     }
 });
 var uploads = multer({ storage: storage });*/
-var uploads = multer({ dest: 'uploads/' });
-var Ruploads=multer({ dest: 'uploads/Reply/' });
+var uploads = multer({ dest: 'uploads/Users/' });
+var Ruploads=multer({ dest: 'uploads/Members/' });
 var uniqid = require('uniqid');
 var Grv = require('../models/grievancedb');
 var datetime = require('node-datetime');
@@ -363,8 +364,25 @@ router.post('/complaint', uploads.single('file'), function (req, res, next) {//T
     }
 
 });
+app.use(express.static(path.join(__dirname, "public")));
+router.get('/download', function (req, res, next) {
+  
+type=req.query.type;
+if(type=='User')
+{
+    res.download(path.join(__dirname, "../uploads/Users/"+req.query.file),req.query.file,function(err){
+        if(err) console.log("error");
+    });
+}
+else
+{
+    res.download(path.join(__dirname, "../uploads/Members/"+req.query.file),req.query.file,function(err){
+        if(err) console.log("error");
+    });
+}
+ 
 
-
+});
 
 
 module.exports = router;

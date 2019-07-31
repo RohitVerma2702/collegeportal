@@ -1,4 +1,5 @@
 <!--Admin-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div ng-app="grievances" ng-controller="NonTeaching_grievances">
     <h3>Grievance Details</h3>
     <div id="grievances" class="table-responsive">
@@ -7,7 +8,7 @@
                 <tr>
                     <th>#</th>
                     <th>Grievance No.</th>
-                    <th>Date</th>
+                    <th></th>
                     <th>Grievance Type</th>
                     <th>Subject</th>
                     <th>Grievance</th>
@@ -96,13 +97,21 @@
                                         <td>{{data.reply}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Grievance Documents</td>
-                                        <td>{{data.file}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Reply Documents</td>
-                                        <td>{{data.doc}}</td>
-                                    </tr>
+                                            <td>Grievance Documents</td>
+                                            <td>{{data.file}}
+                                                                <button style="background-color:white;float:right;margin-top:-5px;"  ng-if="data.file&&data.file!='no file'" class="btn " ng-click="download(data.file,'User')" class="btn btn-primary btn-sm" data-toggle="modal"><i style="color:#337ab7;" class="fa fa-download"></i> </button>
+                                                    
+                                            
+                                            </td>
+                                                        </tr>
+                                                       
+                                        <tr>
+                                            <td>Reply Documents</td>
+                                            <td> {{data.Reply_file}}
+                                                
+                                            <button style="float:right;margin-top:-5px;" ng-if="data.Reply_file&&data.Reply_file!='no file'" class="btn" ng-click="download(data.Reply_file,'Member')" class="btn btn-primary btn-sm" data-toggle="modal"  ><i style="color:#337ab7;" class="fa fa-download"></i></button>
+                                                </td>
+                                        </tr>
                                 </table>
                             </div>
                         </div>

@@ -62,6 +62,7 @@ router.get('/My_Grievances', requireLogin, function (req, res, next) {
     var data = {
       info: result
     }
+
     res.send(data);
   }
 

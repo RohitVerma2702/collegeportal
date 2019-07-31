@@ -84,11 +84,13 @@
                     </tr>
                     <tr>
                         <td>Grievance Documents</td>
-                        <td>{{data.doc}}</td>
+                        <td>{{data.file}}</td>
+                        <td><button ng-if="data.file&&data.file!='no file'" class="btn" ng-click="download(data.file,'User')" class="btn btn-primary btn-sm" data-toggle="modal"  > Download</button>
                     </tr>
                     <tr>
                         <td>Reply Documents</td>
-                        <td>{{data.doc}}</td>
+                        <td>{{data.Reply_file}}</td>
+                        <td><button ng-if="data.Reply_file&&data.Reply_file!='no file'" class="btn" ng-click="download(data.Reply_file,'Member')" class="btn btn-primary btn-sm" data-toggle="modal"  > Download</button>
                     </tr>
                 </table>
             </div>
