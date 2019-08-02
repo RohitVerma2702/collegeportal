@@ -388,12 +388,21 @@ app.controller("Student", function($http, $scope, $window, $mdDialog) {
     }
 
     $scope.download = function(name) {
-        window.open('/post/download?file=' + name);
+        // $http.get("/post/download").then(function success(response) {
+            console.log('Downloaded!');
+            //window.location.href('/post/download?file=' + name);
+            window.open('/post/download?file=' + name);
 
+        // }, function error(response) {
+        //     console.log(response.data);
+        //     swal({
+        //         title: "Error",
+        //         text: "File not found!",
+        //         icon: "warning",
+        //         button: "OK",
+        //     });
+        // });
     }
-    // $http.get("/post/download").then(function (response) {
-
-    // });
 });
 
 // controller for Student ends here...
@@ -709,48 +718,48 @@ app.controller("NonTeaching", function($http, $scope, $window, $mdDialog) {
     $scope.GrvPost = function(ev) {
 
         var file = $scope.file;
-        if(file.size <= 1048576){
-        var uploadUrl = "/post/complaint";
-        var fd = new FormData();
-        console.dir(file);
-        fd.append('file', file);
-        fd.append('type', $scope.Gtype);
-        fd.append('grv', $scope.Desc);
-        fd.append('subject', $scope.subject);
-        fd.append('usertype', "staff");
-        $http.post(uploadUrl, fd, {
-                transformRequest: angular.identity,
-                headers: { 'Content-Type': undefined }
-            })
-            .then(function success(response) {
-                console.log('Posted!!!');
-                swal({
-                    title: "Successful",
-                    text: "Your Grievance has been successfully posted!",
-                    icon: "success",
-                    button: "Thank You",
-                }).then(() => {
-                    $window.location.reload();
-                });
+        if (file.size <= 1048576) {
+            var uploadUrl = "/post/complaint";
+            var fd = new FormData();
+            console.dir(file);
+            fd.append('file', file);
+            fd.append('type', $scope.Gtype);
+            fd.append('grv', $scope.Desc);
+            fd.append('subject', $scope.subject);
+            fd.append('usertype', "staff");
+            $http.post(uploadUrl, fd, {
+                    transformRequest: angular.identity,
+                    headers: { 'Content-Type': undefined }
+                })
+                .then(function success(response) {
+                    console.log('Posted!!!');
+                    swal({
+                        title: "Successful",
+                        text: "Your Grievance has been successfully posted!",
+                        icon: "success",
+                        button: "Thank You",
+                    }).then(() => {
+                        $window.location.reload();
+                    });
 
-            }, function error(response) {
-                console.log(response.data);
+                }, function error(response) {
+                    console.log(response.data);
 
-                swal({
-                    title: "Error",
-                    text: "Unknown Error",
-                    icon: "warning",
-                    button: "OK",
+                    swal({
+                        title: "Error",
+                        text: "Unknown Error",
+                        icon: "warning",
+                        button: "OK",
+                    });
                 });
+        } else {
+            swal({
+                title: "Error",
+                text: "File size must be less than 1MB",
+                icon: "warning",
+                button: "OK",
             });
-}else{
-  swal({
-                    title: "Error",
-                    text: "File size must be less than 1MB",
-                    icon: "warning",
-                    button: "OK",
-                });
-}
+        }
     }
 });
 // controller for Staff ends here...
@@ -891,48 +900,48 @@ app.controller("Faculty", function($http, $scope, $window, $mdDialog) {
     $scope.GrvPost = function(ev) {
 
         var file = $scope.file;
-        if(file.size <= 1048576){
-        var uploadUrl = "/post/complaint";
-        var fd = new FormData();
-        console.dir(file);
-        fd.append('file', file);
-        fd.append('type', $scope.Gtype);
-        fd.append('grv', $scope.Desc);
-        fd.append('subject', $scope.subject);
-        fd.append('usertype', "faculty");
-        $http.post(uploadUrl, fd, {
-                transformRequest: angular.identity,
-                headers: { 'Content-Type': undefined }
-            })
-            .then(function success(response) {
-                console.log('Posted!!!');
-                swal({
-                    title: "Successful",
-                    text: "Your Grievance has been successfully posted!",
-                    icon: "success",
-                    button: "Thank You",
-                }).then(() => {
-                    $window.location.reload();
-                });
+        if (file.size <= 1048576) {
+            var uploadUrl = "/post/complaint";
+            var fd = new FormData();
+            console.dir(file);
+            fd.append('file', file);
+            fd.append('type', $scope.Gtype);
+            fd.append('grv', $scope.Desc);
+            fd.append('subject', $scope.subject);
+            fd.append('usertype', "faculty");
+            $http.post(uploadUrl, fd, {
+                    transformRequest: angular.identity,
+                    headers: { 'Content-Type': undefined }
+                })
+                .then(function success(response) {
+                    console.log('Posted!!!');
+                    swal({
+                        title: "Successful",
+                        text: "Your Grievance has been successfully posted!",
+                        icon: "success",
+                        button: "Thank You",
+                    }).then(() => {
+                        $window.location.reload();
+                    });
 
-            }, function error(response) {
-                console.log(response.data);
+                }, function error(response) {
+                    console.log(response.data);
 
-                swal({
-                    title: "Error",
-                    text: "Unknown Error",
-                    icon: "warning",
-                    button: "OK",
+                    swal({
+                        title: "Error",
+                        text: "Unknown Error",
+                        icon: "warning",
+                        button: "OK",
+                    });
                 });
+        } else {
+            swal({
+                title: "Error",
+                text: "File size must be less than 1MB",
+                icon: "warning",
+                button: "OK",
             });
-}else{
-  swal({
-                    title: "Error",
-                    text: "File size must be less than 1MB",
-                    icon: "warning",
-                    button: "OK",
-                });
-}
+        }
     }
 });
 // controller for Faculty ends here...
@@ -973,48 +982,48 @@ app.controller("Management_grievances", function($http, $scope, $window) {
     $scope.GrvPost = function(ev) {
 
         var file = $scope.file;
-        if(file.size <= 1048576){
-        var uploadUrl = "/post/complaint";
-        var fd = new FormData();
-        console.dir(file);
-        fd.append('file', file);
-        fd.append('type', $scope.Gtype);
-        fd.append('grv', $scope.Desc);
-        fd.append('subject', $scope.subject);
-        fd.append('usertype', "Student");
-        $http.post(uploadUrl, fd, {
-                transformRequest: angular.identity,
-                headers: { 'Content-Type': undefined }
-            })
-            .then(function success(response) {
-                console.log('Posted!!!');
-                swal({
-                    title: "Successful",
-                    text: "Your Grievance has been successfully posted!",
-                    icon: "success",
-                    button: "Thank You",
-                }).then(() => {
-                    $window.location.reload();
-                });
+        if (file.size <= 1048576) {
+            var uploadUrl = "/post/complaint";
+            var fd = new FormData();
+            console.dir(file);
+            fd.append('file', file);
+            fd.append('type', $scope.Gtype);
+            fd.append('grv', $scope.Desc);
+            fd.append('subject', $scope.subject);
+            fd.append('usertype', "Student");
+            $http.post(uploadUrl, fd, {
+                    transformRequest: angular.identity,
+                    headers: { 'Content-Type': undefined }
+                })
+                .then(function success(response) {
+                    console.log('Posted!!!');
+                    swal({
+                        title: "Successful",
+                        text: "Your Grievance has been successfully posted!",
+                        icon: "success",
+                        button: "Thank You",
+                    }).then(() => {
+                        $window.location.reload();
+                    });
 
-            }, function error(response) {
-                console.log(response.data);
+                }, function error(response) {
+                    console.log(response.data);
 
-                swal({
-                    title: "Error",
-                    text: "Unknown Error",
-                    icon: "warning",
-                    button: "OK",
+                    swal({
+                        title: "Error",
+                        text: "Unknown Error",
+                        icon: "warning",
+                        button: "OK",
+                    });
                 });
+        } else {
+            swal({
+                title: "Error",
+                text: "File size must be less than 1MB",
+                icon: "warning",
+                button: "OK",
             });
-}else{
-  swal({
-                    title: "Error",
-                    text: "File size must be less than 1MB",
-                    icon: "warning",
-                    button: "OK",
-                });
-}
+        }
     }
 
     $scope.reply = function(id, ev) {

@@ -27,6 +27,7 @@
     "express-session": "^1.15.6",
     "express-session-expire-timeout": "^1.0.3",
     "express-validator": "^5.3.0",
+    "fs": "0.0.1-security",
     "generate-password": "^1.4.1",
     "html-pdf": "^2.2.0",
     "http-errors": "~1.6.2",
