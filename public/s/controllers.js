@@ -199,6 +199,7 @@ app.controller("Student_grievances", function($http, $scope, $window) {
     }
     $scope.download = function(name, type) {
         window.open('/post/download?file=' + name + '&type=' + type);
+        
 
     }
 });
@@ -386,22 +387,9 @@ app.controller("Student", function($http, $scope, $window, $mdDialog) {
             });
         }
     }
+    $scope.download = function(name, type) {
+        window.open('/post/download?file=' + name + '&type=' + type);
 
-    $scope.download = function(name) {
-        // $http.get("/post/download").then(function success(response) {
-            console.log('Downloaded!');
-            //window.location.href('/post/download?file=' + name);
-            window.open('/post/download?file=' + name);
-
-        // }, function error(response) {
-        //     console.log(response.data);
-        //     swal({
-        //         title: "Error",
-        //         text: "File not found!",
-        //         icon: "warning",
-        //         button: "OK",
-        //     });
-        // });
     }
 });
 

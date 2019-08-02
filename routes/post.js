@@ -367,6 +367,7 @@ app.use(express.static(path.join(__dirname, "public")));
 router.get('/download', function(req, res, next) {
 
     type = req.query.type;
+    
     if (type == 'User') {
         const fpath = path.join(__dirname, "../uploads/Users/" + req.query.file)
         console.log(fpath);
@@ -385,9 +386,25 @@ router.get('/download', function(req, res, next) {
         }
 
     } else {
-        // res.download(path.join(__dirname, "../uploads/Members/" + req.query.file), req.query.file, function(err) {
-        //     if (err) console.log("error");
-        // });
+        /* res.download(path.join(__dirname, "../uploads/Members/" + req.query.file), req.query.file, function(err) {
+             if (err) console.log("error");
+         });*/
+         const fpath = path.join(__dirname, "../uploads/Members/" + req.query.file)
+         console.log(fpath);
+         if (fs.existsSync(fpath)) {
+             console.log('file exists');
+             res.download(path.join(__dirname, "../uploads/Members/" + req.query.file), req.query.file, function(err) {
+                 if (err) {
+                     console.log("error err");
+                     return false;
+                 }
+             });
+         } else {
+             console.log('File not exist.');
+             res.status(500).send('File does not exist!');
+             return false;
+         }
+                    
     }
 
 
