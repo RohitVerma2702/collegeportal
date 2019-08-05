@@ -11,7 +11,7 @@ var LocalStrategy=require('passport-local');
 var multer=require('multer');
 var bcrypt = require('bcryptjs');
 var uploads=multer({dest:'./uploads'});
-var flash=require('connect-flash');
+var flash=require('req-flash');
 var mongo=require('mongodb');
 var mongoose=require('mongoose');
 var db=mongoose.connection;
@@ -28,7 +28,6 @@ var Student_route=require('./routes/Student');
 var Parent_route=require('./routes/Parent');
 var Grv_route=require('./routes/post');
 var app = express();
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -60,6 +59,8 @@ app.use(session({
   saveUninitialized:true,
   cookie: { secure: false }
 }));
+
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());

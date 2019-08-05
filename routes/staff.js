@@ -316,7 +316,8 @@ router.get('/verify', function (req, res) {
       if (err) throw err;
       if (!user) {
         console.log("unknown user");
-        res.redirect('/faculty/unknw');
+        req.flash('error', 'Unknown Error!');
+        res.redirect('/');
         return;
       }
 
@@ -324,7 +325,9 @@ router.get('/verify', function (req, res) {
       console.log('value of random is ' + user.rand);
       if (req.query.rand == user.rand) {
         console.log("email is verified");
-        res.end("<h1>Email " + user.emailid + " is been Successfully verified");
+        req.flash('success', 'Your email has been verified!');
+        res.redirect('/')
+        //res.end("<h1>Email " + user.emailid + " is been Successfully verified");
         var id = { _id: user._id }
         var newvalues = {
           $set:

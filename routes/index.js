@@ -25,7 +25,7 @@ router.get('/', function (req, res, next) {
 
   }
   else {
-    res.render('view3');
+    res.render('view3', { success: req.flash('success'), error: req.flash('error')});
   }
 });
 

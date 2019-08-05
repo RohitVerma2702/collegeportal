@@ -24,7 +24,7 @@
     "express-flash": "0.0.2",
     "express-flash-notification": "^0.5.0",
     "express-messages": "*",
-    "express-session": "^1.15.6",
+    "express-session": "^1.16.2",
     "express-session-expire-timeout": "^1.0.3",
     "express-validator": "^5.3.0",
     "fs": "0.0.1-security",
@@ -44,6 +44,7 @@
     "passport-local": "*",
     "pdfmake": "^0.1.54",
     "phantomjs-prebuilt": "^2.1.16",
+    "req-flash": "0.0.3",
     "smtp-server": "^3.4.7",
     "uniqid": "^5.0.3"
   }

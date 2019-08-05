@@ -186,16 +186,23 @@ app.controller("Student_grievances", function($http, $scope, $window) {
 
     $scope.remind = function(sequence, ev) {
         $scope.seq = sequence;
-        $http.get("/post/reminder?seq=" + $scope.seq).then(function(response) {});
-
-        var update = $mdDialog.confirm()
-            .title('Reminder Sent!')
-            .targetEvent(ev)
-            .ok('Thank You!');
-
-        $mdDialog.show(update).then(function() {
-            $window.location.reload();
-        })
+        $http.get("/post/reminder?seq=" + $scope.seq).then(function success(response) {
+            swal({
+                title: "Reminder Sent",
+                text: "Corresponding member has been reminded.",
+                icon: "success",
+                button: "OK",
+            });
+        }, function error(response) {
+            swal({
+                title: "Error",
+                text: "Unknown Error!",
+                icon: "warning",
+                button: "OK",
+            }).then(() => {
+                $window.location.reload();
+            });
+        });
     }
     $scope.download = function(name, type) {
         window.open('/post/download?file=' + name + '&type=' + type);
@@ -389,9 +396,9 @@ app.controller("Student", function($http, $scope, $window, $mdDialog) {
 
     $scope.download = function(name) {
         // $http.get("/post/download").then(function success(response) {
-            console.log('Downloaded!');
-            //window.location.href('/post/download?file=' + name);
-            window.open('/post/download?file=' + name);
+        console.log('Downloaded!');
+        //window.location.href('/post/download?file=' + name);
+        window.open('/post/download?file=' + name);
 
         // }, function error(response) {
         //     console.log(response.data);
@@ -430,16 +437,23 @@ app.controller("Parent_grievances", function($http, $scope) {
 
     $scope.remind = function(sequence, ev) {
         $scope.seq = sequence;
-        $http.get("/post/reminder?seq=" + $scope.seq).then(function(response) {});
-
-        var update = $mdDialog.confirm()
-            .title('Reminder Sent!')
-            .targetEvent(ev)
-            .ok('Thank You!');
-
-        $mdDialog.show(update).then(function() {
-            $window.location.reload();
-        })
+        $http.get("/post/reminder?seq=" + $scope.seq).then(function success(response) {
+            swal({
+                title: "Reminder Sent",
+                text: "Corresponding member has been reminded.",
+                icon: "success",
+                button: "OK",
+            });
+        }, function error(response) {
+            swal({
+                title: "Error",
+                text: "Unknown Error!",
+                icon: "warning",
+                button: "OK",
+            }).then(() => {
+                $window.location.reload();
+            });
+        });
     }
     $scope.download = function(name, type) {
         window.open('/post/download?file=' + name + '&type=' + type);
@@ -605,16 +619,24 @@ app.controller("NonTeaching_grievances", function($http, $scope, $window) {
 
     $scope.remind = function(sequence, ev) {
         $scope.seq = sequence;
-        $http.get("/post/reminder?seq=" + $scope.seq).then(function(response) {});
+        $http.get("/post/reminder?seq=" + $scope.seq).then(function success(response) {
+            swal({
+                title: "Reminder Sent",
+                text: "Corresponding member has been reminded.",
+                icon: "success",
+                button: "OK",
+            });
+        }, function error(response) {
+            swal({
+                title: "Error",
+                text: "Unknown Error!",
+                icon: "warning",
+                button: "OK",
+            }).then(() => {
+                $window.location.reload();
+            });
+        });
 
-        var update = $mdDialog.confirm()
-            .title('Reminder Sent!')
-            .targetEvent(ev)
-            .ok('Thank You!');
-
-        $mdDialog.show(update).then(function() {
-            $window.location.reload();
-        })
     }
     $scope.download = function(name, type) {
         window.open('/post/download?file=' + name + '&type=' + type);
@@ -785,18 +807,26 @@ app.controller("Faculty_grievances", function($http, $scope, $window) {
         });
         //   $('.detailbackground').fadeIn(500);
     }
-    $scope.remind = function(sequence) {
+    $scope.remind = function(sequence, ev) {
         $scope.seq = sequence;
-        $http.get("/post/reminder?seq=" + $scope.seq).then(function(response) {});
+        $http.get("/post/reminder?seq=" + $scope.seq).then(function success(response) {
+            swal({
+                title: "Reminder Sent",
+                text: "Corresponding member has been reminded.",
+                icon: "success",
+                button: "OK",
+            });
+        }, function error(response) {
+            swal({
+                title: "Error",
+                text: "Unknown Error!",
+                icon: "warning",
+                button: "OK",
+            }).then(() => {
+                $window.location.reload();
+            });
+        });
 
-        var update = $mdDialog.confirm()
-            .title('Reminder Sent!')
-            .targetEvent(ev)
-            .ok('Thank You!');
-
-        $mdDialog.show(update).then(function() {
-            $window.location.reload();
-        })
     }
     $scope.download = function(name, type) {
         window.open('/post/download?file=' + name + '&type=' + type);
