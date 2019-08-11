@@ -45,7 +45,7 @@ app.controller("Gcm_grievances", function($http, $scope, $window) {
                     console.log('Posted!!!');
                     swal({
                         title: "Successful",
-                        text: "Your Grievance has been successfully posted!",
+                        text: "You have replied to a Grievance!",
                         icon: "success",
                         button: "Thank You",
                     }).then(() => {
@@ -70,7 +70,6 @@ app.controller("Gcm_grievances", function($http, $scope, $window) {
                 button: "OK",
             });
         }
-
     }
     $scope.download = function(name, type) {
         window.open('/post/download?file=' + name + '&type=' + type);
@@ -393,8 +392,9 @@ app.controller("Student", function($http, $scope, $window, $mdDialog) {
                 icon: "warning",
                 button: "OK",
             });
-        }
-    }
+        }}
+
+    
     $scope.download = function(name, type) {
         window.open('/post/download?file=' + name + '&type=' + type);
 
@@ -1062,7 +1062,7 @@ app.controller("Management_grievances", function($http, $scope, $window) {
                     console.log('Posted!!!');
                     swal({
                         title: "Successful",
-                        text: "Your Grievance has been successfully posted!",
+                        text: "You have replied to a Grievance!",
                         icon: "success",
                         button: "Thank You",
                     }).then(() => {
@@ -1087,8 +1087,8 @@ app.controller("Management_grievances", function($http, $scope, $window) {
                 button: "OK",
             });
         }
-
     }
+    
     $scope.download = function(name, type) {
         window.open('/post/download?file=' + name + '&type=' + type);
 
