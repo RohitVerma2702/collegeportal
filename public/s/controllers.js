@@ -29,7 +29,8 @@ app.controller("Gcm_grievances", function($http, $scope, $window) {
     }
     $scope.reply = function(id, ev) {
         var file = $scope.file;
-        if (file.size <= 1048576) {
+
+        if (!file||file.size <= 1048576) {
             var uploadUrl = "/post/reply";
             var fd = new FormData();
             fd.append('file', file);
@@ -351,7 +352,7 @@ app.controller("Student", function($http, $scope, $window, $mdDialog) {
     $scope.GrvPost = function(ev) {
 
         var file = $scope.file;
-        if (file.size <= 1048576) {
+        if (!file||file.size <= 1048576) {
             var uploadUrl = "/post/complaint";
             var fd = new FormData();
             console.dir(file);
@@ -537,7 +538,7 @@ app.controller("Parent", function($http, $scope, $window, $mdDialog) {
     $scope.GrvPost = function(ev) {
 
         var file = $scope.file;
-        if (file.size <= 1048576) {
+        if (!file||file.size <= 1048576) {
             var uploadUrl = "/post/complaint";
             var fd = new FormData();
             console.dir(file);
@@ -728,7 +729,7 @@ app.controller("NonTeaching", function($http, $scope, $window, $mdDialog) {
     $scope.GrvPost = function(ev) {
 
         var file = $scope.file;
-        if (file.size <= 1048576) {
+        if (!file||file.size <= 1048576) {
             var uploadUrl = "/post/complaint";
             var fd = new FormData();
             console.dir(file);
@@ -918,7 +919,7 @@ app.controller("Faculty", function($http, $scope, $window, $mdDialog) {
     $scope.GrvPost = function(ev) {
 
         var file = $scope.file;
-        if (file.size <= 1048576) {
+        if (!file||file.size <= 1048576) {
             var uploadUrl = "/post/complaint";
             var fd = new FormData();
             console.dir(file);
@@ -1000,7 +1001,7 @@ app.controller("Management_grievances", function($http, $scope, $window) {
     $scope.GrvPost = function(ev) {
 
         var file = $scope.file;
-        if (file.size <= 1048576) {
+        if (!file||file.size <= 1048576) {
             var uploadUrl = "/post/complaint";
             var fd = new FormData();
             console.dir(file);
@@ -1046,7 +1047,7 @@ app.controller("Management_grievances", function($http, $scope, $window) {
 
     $scope.reply = function(id, ev) {
         var file = $scope.file;
-        if (file.size <= 1048576) {
+        if (!file||file.size <= 1048576) {
             var uploadUrl = "/post/reply";
             var fd = new FormData();
             fd.append('file', file);
