@@ -54,3 +54,11 @@
   border: .1rem solid #fff;
   border-radius: 50%;
 }
+
+/*----------------------------------Reply and Grievances Showcase---------------*/
+
+.wrapping-words {
+    max-width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

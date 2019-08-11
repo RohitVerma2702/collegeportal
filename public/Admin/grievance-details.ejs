@@ -15,7 +15,7 @@
                         <th>Subject</th>
                         <th>Action</th>
                         <th>Status</th>
-                    </tr> 
+                    </tr>
                 </thead>
                 <tr ng-repeat="result in result">
                     <td>{{$index+1}}</td>
@@ -39,7 +39,6 @@
             </table>
         </div>
     </div>
-
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
             <!-- Modal -->
@@ -68,9 +67,9 @@
                                         <td>{{data.subject}}</td>
                                     </tr>
                                     <tr>
-                                            <td>Grievant</td>
-                                            <td>{{data.name}}({{data.Grievant}})</td>
-                                        </tr>
+                                        <td>Grievant</td>
+                                        <td>{{data.name}}({{data.Grievant}})</td>
+                                    </tr>
                                     <tr>
                                         <td>Status</td>
                                         <td>{{data.status}}</td>
@@ -92,21 +91,19 @@
                                         <td>{{data.reply}}</td>
                                     </tr>
                                     <tr>
-                                            <td>Grievance Documents</td>
-                                            <td>{{data.file}}
-                                                                <button style="background-color:white;float:right;margin-top:-5px;"  ng-if="data.file&&data.file!='no file'" class="btn " ng-click="download(data.file,'User')" class="btn btn-primary btn-sm" data-toggle="modal"><i style="color:#337ab7;" class="fa fa-download"></i> </button>
-                                                    
-                                            
-                                            </td>
-                                                        </tr>
-                                                       
-                                        <tr>
-                                            <td>Reply Documents</td>
-                                            <td> {{data.Reply_file}}
-                                                
-                                            <button style="float:right;margin-top:-5px;" ng-if="data.Reply_file&&data.Reply_file!='no file'" class="btn" ng-click="download(data.Reply_file,'Member')" class="btn btn-primary btn-sm" data-toggle="modal"  ><i style="color:#337ab7;" class="fa fa-download"></i></button>
-                                                </td>
-                                        </tr>
+                                        <td>Grievance Documents</td>
+                                        <td>
+                                            <p class="pull-left pr-2 wrapping-words">{{data.file}}</p>
+                                            <button class="btn btn-success btn-sm pull-left" ng-if="data.file&&data.file!='no file'" ng-click="download(data.file,'User')" data-toggle="modal"><i class="fa fa-download"></i> </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Reply Documents</td>
+                                        <td>
+                                            <p class="pull-left pr-2 wrapping-words">{{data.Reply_file}}</p>
+                                            <button class="btn btn-success btn-sm pull-left" ng-if="data.Reply_file&&data.Reply_file!='no file'" ng-click="download(data.Reply_file,'User')" data-toggle="modal"><i class="fa fa-download"></i> </button>
+                                        </td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
@@ -115,7 +112,6 @@
             </div>
         </div>
     </div>
-
     <!-- Reply form starts here -->
     <!-- <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="form-group">
@@ -164,21 +160,15 @@
         </div>
     </div> -->
     <!-- Reply form ends here... -->
-
     <div id="loading">
         <div class="loader">
         </div>
-
         <h3>Loading...</h3>
     </div>
-
 </div>
-
 <script type="text/javascript">
-
-    $('#closebutton, #closebutton-reply').click(function(){
-        $('.detailbackground').fadeOut(500);
-        $('.detailbackground-reply').fadeOut(500);
-    });
+$('#closebutton, #closebutton-reply').click(function() {
+    $('.detailbackground').fadeOut(500);
+    $('.detailbackground-reply').fadeOut(500);
+});
 </script>
-

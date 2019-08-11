@@ -93,14 +93,16 @@
                                     </tr>
                                     <tr>
                                         <td>Grievance Documents</td>
-                                        <td>{{data.file}}
-                                            <button style="background-color:white;float:right;margin-top:-5px;" ng-if="data.file&&data.file!='no file'" class="btn " ng-click="download(data.file,'User')" class="btn btn-primary btn-sm" data-toggle="modal"><i style="color:#337ab7;" class="fa fa-download"></i> </button>
+                                        <td>
+                                            <p class="pull-left pr-2 wrapping-words">{{data.file}}</p>
+                                            <button class="btn btn-success btn-sm pull-left" ng-if="data.file&&data.file!='no file'" ng-click="download(data.file,'User')" data-toggle="modal"><i class="fa fa-download"></i> </button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Reply Documents</td>
-                                        <td> {{data.Reply_file}}
-                                            <button style="float:right;margin-top:-5px;" ng-if="data.Reply_file&&data.Reply_file!='no file'" class="btn" ng-click="download(data.Reply_file,'Member')" class="btn btn-primary btn-sm" data-toggle="modal"><i style="color:#337ab7;" class="fa fa-download"></i></button>
+                                        <td>
+                                            <p class="pull-left pr-2 wrapping-words">{{data.Reply_file}}</p>
+                                            <button class="btn btn-success btn-sm pull-left" ng-if="data.Reply_file&&data.Reply_file!='no file'" ng-click="download(data.Reply_file,'User')" data-toggle="modal"><i class="fa fa-download"></i> </button>
                                         </td>
                                     </tr>
                                 </table>
