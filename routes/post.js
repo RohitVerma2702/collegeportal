@@ -3,17 +3,35 @@ var router = express.Router();
 var multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-/*var storage = multer.diskStorage({
+var Ustorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './uploads/')
+        cb(null, 'uploads/Users/')
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname+ '-' + Date.now()+'.jpg')
+        let extArray = file.mimetype.split("/");
+    let extension = extArray[extArray.length - 1];
+    const temp=file.originalname.split('.');
+    const filename=temp[0];
+        cb(null,  filename+'-'+Date.now()+'.'+extension)
     }
 });
-var uploads = multer({ storage: storage });*/
-var uploads = multer({ dest: 'uploads/Users/' });
-var Ruploads = multer({ dest: 'uploads/Members/' });
+
+var Mstorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/Members/')
+    },
+    filename: function (req, file, cb) {
+        let extArray = file.mimetype.split("/");
+    let extension = extArray[extArray.length - 1];
+    const temp=file.originalname.split('.');
+    const filename=temp[0];
+    cb(null,  filename+'-'+Date.now()+'.'+extension)
+    }
+});
+var uploads = multer({ storage: Ustorage });
+var Ruploads = multer({ storage: Mstorage });
+//var uploads = multer({ dest: 'uploads/Users/' });
+//var Ruploads = multer({ dest: 'uploads/Members/' });
 var uniqid = require('uniqid');
 var Grv = require('../models/grievancedb');
 var datetime = require('node-datetime');
@@ -251,7 +269,10 @@ router.post('/complaint', uploads.single('file'), function(req, res, next) { //T
         file = 'no file';
         console.log('no file');
     } else {
+      //  let extArray = file.mimetype.split("/");
+    //let extension = extArray[extArray.length - 1];
         file = file.filename;
+        console.log(file);
     }
     req.checkBody('type', 'type field is required').notEmpty();
 
