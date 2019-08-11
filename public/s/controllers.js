@@ -30,7 +30,7 @@ app.controller("Gcm_grievances", function($http, $scope, $window) {
     $scope.reply = function(id, ev) {
         var file = $scope.file;
 
-        if (!file||file.size <= 1048576) {
+        if (!file || file.size <= 1048576) {
             var uploadUrl = "/post/reply";
             var fd = new FormData();
             fd.append('file', file);
@@ -72,8 +72,26 @@ app.controller("Gcm_grievances", function($http, $scope, $window) {
         }
     }
     $scope.download = function(name, type) {
-        window.open('/post/download?file=' + name + '&type=' + type);
-
+        // window.open('/post/download?file=' + name + '&type=' + type);
+        $.ajax({
+            type: 'get',
+            url: '/post/download',
+            data: {
+                file: name,
+                type: type,
+            },
+            error: function() {
+                swal({
+                    title: "Error",
+                    text: "File does not exist!",
+                    icon: "error",
+                    button: "OK",
+                });
+            },
+            success: function() {
+                window.open('/post/download?file=' + name + '&type=' + type, '_self');
+            }
+        });
     }
 });
 
@@ -205,8 +223,26 @@ app.controller("Student_grievances", function($http, $scope, $window) {
         });
     }
     $scope.download = function(name, type) {
-        window.open('/post/download?file=' + name + '&type=' + type);
-
+        // window.open('/post/download?file=' + name + '&type=' + type);
+        $.ajax({
+            type: 'get',
+            url: '/post/download',
+            data: {
+                file: name,
+                type: type,
+            },
+            error: function() {
+                swal({
+                    title: "Error",
+                    text: "File does not exist!",
+                    icon: "error",
+                    button: "OK",
+                });
+            },
+            success: function() {
+                window.open('/post/download?file=' + name + '&type=' + type, '_self');
+            }
+        });
 
     }
 });
@@ -351,7 +387,7 @@ app.controller("Student", function($http, $scope, $window, $mdDialog) {
     $scope.GrvPost = function(ev) {
 
         var file = $scope.file;
-        if (!file||file.size <= 1048576) {
+        if (!file || file.size <= 1048576) {
             var uploadUrl = "/post/complaint";
             var fd = new FormData();
             console.dir(file);
@@ -392,12 +428,31 @@ app.controller("Student", function($http, $scope, $window, $mdDialog) {
                 icon: "warning",
                 button: "OK",
             });
-        }}
+        }
+    }
 
-    
+
     $scope.download = function(name, type) {
-        window.open('/post/download?file=' + name + '&type=' + type);
-
+        // window.open('/post/download?file=' + name + '&type=' + type);
+        $.ajax({
+            type: 'get',
+            url: '/post/download',
+            data: {
+                file: name,
+                type: type,
+            },
+            error: function() {
+                swal({
+                    title: "Error",
+                    text: "File does not exist!",
+                    icon: "error",
+                    button: "OK",
+                });
+            },
+            success: function() {
+                window.open('/post/download?file=' + name + '&type=' + type, '_self');
+            }
+        });
     }
 });
 
@@ -445,8 +500,26 @@ app.controller("Parent_grievances", function($http, $scope) {
         });
     }
     $scope.download = function(name, type) {
-        window.open('/post/download?file=' + name + '&type=' + type);
-
+        // window.open('/post/download?file=' + name + '&type=' + type);
+        $.ajax({
+            type: 'get',
+            url: '/post/download',
+            data: {
+                file: name,
+                type: type,
+            },
+            error: function() {
+                swal({
+                    title: "Error",
+                    text: "File does not exist!",
+                    icon: "error",
+                    button: "OK",
+                });
+            },
+            success: function() {
+                window.open('/post/download?file=' + name + '&type=' + type, '_self');
+            }
+        });
     }
 });
 
@@ -538,7 +611,7 @@ app.controller("Parent", function($http, $scope, $window, $mdDialog) {
     $scope.GrvPost = function(ev) {
 
         var file = $scope.file;
-        if (!file||file.size <= 1048576) {
+        if (!file || file.size <= 1048576) {
             var uploadUrl = "/post/complaint";
             var fd = new FormData();
             console.dir(file);
@@ -628,8 +701,26 @@ app.controller("NonTeaching_grievances", function($http, $scope, $window) {
 
     }
     $scope.download = function(name, type) {
-        window.open('/post/download?file=' + name + '&type=' + type);
-
+        // window.open('/post/download?file=' + name + '&type=' + type);
+        $.ajax({
+            type: 'get',
+            url: '/post/download',
+            data: {
+                file: name,
+                type: type,
+            },
+            error: function() {
+                swal({
+                    title: "Error",
+                    text: "File does not exist!",
+                    icon: "error",
+                    button: "OK",
+                });
+            },
+            success: function() {
+                window.open('/post/download?file=' + name + '&type=' + type, '_self');
+            }
+        });
     }
 });
 
@@ -729,7 +820,7 @@ app.controller("NonTeaching", function($http, $scope, $window, $mdDialog) {
     $scope.GrvPost = function(ev) {
 
         var file = $scope.file;
-        if (!file||file.size <= 1048576) {
+        if (!file || file.size <= 1048576) {
             var uploadUrl = "/post/complaint";
             var fd = new FormData();
             console.dir(file);
@@ -818,8 +909,26 @@ app.controller("Faculty_grievances", function($http, $scope, $window) {
 
     }
     $scope.download = function(name, type) {
-        window.open('/post/download?file=' + name + '&type=' + type);
-
+        // window.open('/post/download?file=' + name + '&type=' + type);
+        $.ajax({
+            type: 'get',
+            url: '/post/download',
+            data: {
+                file: name,
+                type: type,
+            },
+            error: function() {
+                swal({
+                    title: "Error",
+                    text: "File does not exist!",
+                    icon: "error",
+                    button: "OK",
+                });
+            },
+            success: function() {
+                window.open('/post/download?file=' + name + '&type=' + type, '_self');
+            }
+        });
     }
 });
 
@@ -919,7 +1028,7 @@ app.controller("Faculty", function($http, $scope, $window, $mdDialog) {
     $scope.GrvPost = function(ev) {
 
         var file = $scope.file;
-        if (!file||file.size <= 1048576) {
+        if (!file || file.size <= 1048576) {
             var uploadUrl = "/post/complaint";
             var fd = new FormData();
             console.dir(file);
@@ -1001,7 +1110,7 @@ app.controller("Management_grievances", function($http, $scope, $window) {
     $scope.GrvPost = function(ev) {
 
         var file = $scope.file;
-        if (!file||file.size <= 1048576) {
+        if (!file || file.size <= 1048576) {
             var uploadUrl = "/post/complaint";
             var fd = new FormData();
             console.dir(file);
@@ -1047,7 +1156,7 @@ app.controller("Management_grievances", function($http, $scope, $window) {
 
     $scope.reply = function(id, ev) {
         var file = $scope.file;
-        if (!file||file.size <= 1048576) {
+        if (!file || file.size <= 1048576) {
             var uploadUrl = "/post/reply";
             var fd = new FormData();
             fd.append('file', file);
@@ -1088,10 +1197,28 @@ app.controller("Management_grievances", function($http, $scope, $window) {
             });
         }
     }
-    
-    $scope.download = function(name, type) {
-        window.open('/post/download?file=' + name + '&type=' + type);
 
+    $scope.download = function(name, type) {
+        // window.open('/post/download?file=' + name + '&type=' + type, '_self');
+        $.ajax({
+            type: 'get',
+            url: '/post/download',
+            data: {
+                file: name,
+                type: type,
+            },
+            error: function() {
+                swal({
+                    title: "Error",
+                    text: "File does not exist!",
+                    icon: "error",
+                    button: "OK",
+                });
+            },
+            success: function() {
+                window.open('/post/download?file=' + name + '&type=' + type, '_self');
+            }
+        });
     }
 });
 
@@ -1147,8 +1274,26 @@ app.controller("Management_active_deactive_grv", function($http, $scope, $window
         }
     }
     $scope.download = function(name, type) {
-        window.open('/post/download?file=' + name + '&type=' + type);
-
+        // window.open('/post/download?file=' + name + '&type=' + type);
+        $.ajax({
+            type: 'get',
+            url: '/post/download',
+            data: {
+                file: name,
+                type: type,
+            },
+            error: function() {
+                swal({
+                    title: "Error",
+                    text: "File does not exist!",
+                    icon: "error",
+                    button: "OK",
+                });
+            },
+            success: function() {
+                window.open('/post/download?file=' + name + '&type=' + type, '_self');
+            }
+        });
     }
 });
 
@@ -1962,8 +2107,26 @@ app.controller("Admin_active_deactive_grv", function($http, $scope, $window, $md
         }
     }
     $scope.download = function(name, type) {
-        window.open('/post/download?file=' + name + '&type=' + type);
-
+        // window.open('/post/download?file=' + name + '&type=' + type);
+        $.ajax({
+            type: 'get',
+            url: '/post/download',
+            data: {
+                file: name,
+                type: type,
+            },
+            error: function() {
+                swal({
+                    title: "Error",
+                    text: "File does not exist!",
+                    icon: "error",
+                    button: "OK",
+                });
+            },
+            success: function() {
+                window.open('/post/download?file=' + name + '&type=' + type, '_self');
+            }
+        });
     }
 });
 
