@@ -1563,6 +1563,11 @@ app.controller("Gtype_report", function($scope, $http) {
         $('#loading').hide();
         $('#grievances').fadeIn(500);
     });
+    $http.get("/Admin/GCM_List").then(function(response) {
+        $scope.Members = response.data.info;
+        $('#loading').hide();
+        $('#grievances').fadeIn(500);
+    });
 
     var vm = this;
     vm.consolidate = function() {
