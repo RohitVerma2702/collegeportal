@@ -48,6 +48,7 @@
     "pdfmake": "^0.1.54",
     "phantomjs-prebuilt": "^2.1.16",
     "req-flash": "0.0.3",
+    "rxjs": "^5.0.1",
     "smtp-server": "^3.4.7",
     "uniqid": "^5.0.3"
   }
