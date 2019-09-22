@@ -29,15 +29,6 @@ var Parent_route=require('./routes/Parent');
 var Grv_route=require('./routes/post');
 var app = express();
 
-//CORS middleware
-var corsMiddleware = function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'https://frvportal.herokuapp.com'); //replace localhost with actual host
-  res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, PATCH, POST, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With, Authorization');
-
-  next();
-}
-
 app.use(corsMiddleware);
 
 // view engine setup

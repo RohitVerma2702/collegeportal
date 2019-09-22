@@ -78,7 +78,7 @@ $('#mngmntlogin').click(function(e) {
 				id: a,
 				password: b,
 			},
-			url: 'http://localhost:3000/mngmnt/login', //node.js server is running
+			url: '/mngmnt/login', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -106,7 +106,7 @@ $('#mngmntlogin').click(function(e) {
 					console.log(data);
 					$('.mngmntlogin .fa-spinner').fadeIn(100);
 					$('.mngmntlogin small').text('');
-					window.location.href = "http://localhost:3000/mngmnt/Home";
+					window.location.href = "/mngmnt/Home";
 					return false;
 				}
 			}
@@ -135,7 +135,7 @@ $('#facultylogin').click(function(e) {
 				id: a,
 				password: b,
 			},
-			url: 'http://localhost:3000/faculty/login', //node.js server is running
+			url: '/faculty/login', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -168,7 +168,7 @@ $('#facultylogin').click(function(e) {
 					console.log(data);
 					$('.facultylogin .fa-spinner').fadeIn(100);
 					$('.facultylogin small').text('');
-					window.location.href = "http://localhost:3000/faculty/Home";
+					window.location.href = "/faculty/Home";
 					return false;
 				}
 			}
@@ -197,7 +197,7 @@ $('#gcmlogin').click(function(e) {
 				id: a,
 				password: b,
 			},
-			url: 'http://localhost:3000/Members/login', //node.js server is running
+			url: '/Members/login', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -225,7 +225,7 @@ $('#gcmlogin').click(function(e) {
 					console.log(data);
 					$('.gcmlogin .fa-spinner').fadeIn(100);
 					$('.gcmlogin small').text('');
-					window.location.href = "http://localhost:3000/Members/Home";
+					window.location.href = "/Members/Home";
 					return false;
 				}
 			}
@@ -254,7 +254,7 @@ $('#studentlogin').click(function(e) {
 				id: a,
 				password: b,
 			},
-			url: 'http://localhost:3000/Student/login', //node.js server is running
+			url: '/Student/login', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -287,7 +287,7 @@ $('#studentlogin').click(function(e) {
 					console.log(data);
 					$('.studentlogin .fa-spinner').fadeIn(100);
 					$('.studentlogin small').text('');
-					window.location.href = "http://localhost:3000/Student/Home";
+					window.location.href = "/Student/Home";
 					return false;
 				}
 			}
@@ -316,7 +316,7 @@ $('#parentlogin').click(function(e) {
 				id: a,
 				password: b,
 			},
-			url: 'http://localhost:3000/Parent/login', //node.js server is running
+			url: '/Parent/login', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -349,7 +349,7 @@ $('#parentlogin').click(function(e) {
 					console.log(data);
 					$('.parentlogin .fa-spinner').fadeIn(100);
 					$('.parentlogin small').text('');
-					window.location.href = "http://localhost:3000/Parent/Home";
+					window.location.href = "/Parent/Home";
 					return false;
 				}
 			}
@@ -378,7 +378,7 @@ $('#nonteachinglogin').click(function(e) {
 				id: a,
 				password: b,
 			},
-			url: 'http://localhost:3000/staff/login', //node.js server is running
+			url: '/staff/login', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -411,7 +411,7 @@ $('#nonteachinglogin').click(function(e) {
 					console.log(data);
 					$('.nonteachinglogin .fa-spinner').fadeIn(100);
 					$('.nonteachinglogin small').text('');
-					window.location.href = "http://localhost:3000/staff/Home";
+					window.location.href = "/staff/Home";
 					return false;
 				}
 			}
@@ -535,7 +535,7 @@ $('#studentsignupbutton').click(function(e) {
 				password: pass1,
 				password2: pass2
 			},
-		    url: 'http://localhost:3000/Student/register', //node.js server is running
+		    url: '/Student/register', //node.js server is running
 		    error: function(error){
 		    	if (error.responseText == 'already reg not verified') {
 		    		console.log(error.responseText);
@@ -646,7 +646,7 @@ $('#facultysignupbutton').click(function(e) {
 				password: pass1,
 				password2: pass2
 			},
-		    url: 'http://localhost:3000/faculty/register', //node.js server is running
+		    url: '/faculty/register', //node.js server is running
 		    error: function(error){
 		    	if (error.responseText == 'already reg not verified') {
 		    		console.log(error.responseText);
@@ -760,7 +760,7 @@ $('#parentsignupbutton').click(function(e) {
 				password: pass1,
 				password2: pass2
 			},
-		    url: 'http://localhost:3000/Parent/register', //node.js server is running
+		    url: '/Parent/register', //node.js server is running
 		    error: function(error){
 		    	if (error.responseText == 'already reg not verified') {
 		    		console.log(error.responseText);
@@ -871,7 +871,7 @@ $('#nonteachingsignupbutton').click(function(e) {
 				password: pass1,
 				password2: pass2
 			},
-		    url: 'http://localhost:3000/staff/register', //node.js server is running
+		    url: '/staff/register', //node.js server is running
 		    error: function(error){
 		    	if (error.responseText == 'already reg not verified') {
 		    		console.log(error.responseText);
@@ -963,7 +963,7 @@ $('#Student_forgotpass').click(function(e) {
 			data: {
 				id: a,
 			},
-			url: 'http://localhost:3000/Student/forgot_pass', //node.js server is running
+			url: '/Student/forgot_pass', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -1022,7 +1022,7 @@ $('#Staff_forgotpass').click(function(e) {
 			data: {
 				id: a,
 			},
-			url: 'http://localhost:3000/staff/forgot_pass', //node.js server is running
+			url: '/staff/forgot_pass', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -1081,7 +1081,7 @@ $('#Parent_forgotpass').click(function(e) {
 			data: {
 				id: a,
 			},
-			url: 'http://localhost:3000/Parent/forgot_pass', //node.js server is running
+			url: '/Parent/forgot_pass', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -1140,7 +1140,7 @@ $('#Faculty_forgotpass').click(function(e) {
 			data: {
 				id: a,
 			},
-			url: 'http://localhost:3000/faculty/forgot_pass', //node.js server is running
+			url: '/faculty/forgot_pass', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -1199,7 +1199,7 @@ $('#Admin_forgotpass').click(function(e) {
 			data: {
 				id: a,
 			},
-			url: 'http://localhost:3000/Admin/forgot_pass', //node.js server is running
+			url: '/Admin/forgot_pass', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -1258,7 +1258,7 @@ $('#Gcm_forgotpass').click(function(e) {
 			data: {
 				id: a,
 			},
-			url: 'http://localhost:3000/Members/forgot_pass', //node.js server is running
+			url: '/Members/forgot_pass', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -1317,7 +1317,7 @@ $('#mngmnt_forgotpass').click(function(e) {
 			data: {
 				id: a,
 			},
-			url: 'http://localhost:3000/mngmnt/forgot_pass', //node.js server is running
+			url: '/mngmnt/forgot_pass', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
