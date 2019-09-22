@@ -29,8 +29,6 @@ var Parent_route=require('./routes/Parent');
 var Grv_route=require('./routes/post');
 var app = express();
 
-app.use(corsMiddleware);
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
