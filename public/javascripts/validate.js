@@ -21,7 +21,7 @@ $('#adminlogin').click(function(e) {
 				id: a,
 				password: b,
 			},
-			url: 'http://localhost:3000/Admin/login', //node.js server is running
+			url: '/Admin/login', //node.js server is running
 			error: function(error){
 				if(error.responseText == 'Unauthorized User'){
 					console.log(error.responseText);
@@ -49,7 +49,7 @@ $('#adminlogin').click(function(e) {
 					console.log(data);
 					$('.adminlogin .fa-spinner').fadeIn(100);
 					$('.adminlogin small').text('');
-					window.location.href = "http://localhost:3000/Admin/Home";
+					window.location.href = "/Admin/Home";
 					return false;
 				}
 			}
