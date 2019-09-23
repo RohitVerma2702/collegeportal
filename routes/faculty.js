@@ -17,7 +17,7 @@ var sess;
 var smtpTransport = nodemailer.createTransport({
   service: "Gmail",
   port: 465,
-  secure: true,
+  secure: false,
   auth: {
     user: "gportal33@gmail.com",
     pass: "grievance001"
