@@ -16,14 +16,15 @@ var dt = datetime.create();
 var sess;
 var smtpTransport = nodemailer.createTransport({
   service: "Gmail",
-  //secure: false,
+  port: 465,
+  secure: true,
   auth: {
     user: "gportal33@gmail.com",
     pass: "grievance001"
   }
 });
 var rand, mailOptions, host, link;
-host = 'localhost:3000'
+host = 'frvportal.herokuapp.com'
 function requireLogin(req, res, next) {
   console.log(req.session.active)
   if (req.session.active == 1 && req.session.type == 'faculty') { /*if someone is logged in as Student*/
