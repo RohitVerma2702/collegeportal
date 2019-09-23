@@ -18,7 +18,7 @@ var smtpTransport = nodemailer.createTransport({
   }
 });
 var rand, mailOptions, host, link;
-host = 'localhost:3000'
+host = 'localhost:5000'
 function requireLogin(req, res, next) {
   console.log(req.session.active)
   if (req.session.active == 1 && req.session.type == 'Student') { /*if someone is logged in as Student*/
