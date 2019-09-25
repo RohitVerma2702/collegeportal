@@ -17,14 +17,14 @@ var sess;
 var smtpTransport = nodemailer.createTransport({
   service: "Gmail",
   port: 465,
-  secure: false,
+  secure: true,
   auth: {
     user: "gportal33@gmail.com",
     pass: "grievance001"
   }
 });
 var rand, mailOptions, host, link;
-host = 'frvportal.herokuapp.com'
+//host = 'frvportal.herokuapp.com'
 function requireLogin(req, res, next) {
   console.log(req.session.active)
   if (req.session.active == 1 && req.session.type == 'faculty') { /*if someone is logged in as Student*/

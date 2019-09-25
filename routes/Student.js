@@ -13,12 +13,12 @@ var smtpTransport = nodemailer.createTransport({
   service: "Gmail",
   //secure: false,
   auth: {
-    user: "gportal33@gmail.com",
+    user: "gportal43@yahoo.com",
     pass: "grievance001"
   }
 });
 var rand, mailOptions, host, link;
-host = 'localhost:3000'
+host = req.get('host');
 function requireLogin(req, res, next) {
   console.log(req.session.active)
   if (req.session.active == 1 && req.session.type == 'Student') { /*if someone is logged in as Student*/
@@ -374,7 +374,7 @@ router.post('/forgot_pass', function (req, res, next) {
 
       host = req.get('host');
       mailOptions = {
-        from:'Grievance Portal <gportal33@gmail.com>',
+        from:'Grievance Portal <gportal43@yahoo.com>',
         to: id,
         subject: "Password Updated",
         html: "Hello,<br> your new password for EduGrievance Portal is: <br>" + password + "<br> Thanks and Regards <br> <b>Anand International College Of Engineering</b>"
