@@ -10,7 +10,7 @@ var Mail_log = require('../models/Maildb');
 var generator = require('generate-password');
 var nodemailer = require("nodemailer");
 var smtpTransport = nodemailer.createTransport({
-  service: "Gmail",
+  service: "yahoo",
   //secure: false,
   auth: {
     user: "gportal43@yahoo.com",
