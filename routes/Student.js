@@ -10,10 +10,10 @@ var Mail_log = require('../models/Maildb');
 var generator = require('generate-password');
 var nodemailer = require("nodemailer");
 var smtpTransport = nodemailer.createTransport({
-  service: "outlook",
+  service: "Gmail",
   //secure: false,
   auth: {
-    user: "grievance33@outlook.com",
+    user: "gportal33@gmail.com",
     pass: "grievance001"
   }
 });
@@ -374,7 +374,7 @@ router.post('/forgot_pass', function (req, res, next) {
 
       host = req.get('host');
       mailOptions = {
-        from:'Grievance Portal <grievance33@outlook.com>',
+        from:'Grievance Portal <gportal33@gmail.com>',
         to: id,
         subject: "Password Updated",
         html: "Hello,<br> your new password for EduGrievance Portal is: <br>" + password + "<br> Thanks and Regards <br> <b>Anand International College Of Engineering</b>"
