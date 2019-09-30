@@ -759,7 +759,7 @@ router.get('/Mail_Log', requireLogin, function (req, res, next) {
   Mail_log.find_mail(function (err, Result) {
     if (err) throw err;
     console.log('Mail Log fetched');
-    console.log(Result);
+    //console.log(Result);
     data = { info: Result }
     res.send(data);
   })
@@ -807,7 +807,7 @@ router.post('/grvtype_add', requireLogin, function (req, res, next) { //For addi
         if (err) throw err;
         else {
           console.log("grievance is added successfuly");
-          console.log(grv);
+          //console.log(grv);
         }
         res.redirect('/Admin/Home');
       });

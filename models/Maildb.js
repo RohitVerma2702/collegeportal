@@ -23,7 +23,7 @@ Mail.mail_log=function(mail_doc,callback){
 }
 
 Mail.find_mail=function(callback){
-    Mail.find(callback);
+    Mail.find(callback).sort({date:-1});
 
 }
 
