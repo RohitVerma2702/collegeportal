@@ -257,7 +257,7 @@ router.post('/register', function (req, res, next) {
             id: id,
             dep: dep,
             gender: gender,
-            desig: desig,
+            Desig: desig,
             emailid: email,
             mobileno: mobile,
             password: password,
