@@ -385,7 +385,8 @@ router.post('/forgot_pass', function (req, res, next) {
           var mail_doc = new Mail_log({//Entry into Mail Log
             emailid: id,
             subject: "Password Update",
-            status: 'Sent'
+            status: 'Sent',
+            date: new Date(dt.now())
           });
 
           Mail_log.mail_log(mail_doc, function (err) {
