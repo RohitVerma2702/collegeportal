@@ -48,7 +48,7 @@ router.get('/my-account', requireLogin, function (req, res, next) {
       gender: user.gender,
       dep: user.dep,
       Batch: user.Batch,
-      cdate: user.Cdate,
+      cdate: user.Last_year,
       mobile: user.mobileno
     }
     res.send(data);
