@@ -311,6 +311,7 @@ router.post('/register', function (req, res, next) {
 router.get('/verify', function (req, res) {
   console.log(req.protocol + "://" + req.get('host'));
   console.log('id is ' + req.query.id);
+  host='frvportal.herokuapp.com';
   if ((req.protocol + "://" + req.get('host')) == ("http://" + host)) {
     console.log("Domain is matched. Information is from Authentic email");
     //console.log("random no is " +sess.user.rand);  
