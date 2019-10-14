@@ -15,11 +15,11 @@ var datetime = require('node-datetime');
 var dt = datetime.create();
 var sess;
 var smtpTransport = nodemailer.createTransport({
-  service: "Gmail",
+  service: "Outlook",
   port: 465,
   secure: true,
   auth: {
-    user: "gportal33@gmail.com",
+    user: "Grievance33@outlook.com",
     pass: "grievance001"
   }
 });
@@ -270,7 +270,7 @@ router.post('/register', function (req, res, next) {
             host = req.get('host');
             link = "http://" + req.get('host') + "/faculty/verify?rand=" + random + "&id=" + newUser._id;
             mailOptions = {
-              from:'Grievance Portal <gportal33@gmail.com>',
+              from:'Grievance Portal <Grievance33@outlook.com>',
               to: user.emailid,
               subject: "Please confirm your Email account",
               html: "Hello,<br> Please Click on the link to verify your email.<br><a href=" + link + ">Click here to verify</a>"
@@ -372,7 +372,7 @@ router.post('/forgot_pass', function (req, res, next) {
 
       host = req.get('host');
       mailOptions = {
-        from:'Grievance Portal <gportal33@gmail.com>',
+        from:'Grievance Portal <Grievance33@outlook.com>',
         to: id,
         subject: "Password Updated",
         html: "Hello,<br> your new password for EduGrievance Portal is: <br>" + password + "<br> Thanks and Regards <br> <b>Anand International College Of Engineering</b>"
