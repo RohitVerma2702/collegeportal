@@ -269,7 +269,7 @@ router.post('/register', function (req, res, next) {
             host = req.get('host');
             link = "http://" + req.get('host') + "/Student/verify?rand=" + random + "&id=" + newUser._id;
             mailOptions = {
-              from:'Grievance Portal <gportal33@gmail.com>',
+              from:'Grievance Portal <Grievance33@outlook.com>',
               to: user.emailid,
               subject: "Please confirm your Email account",
               html: "Hello,<br> Please Click on the link to verify your email.<br><a href=" + link + ">Click here to verify</a>"
