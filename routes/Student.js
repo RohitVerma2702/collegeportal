@@ -13,7 +13,7 @@ var smtpTransport = nodemailer.createTransport({
   service: "Outlook",
   //secure: false,
   auth: {
-    user: "grievance33@outlook.com",
+    user: "Grievance33@outlook.com",
     pass: "grievance001"
   }
 });
@@ -375,7 +375,7 @@ router.post('/forgot_pass', function (req, res, next) {
 
       host = req.get('host');
       mailOptions = {
-        from:'Grievance Portal <gportal33@gmail.com>',
+        from:'Grievance Portal <Grievance33@outlook.com>',
         to: id,
         subject: "Password Updated",
         html: "Hello,<br> your new password for EduGrievance Portal is: <br>" + password + "<br> Thanks and Regards <br> <b>Anand International College Of Engineering</b>"
