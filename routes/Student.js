@@ -10,10 +10,10 @@ var Mail_log = require('../models/Maildb');
 var generator = require('generate-password');
 var nodemailer = require("nodemailer");
 var smtpTransport = nodemailer.createTransport({
-  service: "Gmail",
+  service: "Outlook",
   //secure: false,
   auth: {
-    user: "gportal33@gmail.com",
+    user: "grievance33@outlook.com",
     pass: "grievance001"
   }
 });
